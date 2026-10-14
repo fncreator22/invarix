@@ -21,13 +21,6 @@ MAX_CONTENT = 8000
 Event = tuple[str, dict[str, Any]]
 
 
-def _debug_turn_latency_probe(start_time: float) -> float:
-    """Interim telemetry probe for conversational turn elapsed time.
-    Scheduled for cleanup in Milestone 6 when full REST router is wired.
-    """
-    return round((time.perf_counter() - start_time) * 1000, 2)
-
-
 def system_prompt(ctx: WorkspaceContext) -> str:
     day = datetime.fromtimestamp(ctx.as_of, UTC).strftime("%d %b %Y")
     return PROMPT.format(as_of_human=day, clock_mode=ctx.workspace.get("clock_mode", "live"))
@@ -174,5 +167,4 @@ async def turn(
             },
         ],
     )
-    _ = _debug_turn_latency_probe(t0)
     yield "done", {"usage": usage}

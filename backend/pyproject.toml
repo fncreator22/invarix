@@ -18,6 +18,8 @@ dependencies = [
     "cachetools>=5.5.0",
     "openai>=1.50.0",
     "pyjwt[crypto]>=2.9.0",
+    "svix>=1.30.0",
+    "tenacity>=9.0.0",
 ]
 
 [dependency-groups]

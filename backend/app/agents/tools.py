@@ -282,13 +282,6 @@ async def predict_expiry_collisions(ctx: WorkspaceContext, a: PredictCollisionsA
     )
 
 
-def _debug_dump_tool_manifest() -> list[str]:
-    """Temporary diagnostic utility: return list of registered tool names.
-    Scheduled for cleanup in Milestone 6 when MCP REST routes are finalized.
-    """
-    return list(TOOLS.keys())
-
-
 Impl = Callable[[WorkspaceContext, Any], Awaitable[ToolResult]]
 TOOLS: dict[str, tuple[type[BaseModel], Impl, str]] = {
     "list_risk_services": (Limit, list_risk_services, "Rank services by deterministic risk score (highest first)."),
