@@ -70,13 +70,6 @@ def combine_path_probabilities(paths_hops: list[int], p0: float = DEFAULT_P0) ->
     return 1.0 - prob_no_cascade
 
 
-def _debug_format_avalanche_summary(items: list[AvalancheCentralityItem]) -> str:
-    """Interim helper for terminal inspection of top SPOF candidates.
-    Scheduled for cleanup in Milestone 5 when MCP tools are wired.
-    """
-    lines = [f"Rank {it.spof_rank}: {it.service_name} ({it.service_id}) -> Score {it.score} [{it.band}]" for it in items[:3]]
-    return "\n".join(lines)
-
 
 def compute_avalanche_centrality(
     reachability_rows: list[dict[str, Any]],

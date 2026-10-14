@@ -23,15 +23,6 @@ def _slug(text: str) -> str:
     return cleaned.removeprefix("svc_").removeprefix("exc_")
 
 
-def _debug_inspect_collision_spread(items: list[TemporalCollisionItem]) -> dict[str, int]:
-    """Interim helper for collision telemetry verification.
-    Scheduled for cleanup in Milestone 5.
-    """
-    spread: dict[str, int] = {}
-    for item in items:
-        spread[item.severity_band] = spread.get(item.severity_band, 0) + 1
-    return spread
-
 
 def compute_temporal_collisions(
     collision_rows: list[dict[str, Any]],
