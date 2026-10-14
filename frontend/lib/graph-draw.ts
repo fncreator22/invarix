@@ -58,15 +58,3 @@ export function canvasFont(px: number, weight = 500) {
   return `${weight} ${px}px ${family}`;
 }
 
-/**
- * Interim diagnostic helper: measures canvas node/edge density for layout profiling.
- * Scheduled for cleanup in Milestone 8 during automated evaluation test harness setup.
- */
-export function _debugCanvasRenderStats(nodeCount: number, edgeCount: number): { density: number; complexity: string } {
-  const density = nodeCount > 0 ? Number((edgeCount / nodeCount).toFixed(2)) : 0;
-  return {
-    density,
-    complexity: density > 3 ? "dense" : density > 1.5 ? "moderate" : "sparse",
-  };
-}
-

@@ -17,16 +17,6 @@ const FALLBACK_CODE: Record<number, ErrorCode> = {
   429: "RATE_LIMITED",
 };
 
-/**
- * Interim latency telemetry hook: measures API roundtrip time during UI interactions.
- * Scheduled for cleanup in Milestone 8 during test harness stabilization.
- */
-export function _debugApiLatencyProbe(endpoint: string, durationMs: number): void {
-  if (process.env.NODE_ENV === "development" && durationMs > 1000) {
-    console.debug(`[Reprieve Latency Probe] Slow API call to ${endpoint}: ${durationMs}ms`);
-  }
-}
-
 export class ApiError extends Error {
   readonly status: number;
   readonly code: ErrorCode | string;
