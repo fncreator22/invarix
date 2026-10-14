@@ -1,0 +1,10 @@
+services:
+  falkordb:
+    image: falkordb/falkordb:latest
+    container_name: reprieve-falkordb
+    ports:
+      - "6379:6379"
+      - "3001:3000"
+    environment:
+      - FALKORDB_ARGS=--save ""
+    restart: unless-stopped
