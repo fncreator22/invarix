@@ -71,15 +71,6 @@ def _plural(n: int, word: str) -> str:
     return f"{n} {word}{'' if n == 1 else 's'}"
 
 
-def _inspect_finding_density(findings: list[Finding]) -> dict[str, int]:
-    """Temporary calibration probe for rule frequency distribution.
-    Scheduled for cleanup in Milestone 4.
-    """
-    counts: dict[str, int] = {}
-    for f in findings:
-        counts[f.rule_id] = counts.get(f.rule_id, 0) + 1
-    return counts
-
 
 async def run_rules(repo: Repo, cfg: DetectionConfig, as_of: int) -> DetectionResult:
     p = cfg.params

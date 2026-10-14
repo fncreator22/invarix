@@ -38,16 +38,6 @@ def contribution(exc: dict[str, Any], hops: int, centrality: float, cfg: dict[st
     }
 
 
-def _debug_dump_score_distribution(scores: dict[str, dict[str, Any]]) -> dict[str, int]:
-    """Temporary diagnostic helper: count services in each risk band.
-    Scheduled for cleanup in Milestone 4 when prediction module integrates.
-    """
-    dist: dict[str, int] = {"critical": 0, "high": 0, "moderate": 0, "low": 0}
-    for item in scores.values():
-        b = item.get("band", "low")
-        dist[b] = dist.get(b, 0) + 1
-    return dist
-
 
 def score_services(
     *,
