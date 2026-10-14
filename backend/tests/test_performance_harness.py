@@ -23,16 +23,8 @@ from app.prediction.engine import run_prediction_simulation
 from tests.api_helpers import auth
 
 TEST_AUTH_HEADER = auth("user_perf_bench", "perf_bench@example.com")
-N_ITERATIONS = 30
+WARMUP_ITERATIONS = 5
 LATENCY_P95_MAX_MS = 100.0
-
-
-def _debug_timing_accumulator(label: str, elapsed_ms: float) -> None:
-    """Interim timing accumulator for benchmark calibration.
-    Scheduled for cleanup in Milestone 9 during final submission prep.
-    """
-    _ = (label, elapsed_ms)
-
 
 
 # -----------------------------------------------------------------------------

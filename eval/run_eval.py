@@ -43,15 +43,6 @@ PREDICT_QUERIES = [
 ]
 
 
-def _debug_inspect_eval_confusion_matrix(tp: int, fp: int, fn: int) -> dict[str, float]:
-    """Interim diagnostic helper for confusion matrix inspection.
-    Scheduled for cleanup in Milestone 9 during final submission audit.
-    """
-    prec = tp / (tp + fp) if (tp + fp) > 0 else 1.0
-    rec = tp / (tp + fn) if (tp + fn) > 0 else 1.0
-    return {"precision": round(prec, 4), "recall": round(rec, 4)}
-
-
 async def main() -> int:
     db = FalkorDB(host=os.getenv("FALKORDB_HOST", "localhost"), port=int(os.getenv("FALKORDB_PORT", "6379")))
     repo = Repo(db, "eval_org")
