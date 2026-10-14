@@ -1,0 +1,40 @@
+# Rule presets (03 §8.2) and scoring config (03 §8.4). Workspace RuleConfig nodes override these.
+presets:
+  strict:
+    R1: {window_days: 14}
+    R2: {}
+    R3: {k: 2}
+    R4: {k: 2}
+    R5: {k: 3}
+    R6: {k: 3, window_days: 10, horizon_days: 30}
+    R7: {max_age_days: 21, missing_min_severity: 3}
+    R8: {min_severity: 1}
+  balanced:
+    R1: {window_days: 7}
+    R2: {}
+    R3: {k: 2}
+    R4: {k: 3}
+    R5: {k: 3}
+    R6: {k: 3, window_days: 7, horizon_days: 30}
+    R7: {max_age_days: 30, missing_min_severity: 3}
+    R8: {min_severity: 1}
+  relaxed:
+    R1: {window_days: 3}
+    R2: {}
+    R3: {k: 3}
+    R4: {k: 4}
+    R5: {k: 4}
+    R6: {k: 4, window_days: 5, horizon_days: 30}
+    R7: {max_age_days: 45, missing_min_severity: 4}
+    R8: {min_severity: 3}
+
+scoring:
+  version: 1
+  age_weight: 0.8
+  age_cap_days: 180
+  overdue_multiplier: 1.5
+  hop_decay: {0: 1.0, 1: 0.6, 2: 0.35}
+  centrality: {pagerank: 0.6, betweenness: 0.4}
+  rule_multiplier: 0.5
+  K: 25
+  bands: {moderate: 25, high: 50, critical: 75}
