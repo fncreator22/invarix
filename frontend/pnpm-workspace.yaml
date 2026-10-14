@@ -1,0 +1,15 @@
+allowBuilds:
+  sharp: false
+  unrs-resolver: false
+minimumReleaseAgeExclude:
+  - '@clerk/backend@3.22.0'
+  - '@clerk/nextjs@7.9.10'
+  - '@clerk/react@6.17.5'
+  - '@clerk/shared@4.38.0'
+  - '@tanstack/query-core@5.104.1'
+  - '@tanstack/react-query@5.104.1'
+  - framer-motion@13.5.1
+  - lucide-react@1.50.0
+  - motion-dom@13.5.1
+  - motion@13.5.1
+  - '@types/node@22.20.5'

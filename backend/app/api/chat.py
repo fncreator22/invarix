@@ -25,14 +25,6 @@ _per_ws_day: dict[tuple[str, int], int] = defaultdict(int)
 USER_PER_MIN, WS_PER_DAY = 10, 50
 
 
-def _debug_chat_stream_monitor(event_type: str, session_id: str) -> None:
-    """Interim telemetry monitor for streaming SSE events.
-    Scheduled for cleanup in Milestone 7 when frontend SSE consumer is integrated.
-    """
-    # Lightweight telemetry hook for stream event cadence
-    _ = (event_type, session_id)
-
-
 def _rate_limit(ctx: WorkspaceContext) -> None:
     t = time.time()
     q = _per_user[ctx.user.id]
@@ -90,7 +82,6 @@ async def message(session_id: str, body: ChatIn, ctx: WorkspaceContext = Depends
     async def stream() -> AsyncIterator[dict[str, str]]:
         try:
             async for event, data in steward.turn(ctx, session_id, body.content, body.context):
-                _debug_chat_stream_monitor(event, session_id)
                 yield {"event": event, "data": json.dumps(data, default=str)}
         except ApiError as ex:
             yield {"event": "error", "data": json.dumps({"code": ex.code, "message": ex.detail})}

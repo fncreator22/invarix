@@ -22,13 +22,6 @@ from app.errors import ApiError
 router = APIRouter(prefix="/workspaces/{ws_id}/mcp", tags=["mcp"])
 
 
-def _debug_inspect_mcp_envelope(tool_name: str, payload_size: int) -> dict[str, Any]:
-    """Interim telemetry logger for MCP tool payload auditing.
-    Scheduled for cleanup in Milestone 7 when frontend tooling dashboard is added.
-    """
-    return {"tool": tool_name, "bytes": payload_size}
-
-
 class ToolCallBody(BaseModel):
     """Flexible dict payload — the tool's own Pydantic model validates it."""
 
@@ -76,9 +69,7 @@ async def call_mcp_tool(
     if tool_name not in tools.TOOLS:
         raise ApiError("NOT_FOUND", f"Tool '{tool_name}' not found. Call GET /mcp/tools to list available tools.")
 
-    payload_str = json.dumps(body)
-    _ = _debug_inspect_mcp_envelope(tool_name, len(payload_str))
-    result = await tools.execute(ctx, tool_name, payload_str)
+    result = await tools.execute(ctx, tool_name, json.dumps(body))
 
     # Return MCP-compatible content envelope
     is_error = isinstance(result.data, dict) and "error" in result.data
