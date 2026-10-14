@@ -1,0 +1,82 @@
+{
+ "as_of": 1792195200,
+ "scenarios": [
+  {
+   "id": "S1",
+   "name": "Checkout Collision",
+   "expect": [
+    {
+     "rule": "R4",
+     "subject": "svc_checkout_api"
+    },
+    {
+     "rule": "R8",
+     "subject": "cp_checkout"
+    }
+   ]
+  },
+  {
+   "id": "S2",
+   "name": "Ghost Owner",
+   "expect": [
+    {
+     "rule": "R2",
+     "subject": "exc_ghost_vault_key"
+    },
+    {
+     "rule": "R2",
+     "subject": "exc_ledger_batch_export"
+    }
+   ]
+  },
+  {
+   "id": "S3",
+   "name": "Single Fallback",
+   "expect": [
+    {
+     "rule": "R3",
+     "subject": "per_sam_okafor"
+    }
+   ]
+  },
+  {
+   "id": "S4",
+   "name": "Renewal Treadmill",
+   "expect": [
+    {
+     "rule": "R5",
+     "subject": "exc_tls_pin_4"
+    }
+   ]
+  },
+  {
+   "id": "S5",
+   "name": "Quiet Expiry Week",
+   "expect": [
+    {
+     "rule": "R6",
+     "subject": "team_data"
+    }
+   ]
+  }
+ ],
+ "critical_services": [
+  "svc_checkout_api",
+  "svc_payments_gateway"
+ ],
+ "control_services": [
+  "svc_status_page",
+  "svc_docs_portal",
+  "svc_email_relay"
+ ],
+ "owner_resolution": [
+  {
+   "exception": "exc_ghost_vault_key",
+   "expected_first": "per_marcus_bell"
+  },
+  {
+   "exception": "exc_ledger_batch_export",
+   "expected_first": "per_elena_petrova"
+  }
+ ]
+}

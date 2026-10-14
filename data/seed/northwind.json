@@ -1,0 +1,2562 @@
+{
+ "bundle_version": 1,
+ "exported_at": 1792195200,
+ "teams": [
+  {
+   "id": "team_payments",
+   "name": "Payments Platform"
+  },
+  {
+   "id": "team_ledger",
+   "name": "Ledger"
+  },
+  {
+   "id": "team_identity",
+   "name": "Identity"
+  },
+  {
+   "id": "team_mobile",
+   "name": "Mobile"
+  },
+  {
+   "id": "team_data",
+   "name": "Data Platform"
+  },
+  {
+   "id": "team_infra",
+   "name": "Infrastructure"
+  },
+  {
+   "id": "team_merchant",
+   "name": "Merchant Experience"
+  },
+  {
+   "id": "team_it",
+   "name": "Corporate IT"
+  }
+ ],
+ "people": [
+  {
+   "id": "per_marcus_bell",
+   "name": "Marcus Bell",
+   "email": "marcus.bell@northwindpay.example",
+   "title": "Engineering Manager",
+   "role": "Engineering Manager",
+   "status": "active"
+  },
+  {
+   "id": "per_priya_raman",
+   "name": "Priya Raman",
+   "email": "priya.raman@northwindpay.example",
+   "title": "Staff Engineer",
+   "role": "Staff Engineer",
+   "status": "left"
+  },
+  {
+   "id": "per_hana_sato",
+   "name": "Hana Sato",
+   "email": "hana.sato@northwindpay.example",
+   "title": "Senior Engineer",
+   "role": "Senior Engineer",
+   "status": "active"
+  },
+  {
+   "id": "per_luis_ortega",
+   "name": "Luis Ortega",
+   "email": "luis.ortega@northwindpay.example",
+   "title": "Engineer",
+   "role": "Engineer",
+   "status": "active"
+  },
+  {
+   "id": "per_grace_mensah",
+   "name": "Grace Mensah",
+   "email": "grace.mensah@northwindpay.example",
+   "title": "Engineer",
+   "role": "Engineer",
+   "status": "active"
+  },
+  {
+   "id": "per_elena_petrova",
+   "name": "Elena Petrova",
+   "email": "elena.petrova@northwindpay.example",
+   "title": "Engineering Manager",
+   "role": "Engineering Manager",
+   "status": "active"
+  },
+  {
+   "id": "per_dmitri_volkov",
+   "name": "Dmitri Volkov",
+   "email": "dmitri.volkov@northwindpay.example",
+   "title": "Senior Engineer",
+   "role": "Senior Engineer",
+   "status": "active"
+  },
+  {
+   "id": "per_tomas_silva",
+   "name": "Tomás Silva",
+   "email": "tomas.silva@northwindpay.example",
+   "title": "Engineer",
+   "role": "Engineer",
+   "status": "active"
+  },
+  {
+   "id": "per_aisha_khan",
+   "name": "Aisha Khan",
+   "email": "aisha.khan@northwindpay.example",
+   "title": "Engineer",
+   "role": "Engineer",
+   "status": "active"
+  },
+  {
+   "id": "per_ben_carter",
+   "name": "Ben Carter",
+   "email": "ben.carter@northwindpay.example",
+   "title": "Engineer",
+   "role": "Engineer",
+   "status": "active"
+  },
+  {
+   "id": "per_yuki_tanaka",
+   "name": "Yuki Tanaka",
+   "email": "yuki.tanaka@northwindpay.example",
+   "title": "Engineering Manager",
+   "role": "Engineering Manager",
+   "status": "active"
+  },
+  {
+   "id": "per_omar_haddad",
+   "name": "Omar Haddad",
+   "email": "omar.haddad@northwindpay.example",
+   "title": "Security Engineer",
+   "role": "Security Engineer",
+   "status": "active"
+  },
+  {
+   "id": "per_chloe_martin",
+   "name": "Chloe Martin",
+   "email": "chloe.martin@northwindpay.example",
+   "title": "Engineer",
+   "role": "Engineer",
+   "status": "active"
+  },
+  {
+   "id": "per_ravi_iyer",
+   "name": "Ravi Iyer",
+   "email": "ravi.iyer@northwindpay.example",
+   "title": "Engineer",
+   "role": "Engineer",
+   "status": "active"
+  },
+  {
+   "id": "per_sofia_rossi",
+   "name": "Sofia Rossi",
+   "email": "sofia.rossi@northwindpay.example",
+   "title": "Engineer",
+   "role": "Engineer",
+   "status": "active"
+  },
+  {
+   "id": "per_daniel_kim",
+   "name": "Daniel Kim",
+   "email": "daniel.kim@northwindpay.example",
+   "title": "Engineering Manager",
+   "role": "Engineering Manager",
+   "status": "active"
+  },
+  {
+   "id": "per_amara_nwosu",
+   "name": "Amara Nwosu",
+   "email": "amara.nwosu@northwindpay.example",
+   "title": "Senior Engineer",
+   "role": "Senior Engineer",
+   "status": "active"
+  },
+  {
+   "id": "per_jonas_weber",
+   "name": "Jonas Weber",
+   "email": "jonas.weber@northwindpay.example",
+   "title": "Engineer",
+   "role": "Engineer",
+   "status": "active"
+  },
+  {
+   "id": "per_mei_lin",
+   "name": "Mei Lin",
+   "email": "mei.lin@northwindpay.example",
+   "title": "Engineer",
+   "role": "Engineer",
+   "status": "active"
+  },
+  {
+   "id": "per_kofi_asante",
+   "name": "Kofi Asante",
+   "email": "kofi.asante@northwindpay.example",
+   "title": "Engineer",
+   "role": "Engineer",
+   "status": "left"
+  },
+  {
+   "id": "per_laura_jensen",
+   "name": "Laura Jensen",
+   "email": "laura.jensen@northwindpay.example",
+   "title": "Engineering Manager",
+   "role": "Engineering Manager",
+   "status": "active"
+  },
+  {
+   "id": "per_arjun_mehta",
+   "name": "Arjun Mehta",
+   "email": "arjun.mehta@northwindpay.example",
+   "title": "Data Engineer",
+   "role": "Data Engineer",
+   "status": "active"
+  },
+  {
+   "id": "per_nora_fischer",
+   "name": "Nora Fischer",
+   "email": "nora.fischer@northwindpay.example",
+   "title": "Data Engineer",
+   "role": "Data Engineer",
+   "status": "active"
+  },
+  {
+   "id": "per_pedro_alves",
+   "name": "Pedro Alves",
+   "email": "pedro.alves@northwindpay.example",
+   "title": "ML Engineer",
+   "role": "ML Engineer",
+   "status": "active"
+  },
+  {
+   "id": "per_fatima_zahra",
+   "name": "Fatima Zahra",
+   "email": "fatima.zahra@northwindpay.example",
+   "title": "Analytics Engineer",
+   "role": "Analytics Engineer",
+   "status": "active"
+  },
+  {
+   "id": "per_sam_okafor",
+   "name": "Sam Okafor",
+   "email": "sam.okafor@northwindpay.example",
+   "title": "Site Reliability Engineer",
+   "role": "Site Reliability Engineer",
+   "status": "active"
+  },
+  {
+   "id": "per_rachel_green",
+   "name": "Rachel Green",
+   "email": "rachel.green@northwindpay.example",
+   "title": "Engineering Manager",
+   "role": "Engineering Manager",
+   "status": "active"
+  },
+  {
+   "id": "per_ivan_horvat",
+   "name": "Ivan Horvat",
+   "email": "ivan.horvat@northwindpay.example",
+   "title": "Platform Engineer",
+   "role": "Platform Engineer",
+   "status": "active"
+  },
+  {
+   "id": "per_zoe_adams",
+   "name": "Zoe Adams",
+   "email": "zoe.adams@northwindpay.example",
+   "title": "Platform Engineer",
+   "role": "Platform Engineer",
+   "status": "active"
+  },
+  {
+   "id": "per_kenji_mori",
+   "name": "Kenji Mori",
+   "email": "kenji.mori@northwindpay.example",
+   "title": "Platform Engineer",
+   "role": "Platform Engineer",
+   "status": "active"
+  },
+  {
+   "id": "per_olivia_brown",
+   "name": "Olivia Brown",
+   "email": "olivia.brown@northwindpay.example",
+   "title": "Engineering Manager",
+   "role": "Engineering Manager",
+   "status": "active"
+  },
+  {
+   "id": "per_mateo_garcia",
+   "name": "Mateo García",
+   "email": "mateo.garcia@northwindpay.example",
+   "title": "Senior Engineer",
+   "role": "Senior Engineer",
+   "status": "active"
+  },
+  {
+   "id": "per_leila_ahmadi",
+   "name": "Leila Ahmadi",
+   "email": "leila.ahmadi@northwindpay.example",
+   "title": "Engineer",
+   "role": "Engineer",
+   "status": "active"
+  },
+  {
+   "id": "per_noah_wilson",
+   "name": "Noah Wilson",
+   "email": "noah.wilson@northwindpay.example",
+   "title": "Engineer",
+   "role": "Engineer",
+   "status": "active"
+  },
+  {
+   "id": "per_ingrid_larsen",
+   "name": "Ingrid Larsen",
+   "email": "ingrid.larsen@northwindpay.example",
+   "title": "Engineer",
+   "role": "Engineer",
+   "status": "active"
+  },
+  {
+   "id": "per_patrick_oneill",
+   "name": "Patrick O'Neill",
+   "email": "patrick.oneill@northwindpay.example",
+   "title": "IT Manager",
+   "role": "IT Manager",
+   "status": "active"
+  },
+  {
+   "id": "per_sara_lindqvist",
+   "name": "Sara Lindqvist",
+   "email": "sara.lindqvist@northwindpay.example",
+   "title": "IT Engineer",
+   "role": "IT Engineer",
+   "status": "active"
+  },
+  {
+   "id": "per_victor_dubois",
+   "name": "Victor Dubois",
+   "email": "victor.dubois@northwindpay.example",
+   "title": "IT Engineer",
+   "role": "IT Engineer",
+   "status": "active"
+  },
+  {
+   "id": "per_hiro_nakamura",
+   "name": "Hiro Nakamura",
+   "email": "hiro.nakamura@northwindpay.example",
+   "title": "IT Engineer",
+   "role": "IT Engineer",
+   "status": "active"
+  },
+  {
+   "id": "per_anika_patel",
+   "name": "Anika Patel",
+   "email": "anika.patel@northwindpay.example",
+   "title": "Security & Compliance Lead",
+   "role": "Security & Compliance Lead",
+   "status": "active"
+  }
+ ],
+ "memberships": [
+  {
+   "person_id": "per_marcus_bell",
+   "team_id": "team_payments",
+   "since": 1750118400,
+   "until": null
+  },
+  {
+   "person_id": "per_priya_raman",
+   "team_id": "team_payments",
+   "since": 1772236800,
+   "until": 1788220800
+  },
+  {
+   "person_id": "per_hana_sato",
+   "team_id": "team_payments",
+   "since": 1736208000,
+   "until": null
+  },
+  {
+   "person_id": "per_luis_ortega",
+   "team_id": "team_payments",
+   "since": 1758758400,
+   "until": null
+  },
+  {
+   "person_id": "per_grace_mensah",
+   "team_id": "team_payments",
+   "since": 1716249600,
+   "until": null
+  },
+  {
+   "person_id": "per_elena_petrova",
+   "team_id": "team_ledger",
+   "since": 1764201600,
+   "until": null
+  },
+  {
+   "person_id": "per_dmitri_volkov",
+   "team_id": "team_ledger",
+   "since": 1732060800,
+   "until": 1789430400
+  },
+  {
+   "person_id": "per_dmitri_volkov",
+   "team_id": "team_data",
+   "since": 1789430400,
+   "until": null
+  },
+  {
+   "person_id": "per_tomas_silva",
+   "team_id": "team_ledger",
+   "since": 1696032000,
+   "until": null
+  },
+  {
+   "person_id": "per_aisha_khan",
+   "team_id": "team_ledger",
+   "since": 1704758400,
+   "until": null
+  },
+  {
+   "person_id": "per_ben_carter",
+   "team_id": "team_ledger",
+   "since": 1728604800,
+   "until": null
+  },
+  {
+   "person_id": "per_yuki_tanaka",
+   "team_id": "team_identity",
+   "since": 1691884800,
+   "until": null
+  },
+  {
+   "person_id": "per_omar_haddad",
+   "team_id": "team_identity",
+   "since": 1728000000,
+   "until": null
+  },
+  {
+   "person_id": "per_chloe_martin",
+   "team_id": "team_identity",
+   "since": 1728777600,
+   "until": null
+  },
+  {
+   "person_id": "per_ravi_iyer",
+   "team_id": "team_identity",
+   "since": 1708300800,
+   "until": null
+  },
+  {
+   "person_id": "per_sofia_rossi",
+   "team_id": "team_identity",
+   "since": 1725840000,
+   "until": null
+  },
+  {
+   "person_id": "per_daniel_kim",
+   "team_id": "team_mobile",
+   "since": 1691625600,
+   "until": null
+  },
+  {
+   "person_id": "per_amara_nwosu",
+   "team_id": "team_mobile",
+   "since": 1726012800,
+   "until": null
+  },
+  {
+   "person_id": "per_jonas_weber",
+   "team_id": "team_mobile",
+   "since": 1699228800,
+   "until": null
+  },
+  {
+   "person_id": "per_mei_lin",
+   "team_id": "team_mobile",
+   "since": 1745798400,
+   "until": null
+  },
+  {
+   "person_id": "per_kofi_asante",
+   "team_id": "team_mobile",
+   "since": 1722988800,
+   "until": 1781827200
+  },
+  {
+   "person_id": "per_laura_jensen",
+   "team_id": "team_data",
+   "since": 1759363200,
+   "until": null
+  },
+  {
+   "person_id": "per_arjun_mehta",
+   "team_id": "team_data",
+   "since": 1732665600,
+   "until": null
+  },
+  {
+   "person_id": "per_nora_fischer",
+   "team_id": "team_data",
+   "since": 1693094400,
+   "until": null
+  },
+  {
+   "person_id": "per_pedro_alves",
+   "team_id": "team_data",
+   "since": 1729555200,
+   "until": null
+  },
+  {
+   "person_id": "per_fatima_zahra",
+   "team_id": "team_data",
+   "since": 1739836800,
+   "until": null
+  },
+  {
+   "person_id": "per_sam_okafor",
+   "team_id": "team_infra",
+   "since": 1726272000,
+   "until": null
+  },
+  {
+   "person_id": "per_rachel_green",
+   "team_id": "team_infra",
+   "since": 1725148800,
+   "until": null
+  },
+  {
+   "person_id": "per_ivan_horvat",
+   "team_id": "team_infra",
+   "since": 1767312000,
+   "until": null
+  },
+  {
+   "person_id": "per_zoe_adams",
+   "team_id": "team_infra",
+   "since": 1759190400,
+   "until": null
+  },
+  {
+   "person_id": "per_kenji_mori",
+   "team_id": "team_infra",
+   "since": 1712188800,
+   "until": null
+  },
+  {
+   "person_id": "per_olivia_brown",
+   "team_id": "team_merchant",
+   "since": 1758585600,
+   "until": null
+  },
+  {
+   "person_id": "per_mateo_garcia",
+   "team_id": "team_merchant",
+   "since": 1760486400,
+   "until": null
+  },
+  {
+   "person_id": "per_leila_ahmadi",
+   "team_id": "team_merchant",
+   "since": 1752624000,
+   "until": null
+  },
+  {
+   "person_id": "per_noah_wilson",
+   "team_id": "team_merchant",
+   "since": 1747094400,
+   "until": null
+  },
+  {
+   "person_id": "per_ingrid_larsen",
+   "team_id": "team_merchant",
+   "since": 1694908800,
+   "until": null
+  },
+  {
+   "person_id": "per_patrick_oneill",
+   "team_id": "team_it",
+   "since": 1735171200,
+   "until": null
+  },
+  {
+   "person_id": "per_sara_lindqvist",
+   "team_id": "team_it",
+   "since": 1707436800,
+   "until": null
+  },
+  {
+   "person_id": "per_victor_dubois",
+   "team_id": "team_it",
+   "since": 1724976000,
+   "until": null
+  },
+  {
+   "person_id": "per_hiro_nakamura",
+   "team_id": "team_it",
+   "since": 1762905600,
+   "until": null
+  },
+  {
+   "person_id": "per_anika_patel",
+   "team_id": "team_it",
+   "since": 1712188800,
+   "until": null
+  }
+ ],
+ "leads": [
+  {
+   "person_id": "per_priya_raman",
+   "team_id": "team_payments",
+   "since": 1714435200,
+   "until": 1788220800
+  },
+  {
+   "person_id": "per_marcus_bell",
+   "team_id": "team_payments",
+   "since": 1788220800,
+   "until": null
+  },
+  {
+   "person_id": "per_elena_petrova",
+   "team_id": "team_ledger",
+   "since": 1731715200,
+   "until": null
+  },
+  {
+   "person_id": "per_yuki_tanaka",
+   "team_id": "team_identity",
+   "since": 1723075200,
+   "until": null
+  },
+  {
+   "person_id": "per_daniel_kim",
+   "team_id": "team_mobile",
+   "since": 1740355200,
+   "until": null
+  },
+  {
+   "person_id": "per_laura_jensen",
+   "team_id": "team_data",
+   "since": 1736035200,
+   "until": null
+  },
+  {
+   "person_id": "per_rachel_green",
+   "team_id": "team_infra",
+   "since": 1727395200,
+   "until": null
+  },
+  {
+   "person_id": "per_olivia_brown",
+   "team_id": "team_merchant",
+   "since": 1748995200,
+   "until": null
+  },
+  {
+   "person_id": "per_patrick_oneill",
+   "team_id": "team_it",
+   "since": 1705795200,
+   "until": null
+  }
+ ],
+ "services": [
+  {
+   "id": "svc_checkout_api",
+   "name": "checkout-api",
+   "tier": 1,
+   "customer_facing": true,
+   "description": "Public checkout API used by merchant storefronts",
+   "team_id": "team_payments"
+  },
+  {
+   "id": "svc_payments_gateway",
+   "name": "payments-gateway",
+   "tier": 1,
+   "customer_facing": false,
+   "description": "Routes authorizations to acquirers and card networks",
+   "team_id": "team_payments"
+  },
+  {
+   "id": "svc_fraud_scoring",
+   "name": "fraud-scoring",
+   "tier": 1,
+   "customer_facing": false,
+   "description": "Real-time fraud risk scoring for transactions",
+   "team_id": "team_payments"
+  },
+  {
+   "id": "svc_card_vault",
+   "name": "card-vault",
+   "tier": 1,
+   "customer_facing": false,
+   "description": "PCI-scoped tokenization and card data vault",
+   "team_id": "team_payments"
+  },
+  {
+   "id": "svc_ledger",
+   "name": "ledger",
+   "tier": 1,
+   "customer_facing": false,
+   "description": "Double-entry ledger of all money movement",
+   "team_id": "team_ledger"
+  },
+  {
+   "id": "svc_reconciliation",
+   "name": "reconciliation",
+   "tier": 2,
+   "customer_facing": false,
+   "description": "Daily reconciliation against bank and acquirer files",
+   "team_id": "team_ledger"
+  },
+  {
+   "id": "svc_payouts",
+   "name": "payouts",
+   "tier": 1,
+   "customer_facing": true,
+   "description": "Merchant payout scheduling and bank transfers",
+   "team_id": "team_ledger"
+  },
+  {
+   "id": "svc_auth",
+   "name": "auth",
+   "tier": 1,
+   "customer_facing": false,
+   "description": "Authentication, sessions and MFA",
+   "team_id": "team_identity"
+  },
+  {
+   "id": "svc_user_profile",
+   "name": "user-profile",
+   "tier": 2,
+   "customer_facing": false,
+   "description": "Consumer and merchant profile store",
+   "team_id": "team_identity"
+  },
+  {
+   "id": "svc_mobile_api",
+   "name": "mobile-api",
+   "tier": 1,
+   "customer_facing": true,
+   "description": "Backend for the consumer mobile wallet",
+   "team_id": "team_mobile"
+  },
+  {
+   "id": "svc_push_notifications",
+   "name": "push-notifications",
+   "tier": 2,
+   "customer_facing": false,
+   "description": "Push and in-app notification delivery",
+   "team_id": "team_mobile"
+  },
+  {
+   "id": "svc_data_warehouse",
+   "name": "data-warehouse",
+   "tier": 2,
+   "customer_facing": false,
+   "description": "Analytical warehouse",
+   "team_id": "team_data"
+  },
+  {
+   "id": "svc_etl_pipeline",
+   "name": "etl-pipeline",
+   "tier": 2,
+   "customer_facing": false,
+   "description": "Batch ingestion into the warehouse",
+   "team_id": "team_data"
+  },
+  {
+   "id": "svc_reporting",
+   "name": "reporting",
+   "tier": 3,
+   "customer_facing": false,
+   "description": "Merchant and finance reporting",
+   "team_id": "team_data"
+  },
+  {
+   "id": "svc_ml_features",
+   "name": "ml-features",
+   "tier": 2,
+   "customer_facing": false,
+   "description": "Feature store for fraud and risk models",
+   "team_id": "team_data"
+  },
+  {
+   "id": "svc_k8s_platform",
+   "name": "k8s-platform",
+   "tier": 1,
+   "customer_facing": false,
+   "description": "Shared Kubernetes runtime",
+   "team_id": "team_infra"
+  },
+  {
+   "id": "svc_secrets_manager",
+   "name": "secrets-manager",
+   "tier": 1,
+   "customer_facing": false,
+   "description": "Secrets and key management",
+   "team_id": "team_infra"
+  },
+  {
+   "id": "svc_ci_runner",
+   "name": "ci-runner",
+   "tier": 3,
+   "customer_facing": false,
+   "description": "Build and test runners",
+   "team_id": "team_infra"
+  },
+  {
+   "id": "svc_observability",
+   "name": "observability",
+   "tier": 2,
+   "customer_facing": false,
+   "description": "Metrics, logs and tracing",
+   "team_id": "team_infra"
+  },
+  {
+   "id": "svc_merchant_dashboard",
+   "name": "merchant-dashboard",
+   "tier": 2,
+   "customer_facing": true,
+   "description": "Merchant web dashboard",
+   "team_id": "team_merchant"
+  },
+  {
+   "id": "svc_onboarding_kyc",
+   "name": "onboarding-kyc",
+   "tier": 1,
+   "customer_facing": true,
+   "description": "Merchant onboarding and KYC checks",
+   "team_id": "team_merchant"
+  },
+  {
+   "id": "svc_webhooks",
+   "name": "webhooks",
+   "tier": 2,
+   "customer_facing": false,
+   "description": "Outbound merchant webhooks",
+   "team_id": "team_merchant"
+  },
+  {
+   "id": "svc_status_page",
+   "name": "status-page",
+   "tier": 3,
+   "customer_facing": false,
+   "description": "Public status page",
+   "team_id": "team_it"
+  },
+  {
+   "id": "svc_docs_portal",
+   "name": "docs-portal",
+   "tier": 3,
+   "customer_facing": false,
+   "description": "Internal documentation portal",
+   "team_id": "team_it"
+  },
+  {
+   "id": "svc_email_relay",
+   "name": "email-relay",
+   "tier": 3,
+   "customer_facing": false,
+   "description": "Transactional email relay",
+   "team_id": "team_it"
+  }
+ ],
+ "dependencies": [
+  {
+   "from": "svc_checkout_api",
+   "to": "svc_payments_gateway"
+  },
+  {
+   "from": "svc_checkout_api",
+   "to": "svc_fraud_scoring"
+  },
+  {
+   "from": "svc_checkout_api",
+   "to": "svc_auth"
+  },
+  {
+   "from": "svc_payments_gateway",
+   "to": "svc_card_vault"
+  },
+  {
+   "from": "svc_payments_gateway",
+   "to": "svc_ledger"
+  },
+  {
+   "from": "svc_fraud_scoring",
+   "to": "svc_ml_features"
+  },
+  {
+   "from": "svc_ml_features",
+   "to": "svc_data_warehouse"
+  },
+  {
+   "from": "svc_reconciliation",
+   "to": "svc_ledger"
+  },
+  {
+   "from": "svc_reconciliation",
+   "to": "svc_data_warehouse"
+  },
+  {
+   "from": "svc_payouts",
+   "to": "svc_ledger"
+  },
+  {
+   "from": "svc_auth",
+   "to": "svc_user_profile"
+  },
+  {
+   "from": "svc_auth",
+   "to": "svc_secrets_manager"
+  },
+  {
+   "from": "svc_card_vault",
+   "to": "svc_secrets_manager"
+  },
+  {
+   "from": "svc_mobile_api",
+   "to": "svc_auth"
+  },
+  {
+   "from": "svc_mobile_api",
+   "to": "svc_payments_gateway"
+  },
+  {
+   "from": "svc_mobile_api",
+   "to": "svc_push_notifications"
+  },
+  {
+   "from": "svc_merchant_dashboard",
+   "to": "svc_reporting"
+  },
+  {
+   "from": "svc_merchant_dashboard",
+   "to": "svc_webhooks"
+  },
+  {
+   "from": "svc_merchant_dashboard",
+   "to": "svc_auth"
+  },
+  {
+   "from": "svc_reporting",
+   "to": "svc_data_warehouse"
+  },
+  {
+   "from": "svc_etl_pipeline",
+   "to": "svc_data_warehouse"
+  },
+  {
+   "from": "svc_onboarding_kyc",
+   "to": "svc_user_profile"
+  },
+  {
+   "from": "svc_observability",
+   "to": "svc_k8s_platform"
+  },
+  {
+   "from": "svc_ci_runner",
+   "to": "svc_k8s_platform"
+  }
+ ],
+ "customer_paths": [
+  {
+   "id": "cp_checkout",
+   "name": "Checkout",
+   "description": "Shopper pays a merchant online",
+   "service_ids": [
+    "svc_checkout_api"
+   ]
+  },
+  {
+   "id": "cp_mobile_pay",
+   "name": "Mobile wallet pay",
+   "description": "Consumer pays with the wallet app",
+   "service_ids": [
+    "svc_mobile_api"
+   ]
+  },
+  {
+   "id": "cp_merchant_payouts",
+   "name": "Merchant payouts",
+   "description": "Merchant receives settlement funds",
+   "service_ids": [
+    "svc_payouts",
+    "svc_merchant_dashboard"
+   ]
+  },
+  {
+   "id": "cp_merchant_signup",
+   "name": "Merchant sign-up",
+   "description": "New merchant completes onboarding",
+   "service_ids": [
+    "svc_onboarding_kyc"
+   ]
+  }
+ ],
+ "controls": [
+  {
+   "id": "ctl_encrypt_at_rest",
+   "name": "Encryption at rest",
+   "framework": "PCI DSS 3.5",
+   "severity_weight": 5,
+   "description": "Encryption at rest"
+  },
+  {
+   "id": "ctl_tls_modern",
+   "name": "Modern TLS only (1.2+)",
+   "framework": "PCI DSS 4.2",
+   "severity_weight": 5,
+   "description": "Modern TLS only (1.2+)"
+  },
+  {
+   "id": "ctl_tls_pinning",
+   "name": "Certificate pinning in mobile clients",
+   "framework": "OWASP MASVS",
+   "severity_weight": 4,
+   "description": "Certificate pinning in mobile clients"
+  },
+  {
+   "id": "ctl_key_rotation",
+   "name": "Cryptographic key rotation",
+   "framework": "PCI DSS 3.6",
+   "severity_weight": 5,
+   "description": "Cryptographic key rotation"
+  },
+  {
+   "id": "ctl_mfa_admin",
+   "name": "MFA for administrative access",
+   "framework": "SOC 2 CC6.1",
+   "severity_weight": 4,
+   "description": "MFA for administrative access"
+  },
+  {
+   "id": "ctl_code_review",
+   "name": "Mandatory code review",
+   "framework": "SOC 2 CC8.1",
+   "severity_weight": 3,
+   "description": "Mandatory code review"
+  },
+  {
+   "id": "ctl_test_coverage",
+   "name": "Required automated tests before release",
+   "framework": "Internal SDLC",
+   "severity_weight": 2,
+   "description": "Required automated tests before release"
+  },
+  {
+   "id": "ctl_change_approval",
+   "name": "Change approval before production deploy",
+   "framework": "SOC 2 CC8.1",
+   "severity_weight": 3,
+   "description": "Change approval before production deploy"
+  },
+  {
+   "id": "ctl_pii_export",
+   "name": "No manual export of personal data",
+   "framework": "GDPR Art. 32",
+   "severity_weight": 4,
+   "description": "No manual export of personal data"
+  },
+  {
+   "id": "ctl_cost_budget",
+   "name": "Service cost budget limits",
+   "framework": "FinOps policy",
+   "severity_weight": 1,
+   "description": "Service cost budget limits"
+  },
+  {
+   "id": "ctl_strong_customer_auth",
+   "name": "Strong customer authentication (3-D Secure)",
+   "framework": "PSD2 SCA",
+   "severity_weight": 5,
+   "description": "Strong customer authentication (3-D Secure)"
+  },
+  {
+   "id": "ctl_vuln_patching",
+   "name": "Critical vulnerabilities patched within 14 days",
+   "framework": "SOC 2 CC7.1",
+   "severity_weight": 4,
+   "description": "Critical vulnerabilities patched within 14 days"
+  }
+ ],
+ "runbooks": [
+  {
+   "id": "rbk_acquirer_failover",
+   "name": "Acquirer failover",
+   "url": "https://wiki.northwindpay.example/runbooks/acquirer_failover"
+  },
+  {
+   "id": "rbk_vault_break_glass",
+   "name": "Vault break-glass access",
+   "url": "https://wiki.northwindpay.example/runbooks/vault_break_glass"
+  },
+  {
+   "id": "rbk_ledger_replay",
+   "name": "Ledger replay",
+   "url": "https://wiki.northwindpay.example/runbooks/ledger_replay"
+  },
+  {
+   "id": "rbk_auth_lockout",
+   "name": "Auth mass-lockout recovery",
+   "url": "https://wiki.northwindpay.example/runbooks/auth_lockout"
+  },
+  {
+   "id": "rbk_etl_backfill",
+   "name": "ETL backfill",
+   "url": "https://wiki.northwindpay.example/runbooks/etl_backfill"
+  },
+  {
+   "id": "rbk_cert_rotation",
+   "name": "Certificate rotation",
+   "url": "https://wiki.northwindpay.example/runbooks/cert_rotation"
+  }
+ ],
+ "compensating_controls": [
+  {
+   "id": "cc_fraud_spot_check",
+   "description": "Manual fraud spot-check of bypassed transactions",
+   "last_verified_at": 1791763200,
+   "verified_ok": true,
+   "verify_interval_days": 30,
+   "relies_on": [
+    "per_sam_okafor"
+   ]
+  },
+  {
+   "id": "cc_acquirer_ip_allowlist",
+   "description": "IP allowlist on the acquirer link",
+   "last_verified_at": 1787011200,
+   "verified_ok": true,
+   "verify_interval_days": 30,
+   "relies_on": [
+    "rbk_acquirer_failover"
+   ]
+  },
+  {
+   "id": "cc_refund_manual_review",
+   "description": "Manual review of refunds above €500",
+   "last_verified_at": 1791763200,
+   "verified_ok": true,
+   "verify_interval_days": 30,
+   "relies_on": [
+    "per_sam_okafor"
+   ]
+  },
+  {
+   "id": "cc_fraud_shadow",
+   "description": "Shadow scoring against model v11",
+   "last_verified_at": 1791763200,
+   "verified_ok": true,
+   "verify_interval_days": 30,
+   "relies_on": []
+  },
+  {
+   "id": "cc_vault_log_review",
+   "description": "Nightly vault access log review",
+   "last_verified_at": 1791763200,
+   "verified_ok": true,
+   "verify_interval_days": 30,
+   "relies_on": [
+    "per_sam_okafor"
+   ]
+  },
+  {
+   "id": "cc_export_encrypted",
+   "description": "Exports encrypted and deleted after 7 days",
+   "last_verified_at": 1791763200,
+   "verified_ok": true,
+   "verify_interval_days": 30,
+   "relies_on": []
+  },
+  {
+   "id": "cc_mobile_runtime_check",
+   "description": "Runtime integrity check in the wallet app",
+   "last_verified_at": 1791763200,
+   "verified_ok": true,
+   "verify_interval_days": 30,
+   "relies_on": [
+    "rbk_cert_rotation"
+   ]
+  },
+  {
+   "id": "cc_etl_pii_columns",
+   "description": "Weekly check: pii columns ingested unmasked during migration",
+   "last_verified_at": 1791763200,
+   "verified_ok": true,
+   "verify_interval_days": 30,
+   "relies_on": []
+  },
+  {
+   "id": "cc_etl_change_freeze",
+   "description": "Weekly check: pipeline deploys without change approval",
+   "last_verified_at": 1791763200,
+   "verified_ok": true,
+   "verify_interval_days": 30,
+   "relies_on": []
+  },
+  {
+   "id": "cc_reporting_budget",
+   "description": "Weekly check: reporting cluster over cost budget",
+   "last_verified_at": 1791763200,
+   "verified_ok": true,
+   "verify_interval_days": 30,
+   "relies_on": []
+  },
+  {
+   "id": "cc_features_tests",
+   "description": "Weekly check: feature store integration tests skipped",
+   "last_verified_at": 1791763200,
+   "verified_ok": true,
+   "verify_interval_days": 30,
+   "relies_on": []
+  },
+  {
+   "id": "cc_ctl_status_page",
+   "description": "Monthly manual verification",
+   "last_verified_at": 1791763200,
+   "verified_ok": true,
+   "verify_interval_days": 30,
+   "relies_on": []
+  },
+  {
+   "id": "cc_ctl_docs_portal",
+   "description": "Monthly manual verification",
+   "last_verified_at": 1791763200,
+   "verified_ok": true,
+   "verify_interval_days": 30,
+   "relies_on": []
+  },
+  {
+   "id": "cc_ctl_email_relay",
+   "description": "Monthly manual verification",
+   "last_verified_at": 1791763200,
+   "verified_ok": true,
+   "verify_interval_days": 30,
+   "relies_on": []
+  },
+  {
+   "id": "cc_n01",
+   "description": "Compensating monitoring and alerting",
+   "last_verified_at": 1791244800,
+   "verified_ok": true,
+   "verify_interval_days": 30,
+   "relies_on": []
+  },
+  {
+   "id": "cc_n02",
+   "description": "Compensating monitoring and alerting",
+   "last_verified_at": 1791244800,
+   "verified_ok": true,
+   "verify_interval_days": 30,
+   "relies_on": [
+    "rbk_etl_backfill"
+   ]
+  },
+  {
+   "id": "cc_n04",
+   "description": "Compensating monitoring and alerting",
+   "last_verified_at": 1790985600,
+   "verified_ok": true,
+   "verify_interval_days": 30,
+   "relies_on": []
+  },
+  {
+   "id": "cc_n09",
+   "description": "Compensating monitoring and alerting",
+   "last_verified_at": 1791849600,
+   "verified_ok": true,
+   "verify_interval_days": 30,
+   "relies_on": []
+  },
+  {
+   "id": "cc_n10",
+   "description": "Compensating monitoring and alerting",
+   "last_verified_at": 1790899200,
+   "verified_ok": true,
+   "verify_interval_days": 30,
+   "relies_on": [
+    "rbk_auth_lockout"
+   ]
+  },
+  {
+   "id": "cc_n11",
+   "description": "Compensating monitoring and alerting",
+   "last_verified_at": 1791763200,
+   "verified_ok": true,
+   "verify_interval_days": 30,
+   "relies_on": []
+  },
+  {
+   "id": "cc_n14",
+   "description": "Compensating monitoring and alerting",
+   "last_verified_at": 1791158400,
+   "verified_ok": true,
+   "verify_interval_days": 30,
+   "relies_on": [
+    "rbk_ledger_replay"
+   ]
+  },
+  {
+   "id": "cc_n16",
+   "description": "Compensating monitoring and alerting",
+   "last_verified_at": 1791936000,
+   "verified_ok": true,
+   "verify_interval_days": 30,
+   "relies_on": [
+    "rbk_vault_break_glass"
+   ]
+  },
+  {
+   "id": "cc_n17",
+   "description": "Compensating monitoring and alerting",
+   "last_verified_at": 1790899200,
+   "verified_ok": true,
+   "verify_interval_days": 30,
+   "relies_on": []
+  },
+  {
+   "id": "cc_n18",
+   "description": "Compensating monitoring and alerting",
+   "last_verified_at": 1791849600,
+   "verified_ok": true,
+   "verify_interval_days": 30,
+   "relies_on": []
+  },
+  {
+   "id": "cc_n20",
+   "description": "Compensating monitoring and alerting",
+   "last_verified_at": 1791504000,
+   "verified_ok": true,
+   "verify_interval_days": 30,
+   "relies_on": []
+  },
+  {
+   "id": "cc_n22",
+   "description": "Compensating monitoring and alerting",
+   "last_verified_at": 1790985600,
+   "verified_ok": true,
+   "verify_interval_days": 30,
+   "relies_on": []
+  }
+ ],
+ "exceptions": [
+  {
+   "id": "exc_chk_3ds_bypass",
+   "title": "3-D Secure challenge bypass for low-value carts",
+   "kind": "flag_override",
+   "status": "active",
+   "severity": 4,
+   "granted_at": 1787011200,
+   "expires_at": 1792454400,
+   "description": "3-D Secure challenge bypass for low-value carts",
+   "control_id": "ctl_strong_customer_auth",
+   "service_ids": [
+    "svc_checkout_api"
+   ],
+   "owner_id": "per_hana_sato",
+   "approver_id": "per_marcus_bell",
+   "compensating_control_ids": [
+    "cc_fraud_spot_check"
+   ],
+   "requester_kind": "person"
+  },
+  {
+   "id": "exc_gw_tls_legacy",
+   "title": "Legacy TLS 1.1 allowed on acquirer link",
+   "kind": "security_waiver",
+   "status": "active",
+   "severity": 5,
+   "granted_at": 1781827200,
+   "expires_at": 1792022400,
+   "description": "Legacy TLS 1.1 allowed on acquirer link",
+   "control_id": "ctl_tls_modern",
+   "service_ids": [
+    "svc_payments_gateway"
+   ],
+   "owner_id": "per_luis_ortega",
+   "approver_id": "per_marcus_bell",
+   "compensating_control_ids": [
+    "cc_acquirer_ip_allowlist"
+   ],
+   "requester_kind": "person"
+  },
+  {
+   "id": "exc_gw_rate_limit",
+   "title": "Raised authorization rate limit for holiday peak",
+   "kind": "cost_limit_extension",
+   "status": "active",
+   "severity": 3,
+   "granted_at": 1789603200,
+   "expires_at": 1796083200,
+   "description": "Raised authorization rate limit for holiday peak",
+   "control_id": "ctl_cost_budget",
+   "service_ids": [
+    "svc_payments_gateway"
+   ],
+   "owner_id": "per_grace_mensah",
+   "approver_id": "per_marcus_bell",
+   "compensating_control_ids": [
+    "cc_refund_manual_review"
+   ],
+   "requester_kind": "person"
+  },
+  {
+   "id": "exc_fraud_model_skip",
+   "title": "Model drift tests skipped for fraud model v12",
+   "kind": "skipped_test",
+   "status": "active",
+   "severity": 3,
+   "granted_at": 1790467200,
+   "expires_at": 1795651200,
+   "description": "Model drift tests skipped for fraud model v12",
+   "control_id": "ctl_test_coverage",
+   "service_ids": [
+    "svc_fraud_scoring"
+   ],
+   "owner_id": "per_hana_sato",
+   "approver_id": "per_marcus_bell",
+   "compensating_control_ids": [
+    "cc_fraud_shadow"
+   ],
+   "requester_kind": "person"
+  },
+  {
+   "id": "exc_vault_hsm_pin",
+   "title": "HSM firmware pinned to vulnerable version",
+   "kind": "emergency_change",
+   "status": "active",
+   "severity": 4,
+   "granted_at": 1790035200,
+   "expires_at": 1796515200,
+   "description": "HSM firmware pinned to vulnerable version",
+   "control_id": "ctl_vuln_patching",
+   "service_ids": [
+    "svc_card_vault"
+   ],
+   "owner_id": "per_grace_mensah",
+   "approver_id": "per_marcus_bell",
+   "compensating_control_ids": [
+    "cc_vault_log_review"
+   ],
+   "requester_kind": "person"
+  },
+  {
+   "id": "exc_ghost_vault_key",
+   "title": "Key rotation deferred for card-vault master key",
+   "kind": "security_waiver",
+   "status": "active",
+   "severity": 4,
+   "granted_at": 1779235200,
+   "expires_at": 1794787200,
+   "description": "Key rotation deferred for card-vault master key",
+   "control_id": "ctl_key_rotation",
+   "service_ids": [
+    "svc_card_vault"
+   ],
+   "owner_id": "per_priya_raman",
+   "approver_id": "per_rachel_green",
+   "compensating_control_ids": [],
+   "requester_kind": "person"
+  },
+  {
+   "id": "exc_ledger_batch_export",
+   "title": "Manual batch export of ledger entries for auditors",
+   "kind": "data_export_permission",
+   "status": "active",
+   "severity": 3,
+   "granted_at": 1784419200,
+   "expires_at": 1794355200,
+   "description": "Manual batch export of ledger entries for auditors",
+   "control_id": "ctl_pii_export",
+   "service_ids": [
+    "svc_reconciliation"
+   ],
+   "owner_id": "per_dmitri_volkov",
+   "approver_id": "per_elena_petrova",
+   "compensating_control_ids": [
+    "cc_export_encrypted"
+   ],
+   "requester_kind": "person"
+  },
+  {
+   "id": "exc_tls_pin_1",
+   "title": "Certificate pinning disabled in wallet app",
+   "kind": "security_waiver",
+   "status": "renewed",
+   "severity": 3,
+   "granted_at": 1766275200,
+   "expires_at": 1774051200,
+   "description": "Certificate pinning disabled in wallet app",
+   "control_id": "ctl_tls_pinning",
+   "service_ids": [
+    "svc_mobile_api"
+   ],
+   "owner_id": "per_amara_nwosu",
+   "approver_id": "per_daniel_kim",
+   "compensating_control_ids": [
+    "cc_mobile_runtime_check"
+   ],
+   "requester_kind": "person"
+  },
+  {
+   "id": "exc_tls_pin_2",
+   "title": "Certificate pinning disabled in wallet app",
+   "kind": "security_waiver",
+   "status": "renewed",
+   "severity": 3,
+   "granted_at": 1774051200,
+   "expires_at": 1781827200,
+   "description": "Certificate pinning disabled in wallet app",
+   "control_id": "ctl_tls_pinning",
+   "service_ids": [
+    "svc_mobile_api"
+   ],
+   "owner_id": "per_amara_nwosu",
+   "approver_id": "per_daniel_kim",
+   "compensating_control_ids": [
+    "cc_mobile_runtime_check"
+   ],
+   "requester_kind": "person"
+  },
+  {
+   "id": "exc_tls_pin_3",
+   "title": "Certificate pinning disabled in wallet app",
+   "kind": "security_waiver",
+   "status": "renewed",
+   "severity": 3,
+   "granted_at": 1781827200,
+   "expires_at": 1789603200,
+   "description": "Certificate pinning disabled in wallet app",
+   "control_id": "ctl_tls_pinning",
+   "service_ids": [
+    "svc_mobile_api"
+   ],
+   "owner_id": "per_amara_nwosu",
+   "approver_id": "per_daniel_kim",
+   "compensating_control_ids": [
+    "cc_mobile_runtime_check"
+   ],
+   "requester_kind": "person"
+  },
+  {
+   "id": "exc_tls_pin_4",
+   "title": "Certificate pinning disabled in wallet app",
+   "kind": "security_waiver",
+   "status": "active",
+   "severity": 3,
+   "granted_at": 1789603200,
+   "expires_at": 1797379200,
+   "description": "Certificate pinning disabled in wallet app",
+   "control_id": "ctl_tls_pinning",
+   "service_ids": [
+    "svc_mobile_api"
+   ],
+   "owner_id": "per_amara_nwosu",
+   "approver_id": "per_daniel_kim",
+   "compensating_control_ids": [
+    "cc_mobile_runtime_check"
+   ],
+   "requester_kind": "person"
+  },
+  {
+   "id": "exc_etl_pii_columns",
+   "title": "PII columns ingested unmasked during migration",
+   "kind": "data_export_permission",
+   "status": "active",
+   "severity": 3,
+   "granted_at": 1787011200,
+   "expires_at": 1793145600,
+   "description": "PII columns ingested unmasked during migration",
+   "control_id": "ctl_pii_export",
+   "service_ids": [
+    "svc_etl_pipeline"
+   ],
+   "owner_id": "per_arjun_mehta",
+   "approver_id": "per_laura_jensen",
+   "compensating_control_ids": [
+    "cc_etl_pii_columns"
+   ],
+   "requester_kind": "person"
+  },
+  {
+   "id": "exc_etl_change_freeze",
+   "title": "Pipeline deploys without change approval",
+   "kind": "emergency_change",
+   "status": "active",
+   "severity": 2,
+   "granted_at": 1787011200,
+   "expires_at": 1793232000,
+   "description": "Pipeline deploys without change approval",
+   "control_id": "ctl_change_approval",
+   "service_ids": [
+    "svc_etl_pipeline"
+   ],
+   "owner_id": "per_nora_fischer",
+   "approver_id": "per_laura_jensen",
+   "compensating_control_ids": [
+    "cc_etl_change_freeze"
+   ],
+   "requester_kind": "person"
+  },
+  {
+   "id": "exc_reporting_budget",
+   "title": "Reporting cluster over cost budget",
+   "kind": "cost_limit_extension",
+   "status": "active",
+   "severity": 2,
+   "granted_at": 1787011200,
+   "expires_at": 1793404800,
+   "description": "Reporting cluster over cost budget",
+   "control_id": "ctl_cost_budget",
+   "service_ids": [
+    "svc_reporting"
+   ],
+   "owner_id": "per_fatima_zahra",
+   "approver_id": "per_laura_jensen",
+   "compensating_control_ids": [
+    "cc_reporting_budget"
+   ],
+   "requester_kind": "person"
+  },
+  {
+   "id": "exc_features_tests",
+   "title": "Feature store integration tests skipped",
+   "kind": "skipped_test",
+   "status": "active",
+   "severity": 2,
+   "granted_at": 1787011200,
+   "expires_at": 1793577600,
+   "description": "Feature store integration tests skipped",
+   "control_id": "ctl_test_coverage",
+   "service_ids": [
+    "svc_ml_features"
+   ],
+   "owner_id": "per_pedro_alves",
+   "approver_id": "per_laura_jensen",
+   "compensating_control_ids": [
+    "cc_features_tests"
+   ],
+   "requester_kind": "person"
+  },
+  {
+   "id": "exc_ctl_status_page",
+   "title": "Status page served without CDN failover",
+   "kind": "cost_limit_extension",
+   "status": "active",
+   "severity": 1,
+   "granted_at": 1790467200,
+   "expires_at": 1799971200,
+   "description": "Status page served without CDN failover",
+   "control_id": "ctl_mfa_admin",
+   "service_ids": [
+    "svc_status_page"
+   ],
+   "owner_id": "per_sara_lindqvist",
+   "approver_id": "per_patrick_oneill",
+   "compensating_control_ids": [
+    "cc_ctl_status_page"
+   ],
+   "requester_kind": "person"
+  },
+  {
+   "id": "exc_ctl_docs_portal",
+   "title": "Docs portal behind basic auth instead of SSO",
+   "kind": "security_waiver",
+   "status": "active",
+   "severity": 1,
+   "granted_at": 1790467200,
+   "expires_at": 1799971200,
+   "description": "Docs portal behind basic auth instead of SSO",
+   "control_id": "ctl_mfa_admin",
+   "service_ids": [
+    "svc_docs_portal"
+   ],
+   "owner_id": "per_victor_dubois",
+   "approver_id": "per_patrick_oneill",
+   "compensating_control_ids": [
+    "cc_ctl_docs_portal"
+   ],
+   "requester_kind": "person"
+  },
+  {
+   "id": "exc_ctl_email_relay",
+   "title": "Email relay cost budget raised for newsletter",
+   "kind": "cost_limit_extension",
+   "status": "active",
+   "severity": 1,
+   "granted_at": 1790467200,
+   "expires_at": 1799971200,
+   "description": "Email relay cost budget raised for newsletter",
+   "control_id": "ctl_cost_budget",
+   "service_ids": [
+    "svc_email_relay"
+   ],
+   "owner_id": "per_hiro_nakamura",
+   "approver_id": "per_patrick_oneill",
+   "compensating_control_ids": [
+    "cc_ctl_email_relay"
+   ],
+   "requester_kind": "person"
+  },
+  {
+   "id": "exc_n01",
+   "title": "Database index created in production by hand",
+   "kind": "emergency_change",
+   "status": "active",
+   "severity": 1,
+   "granted_at": 1780099200,
+   "expires_at": 1802736000,
+   "description": "Database index created in production by hand",
+   "control_id": "ctl_code_review",
+   "service_ids": [
+    "svc_checkout_api"
+   ],
+   "owner_id": "per_hana_sato",
+   "approver_id": "per_marcus_bell",
+   "compensating_control_ids": [
+    "cc_n01"
+   ],
+   "requester_kind": "person"
+  },
+  {
+   "id": "exc_n02",
+   "title": "Partner data share for pilot",
+   "kind": "data_export_permission",
+   "status": "active",
+   "severity": 1,
+   "granted_at": 1784678400,
+   "expires_at": 1803254400,
+   "description": "Partner data share for pilot",
+   "control_id": "ctl_pii_export",
+   "service_ids": [
+    "svc_etl_pipeline"
+   ],
+   "owner_id": "per_nora_fischer",
+   "approver_id": "per_laura_jensen",
+   "compensating_control_ids": [
+    "cc_n02"
+   ],
+   "requester_kind": "person"
+  },
+  {
+   "id": "exc_n03",
+   "title": "Container image runs as root",
+   "kind": "security_waiver",
+   "status": "active",
+   "severity": 1,
+   "granted_at": 1782172800,
+   "expires_at": 1803513600,
+   "description": "Container image runs as root",
+   "control_id": "ctl_mfa_admin",
+   "service_ids": [
+    "svc_ledger"
+   ],
+   "owner_id": "per_ben_carter",
+   "approver_id": "per_elena_petrova",
+   "compensating_control_ids": [],
+   "requester_kind": "person"
+  },
+  {
+   "id": "exc_n04",
+   "title": "Flaky e2e suite quarantined",
+   "kind": "skipped_test",
+   "status": "active",
+   "severity": 2,
+   "granted_at": 1781136000,
+   "expires_at": 1796947200,
+   "description": "Flaky e2e suite quarantined",
+   "control_id": "ctl_test_coverage",
+   "service_ids": [
+    "svc_mobile_api"
+   ],
+   "owner_id": "per_jonas_weber",
+   "approver_id": "per_daniel_kim",
+   "compensating_control_ids": [
+    "cc_n04"
+   ],
+   "requester_kind": "person"
+  },
+  {
+   "id": "exc_n05",
+   "title": "Log ingestion over budget",
+   "kind": "cost_limit_extension",
+   "status": "active",
+   "severity": 2,
+   "granted_at": 1788566400,
+   "expires_at": 1797120000,
+   "description": "Log ingestion over budget",
+   "control_id": "ctl_cost_budget",
+   "service_ids": [
+    "svc_reporting"
+   ],
+   "owner_id": "per_pedro_alves",
+   "approver_id": "per_laura_jensen",
+   "compensating_control_ids": [],
+   "requester_kind": "person"
+  },
+  {
+   "id": "exc_n06",
+   "title": "Analyst export of anonymized sample",
+   "kind": "data_export_permission",
+   "status": "active",
+   "severity": 2,
+   "granted_at": 1790121600,
+   "expires_at": 1799539200,
+   "description": "Analyst export of anonymized sample",
+   "control_id": "ctl_pii_export",
+   "service_ids": [
+    "svc_etl_pipeline"
+   ],
+   "owner_id": "per_dmitri_volkov",
+   "approver_id": "per_laura_jensen",
+   "compensating_control_ids": [],
+   "requester_kind": "person"
+  },
+  {
+   "id": "exc_n07",
+   "title": "Autoscaling ceiling raised",
+   "kind": "cost_limit_extension",
+   "status": "active",
+   "severity": 2,
+   "granted_at": 1787443200,
+   "expires_at": 1805155200,
+   "description": "Autoscaling ceiling raised",
+   "control_id": "ctl_cost_budget",
+   "service_ids": [
+    "svc_ledger"
+   ],
+   "owner_id": "per_tomas_silva",
+   "approver_id": "per_elena_petrova",
+   "compensating_control_ids": [],
+   "requester_kind": "person"
+  },
+  {
+   "id": "exc_n08",
+   "title": "Reserved capacity extension",
+   "kind": "cost_limit_extension",
+   "status": "active",
+   "severity": 1,
+   "granted_at": 1784851200,
+   "expires_at": 1806278400,
+   "description": "Reserved capacity extension",
+   "control_id": "ctl_cost_budget",
+   "service_ids": [
+    "svc_secrets_manager"
+   ],
+   "owner_id": "per_ivan_horvat",
+   "approver_id": "per_rachel_green",
+   "compensating_control_ids": [],
+   "requester_kind": "person"
+  },
+  {
+   "id": "exc_n09",
+   "title": "Flaky e2e suite quarantined",
+   "kind": "skipped_test",
+   "status": "active",
+   "severity": 1,
+   "granted_at": 1781568000,
+   "expires_at": 1805328000,
+   "description": "Flaky e2e suite quarantined",
+   "control_id": "ctl_test_coverage",
+   "service_ids": [
+    "svc_checkout_api"
+   ],
+   "owner_id": "per_hana_sato",
+   "approver_id": "per_marcus_bell",
+   "compensating_control_ids": [
+    "cc_n09"
+   ],
+   "requester_kind": "person"
+  },
+  {
+   "id": "exc_n10",
+   "title": "Audit log retention below policy",
+   "kind": "security_waiver",
+   "status": "active",
+   "severity": 2,
+   "granted_at": 1783209600,
+   "expires_at": 1804291200,
+   "description": "Audit log retention below policy",
+   "control_id": "ctl_vuln_patching",
+   "service_ids": [
+    "svc_auth"
+   ],
+   "owner_id": "per_sofia_rossi",
+   "approver_id": "per_yuki_tanaka",
+   "compensating_control_ids": [
+    "cc_n10"
+   ],
+   "requester_kind": "person"
+  },
+  {
+   "id": "exc_n11",
+   "title": "Contract tests skipped for internal client",
+   "kind": "skipped_test",
+   "status": "active",
+   "severity": 1,
+   "granted_at": 1786924800,
+   "expires_at": 1805155200,
+   "description": "Contract tests skipped for internal client",
+   "control_id": "ctl_test_coverage",
+   "service_ids": [
+    "svc_mobile_api"
+   ],
+   "owner_id": "per_amara_nwosu",
+   "approver_id": "per_daniel_kim",
+   "compensating_control_ids": [
+    "cc_n11"
+   ],
+   "requester_kind": "person"
+  },
+  {
+   "id": "exc_n12",
+   "title": "Shared credentials for batch job",
+   "kind": "security_waiver",
+   "status": "active",
+   "severity": 1,
+   "granted_at": 1779235200,
+   "expires_at": 1804896000,
+   "description": "Shared credentials for batch job",
+   "control_id": "ctl_mfa_admin",
+   "service_ids": [
+    "svc_checkout_api"
+   ],
+   "owner_id": "per_hana_sato",
+   "approver_id": "per_marcus_bell",
+   "compensating_control_ids": [],
+   "requester_kind": "person"
+  },
+  {
+   "id": "exc_n13",
+   "title": "Contract tests skipped for internal client",
+   "kind": "skipped_test",
+   "status": "active",
+   "severity": 2,
+   "granted_at": 1790035200,
+   "expires_at": 1803600000,
+   "description": "Contract tests skipped for internal client",
+   "control_id": "ctl_test_coverage",
+   "service_ids": [
+    "svc_mobile_api"
+   ],
+   "owner_id": "per_jonas_weber",
+   "approver_id": "per_daniel_kim",
+   "compensating_control_ids": [],
+   "requester_kind": "person"
+  },
+  {
+   "id": "exc_n14",
+   "title": "Partner data share for pilot",
+   "kind": "data_export_permission",
+   "status": "active",
+   "severity": 2,
+   "granted_at": 1782086400,
+   "expires_at": 1805328000,
+   "description": "Partner data share for pilot",
+   "control_id": "ctl_pii_export",
+   "service_ids": [
+    "svc_k8s_platform"
+   ],
+   "owner_id": "per_ivan_horvat",
+   "approver_id": "per_rachel_green",
+   "compensating_control_ids": [
+    "cc_n14"
+   ],
+   "requester_kind": "person"
+  },
+  {
+   "id": "exc_n15",
+   "title": "Kill switch disabled during migration",
+   "kind": "flag_override",
+   "status": "active",
+   "severity": 2,
+   "granted_at": 1788566400,
+   "expires_at": 1806364800,
+   "description": "Kill switch disabled during migration",
+   "control_id": "ctl_code_review",
+   "service_ids": [
+    "svc_data_warehouse"
+   ],
+   "owner_id": "per_fatima_zahra",
+   "approver_id": "per_laura_jensen",
+   "compensating_control_ids": [],
+   "requester_kind": "person"
+  },
+  {
+   "id": "exc_n16",
+   "title": "Admin console reachable without VPN",
+   "kind": "security_waiver",
+   "status": "active",
+   "severity": 2,
+   "granted_at": 1779840000,
+   "expires_at": 1806105600,
+   "description": "Admin console reachable without VPN",
+   "control_id": "ctl_encrypt_at_rest",
+   "service_ids": [
+    "svc_secrets_manager"
+   ],
+   "owner_id": "per_sam_okafor",
+   "approver_id": "per_rachel_green",
+   "compensating_control_ids": [
+    "cc_n16"
+   ],
+   "requester_kind": "person"
+  },
+  {
+   "id": "exc_n17",
+   "title": "Database index created in production by hand",
+   "kind": "emergency_change",
+   "status": "active",
+   "severity": 3,
+   "granted_at": 1783036800,
+   "expires_at": 1805846400,
+   "description": "Database index created in production by hand",
+   "control_id": "ctl_code_review",
+   "service_ids": [
+    "svc_mobile_api"
+   ],
+   "owner_id": "per_jonas_weber",
+   "approver_id": "per_daniel_kim",
+   "compensating_control_ids": [
+    "cc_n17"
+   ],
+   "requester_kind": "person"
+  },
+  {
+   "id": "exc_n18",
+   "title": "Partner data share for pilot",
+   "kind": "data_export_permission",
+   "status": "active",
+   "severity": 1,
+   "granted_at": 1782000000,
+   "expires_at": 1802736000,
+   "description": "Partner data share for pilot",
+   "control_id": "ctl_pii_export",
+   "service_ids": [
+    "svc_card_vault"
+   ],
+   "owner_id": "per_luis_ortega",
+   "approver_id": "per_marcus_bell",
+   "compensating_control_ids": [
+    "cc_n18"
+   ],
+   "requester_kind": "person"
+  },
+  {
+   "id": "exc_n19",
+   "title": "Database index created in production by hand",
+   "kind": "emergency_change",
+   "status": "active",
+   "severity": 1,
+   "granted_at": 1782000000,
+   "expires_at": 1803859200,
+   "description": "Database index created in production by hand",
+   "control_id": "ctl_code_review",
+   "service_ids": [
+    "svc_ml_features"
+   ],
+   "owner_id": "per_pedro_alves",
+   "approver_id": "per_laura_jensen",
+   "compensating_control_ids": [],
+   "requester_kind": "person"
+  },
+  {
+   "id": "exc_n20",
+   "title": "Feature flag forced on for beta merchants",
+   "kind": "flag_override",
+   "status": "active",
+   "severity": 2,
+   "granted_at": 1783987200,
+   "expires_at": 1800662400,
+   "description": "Feature flag forced on for beta merchants",
+   "control_id": "ctl_code_review",
+   "service_ids": [
+    "svc_merchant_dashboard"
+   ],
+   "owner_id": "per_ingrid_larsen",
+   "approver_id": "per_olivia_brown",
+   "compensating_control_ids": [
+    "cc_n20"
+   ],
+   "requester_kind": "person"
+  },
+  {
+   "id": "exc_n21",
+   "title": "Audit log retention below policy",
+   "kind": "security_waiver",
+   "status": "active",
+   "severity": 1,
+   "granted_at": 1784678400,
+   "expires_at": 1799020800,
+   "description": "Audit log retention below policy",
+   "control_id": "ctl_encrypt_at_rest",
+   "service_ids": [
+    "svc_onboarding_kyc"
+   ],
+   "owner_id": "per_leila_ahmadi",
+   "approver_id": "per_olivia_brown",
+   "compensating_control_ids": [],
+   "requester_kind": "person"
+  },
+  {
+   "id": "exc_n22",
+   "title": "Kill switch disabled during migration",
+   "kind": "flag_override",
+   "status": "active",
+   "severity": 3,
+   "granted_at": 1779408000,
+   "expires_at": 1802304000,
+   "description": "Kill switch disabled during migration",
+   "control_id": "ctl_code_review",
+   "service_ids": [
+    "svc_reporting"
+   ],
+   "owner_id": "per_arjun_mehta",
+   "approver_id": "per_laura_jensen",
+   "compensating_control_ids": [
+    "cc_n22"
+   ],
+   "requester_kind": "person"
+  },
+  {
+   "id": "exc_h01",
+   "title": "Container image runs as root",
+   "kind": "security_waiver",
+   "status": "closed",
+   "severity": 4,
+   "granted_at": 1773446400,
+   "expires_at": 1783641600,
+   "description": "Container image runs as root",
+   "control_id": "ctl_encrypt_at_rest",
+   "service_ids": [
+    "svc_data_warehouse"
+   ],
+   "owner_id": "per_kofi_asante",
+   "approver_id": "per_laura_jensen",
+   "compensating_control_ids": [],
+   "requester_kind": "person",
+   "closed_at": 1781049600,
+   "closed_reason": "Underlying fix shipped"
+  },
+  {
+   "id": "exc_h02",
+   "title": "Reserved capacity extension",
+   "kind": "cost_limit_extension",
+   "status": "closed",
+   "severity": 1,
+   "granted_at": 1769904000,
+   "expires_at": 1782000000,
+   "description": "Reserved capacity extension",
+   "control_id": "ctl_cost_budget",
+   "service_ids": [
+    "svc_ml_features"
+   ],
+   "owner_id": "per_nora_fischer",
+   "approver_id": "per_laura_jensen",
+   "compensating_control_ids": [],
+   "requester_kind": "person",
+   "closed_at": 1779408000,
+   "closed_reason": "Underlying fix shipped"
+  },
+  {
+   "id": "exc_h03",
+   "title": "Legacy API version kept enabled",
+   "kind": "flag_override",
+   "status": "revoked",
+   "severity": 3,
+   "granted_at": 1774483200,
+   "expires_at": 1784764800,
+   "description": "Legacy API version kept enabled",
+   "control_id": "ctl_change_approval",
+   "service_ids": [
+    "svc_payments_gateway"
+   ],
+   "owner_id": "per_grace_mensah",
+   "approver_id": "per_marcus_bell",
+   "compensating_control_ids": [],
+   "requester_kind": "person",
+   "revoked_at": 1782172800
+  },
+  {
+   "id": "exc_h04",
+   "title": "Reserved capacity extension",
+   "kind": "cost_limit_extension",
+   "status": "closed",
+   "severity": 4,
+   "granted_at": 1770336000,
+   "expires_at": 1779667200,
+   "description": "Reserved capacity extension",
+   "control_id": "ctl_cost_budget",
+   "service_ids": [
+    "svc_webhooks"
+   ],
+   "owner_id": "per_ingrid_larsen",
+   "approver_id": "per_olivia_brown",
+   "compensating_control_ids": [],
+   "requester_kind": "person",
+   "closed_at": 1777075200,
+   "closed_reason": "Underlying fix shipped"
+  },
+  {
+   "id": "exc_h05",
+   "title": "Audit log retention below policy",
+   "kind": "security_waiver",
+   "status": "closed",
+   "severity": 3,
+   "granted_at": 1772841600,
+   "expires_at": 1780704000,
+   "description": "Audit log retention below policy",
+   "control_id": "ctl_encrypt_at_rest",
+   "service_ids": [
+    "svc_reporting"
+   ],
+   "owner_id": "per_laura_jensen",
+   "approver_id": "per_laura_jensen",
+   "compensating_control_ids": [],
+   "requester_kind": "person",
+   "closed_at": 1778112000,
+   "closed_reason": "Underlying fix shipped"
+  },
+  {
+   "id": "exc_h06",
+   "title": "Load test skipped before release",
+   "kind": "skipped_test",
+   "status": "revoked",
+   "severity": 1,
+   "granted_at": 1770940800,
+   "expires_at": 1779580800,
+   "description": "Load test skipped before release",
+   "control_id": "ctl_test_coverage",
+   "service_ids": [
+    "svc_fraud_scoring"
+   ],
+   "owner_id": "per_grace_mensah",
+   "approver_id": "per_marcus_bell",
+   "compensating_control_ids": [],
+   "requester_kind": "person",
+   "revoked_at": 1776988800
+  },
+  {
+   "id": "exc_h07",
+   "title": "Partner data share for pilot",
+   "kind": "data_export_permission",
+   "status": "closed",
+   "severity": 1,
+   "granted_at": 1764115200,
+   "expires_at": 1772323200,
+   "description": "Partner data share for pilot",
+   "control_id": "ctl_pii_export",
+   "service_ids": [
+    "svc_k8s_platform"
+   ],
+   "owner_id": "per_kenji_mori",
+   "approver_id": "per_rachel_green",
+   "compensating_control_ids": [],
+   "requester_kind": "person",
+   "closed_at": 1769731200,
+   "closed_reason": "Underlying fix shipped"
+  },
+  {
+   "id": "exc_h08",
+   "title": "Legacy API version kept enabled",
+   "kind": "flag_override",
+   "status": "closed",
+   "severity": 1,
+   "granted_at": 1767312000,
+   "expires_at": 1774915200,
+   "description": "Legacy API version kept enabled",
+   "control_id": "ctl_change_approval",
+   "service_ids": [
+    "svc_observability"
+   ],
+   "owner_id": "per_zoe_adams",
+   "approver_id": "per_rachel_green",
+   "compensating_control_ids": [],
+   "requester_kind": "person",
+   "closed_at": 1772323200,
+   "closed_reason": "Underlying fix shipped"
+  },
+  {
+   "id": "exc_h09",
+   "title": "Contract tests skipped for internal client",
+   "kind": "skipped_test",
+   "status": "revoked",
+   "severity": 2,
+   "granted_at": 1759190400,
+   "expires_at": 1768780800,
+   "description": "Contract tests skipped for internal client",
+   "control_id": "ctl_test_coverage",
+   "service_ids": [
+    "svc_card_vault"
+   ],
+   "owner_id": "per_luis_ortega",
+   "approver_id": "per_marcus_bell",
+   "compensating_control_ids": [],
+   "requester_kind": "person",
+   "revoked_at": 1766188800
+  },
+  {
+   "id": "exc_h10",
+   "title": "Database index created in production by hand",
+   "kind": "emergency_change",
+   "status": "closed",
+   "severity": 2,
+   "granted_at": 1767052800,
+   "expires_at": 1775433600,
+   "description": "Database index created in production by hand",
+   "control_id": "ctl_code_review",
+   "service_ids": [
+    "svc_push_notifications"
+   ],
+   "owner_id": "per_amara_nwosu",
+   "approver_id": "per_daniel_kim",
+   "compensating_control_ids": [],
+   "requester_kind": "person",
+   "closed_at": 1772841600,
+   "closed_reason": "Underlying fix shipped"
+  },
+  {
+   "id": "exc_h11",
+   "title": "Admin console reachable without VPN",
+   "kind": "security_waiver",
+   "status": "closed",
+   "severity": 2,
+   "granted_at": 1773532800,
+   "expires_at": 1783296000,
+   "description": "Admin console reachable without VPN",
+   "control_id": "ctl_mfa_admin",
+   "service_ids": [
+    "svc_card_vault"
+   ],
+   "owner_id": "per_marcus_bell",
+   "approver_id": "per_marcus_bell",
+   "compensating_control_ids": [],
+   "requester_kind": "person",
+   "closed_at": 1780704000,
+   "closed_reason": "Underlying fix shipped"
+  },
+  {
+   "id": "exc_h12",
+   "title": "Kill switch disabled during migration",
+   "kind": "flag_override",
+   "status": "revoked",
+   "severity": 2,
+   "granted_at": 1766534400,
+   "expires_at": 1778803200,
+   "description": "Kill switch disabled during migration",
+   "control_id": "ctl_code_review",
+   "service_ids": [
+    "svc_payouts"
+   ],
+   "owner_id": "per_ben_carter",
+   "approver_id": "per_elena_petrova",
+   "compensating_control_ids": [],
+   "requester_kind": "person",
+   "revoked_at": 1776211200
+  },
+  {
+   "id": "exc_h13",
+   "title": "Autoscaling ceiling raised",
+   "kind": "cost_limit_extension",
+   "status": "closed",
+   "severity": 1,
+   "granted_at": 1774483200,
+   "expires_at": 1780272000,
+   "description": "Autoscaling ceiling raised",
+   "control_id": "ctl_cost_budget",
+   "service_ids": [
+    "svc_webhooks"
+   ],
+   "owner_id": "per_mateo_garcia",
+   "approver_id": "per_olivia_brown",
+   "compensating_control_ids": [],
+   "requester_kind": "person",
+   "closed_at": 1777680000,
+   "closed_reason": "Underlying fix shipped"
+  },
+  {
+   "id": "exc_h14",
+   "title": "Database index created in production by hand",
+   "kind": "emergency_change",
+   "status": "closed",
+   "severity": 2,
+   "granted_at": 1766707200,
+   "expires_at": 1773273600,
+   "description": "Database index created in production by hand",
+   "control_id": "ctl_code_review",
+   "service_ids": [
+    "svc_reporting"
+   ],
+   "owner_id": "per_nora_fischer",
+   "approver_id": "per_laura_jensen",
+   "compensating_control_ids": [],
+   "requester_kind": "person",
+   "closed_at": 1770681600,
+   "closed_reason": "Underlying fix shipped"
+  },
+  {
+   "id": "exc_h15",
+   "title": "Database index created in production by hand",
+   "kind": "emergency_change",
+   "status": "revoked",
+   "severity": 4,
+   "granted_at": 1768694400,
+   "expires_at": 1775347200,
+   "description": "Database index created in production by hand",
+   "control_id": "ctl_change_approval",
+   "service_ids": [
+    "svc_etl_pipeline"
+   ],
+   "owner_id": "per_laura_jensen",
+   "approver_id": "per_laura_jensen",
+   "compensating_control_ids": [],
+   "requester_kind": "person",
+   "revoked_at": 1772755200
+  },
+  {
+   "id": "exc_h16",
+   "title": "Hotfix deployed without second reviewer",
+   "kind": "emergency_change",
+   "status": "closed",
+   "severity": 1,
+   "granted_at": 1769212800,
+   "expires_at": 1775520000,
+   "description": "Hotfix deployed without second reviewer",
+   "control_id": "ctl_change_approval",
+   "service_ids": [
+    "svc_reporting"
+   ],
+   "owner_id": "per_fatima_zahra",
+   "approver_id": "per_laura_jensen",
+   "compensating_control_ids": [],
+   "requester_kind": "person",
+   "closed_at": 1772928000,
+   "closed_reason": "Underlying fix shipped"
+  },
+  {
+   "id": "exc_h17",
+   "title": "Feature flag forced on for beta merchants",
+   "kind": "flag_override",
+   "status": "closed",
+   "severity": 2,
+   "granted_at": 1760227200,
+   "expires_at": 1765929600,
+   "description": "Feature flag forced on for beta merchants",
+   "control_id": "ctl_code_review",
+   "service_ids": [
+    "svc_card_vault"
+   ],
+   "owner_id": "per_grace_mensah",
+   "approver_id": "per_marcus_bell",
+   "compensating_control_ids": [],
+   "requester_kind": "person",
+   "closed_at": 1763337600,
+   "closed_reason": "Underlying fix shipped"
+  },
+  {
+   "id": "exc_d01",
+   "title": "Webhook signing disabled for one partner",
+   "kind": "security_waiver",
+   "status": "draft",
+   "severity": 2,
+   "granted_at": 1792195200,
+   "expires_at": 1797379200,
+   "description": "Webhook signing disabled for one partner",
+   "control_id": "ctl_mfa_admin",
+   "service_ids": [
+    "svc_webhooks"
+   ],
+   "owner_id": "per_ingrid_larsen",
+   "approver_id": "per_olivia_brown",
+   "compensating_control_ids": [],
+   "requester_kind": "person"
+  },
+  {
+   "id": "exc_d02",
+   "title": "Skip SAST on documentation-only builds",
+   "kind": "skipped_test",
+   "status": "draft",
+   "severity": 2,
+   "granted_at": 1792195200,
+   "expires_at": 1797379200,
+   "description": "Skip SAST on documentation-only builds",
+   "control_id": "ctl_test_coverage",
+   "service_ids": [
+    "svc_ci_runner"
+   ],
+   "owner_id": "per_rachel_green",
+   "approver_id": "per_rachel_green",
+   "compensating_control_ids": [],
+   "requester_kind": "person"
+  },
+  {
+   "id": "exc_d03",
+   "title": "Same-day payout limit increase",
+   "kind": "cost_limit_extension",
+   "status": "draft",
+   "severity": 2,
+   "granted_at": 1792195200,
+   "expires_at": 1797379200,
+   "description": "Same-day payout limit increase",
+   "control_id": "ctl_cost_budget",
+   "service_ids": [
+    "svc_payouts"
+   ],
+   "owner_id": "per_aisha_khan",
+   "approver_id": "per_elena_petrova",
+   "compensating_control_ids": [],
+   "requester_kind": "person"
+  }
+ ],
+ "evidence": [
+  {
+   "id": "ev_chk_3ds_bypass",
+   "exception_id": "exc_chk_3ds_bypass",
+   "kind": "ticket",
+   "source_ref": "PAY-4821",
+   "captured_at": 1787011200,
+   "excerpt": "Conversion dropped 6% with 3DS on sub-€30 carts; bypass approved until the frictionless flow ships."
+  },
+  {
+   "id": "ev_gw_tls_legacy",
+   "exception_id": "exc_gw_tls_legacy",
+   "kind": "email",
+   "source_ref": "acquirer-thread-2026-06",
+   "captured_at": 1781827200,
+   "excerpt": "Acquirer cannot move off TLS 1.1 before their Q3 upgrade."
+  },
+  {
+   "id": "ev_vault_hsm_pin",
+   "exception_id": "exc_vault_hsm_pin",
+   "kind": "ticket",
+   "source_ref": "SEC-1177",
+   "captured_at": 1790035200,
+   "excerpt": "Vendor firmware 4.2 breaks tokenization; staying on 4.0.3 with compensating monitoring."
+  },
+  {
+   "id": "ev_ghost_vault_key",
+   "exception_id": "exc_ghost_vault_key",
+   "kind": "chat",
+   "source_ref": "#payments-eng 2026-05-20",
+   "captured_at": 1779235200,
+   "excerpt": "Priya: rotating the master key needs a vault freeze; I'll own this until Q4."
+  }
+ ],
+ "renewals": [
+  {
+   "from": "exc_tls_pin_2",
+   "to": "exc_tls_pin_1"
+  },
+  {
+   "from": "exc_tls_pin_3",
+   "to": "exc_tls_pin_2"
+  },
+  {
+   "from": "exc_tls_pin_4",
+   "to": "exc_tls_pin_3"
+  }
+ ]
+}
