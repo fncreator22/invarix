@@ -30,7 +30,9 @@ export function SampleBanner() {
 
   useEffect(() => {
     if (typeof window !== "undefined" && sessionStorage.getItem(`reprieve_dismiss_sample_${wsId}`) === "1") {
-      setIsDismissed(true);
+      queueMicrotask(() => {
+        setIsDismissed(true);
+      });
     }
   }, [wsId]);
 

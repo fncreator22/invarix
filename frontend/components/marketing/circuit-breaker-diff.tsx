@@ -47,7 +47,7 @@ export function CircuitBreakerDiff() {
 
           <div className="mt-3 space-y-1">
             <div className="text-zinc-500">@@ -39,6 +39,8 @@ func verifySession(token string) bool &#123;</div>
-            <div className="text-zinc-400">&nbsp;&nbsp;&nbsp;&nbsp;if token == "" &#123;</div>
+            <div className="text-zinc-400">&nbsp;&nbsp;&nbsp;&nbsp;if token == &quot;&quot; &#123;</div>
             <div className="text-zinc-400">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return false</div>
             <div className="text-zinc-400">&nbsp;&nbsp;&nbsp;&nbsp;&#125;</div>
             <div className="rounded bg-red-950/40 px-2 py-0.5 text-red-300 border-l-2 border-red-500/80">

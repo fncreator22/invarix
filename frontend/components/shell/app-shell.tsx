@@ -10,6 +10,7 @@ import { EntityDrawer } from "@/components/shell/entity-drawer";
 import { LeftRail } from "@/components/shell/left-rail";
 import { MobileBottomBar } from "@/components/shell/mobile-bottom-bar";
 import { SampleBanner } from "@/components/shell/sample-banner";
+import { McpBanner } from "@/components/shell/mcp-banner";
 import { ShellProvider } from "@/components/shell/shell-context";
 import { StewardPanel } from "@/components/shell/steward-panel";
 import { TopBar } from "@/components/shell/top-bar";
@@ -91,6 +92,7 @@ function ReadyShell({
             <TopBar sentinel={sentinel} />
             <OfflineBanner />
             <SampleBanner />
+            <McpBanner />
             <main
               id="main"
               tabIndex={-1}

@@ -50,10 +50,12 @@ def score_services(
     r8_services: set[str],
     cfg: dict[str, Any],
     as_of: int,
+    threat_intel: dict[str, dict[str, Any]] | None = None,
 ) -> dict[str, dict[str, Any]]:
     """radius[s][e] = node ids of the shortest path s → … → landing service → e."""
     out: dict[str, dict[str, Any]] = {}
     m = cfg["rule_multiplier"]
+    threat_map = threat_intel or {}
     for s in service_ids:
         contribs = []
         for e, path in sorted(radius.get(s, {}).items()):
@@ -71,9 +73,16 @@ def score_services(
             )
             if hit
         ]
+        
+        # Check Tavily in-the-wild threat intelligence correlation
+        threats_found = [threat_map[e_id] for e_id in in_radius if e_id in threat_map]
         multiplier = 1.0
         for _ in hits:
             multiplier *= 1 + m
+        if threats_found:
+            hits.append("TAVILY_EXPLOIT")
+            multiplier *= 1.35  # High-priority exploit penalty
+
         score = 100 * (1 - math.exp(-raw * multiplier / cfg["K"]))
         out[s] = {
             "service_id": s,
@@ -83,6 +92,8 @@ def score_services(
             "band": band(score, cfg["bands"]),
             "contributions": sorted(contribs, key=lambda c: (-c["value"], c["exception_id"])),
             "rule_hits": hits,
+            "threat_intel_active": bool(threats_found),
+            "threat_intel_citations": threats_found[:3],
             "config_version": cfg.get("version", 1),
             "as_of": as_of,
         }

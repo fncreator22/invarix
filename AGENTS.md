@@ -29,6 +29,7 @@ Reprieve exposes a set of read-only graph reasoning tools through two surfaces:
 | `what_if_as_of` | Full detection run at a future date (read-only, does not persist) |
 | `propose_review` | Returns a ProposedAction to schedule a review (human must approve) |
 | `recall_precedent` | Searches the memory graph for prior decisions on the same control/service |
+| `recall_conversation_history` | Searches memory graph for prior conversation turns, topics, and past sessions |
 
 ## MCP endpoint
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { Check, Loader2, Send, Sparkles, Square, TriangleAlert, Zap } from "lucide-react";
+import { Check, History, Loader2, Plus, Send, ShieldAlert, Sparkles, Square, Trash2, TriangleAlert, Zap } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import ReactMarkdown from "react-markdown";
@@ -14,6 +14,7 @@ import { Button } from "@/components/ui/button";
 import { isApiError, useApi, wsPath } from "@/lib/api";
 import { useAuthBridge } from "@/lib/auth";
 import { errorMessage } from "@/lib/errors";
+import { formatUtcDay } from "@/lib/format";
 import { openStream } from "@/lib/sse";
 import type { ProposedAction, ReviewOut, StewardAnswer } from "@/lib/types";
 import { cn } from "@/lib/utils";
@@ -21,6 +22,7 @@ import { useWorkspace } from "@/lib/workspace";
 
 type Tool = { id: string; name: string; summary?: string; ok?: boolean };
 type Msg = { role: "user" | "assistant"; text: string; answer?: StewardAnswer; tools: Tool[]; streaming?: boolean };
+type SessionItem = { id: string; title: string | null; created_at: number; last_active_at?: number };
 
 const SUGGESTED = ["Which service is carrying the most hidden risk?", "Who should own exceptions whose owner left?", "What expires next week?"];
 const DEGRADED = new Set(["LLM_UNAVAILABLE", "AI_DISABLED", "QUOTA_EXCEEDED"]);
@@ -66,6 +68,10 @@ export function StewardChat({ initialPrompt, compact = false }: { initialPrompt?
   const [input, setInput] = useState("");
   const [busy, setBusy] = useState(false);
   const [degraded, setDegraded] = useState<string | null>(null);
+  const [sessions, setSessions] = useState<SessionItem[]>([]);
+  const [showHistory, setShowHistory] = useState(false);
+  const [currentSessionId, setCurrentSessionId] = useState<string | null>(null);
+  const [loadingHistory, setLoadingHistory] = useState(false);
   const session = useRef<string | null>(null);
   const abort = useRef<AbortController | null>(null);
   const end = useRef<HTMLDivElement>(null);
@@ -77,6 +83,74 @@ export function StewardChat({ initialPrompt, compact = false }: { initialPrompt?
 
   const patchLast = (fn: (m: Msg) => Msg) => setMessages((ms) => [...ms.slice(0, -1), fn(ms[ms.length - 1])]);
 
+  async function fetchSessions() {
+    try {
+      setLoadingHistory(true);
+      const list = await api<SessionItem[]>(wsPath(wsId, "/chat/sessions"));
+      setSessions(list || []);
+    } catch {
+      // ignore
+    } finally {
+      setLoadingHistory(false);
+    }
+  }
+
+  async function selectSession(id: string) {
+    if (busy) return;
+    try {
+      setBusy(true);
+      const res = await api<{ id: string; turns: Array<{ id: string; role: "user" | "assistant"; content: string; citations?: any[]; tool_calls_json?: string }> }>(
+        wsPath(wsId, `/chat/sessions/${id}`)
+      );
+      session.current = id;
+      setCurrentSessionId(id);
+      const restored: Msg[] = (res.turns || []).map((t) => {
+        const toolNames: string[] = t.tool_calls_json ? JSON.parse(t.tool_calls_json) : [];
+        return {
+          role: t.role,
+          text: t.content || "",
+          tools: toolNames.map((name, i) => ({ id: `${t.id}-${i}`, name, summary: "Completed", ok: true })),
+          answer: t.role === "assistant" ? {
+            answer_markdown: t.content || "",
+            citations: t.citations || [],
+            proof_paths: [],
+            proposed_actions: [],
+            used_tools: toolNames,
+            removed_claims: 0,
+          } : undefined,
+        };
+      });
+      setMessages(restored);
+      setShowHistory(false);
+    } catch (e) {
+      toast.error(errorMessage(e));
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  function startNewChat() {
+    if (busy) return;
+    session.current = null;
+    setCurrentSessionId(null);
+    setMessages([]);
+    setShowHistory(false);
+  }
+
+  async function deleteSessionItem(e: React.MouseEvent, id: string) {
+    e.stopPropagation();
+    try {
+      await api(wsPath(wsId, `/chat/sessions/${id}`), { method: "DELETE" });
+      setSessions((prev) => prev.filter((s) => s.id !== id));
+      toast.success("Conversation deleted.");
+      if (session.current === id) {
+        startNewChat();
+      }
+    } catch (e) {
+      toast.error(errorMessage(e));
+    }
+  }
+
   async function send(text: string) {
     const content = text.trim();
     if (!content || busy) return;
@@ -86,7 +160,12 @@ export function StewardChat({ initialPrompt, compact = false }: { initialPrompt?
     const ctrl = new AbortController();
     abort.current = ctrl;
     try {
-      session.current ??= (await api<{ id: string }>(wsPath(wsId, "/chat/sessions"), { method: "POST" })).id;
+      if (!session.current) {
+        const created = await api<{ id: string }>(wsPath(wsId, "/chat/sessions"), { method: "POST" });
+        session.current = created.id;
+        setCurrentSessionId(created.id);
+        void fetchSessions();
+      }
       await openStream({
         path: wsPath(wsId, `/chat/sessions/${session.current}/messages`),
         method: "POST",
@@ -146,6 +225,95 @@ export function StewardChat({ initialPrompt, compact = false }: { initialPrompt?
 
   return (
     <div className="flex h-full min-h-0 flex-col">
+      {/* Top Header / Session Bar */}
+      <div className="flex items-center justify-between border-b border-border-subtle pb-2 mb-1 shrink-0">
+        <div className="flex items-center gap-2">
+          <span className="flex size-2 rounded-full bg-brand" />
+          <span className="text-xs font-semibold text-text-primary">Steward Graph Copilot</span>
+          {currentSessionId && (
+            <span className="rounded bg-sunken px-1.5 py-0.5 text-[10px] font-mono text-text-muted" title={currentSessionId}>
+              {currentSessionId.slice(0, 8)}…
+            </span>
+          )}
+        </div>
+        <div className="flex items-center gap-1.5">
+          <Button
+            type="button"
+            variant="ghost"
+            size="sm"
+            className="h-7 text-xs gap-1"
+            onClick={startNewChat}
+            disabled={busy}
+            title="Start fresh conversation"
+          >
+            <Plus className="size-3.5" />
+            <span>New Chat</span>
+          </Button>
+          <Button
+            type="button"
+            variant={showHistory ? "secondary" : "ghost"}
+            size="sm"
+            className="h-7 text-xs gap-1"
+            onClick={() => {
+              const next = !showHistory;
+              setShowHistory(next);
+              if (next) void fetchSessions();
+            }}
+            title="View past conversations"
+          >
+            <History className="size-3.5" />
+            <span>History</span>
+          </Button>
+        </div>
+      </div>
+
+      {showHistory && (
+        <div className="mb-2 max-h-56 shrink-0 overflow-y-auto rounded-lg border border-border-subtle bg-surface p-2 shadow-sm animate-in fade-in">
+          <div className="mb-1.5 flex items-center justify-between px-2 text-xs font-medium text-text-secondary">
+            <span>Past Conversations ({sessions.length})</span>
+            <Button variant="ghost" size="sm" className="h-5 text-[11px] px-1" onClick={() => setShowHistory(false)}>
+              Close
+            </Button>
+          </div>
+          {loadingHistory ? (
+            <div className="flex items-center justify-center py-4 text-xs text-text-muted">
+              <Loader2 className="mr-2 size-3.5 animate-spin" /> Loading history…
+            </div>
+          ) : sessions.length === 0 ? (
+            <p className="px-2 py-3 text-center text-xs text-text-muted">No prior conversations found in this workspace.</p>
+          ) : (
+            <div className="space-y-1">
+              {sessions.map((s) => (
+                <div
+                  key={s.id}
+                  onClick={() => selectSession(s.id)}
+                  role="button"
+                  tabIndex={0}
+                  className={cn(
+                    "flex items-center justify-between gap-2 rounded px-2.5 py-1.5 text-xs transition-colors hover:bg-raised cursor-pointer",
+                    session.current === s.id ? "bg-brand-soft text-brand font-medium" : "text-text-primary"
+                  )}
+                >
+                  <div className="min-w-0 flex-1">
+                    <p className="truncate">{s.title || "Untitled Conversation"}</p>
+                    <p className="text-[10px] text-text-muted">{formatUtcDay(s.created_at)}</p>
+                  </div>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="size-6 text-text-muted hover:text-sev-critical"
+                    onClick={(e) => deleteSessionItem(e, s.id)}
+                    title="Delete conversation"
+                  >
+                    <Trash2 className="size-3" />
+                  </Button>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+
       <div className={cn("flex-1 space-y-6 overflow-y-auto", compact ? "p-4" : "py-6")} aria-live="polite" aria-busy={busy}>
         {degraded && (
           <div role="status" className="flex gap-2 rounded-md border border-sev-moderate bg-sev-moderate-soft px-3 py-2 text-body-sm">
@@ -215,6 +383,12 @@ export function StewardChat({ initialPrompt, compact = false }: { initialPrompt?
             </Button>
           )}
         </form>
+        <div className="flex items-center justify-center gap-1.5 px-2 pt-1 text-center font-mono text-[11px] leading-tight text-text-muted">
+          <ShieldAlert className="size-3.5 shrink-0 text-text-muted" aria-hidden />
+          <span>
+            <strong className="text-text-secondary">Engineering Notice:</strong> Graph heuristics & AI predictions do not replace certified audits. Proposed actions require human approval.
+          </span>
+        </div>
       </div>
     </div>
   );

@@ -6,17 +6,19 @@ from collections.abc import Awaitable, Callable
 from dataclasses import dataclass, field
 from typing import Any
 
+import httpx
 from cachetools import TTLCache
 from pydantic import BaseModel, Field, ValidationError
 
 from app.api import data as data_api
 from app.api import risk_alerts
 from app.auth.deps import WorkspaceContext
+from app.config import get_settings
 from app.detection.config import load_config
 from app.detection.engine import run_rules
 from app.errors import ApiError
 from app.ids import DAY, new_id, now
-from app.memory.store import precedent
+from app.memory.store import precedent, search_history
 from app.models.api import Role
 from app.prediction.engine import run_prediction_simulation
 from app.services import reviews, views
@@ -282,6 +284,58 @@ async def predict_expiry_collisions(ctx: WorkspaceContext, a: PredictCollisionsA
     )
 
 
+class TavilyThreatIntelArgs(BaseModel):
+    query: str = Field(description="Search query, CVE ID (e.g. CVE-2024-XXXX), package name, or vendor advisory to check for active exploits or breaking changes.")
+
+
+async def tavily_search_threat_intel(ctx: WorkspaceContext, a: TavilyThreatIntelArgs) -> ToolResult:
+    s = get_settings()
+    if not s.tavily_api_key:
+        return ToolResult(
+            data={"warning": "TAVILY_API_KEY is not configured in backend/.env."},
+            summary=f"Tavily threat intelligence unavailable (missing API key). Query was '{a.query}'.",
+        )
+    try:
+        async with httpx.AsyncClient(timeout=10.0) as client:
+            resp = await client.post(
+                "https://api.tavily.com/search",
+                json={
+                    "api_key": s.tavily_api_key,
+                    "query": f"{a.query} active exploit proof of concept in the wild",
+                    "search_depth": "advanced",
+                    "include_answer": True,
+                    "max_results": 5,
+                },
+            )
+            resp.raise_for_status()
+            data = resp.json()
+            results = data.get("results", [])
+            answer = data.get("answer", "")
+            summary = answer or f"Found {len(results)} threat intelligence records for '{a.query}'."
+            return ToolResult(data={"results": results, "answer": answer}, summary=summary)
+    except Exception as ex:
+        return ToolResult(data={"error": f"Tavily search failed: {ex}"}, summary=f"Failed querying Tavily: {ex}")
+
+
+class HistorySearchArgs(BaseModel):
+    query: str = Field(default="", description="Search query or keyword to recall past conversations, topics discussed earlier, or decisions made in previous days.")
+    limit: int = Field(default=5, ge=1, le=20, description="Max turns to return.")
+
+
+async def recall_conversation_history(ctx: WorkspaceContext, a: HistorySearchArgs) -> ToolResult:
+    """Recall prior conversation turns and topics for the current user across current and past chat sessions."""
+    rows = await search_history(ctx.mem, ctx.user.id, a.query, limit=a.limit)
+    if not rows:
+        return ToolResult(
+            data={"conversations": []},
+            summary="No matching past conversations or memory turns found for this user in this workspace.",
+        )
+    return ToolResult(
+        data={"conversations": rows},
+        summary=f"Found {len(rows)} past conversation turns matching '{a.query}'." if a.query else f"Recalled {len(rows)} recent conversation turns.",
+    )
+
+
 Impl = Callable[[WorkspaceContext, Any], Awaitable[ToolResult]]
 TOOLS: dict[str, tuple[type[BaseModel], Impl, str]] = {
     "list_risk_services": (Limit, list_risk_services, "Rank services by deterministic risk score (highest first)."),
@@ -302,6 +356,11 @@ TOOLS: dict[str, tuple[type[BaseModel], Impl, str]] = {
     "proof_path": (PathArgs, proof_path, "Shortest relationship path between two entities."),
     "search_entities": (SearchArgs, search_entities, "Find entities by name or id."),
     "recall_precedent": (PrecedentArgs, recall_precedent, "Past review decisions for a control (and service)."),
+    "recall_conversation_history": (
+        HistorySearchArgs,
+        recall_conversation_history,
+        "Search or recall past user conversation turns, topics, or prior discussion history across chat sessions.",
+    ),
     "what_if_as_of": (WhatIfArgs, what_if_as_of, "Preview alerts and ranking at another date. Read-only."),
     "predict_avalanche": (
         PredictAvalancheArgs,
@@ -314,6 +373,11 @@ TOOLS: dict[str, tuple[type[BaseModel], Impl, str]] = {
         "Predict future temporal clusters of simultaneous exception expirations across dependencies.",
     ),
     "propose_review": (ProposeArgs, propose_review, "Draft a review for an alert. A human must approve it."),
+    "tavily_search_threat_intel": (
+        TavilyThreatIntelArgs,
+        tavily_search_threat_intel,
+        "Search live web threat intelligence for CVE exploits, vendor EOL, and active security advisories using the Tavily Search API.",
+    ),
 }
 
 

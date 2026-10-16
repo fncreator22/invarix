@@ -179,7 +179,13 @@
   ::selection { background: var(--brand-soft); }
   :focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
   .dark :focus-visible { box-shadow: 0 0 0 1px var(--bg-canvas); }
-  button:not(:disabled), [role="button"]:not([aria-disabled="true"]) { cursor: pointer; }
+  button:not(:disabled), [role="button"]:not([aria-disabled="true"]) {
+    cursor: pointer;
+    transition: transform var(--dur-fast) var(--ease-out);
+  }
+  button:not(:disabled):active, [role="button"]:not([aria-disabled="true"]):active {
+    transform: scale(0.97);
+  }
 }
 
 @utility tabular { font-variant-numeric: tabular-nums; }

@@ -284,6 +284,8 @@ export interface SettingsWorkspaceHubProps {
    isRunningSentinel?: boolean;
    onResetBlank?: () => void;
    isResettingBlank?: boolean;
+   onPurgeData?: () => void;
+   isPurgingData?: boolean;
    onLoadSample?: () => void;
    isLoadingSample?: boolean;
    deleteDialogNode?: React.ReactNode;
@@ -304,6 +306,8 @@ export function SettingsWorkspaceHub({
    isRunningSentinel = false,
    onResetBlank,
    isResettingBlank = false,
+   onPurgeData,
+   isPurgingData = false,
    onLoadSample,
    isLoadingSample = false,
    deleteDialogNode,
@@ -545,6 +549,58 @@ export function SettingsWorkspaceHub({
                   <p className="text-caption text-text-muted">
                      Use <strong>Clear all data</strong> to purge all sample alerts and start fresh, or <strong>Load demo data</strong> to explore the full graph algorithms.
                   </p>
+
+                  <div className="mt-4 pt-4 border-t border-border-subtle">
+                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <div>
+                           <h3 className="font-sans text-body font-semibold flex items-center gap-2">
+                              <span className="size-2 rounded-full bg-sev-low" />
+                              Data Privacy, Erasure & Compliance (GDPR / CCPA)
+                           </h3>
+                           <p className="text-caption text-text-muted mt-0.5">
+                              Self-serve irreversible erasure of all domain graph entities, conversation turns, facts, and agent memories.
+                           </p>
+                        </div>
+                        <AlertDialog>
+                           <AlertDialogTrigger asChild>
+                              <Button variant="destructive" size="sm" loading={isPurgingData || isResettingBlank}>
+                                 Purge Workspace Data & Memory
+                              </Button>
+                           </AlertDialogTrigger>
+                           <AlertDialogContent>
+                              <AlertDialogHeader>
+                                 <AlertDialogTitle>Execute GDPR / CCPA Right to Erasure?</AlertDialogTitle>
+                                 <AlertDialogDescription className="space-y-2">
+                                    <span>
+                                       This permanently and irreversibly purges all data in this workspace:
+                                    </span>
+                                    <ul className="list-disc pl-5 text-caption space-y-1 mt-2">
+                                       <li>All services, exceptions, customer paths, controls, and active alerts in the domain graph.</li>
+                                       <li>All conversational memory, conversation turns, citations, and learned facts in the memory graph.</li>
+                                       <li>All cached telemetry, proposed actions, and webhook payload logs.</li>
+                                    </ul>
+                                    <span className="block font-semibold text-sev-critical mt-2">
+                                       This action cannot be undone.
+                                    </span>
+                                 </AlertDialogDescription>
+                              </AlertDialogHeader>
+                              <AlertDialogFooter>
+                                 <AlertDialogCancel>Cancel</AlertDialogCancel>
+                                 <AlertDialogAction
+                                    className="bg-danger text-text-on-brand hover:bg-danger/90"
+                                    onClick={() => {
+                                       if (onPurgeData) onPurgeData();
+                                       else if (onResetBlank) onResetBlank();
+                                       else toast.success('Workspace data & memory purged (demo mode).');
+                                    }}
+                                 >
+                                    Yes, Purge Everything Now
+                                 </AlertDialogAction>
+                              </AlertDialogFooter>
+                           </AlertDialogContent>
+                        </AlertDialog>
+                     </div>
+                  </div>
                </div>
             </section>
          )}

@@ -220,6 +220,14 @@ async def reset_blank(tasks: BackgroundTasks, ctx: WorkspaceContext = Depends(an
     return workspace_out(w, ctx.role.value, ctx.person_id)
 
 
+@router.post("/workspaces/{ws_id}/purge-data", response_model=WorkspaceOut)
+async def purge_data(tasks: BackgroundTasks, ctx: WorkspaceContext = Depends(any_status)) -> dict[str, Any]:
+    """GDPR Art. 17 / CCPA Self-serve Right to Erasure.
+    Permanently and irreversibly purges all graph topology, exception records, active alerts,
+    conversation sessions, turns, and agent memory in this workspace. Admins only."""
+    return await reset_blank(tasks, ctx)
+
+
 @router.post("/workspaces/{ws_id}/load-sample", response_model=WorkspaceOut)
 async def load_sample(tasks: BackgroundTasks, ctx: WorkspaceContext = Depends(any_status)) -> dict[str, Any]:
     """Populate workspace with Northwind Pay demo dataset. Admins only."""

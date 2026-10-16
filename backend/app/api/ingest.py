@@ -273,3 +273,38 @@ async def reject(draft_id: str, ctx: WorkspaceContext = Depends(reviewer)) -> No
         target_kind="Exception",
         target_id=draft_id,
     )
+
+
+class ManifestIngestIn(BaseModel):
+    manifest_content: str = Field(..., min_length=20, max_length=1_000_000)
+    source_ref: str | None = Field(None, max_length=300)
+    auto_persist: bool = Field(True, description="Persist discovered services and dependencies directly to the graph")
+
+
+@router.post("/manifests", response_model=dict[str, Any])
+async def ingest_manifests(
+    body: ManifestIngestIn,
+    ctx: WorkspaceContext = Depends(member),
+) -> dict[str, Any]:
+    """Ingest Kubernetes/Helm/monorepo manifests using NVIDIA Nemotron-3.5-Lightning (1M context)."""
+    from app.ingest.manifest_scanner import ingest_repository_manifests
+    ai_mode = ctx.workspace.get("ai_mode", "cloud")
+    result = await ingest_repository_manifests(
+        ws_id=ctx.ws_id,
+        ai_mode=ai_mode,
+        raw_manifest_text=body.manifest_content,
+        org_repo=ctx.org if body.auto_persist else None,
+    )
+    if body.auto_persist and (result.services or result.dependencies):
+        await sentinel.mark_dirty(ctx.ws_id)
+        await audit(
+            ctx.org,
+            actor_kind="user",
+            actor_id=ctx.user.id,
+            action="manifest.ingested",
+            target_kind="Workspace",
+            target_id=ctx.ws_id,
+            summary=result.summary,
+        )
+    return result.model_dump()
+

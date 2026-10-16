@@ -98,3 +98,20 @@ async def precedent(mem: Repo, control_id: str, service_id: str | None, limit: i
         }
         for r in rows
     ]
+
+
+async def search_history(
+    mem: Repo, user_id: str, query: str = "", limit: int = 10
+) -> list[dict[str, Any]]:
+    rows = await mem.read("mem_history_search", user_id=user_id, q=query.lower().strip(), limit=limit)
+    return [
+        {
+            "session_id": r["session_id"],
+            "session_title": r["session_title"],
+            "turn_id": r["turn_id"],
+            "role": r["role"],
+            "content": r["content"],
+            "created_at": r["created_at"],
+        }
+        for r in rows
+    ]

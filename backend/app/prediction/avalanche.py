@@ -56,13 +56,33 @@ def compute_path_probability(hops: int, p0: float = DEFAULT_P0) -> float:
     return p0**hops
 
 
-def combine_path_probabilities(paths_hops: list[int], p0: float = DEFAULT_P0) -> float:
-    """Multi-path cascade probability: 1 - prod(1 - p0^h)."""
+def combine_path_probabilities(
+    paths_hops: list[int], p0: float = DEFAULT_P0, mode: str = "independent"
+) -> float:
+    """Cascade probability across convergent paths.
+    
+    Supports:
+    - 'independent': Classical multi-path model 1 - prod(1 - p0^h)
+    - 'subadditive': Percolation coupling with diminishing marginal risk.
+    """
     if not paths_hops:
         return 0.0
     if len(paths_hops) == 1:
         h = paths_hops[0]
         return p0**h if h > 0 else 1.0
+
+    if mode == "subadditive":
+        sorted_hops = sorted(paths_hops)
+        h_min = sorted_hops[0]
+        p_primary = p0**h_min if h_min > 0 else 1.0
+        prob_no_cascade = 1.0 - p_primary
+        k = len(sorted_hops)
+        alpha = 1.0 / (1.0 + math.log2(k))
+        for h in sorted_hops[1:]:
+            p_secondary = alpha * (p0**h if h > 0 else 1.0)
+            prob_no_cascade *= 1.0 - p_secondary
+        return 1.0 - prob_no_cascade
+
     prob_no_cascade = 1.0
     for h in paths_hops:
         p_path = p0**h if h > 0 else 1.0

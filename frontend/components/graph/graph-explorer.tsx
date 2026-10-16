@@ -158,7 +158,9 @@ export function GraphExplorer() {
 
   useEffect(() => {
     if (params.get("sim") === "1" || params.get("horizon") === "30") {
-      setHorizonDays(30);
+      queueMicrotask(() => {
+        setHorizonDays(30);
+      });
       const avItem = forecast.data?.avalanche_centrality?.find((a) => a.service_id === "svc_payments_gateway") ?? null;
       const cascadePath = avItem?.proof?.nodes?.length
         ? avItem.proof.nodes
@@ -172,7 +174,9 @@ export function GraphExplorer() {
       }
 
       if (avItem && !selectedProofNode) {
-        setSelectedProofNode({ avalancheItem: avItem, collisionItem: null });
+        queueMicrotask(() => {
+          setSelectedProofNode({ avalancheItem: avItem, collisionItem: null });
+        });
       }
     }
   }, [params, forecast.data, selectedProofNode, pathname, router]);
@@ -182,7 +186,9 @@ export function GraphExplorer() {
       const avItem = forecast.data.avalanche_centrality?.find((a) => a.service_id === "svc_payments_gateway") ?? null;
       const colItem = forecast.data.temporal_collisions?.[0] ?? null;
       if (avItem || colItem) {
-        setSelectedProofNode({ avalancheItem: avItem, collisionItem: colItem });
+        queueMicrotask(() => {
+          setSelectedProofNode({ avalancheItem: avItem, collisionItem: colItem });
+        });
       }
     }
   }, [horizonDays, focus, forecast.data, selectedProofNode]);

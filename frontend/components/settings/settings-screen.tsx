@@ -9,6 +9,8 @@ import { toast } from "sonner";
 import { PageContainer, PageHeader } from "@/components/page-header";
 import { ApiKeysSection } from "@/components/settings/api-keys-section";
 import { IntegrationsTab } from "@/components/settings/integrations-tab";
+import { AdminTab } from "@/components/settings/admin-tab";
+import { BillingTab } from "@/components/settings/billing-tab";
 import { TABS, type SettingsTab } from "@/components/settings/tabs";
 import {
   AlertDialog,
@@ -56,7 +58,7 @@ export function SettingsScreen({ tab }: { tab: SettingsTab }) {
             </Link>
           ))}
         </nav>
-        <div className={cn("space-y-6", tab === "workspace" || tab === "api-keys" || tab === "integrations" ? "max-w-5xl" : "max-w-2xl")}>
+        <div className={cn("space-y-6", tab === "workspace" || tab === "api-keys" || tab === "integrations" || tab === "admin" || tab === "billing" ? "max-w-5xl" : "max-w-2xl")}>
           {tab === "profile" ? (
             <Profile />
           ) : tab === "workspace" ? (
@@ -65,6 +67,10 @@ export function SettingsScreen({ tab }: { tab: SettingsTab }) {
             <Ai />
           ) : tab === "integrations" ? (
             <IntegrationsTab />
+          ) : tab === "admin" ? (
+            <AdminTab />
+          ) : tab === "billing" ? (
+            <BillingTab />
           ) : (
             <ApiKeysSection />
           )}
@@ -158,6 +164,23 @@ function Workspace() {
     onError: (e) => toast.error(errorMessage(e)),
   });
 
+  const purgeData = useMutation({
+    mutationFn: () =>
+      api<WorkspaceOut>(wsPath(wsId, "/purge-data"), { method: "POST" }),
+    onSuccess: (w) => {
+      qc.setQueryData(workspaceQueryKey(wsId), w);
+      void qc.invalidateQueries({ queryKey: ["risk-summary", wsId] });
+      void qc.invalidateQueries({ queryKey: ["risk-services", wsId] });
+      void qc.invalidateQueries({ queryKey: ["alerts", wsId] });
+      void qc.invalidateQueries({ queryKey: ["graph", wsId] });
+      void qc.invalidateQueries({ queryKey: meQueryKey });
+      toast.success(
+        "GDPR Right to Erasure executed: Domain graph, turns, and agent memory permanently purged."
+      );
+    },
+    onError: (e) => toast.error(errorMessage(e)),
+  });
+
   const loadSample = useMutation({
     mutationFn: () =>
       api<WorkspaceOut>(wsPath(wsId, "/load-sample"), { method: "POST" }),
@@ -189,6 +212,8 @@ function Workspace() {
       isRunningSentinel={run.isPending}
       onResetBlank={() => resetBlank.mutate()}
       isResettingBlank={resetBlank.isPending}
+      onPurgeData={() => purgeData.mutate()}
+      isPurgingData={purgeData.isPending}
       onLoadSample={() => loadSample.mutate()}
       isLoadingSample={loadSample.isPending}
       deleteDialogNode={

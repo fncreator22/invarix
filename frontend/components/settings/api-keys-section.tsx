@@ -299,7 +299,7 @@ export function ApiKeysSection() {
           <span>Automation & CLI Environment Variables</span>
         </div>
         <p className="text-body-sm text-text-secondary">
-          Reprieve's pre-merge risk engine and MCP agent read your API key and target workspace from environment variables:
+          Reprieve&apos;s pre-merge risk engine and MCP agent read your API key and target workspace from environment variables:
         </p>
         <div className="rounded-md bg-bg-muted/80 p-3.5 font-mono text-body-sm space-y-1.5 border border-border-subtle overflow-x-auto">
           <div className="text-text-muted"># Linux / macOS / GitHub Actions CI:</div>

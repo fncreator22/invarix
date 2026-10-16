@@ -41,7 +41,7 @@ class Provider:
     model: str
 
 
-def _provider(kind: str) -> Provider | None:
+def _provider(kind: str, role: str = "reasoning") -> Provider | None:
     s = get_settings()
     if kind == "openai" and s.openai_api_key and s.openai_model_agent:
         return Provider(
@@ -53,30 +53,31 @@ def _provider(kind: str) -> Provider | None:
             openai.AsyncOpenAI(base_url=s.local_llm_base_url, api_key=s.local_llm_api_key, timeout=s.llm_timeout_s),
             s.local_llm_model,
         )
-    if kind == "compat" and s.compat_base_url and s.compat_model:
+    if kind == "compat" and s.compat_base_url:
+        model = s.get_compat_model(role)
         return Provider(
             "compat",
             openai.AsyncOpenAI(
                 base_url=s.compat_base_url,
-                api_key=s.compat_api_key,
+                api_key=s.compat_api_key or "nebius-token-factory-key",
                 timeout=s.llm_timeout_s,
                 default_headers={
                     "HTTP-Referer": s.web_origin,
-                    "X-Title": "Reprieve",
+                    "X-Title": "INVARIX",
                 },
             ),
-            s.compat_model,
+            model,
         )
     return None
 
 
-def providers(ai_mode: str) -> list[Provider]:
+def providers(ai_mode: str, role: str = "reasoning") -> list[Provider]:
     """cloud: primary then fallback; private: only local/compat (nothing leaves to OpenAI); off: none."""
     s = get_settings()
     if ai_mode == "off":
         return []
-    order = [s.llm_primary, s.llm_fallback] if ai_mode == "cloud" else ["local", "compat"]
-    out = [p for p in (_provider(k) for k in order if k != "none") if p]
+    order = [s.llm_primary, s.llm_fallback] if ai_mode == "cloud" else ["compat", "local"]
+    out = [p for p in (_provider(k, role=role) for k in order if k != "none") if p]
     return out[:2]
 
 
@@ -172,10 +173,15 @@ async def stream_chat(
 
 
 async def complete_json(
-    ws_id: str, ai_mode: str, messages: list[dict[str, Any]], schema: dict[str, Any], name: str
+    ws_id: str,
+    ai_mode: str,
+    messages: list[dict[str, Any]],
+    schema: dict[str, Any],
+    name: str,
+    role: str = "reasoning",
 ) -> dict[str, Any]:
     """Non-streaming structured output: JSON-schema response format, falling back to JSON mode, one retry."""
-    plist = providers(ai_mode)
+    plist = providers(ai_mode, role=role)
     if not plist:
         raise ApiError("AI_DISABLED" if ai_mode == "off" else "LLM_UNAVAILABLE", "No AI provider is configured.")
     check_budget(ws_id)

@@ -146,3 +146,88 @@ async def test_alert_explain_fallback_and_cached_ai(ws, monkeypatch):
     await c.put(f"{base}/ai-settings", headers=H, json={"ai_mode": "off"})
     off = (await c.get(f"{base}/alerts/{alert['id']}/explain", headers=H)).json()
     assert off["source"] == "deterministic" and "Path:" in off["text"]
+
+
+async def test_recall_conversation_history_tool_and_isolation(ws, monkeypatch):
+    c, base = ws
+    script = [
+        llm.LLMEvent("done", tool_calls=[llm.ToolCall("c1", "list_risk_services", '{"limit": 3}')], model="stub"),
+        llm.LLMEvent(
+            "done",
+            text="Checkout carries the most hidden risk `svc_checkout_api`.",
+            model="stub",
+            usage={"prompt_tokens": 10, "completion_tokens": 5, "total_tokens": 15},
+        ),
+    ]
+
+    async def fake(ws_id, ai_mode, messages, tools):
+        ev = script.pop(0)
+        yield ev
+
+    monkeypatch.setattr(llm, "stream_chat", fake)
+    ses = (await c.post(f"{base}/chat/sessions", headers=H)).json()
+    r = await c.post(
+        f"{base}/chat/sessions/{ses['id']}/messages",
+        headers=H,
+        json={"content": "Do you remember what we talked about day before today?"},
+    )
+    _ = r.text  # fully consume the SSE stream so turns are written
+
+    from app.agents.tools import execute, HistorySearchArgs, recall_conversation_history
+    from app.auth.deps import CurrentUser, WorkspaceContext
+    from app.graph.client import get_db, graph_names
+    from app.graph.repo import Repo
+    from app.models.api import Role
+
+    ws_id = base.split("/")[-1]
+    db = get_db()
+    names = graph_names(ws_id)
+    real_user_id = ses["user_id"]
+    ctx_user1 = WorkspaceContext(
+        ws_id=ws_id,
+        workspace={"id": ws_id, "data_mode": "sample", "clock_mode": "simulated"},
+        role=Role.admin,
+        person_id=None,
+        as_of=1700000000,
+        user=CurrentUser(id=real_user_id, clerk_user_id="user_s", email="s@example.com", name="S", prefs={}),
+        platform=Repo(db, names.platform),
+        org=Repo(db, names.org),
+        mem=Repo(db, names.mem),
+    )
+
+    # User 1 searches past conversation
+    res1 = await execute(ctx_user1, "recall_conversation_history", '{"query": "hidden risk"}')
+    assert res1.data["conversations"]
+    assert any("hidden risk" in c["content"] for c in res1.data["conversations"])
+
+    # User 1 searches with empty query (retrieves recent turns)
+    res_all = await execute(ctx_user1, "recall_conversation_history", '{"query": ""}')
+    assert len(res_all.data["conversations"]) >= 1
+
+    # User 1 searches non-matching query
+    res_none = await execute(ctx_user1, "recall_conversation_history", '{"query": "nonexistent query"}')
+    assert res_none.data["conversations"] == []
+
+    # User 2 in the same workspace has isolated memory - cannot see User 1's history
+    ctx_user2 = WorkspaceContext(
+        ws_id=ws_id,
+        workspace={"id": ws_id, "data_mode": "sample", "clock_mode": "simulated"},
+        role=Role.member,
+        person_id=None,
+        as_of=1700000000,
+        user=CurrentUser(id="user_other", clerk_user_id="user_other", email="other@example.com", name="Other", prefs={}),
+        platform=Repo(db, names.platform),
+        org=Repo(db, names.org),
+        mem=Repo(db, names.mem),
+    )
+    res2 = await execute(ctx_user2, "recall_conversation_history", '{"query": "hidden risk"}')
+    assert res2.data["conversations"] == []
+
+
+async def test_gdpr_purge_data_endpoint(ws):
+    c, base = ws
+    res = await c.post(f"{base}/purge-data", headers=H)
+    assert res.status_code == 200
+    data = res.json()
+    assert data["data_mode"] == "blank"
+    assert data["status"] in ("provisioning", "ready")

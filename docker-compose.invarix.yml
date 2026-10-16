@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  invarix-falkordb:
+    image: falkordb/falkordb:v4.22.0
+    container_name: invarix-falkordb
+    ports:
+      - "6380:6379"
+    environment:
+      - FALKORDB_ARGS=--save ""
+    networks:
+      - invarix-net
+    restart: unless-stopped
+
+  invarix-backend:
+    image: invarix-backend:latest
+    container_name: invarix-backend
+    ports:
+      - "8001:8000"
+    environment:
+      - FALKORDB_HOST=invarix-falkordb
+      - FALKORDB_PORT=6379
+      - PORT=8000
+      - ENV_NAME=local
+      - DEV_AUTH=true
+      - WEB_ORIGIN=http://localhost:3001
+      - GRAPH_PREFIX=invarix_
+      - LLM_PRIMARY=compat
+      - COMPAT_BASE_URL=https://api.tokenfactory.nebius.ai/v1
+      - COMPAT_API_KEY=your_nebius_token_factory_key_here
+      - COMPAT_MODEL=nvidia/nemotron-3-super-120b-a12b
+      - COMPAT_MODEL_INGEST=nebius/nvidia/Nemotron-3_5-Lightning
+      - TAVILY_API_KEY=your_tavily_api_key_here
+      - INTERNAL_TICK_SECRET=invarix_dev_secret_2026
+    depends_on:
+      - invarix-falkordb
+    networks:
+      - invarix-net
+    restart: unless-stopped
+
+networks:
+  invarix-net:
+    name: invarix-network

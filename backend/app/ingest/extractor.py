@@ -7,7 +7,7 @@ from pydantic import BaseModel, Field
 
 from app.agents import llm
 
-MAX_TEXT = 6000
+MAX_TEXT = 200_000
 
 INSTRUCTION_LIKE = re.compile(
     r"(ignore (all |any )?(previous|prior|above) (rules|instructions)|disregard .*instructions"

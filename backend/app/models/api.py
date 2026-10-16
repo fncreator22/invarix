@@ -212,6 +212,8 @@ class ScoreBreakdown(Base):
     band: Severity
     contributions: list[ScoreContribution]
     rule_hits: list[str]
+    threat_intel_active: bool = False
+    threat_intel_citations: list[dict[str, Any]] = []
     config_version: int
     as_of: int
 
