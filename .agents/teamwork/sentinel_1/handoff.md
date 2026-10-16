@@ -1,7 +1,7 @@
-# Final Sentinel Handoff Report — Project Reprieve
+# Final Sentinel Handoff Report — Project INVARIX
 
 ## Observation
-- The user requested the implementation and launch of **Reprieve**: an autonomous agentic engine turning fragmented software exceptions, security waivers, and technical debt overrides into a verifiable, tri-planar knowledge graph detecting cascading multi-service risk collisions before production deployment.
+- The user requested the implementation and launch of **INVARIX**: an autonomous agentic engine turning fragmented software exceptions, security waivers, and technical debt overrides into a verifiable, tri-planar knowledge graph detecting cascading multi-service risk collisions before production deployment.
 - Requirements encompassed:
   - R1: Tri-Planar Knowledge Graph (Platform, Domain, Memory) using FalkorDB, 8 deterministic invariants (R1–R8), and shortest proof path extraction.
   - R2: Deterministic Prediction & Avalanche Centrality ($AC(u) = 1 - \prod(1 - p_0^{\text{len}(p)})$) and sliding-horizon temporal collision dynamics.
@@ -24,7 +24,7 @@
 - Production deployment requires standard runtime credentials for external providers (`NEBIUS_API_KEY` / `COMPAT_API_KEY` for Nebius Token Factory, and `TAVILY_API_KEY` for live threat intel searches). In their absence, fallback stubs and structured warnings execute safely without unhandled crashes.
 
 ## Conclusion
-- Project Reprieve is completely implemented, verified, audited, and production-ready.
+- Project INVARIX is completely implemented, verified, audited, and production-ready.
 - All crons and subagents have been cleanly dismantled.
 
 ## Verification Method

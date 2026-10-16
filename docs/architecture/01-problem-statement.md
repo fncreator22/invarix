@@ -14,8 +14,8 @@ Flat spreadsheets and relational registers cannot detect combinatorial exposure:
 - Relational databases require expensive recursive multi-hop joins that fail to scale across deep dependency trees.
 - Vector search retrieves semantic text similarity but cannot evaluate deterministic structural reachability (e.g., *Can service A reach customer-facing path B in 3 hops?*).
 
-## The Solution: Reprieve
-Reprieve models every exception as a **promise in a property graph** powered by **FalkorDB**:
+## The Solution: INVARIX
+INVARIX models every exception as a **promise in a property graph** powered by **FalkorDB**:
 - Traverses multi-hop dependency chains in milliseconds.
 - Computes structural PageRank, betweenness centrality, and shortest proof paths.
 - Provides autonomous invariant detection rules (`R1`–`R8`) and a grounded conversational agent (**Steward**).

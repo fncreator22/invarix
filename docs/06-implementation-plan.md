@@ -1,8 +1,8 @@
-# 06 — Implementation Plan: Reprieve
+# 06 — Implementation Plan: INVARIX
 
 | Field | Value |
 | --- | --- |
-| **Product** | Reprieve — the exception debt agent |
+| **Product** | INVARIX — the exception debt agent |
 | **Version** | 1.0 (draft for build kickoff) |
 | **Date** | 2 Oct 2026 |
 | **Owner** | Solo founder / developer, building with Claude Code |
@@ -177,9 +177,9 @@ Write these in the dry-run, from the documents, using **skill-creator**. They st
 | Skill | Source | Contains |
 | --- | --- | --- |
 | **`falkordb-cypher`** | `docs/spike-notes.md`, `02` C4 to C7, `03` §6 to §7 | FalkorDB Cypher subset rules, working `algo.*` signatures, forbidden patterns (S-9, S-10), batching rules, MERGE patterns, the constraint bootstrap, "never copy Neo4j snippets" |
-| **`reprieve-ui`** | `05`, `04` §7 to §8 | Token names, component specs, state patterns, motion rules, accessibility checklist, copy rules |
-| **`reprieve-api-contract`** | `03` §10 to §11 | Error codes and UI map, RBAC matrix, SSE events, pagination, `If-Match` rules |
-| **`reprieve-demo`** | blueprint §17, `04` §10 | Golden path steps, seeded scenario names, cached LLM outputs, reset commands |
+| **`invarix-ui`** | `05`, `04` §7 to §8 | Token names, component specs, state patterns, motion rules, accessibility checklist, copy rules |
+| **`invarix-api-contract`** | `03` §10 to §11 | Error codes and UI map, RBAC matrix, SSE events, pagination, `If-Match` rules |
+| **`invarix-demo`** | blueprint §17, `04` §10 | Golden path steps, seeded scenario names, cached LLM outputs, reset commands |
 
 ### 5.4 MCP servers for Claude Code
 
@@ -511,7 +511,7 @@ Cut to E1 plus the clock; one agent (Steward) with Sentinel as a function; no in
 ## Appendix A: `CLAUDE.md` template
 
 ```markdown
-# Reprieve — instructions for Claude Code
+# INVARIX — instructions for Claude Code
 
 ## What this is
 Graph-first exception-risk product. FalkorDB is central. Docs in /docs (01 PRD, 02 tech, 03 schema/API, 04 flows, 05 design, 06 plan). Read the relevant section by path; do not ask me to paste it.

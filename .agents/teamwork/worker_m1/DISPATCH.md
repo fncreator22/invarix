@@ -17,7 +17,7 @@
   - `backend/.env`
 
 ## 2026-10-15T23:09:52Z
-You are Worker M1 for Project Reprieve.
+You are Worker M1 for Project INVARIX.
 
 Your working directory is:
 d:\hackthon\Nvidea\.agents\teamwork\worker_m1

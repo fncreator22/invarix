@@ -1,4 +1,4 @@
-# Progress — Project Reprieve Orchestrator
+# Progress — Project INVARIX Orchestrator
 
 Last visited: 2026-10-16T00:25:30Z
 
@@ -33,5 +33,5 @@ Every requirement (R1–R5) and acceptance criterion has been rigorously built, 
 2. Avalanche Centrality engine $AC(u) = 1 - \prod(1 - p_0^{\text{len}(p)})$ with tier weights and sliding-horizon temporal collision dynamics.
 3. Multi-agent swarm (Steward, Sentinel) wired to Nebius Token Factory with dual-model routing (`nebius/nvidia/Nemotron-3_5-Lightning` for 1M ingestion + `nvidia/nemotron-3-super-120b-a12b` for causal reasoning) and provenance guardrail (`guard.py`).
 4. External threat intelligence via Tavily search tool (`tavily_search_threat_intel`) with structured warning/error fallbacks.
-5. Interactive force-directed 2D/WebGL canvas with animated pulsating risk halos (`Math.sin(Date.now() / 250) * 2.5 + 3.5`), SSE chat streaming, and pre-merge CI CLI gate (`reprieve scan --pr`).
+5. Interactive force-directed 2D/WebGL canvas with animated pulsating risk halos (`Math.sin(Date.now() / 250) * 2.5 + 3.5`), SSE chat streaming, and pre-merge CI CLI gate (`invarix scan --pr`).
 6. All 21 E2E tests and 109 backend tests pass cleanly. Forensic audit confirmed CLEAN.

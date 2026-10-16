@@ -75,7 +75,7 @@ function PathStep({ value, onChange, onNext }: { value: Path; onChange: (p: Path
       value: "blank" as const,
       icon: FilePlus2,
       title: "Start blank (Clean Slate)",
-      body: "An empty workspace for your company. Connect your repositories via CLI (reprieve scan), configure MCP tools, or generate API keys to ingest live data.",
+      body: "An empty workspace for your company. Connect your repositories via CLI (invarix scan), configure MCP tools, or generate API keys to ingest live data.",
       badge: "Recommended",
     },
     {
@@ -245,7 +245,7 @@ function NameStep({ path, onBack, onCreated }: { path: Path; onBack: () => void;
             id="ws-slug"
             label="Address"
             error={errors.slug?.message}
-            helper={<span className="font-mono">reprieve.app/w/{slugValue || (path === "sample" ? "northwind-pay" : "your-team")}</span>}
+            helper={<span className="font-mono">invarix.app/w/{slugValue || (path === "sample" ? "northwind-pay" : "your-team")}</span>}
           >
             <Input
               id="ws-slug"
@@ -676,7 +676,7 @@ export function OnboardingShell({ children }: { children: React.ReactNode }) {
       <header className="relative mb-8 flex w-full max-w-[560px] items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
           <LogoMark />
-          <span className="font-display text-[1.2rem] font-bold">Reprieve</span>
+          <span className="font-display text-[1.2rem] font-bold">INVARIX</span>
         </Link>
         {CLERK_ENABLED ? (
           <div className="flex items-center gap-2">

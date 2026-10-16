@@ -22,7 +22,7 @@ import {
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { CLERK_ENABLED } from "@/lib/auth-config";
-import { REPRIEVE_VIDEOS } from "@/lib/videos";
+import { INVARIX_VIDEOS } from "@/lib/videos";
 
 interface VslSectionProps {
   onBookCall: () => void;
@@ -95,7 +95,7 @@ export function VslSection({ onBookCall }: VslSectionProps) {
   const [activeChapter, setActiveChapter] = useState(0);
   const [transcriptOpen, setTranscriptOpen] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const video = REPRIEVE_VIDEOS.HERO_SHOWCASE;
+  const video = INVARIX_VIDEOS.HERO_SHOWCASE;
 
   const togglePlay = () => {
     if (videoRef.current) {

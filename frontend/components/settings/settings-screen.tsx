@@ -257,8 +257,8 @@ function DeleteWorkspaceDialog({
       }),
     onSuccess: () => {
       if (typeof window !== "undefined" && window.localStorage) {
-        if (window.localStorage.getItem("reprieve.last_ws") === slug) {
-          window.localStorage.removeItem("reprieve.last_ws");
+        if (window.localStorage.getItem("invarix.last_ws") === slug) {
+          window.localStorage.removeItem("invarix.last_ws");
         }
       }
       toast.success(`Workspace "${name}" was permanently deleted.`);

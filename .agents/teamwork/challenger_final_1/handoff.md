@@ -96,7 +96,7 @@ Direct empirical observations and execution results against the codebase:
 
 **VERDICT: APPROVE**
 
-The mathematical algorithms, stability bounds, sliding-horizon temporal collision clusters, and provenance guardrails for Project Reprieve are empirically verified and fully hardened. All 31 empirical challenge tests and all 21 user acceptance criteria E2E tests pass cleanly.
+The mathematical algorithms, stability bounds, sliding-horizon temporal collision clusters, and provenance guardrails for Project INVARIX are empirically verified and fully hardened. All 31 empirical challenge tests and all 21 user acceptance criteria E2E tests pass cleanly.
 
 ---
 

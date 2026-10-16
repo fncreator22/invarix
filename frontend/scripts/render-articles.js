@@ -147,7 +147,7 @@ async function renderArticles() {
 
       <div class="footer-audit">
         <span>Public Domain Evidence: ${art.sourceDomain} · Post-Incident Review</span>
-        <span>Reprieve Deterministic AST Grounding · 100% Verified Non-Fictional Record</span>
+        <span>INVARIX Deterministic AST Grounding · 100% Verified Non-Fictional Record</span>
       </div>
     </div>
   </div>

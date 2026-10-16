@@ -6,8 +6,8 @@ import { Reveal } from "@/components/marketing/reveal";
 import { CLERK_ENABLED } from "@/lib/auth-config";
 
 export const metadata: Metadata = {
-  title: "Architecture & 3-Graph Topology · Reprieve",
-  description: "Technical deep dive on Reprieve's multi-graph FalkorDB foundation, the Sentinel detection engine, and the Steward AI memory model.",
+  title: "Architecture & 3-Graph Topology · INVARIX",
+  description: "Technical deep dive on INVARIX's multi-graph FalkorDB foundation, the Sentinel detection engine, and the Steward AI memory model.",
 };
 
 export default function ArchitecturePage() {
@@ -28,7 +28,7 @@ export default function ArchitecturePage() {
               Graph-First, LLM-Second
             </h1>
             <p className="mt-4 text-body-lg text-text-secondary leading-relaxed">
-              Why we don&apos;t let AI write graph queries. Reprieve uses a three-tier FalkorDB topology to keep tenant
+              Why we don&apos;t let AI write graph queries. INVARIX uses a three-tier FalkorDB topology to keep tenant
               identities isolated, detection queries provably deterministic, and agent memory persistent across turns.
             </p>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-3">

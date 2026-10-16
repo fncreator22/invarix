@@ -120,10 +120,10 @@ export function HomeScreen() {
               Set these environment variables in your terminal, CI/CD pipeline, or AI IDE to automatically attach your microservices and exception debt:
             </p>
             <div className="rounded-lg bg-surface-subtle p-3.5 font-mono text-caption text-text-primary space-y-1.5 overflow-x-auto border border-border-subtle">
-              <p>export REPRIEVE_WORKSPACE=&quot;{slug}&quot;</p>
-              <p>export REPRIEVE_API_KEY=&quot;&lt;your-api-key-from-settings&gt;&quot;</p>
+              <p>export INVARIX_WORKSPACE=&quot;{slug}&quot;</p>
+              <p>export INVARIX_API_KEY=&quot;&lt;your-api-key-from-settings&gt;&quot;</p>
               <p className="text-text-muted pt-1"># Scan your repository for waivers, TODOs, and #nosec tags:</p>
-              <p className="text-brand">reprieve scan .</p>
+              <p className="text-brand">invarix scan .</p>
             </div>
             <p className="text-caption text-text-muted">
               Generate secure API keys anytime under{" "}

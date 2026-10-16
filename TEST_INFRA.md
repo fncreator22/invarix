@@ -1,8 +1,8 @@
-# Reprieve Test Infrastructure & E2E Verification Architecture
+# INVARIX Test Infrastructure & E2E Verification Architecture
 
 ## 1. Overview & Architectural Principles
 
-Reprieve's End-to-End (E2E) testing framework provides **opaque-box, requirement-driven verification** of the entire cascading risk engine, validating all user requirements (R1–R5), mathematical properties, multi-agent reasoning loops, and CI/CD pre-merge controls.
+INVARIX's End-to-End (E2E) testing framework provides **opaque-box, requirement-driven verification** of the entire cascading risk engine, validating all user requirements (R1–R5), mathematical properties, multi-agent reasoning loops, and CI/CD pre-merge controls.
 
 All tests are genuine and execute real Cypher queries against FalkorDB, real mathematical graph algorithms, real provenance guardrails, and real CLI commands. No mock facades or tautological assertions are used.
 

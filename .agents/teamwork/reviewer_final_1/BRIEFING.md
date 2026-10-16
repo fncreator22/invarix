@@ -1,7 +1,7 @@
 # BRIEFING — 2026-10-16T00:20:00Z
 
 ## Mission
-Independent adversarial quality and integrity review of Project Reprieve (Milestone M-Final): FalkorDB schema isolation, invariants R1-R8, Avalanche Centrality AC(u), dual-model routing, Tavily tool, and test verification.
+Independent adversarial quality and integrity review of Project INVARIX (Milestone M-Final): FalkorDB schema isolation, invariants R1-R8, Avalanche Centrality AC(u), dual-model routing, Tavily tool, and test verification.
 
 ## 🔒 My Identity
 - Archetype: reviewer_critic

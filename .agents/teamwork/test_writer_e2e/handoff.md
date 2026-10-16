@@ -73,7 +73,7 @@
 
 ## 4. Conclusion
 
-The comprehensive E2E test suite for Project Reprieve is **100% complete, fully verified, and passing**.
+The comprehensive E2E test suite for Project INVARIX is **100% complete, fully verified, and passing**.
 - All 21 tests across Tiers 1–4 execute in **3.77 seconds** with 0 failures.
 - `TEST_INFRA.md` and `TEST_READY.md` have been authored and published at the project root.
 - The project is fully test-ready for Milestone M2 and Phase 2 Final Verification.

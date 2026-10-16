@@ -1,7 +1,7 @@
-# Project: Reprieve — Autonomous Cascading Risk Engine
+# Project: INVARIX — Autonomous Cascading Risk Engine
 
 ## Architecture
-Reprieve turns fragmented software exceptions, security waivers, and technical debt overrides into a verifiable, tri-planar knowledge graph that detects cascading multi-service risk collisions before production deployment.
+INVARIX turns fragmented software exceptions, security waivers, and technical debt overrides into a verifiable, tri-planar knowledge graph that detects cascading multi-service risk collisions before production deployment.
 
 ```
                     ┌───────────────────────────────┐

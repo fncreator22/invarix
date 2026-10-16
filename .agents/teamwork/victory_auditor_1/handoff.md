@@ -1,4 +1,4 @@
-# Victory Audit Handoff Report — Project Reprieve
+# Victory Audit Handoff Report — Project INVARIX
 
 - **Author**: Independent Victory Auditor (`victory_auditor_1`)
 - **Roles**: critic, specialist, auditor, victory_verifier
@@ -115,7 +115,7 @@ PHASE C — INDEPENDENT TEST EXECUTION:
 
 ## 4. Conclusion
 
-The claim of project completion by the Project Orchestrator is **fully verified and authentic**. Project Reprieve satisfies all technical requirements (R1–R5) and all 6 acceptance criteria stipulated in `ORIGINAL_REQUEST.md`.
+The claim of project completion by the Project Orchestrator is **fully verified and authentic**. Project INVARIX satisfies all technical requirements (R1–R5) and all 6 acceptance criteria stipulated in `ORIGINAL_REQUEST.md`.
 
 **Official Verdict**: **VICTORY CONFIRMED**
 

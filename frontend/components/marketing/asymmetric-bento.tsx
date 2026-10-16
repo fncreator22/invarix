@@ -23,7 +23,7 @@ export function AsymmetricBento() {
           Risk compounds across the graph.
         </h2>
         <p className="mt-3 text-body text-zinc-400">
-          Individual waivers look harmless on sprint boards. Reprieve projects them onto your microservice topology to catch cascading failures before peak traffic.
+          Individual waivers look harmless on sprint boards. INVARIX projects them onto your microservice topology to catch cascading failures before peak traffic.
         </p>
       </div>
 
@@ -119,7 +119,7 @@ export function AsymmetricBento() {
               </div>
             </div>
             <p className="mt-3 text-[12px] text-zinc-400 leading-relaxed">
-              Priya R. owned 2 security waivers and left the company in August. Reprieve reroutes pending reviews to the active team lead in 14 seconds.
+              Priya R. owned 2 security waivers and left the company in August. INVARIX reroutes pending reviews to the active team lead in 14 seconds.
             </p>
             <div className="mt-4 flex items-center justify-between rounded-lg border border-white/[0.06] bg-[#141518] p-2.5 text-[11px]">
               <span className="text-zinc-400">Reassigned To:</span>

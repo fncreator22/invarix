@@ -14,7 +14,7 @@
 
 **Verdict**: **APPROVE**
 
-Independent forensic review and adversarial stress-testing of Project Reprieve across the backend graph invariants (R1–R8), mathematical prediction engine, multi-agent reasoning architecture, Tavily threat intelligence tool, and pre-merge CI CLI gate confirmed 100% architectural and mathematical validity. 
+Independent forensic review and adversarial stress-testing of Project INVARIX across the backend graph invariants (R1–R8), mathematical prediction engine, multi-agent reasoning architecture, Tavily threat intelligence tool, and pre-merge CI CLI gate confirmed 100% architectural and mathematical validity. 
 
 No integrity violations, hardcoded test results, facade logic, or bypassed tasks were found. All 21 E2E integration tests and 153 backend tests executed cleanly and passed independently.
 
@@ -152,7 +152,7 @@ No integrity violations, hardcoded test results, facade logic, or bypassed tasks
 
 ## 5. Conclusion
 
-Project Reprieve satisfies all technical requirements (R1–R5), invariant specifications (R1–R8), mathematical derivations, model routing rules, and acceptance criteria specified in `ORIGINAL_REQUEST.md` and `PROJECT.md`. 
+Project INVARIX satisfies all technical requirements (R1–R5), invariant specifications (R1–R8), mathematical derivations, model routing rules, and acceptance criteria specified in `ORIGINAL_REQUEST.md` and `PROJECT.md`. 
 
 The test harness achieves 100% pass rates across 174 automated tests. No integrity violations or regressions were identified.
 

@@ -22,7 +22,7 @@ export const INCIDENTS: ProjectData[] = [
       "A rapid-response content update in Channel File 291 passed syntax gates but skipped staged rollout, triggering an out-of-bounds memory read directly on the kernel path.",
     whatHappened:
       "A rapid-response content update in Channel File 291 passed syntax gates but skipped staged rollout, triggering an out-of-bounds memory read directly on the kernel path.",
-    withReprieve:
+    withInvarix:
       "Evaluates blast radius on core paths. Sentinel flags uncanaried bypasses on root operating dependencies before release.",
     rules: ["Rule R4: Service Concentration", "Rule R8: Customer-Path Exposure"],
     color: "#0b0c13",
@@ -44,7 +44,7 @@ export const INCIDENTS: ProjectData[] = [
       "An unmonitored legacy Citrix portal had no MFA enabled—a forgotten policy exception left behind after a corporate merger with zero active owner.",
     whatHappened:
       "An unmonitored legacy Citrix portal had no MFA enabled—a forgotten policy exception left behind after a corporate merger with zero active owner.",
-    withReprieve:
+    withInvarix:
       "Flags unowned systems and expired policy exceptions. Sentinel alerts security teams before dormant, single-factor backdoors reach production.",
     rules: ["Rule R2: Ghost Owner", "Rule R7: Broken Compensating Control"],
     color: "#0c0d16",
@@ -66,7 +66,7 @@ export const INCIDENTS: ProjectData[] = [
       "An internal firewall update coincided with a DNS server upgrade, exhausting DNS capacity and severing microservices from checkout payment gateways.",
     whatHappened:
       "An internal firewall update coincided with a DNS server upgrade, exhausting DNS capacity and severing microservices from checkout payment gateways.",
-    withReprieve:
+    withInvarix:
       "Detects compound change collisions. Halts deployments when concurrent infrastructure updates intersect on shared resolution paths.",
     rules: ["Rule R4: Service Concentration", "Rule R6: High-Blast Wave"],
     color: "#0d0e1a",
@@ -95,7 +95,7 @@ export function CaseStudiesSection() {
         </h2>
         <p className="text-[1.05rem] text-zinc-300 leading-relaxed">
           Real-world engineering disasters from top tech companies. Here is how
-          Reprieve&apos;s deterministic graph rules intercept these failure modes
+          INVARIX&apos;s deterministic graph rules intercept these failure modes
           before code merges.
         </p>
       </div>

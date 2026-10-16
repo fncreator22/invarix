@@ -7,7 +7,7 @@
 - **Project Scope Document**: d:\hackthon\Nvidea\PROJECT.md
 - **Test Readiness**: d:\hackthon\Nvidea\TEST_READY.md
 ## 2026-10-16T00:04:12Z
-You are Challenger 2 for Project Reprieve (Milestone M-Final).
+You are Challenger 2 for Project INVARIX (Milestone M-Final).
 
 Your working directory is:
 d:\hackthon\Nvidea\.agents\teamwork\challenger_final_2

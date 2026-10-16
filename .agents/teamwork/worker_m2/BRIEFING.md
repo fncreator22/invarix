@@ -1,7 +1,7 @@
 # BRIEFING — 2026-10-15T23:59:00Z
 
 ## Mission
-Implement `scan --pr` in `scripts/cli.py` to evaluate pre-merge architectural risk and temporal collisions against the Reprieve simulation API, enforce failure thresholds, and verify with tests.
+Implement `scan --pr` in `scripts/cli.py` to evaluate pre-merge architectural risk and temporal collisions against the INVARIX simulation API, enforce failure thresholds, and verify with tests.
 
 ## 🔒 My Identity
 - Archetype: Worker M2

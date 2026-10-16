@@ -1,4 +1,4 @@
-# Orchestrator Completion Handoff Report — Project Reprieve
+# Orchestrator Completion Handoff Report — Project INVARIX
 
 - **Author**: Project Orchestrator (`orchestrator_1`)
 - **Roles**: orchestrator, user_liaison, human_reporter, successor
@@ -68,7 +68,7 @@
 
 ## 4. Conclusion
 
-Project Reprieve is fully built, hardened, and verified in strict accordance with all requirements and acceptance criteria in `ORIGINAL_REQUEST.md`. All gate criteria have passed unconditionally.
+Project INVARIX is fully built, hardened, and verified in strict accordance with all requirements and acceptance criteria in `ORIGINAL_REQUEST.md`. All gate criteria have passed unconditionally.
 
 ---
 

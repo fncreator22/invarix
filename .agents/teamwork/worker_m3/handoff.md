@@ -54,7 +54,7 @@ Note: Upstream explorer analysis referenced `frontend/components/marketing/featu
    Replaced unescaped apostrophe:
    ```tsx
    <p className="text-body-sm text-text-secondary">
-     Reprieve&apos;s pre-merge risk engine and MCP agent read your API key and target workspace from environment variables:
+     INVARIX&apos;s pre-merge risk engine and MCP agent read your API key and target workspace from environment variables:
    </p>
    ```
    *Result*: Eliminates `react/no-unescaped-entities` error at line 302.
@@ -70,7 +70,7 @@ Note: Upstream explorer analysis referenced `frontend/components/marketing/featu
    Deferred synchronous `setIsDismissed(true)` in `useEffect` using `queueMicrotask`:
    ```tsx
    useEffect(() => {
-     if (typeof window !== "undefined" && sessionStorage.getItem(`reprieve_dismiss_sample_${wsId}`) === "1") {
+     if (typeof window !== "undefined" && sessionStorage.getItem(`invarix_dismiss_sample_${wsId}`) === "1") {
        queueMicrotask(() => {
          setIsDismissed(true);
        });
@@ -125,7 +125,7 @@ Note: Upstream explorer analysis referenced `frontend/components/marketing/featu
 ## 2. Logic Chain
 
 1. In `frontend/eslint.config.mjs`, scripts located under `frontend/scripts/` are node-based build/test helper utilities using CommonJS `require()`. Adding `"scripts/**"` and `"public/**"` to `globalIgnores` instructs ESLint not to apply Next.js TypeScript rules to non-bundled scripts, genuinely fixing 6 errors without disabling the rule for app code.
-2. In JSX, unescaped `'` in `Reprieve's` and `"` in `""` violate the `react/no-unescaped-entities` rule. Replacing them with their standard HTML entity equivalents `&apos;` and `&quot;&quot;` preserves identical visual output while satisfying the lint rule.
+2. In JSX, unescaped `'` in `INVARIX's` and `"` in `""` violate the `react/no-unescaped-entities` rule. Replacing them with their standard HTML entity equivalents `&apos;` and `&quot;&quot;` preserves identical visual output while satisfying the lint rule.
 3. React 19's `react-hooks/set-state-in-effect` flag prevents synchronous `setState` in the top level of an effect body to avoid cascading re-renders. Wrapping state updates in `queueMicrotask` defers execution to the browser microtask queue, allowing the initial render cycle to settle before updating state, thereby strictly conforming to React 19 effect guidelines.
 4. With all 12 errors resolved, running `pnpm --dir frontend lint` exits 0 with 0 errors. Running `pnpm --dir frontend typecheck` confirms TypeScript type safety. Running `pnpm --dir frontend build` confirms successful Turbopack production compilation.
 

@@ -233,7 +233,7 @@ export default function Footer01() {
 
         <div className="mt-16 flex flex-col-reverse items-start justify-between gap-6 border-t border-white/[0.08] py-8 sm:flex-row sm:items-center">
           <div className="flex flex-col gap-3 text-xs text-zinc-400 sm:flex-row sm:items-center sm:gap-6 font-mono">
-            <span>© {new Date().getFullYear()} Reprieve, Inc. All rights reserved.</span>
+            <span>© {new Date().getFullYear()} INVARIX, Inc. All rights reserved.</span>
             <div className="inline-flex items-center gap-2 text-zinc-400">
               <SteadyStatusDot />
               <span>FalkorDB in-memory graph operational · 12ms</span>
@@ -270,7 +270,7 @@ export default function Footer01() {
             textAnchor="middle"
             className="font-mono font-bold tracking-tighter text-[120px]"
           >
-            REPRIEVE
+            INVARIX
           </text>
         </svg>
       </div>

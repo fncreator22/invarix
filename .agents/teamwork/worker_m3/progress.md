@@ -8,7 +8,7 @@ Last visited: 2026-10-15T23:18:30Z
 - [x] Implement fixes in owned files:
   - [x] `frontend/eslint.config.mjs`: Added `scripts/**` and `public/**` to `globalIgnores`
   - [x] `frontend/components/marketing/circuit-breaker-diff.tsx`: Escaped raw quotes `""` -> `&quot;&quot;`
-  - [x] `frontend/components/settings/api-keys-section.tsx`: Escaped apostrophe `Reprieve's` -> `Reprieve&apos;s`
+  - [x] `frontend/components/settings/api-keys-section.tsx`: Escaped apostrophe `INVARIX's` -> `INVARIX&apos;s`
   - [x] `frontend/components/shell/sample-banner.tsx`: Refactored `setIsDismissed` with `queueMicrotask`
   - [x] `frontend/components/graph/graph-explorer.tsx`: Refactored `setHorizonDays` and `setSelectedProofNode` with `queueMicrotask`
 - [x] Run verification:

@@ -2,7 +2,7 @@
 
 ## 2026-10-15T22:53:18Z
 
-Build and launch **Reprieve**: an autonomous agentic engine that turns fragmented software exceptions, security waivers, and technical debt overrides into a verifiable, tri-planar knowledge graph that detects cascading multi-service risk collisions before production deployment.
+Build and launch **INVARIX**: an autonomous agentic engine that turns fragmented software exceptions, security waivers, and technical debt overrides into a verifiable, tri-planar knowledge graph that detects cascading multi-service risk collisions before production deployment.
 
 Working directory: d:\hackthon\Nvidea
 Integrity mode: development
@@ -27,7 +27,7 @@ Wire the multi-agent swarm (Sentinel, Steward) to **Nebius Token Factory** endpo
 Integrate the `tavily_search_threat_intel` tool into the agent tool registry (`backend/app/agents/tools.py`) to query active in-the-wild exploits and EOL advisories for waived CVEs and third-party packages, qualifying for the Devpost $3,000 Tavily bounty.
 
 ### R5. Interactive UI & Pre-Merge CI Gate
-Deliver a high-fidelity Next.js 16 / React 19 interface with force-directed 2D/WebGL graph canvas, interactive Steward chat with SSE streaming, and a pre-merge CLI gate (`reprieve scan --pr`) that blocks risky pull requests in CI/CD.
+Deliver a high-fidelity Next.js 16 / React 19 interface with force-directed 2D/WebGL graph canvas, interactive Steward chat with SSE streaming, and a pre-merge CLI gate (`invarix scan --pr`) that blocks risky pull requests in CI/CD.
 
 ## Acceptance Criteria
 

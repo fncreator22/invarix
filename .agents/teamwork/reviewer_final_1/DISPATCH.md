@@ -2,7 +2,7 @@
 Sender: 9b0fddfb-514e-419c-b57c-ebbf64019604
 Priority: MESSAGE_PRIORITY_HIGH
 
-You are Reviewer 1 for Project Reprieve (Milestone M-Final).
+You are Reviewer 1 for Project INVARIX (Milestone M-Final).
 
 Your working directory is:
 d:\hackthon\Nvidea\.agents\teamwork\reviewer_final_1

@@ -1,8 +1,8 @@
-# 04 — User Flow and Screens: Reprieve
+# 04 — User Flow and Screens: INVARIX
 
 | Field | Value |
 | --- | --- |
-| **Product** | Reprieve — the exception debt agent |
+| **Product** | INVARIX — the exception debt agent |
 | **Version** | 1.0 (draft for build kickoff) |
 | **Date** | 2 Oct 2026 |
 | **Owner** | Solo founder / developer |
@@ -174,7 +174,7 @@ Each spec lists: **purpose, route, roles, requirements, layout regions, key acti
 | Section | Content |
 | --- | --- |
 | Nav | Logo, How it works, Features, FAQ, Sign in, **Get started** (primary) |
-| Hero | Headline "Individually reasonable exceptions add up to one unreasonable risk." Sub-line "Reprieve is the agent that sees the sum." Primary CTA **Explore with sample data**, secondary **Sign in**. Right side: **interactive mini-graph** where hovering a service lights up its stacked exceptions and a proof path draws across (reduced-motion: static highlighted path). |
+| Hero | Headline "Individually reasonable exceptions add up to one unreasonable risk." Sub-line "INVARIX is the agent that sees the sum." Primary CTA **Explore with sample data**, secondary **Sign in**. Right side: **interactive mini-graph** where hovering a service lights up its stacked exceptions and a proof path draws across (reduced-motion: static highlighted path). |
 | Problem | Three short cards: *Forgotten expiry*, *Ghost owner*, *Piling up on one service* |
 | How it works | 4 steps with small animations: Capture → Connect → Detect → Prove |
 | Feature highlights | Compound-risk detection, current-owner routing, proof paths, memory/precedent, human approval |

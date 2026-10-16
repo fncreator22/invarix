@@ -20,7 +20,8 @@ export interface ProjectData {
   lossFigure?: string;
   lossColor?: string;
   whatHappened?: string;
-  withReprieve?: string;
+  withInvarix?: string;
+  withINVARIX?: string;
   rules?: string[];
   articleImage?: string;
   borderClass?: string;
@@ -154,16 +155,16 @@ export const Card = ({
                         </p>
                       </div>
 
-                      {/* With Reprieve */}
+                      {/* With INVARIX */}
                       <div className="space-y-1">
                         <div className="flex items-center gap-1.5">
                           <ShieldCheck className="size-3 text-brand" aria-hidden="true" />
                           <span className="font-mono text-[10px] sm:text-[10.5px] font-bold uppercase tracking-wider text-brand">
-                            How Reprieve Prevents This
+                            How INVARIX Prevents This
                           </span>
                         </div>
                         <p className="text-[12px] sm:text-[13.5px] text-zinc-300 leading-snug sm:leading-relaxed">
-                          {project?.withReprieve}
+                          {project?.withInvarix || project?.withINVARIX}
                         </p>
                       </div>
 

@@ -1,7 +1,7 @@
 # BRIEFING — 2026-10-15T23:06:00Z
 
 ## Mission
-Investigate and survey the backend architecture, FalkorDB tri-planar graph, predictions, agent runtime, guardrails, and test suite of Project Reprieve.
+Investigate and survey the backend architecture, FalkorDB tri-planar graph, predictions, agent runtime, guardrails, and test suite of Project INVARIX.
 
 ## 🔒 My Identity
 - Archetype: explorer

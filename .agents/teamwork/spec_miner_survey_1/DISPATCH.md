@@ -15,7 +15,7 @@
 From: 9b0fddfb-514e-419c-b57c-ebbf64019604
 Priority: MESSAGE_PRIORITY_HIGH
 
-You are the Specification & Architecture Miner for Project Reprieve.
+You are the Specification & Architecture Miner for Project INVARIX.
 
 Your working directory is:
 d:\hackthon\Nvidea\.agents\teamwork\spec_miner_survey_1
@@ -33,7 +33,7 @@ d:\hackthon\Nvidea\JUDGING.md
 d:\hackthon\Nvidea\README.md
 
 OBJECTIVE:
-Conduct an exhaustive specification and requirements mining survey for Reprieve across all authoritative sources.
+Conduct an exhaustive specification and requirements mining survey for INVARIX across all authoritative sources.
 Specifically:
 1. Extract and map out all formal requirements (R1–R5), invariants (R1–R8 invariants), mathematical formulas (Avalanche Centrality AC(u)), models and endpoints (Nebius Token Factory, NVIDIA Nemotron 3.5 Lightning, Nemotron-3 Super 120b), Tavily threat intel tool specification, CLI scan options, and UI requirements.
 2. Cross-reference existing blueprint and documentation against the acceptance criteria.

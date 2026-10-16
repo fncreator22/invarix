@@ -35,13 +35,13 @@ export function CiGateShowcase({ open, onOpenChange }: CiGateShowcaseProps) {
   const [copied, setCopied] = useState(false);
 
   const copyYaml = () => {
-    const yaml = `name: Reprieve Pre-Merge Gate
+    const yaml = `name: INVARIX Pre-Merge Gate
 on:
   pull_request:
     branches: [main, master]
 
 jobs:
-  reprieve-audit:
+  invarix-audit:
     name: Evaluate Architectural Exception Debt
     runs-on: ubuntu-latest
     steps:
@@ -52,17 +52,17 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Run Reprieve AST Waiver Scan
+      - name: Run INVARIX AST Waiver Scan
         env:
-          REPRIEVE_API_KEY: \${{ secrets.REPRIEVE_API_KEY }}
-          REPRIEVE_WORKSPACE: \${{ secrets.REPRIEVE_WORKSPACE }}
+          INVARIX_API_KEY: \${{ secrets.INVARIX_API_KEY }}
+          INVARIX_WORKSPACE: \${{ secrets.INVARIX_WORKSPACE }}
         run: |
           python scripts/cli.py scan --dir . --submit
 
       - name: Enforce 30-Day Avalanche Circuit Breaker
         env:
-          REPRIEVE_API_KEY: \${{ secrets.REPRIEVE_API_KEY }}
-          REPRIEVE_WORKSPACE: \${{ secrets.REPRIEVE_WORKSPACE }}
+          INVARIX_API_KEY: \${{ secrets.INVARIX_API_KEY }}
+          INVARIX_WORKSPACE: \${{ secrets.INVARIX_WORKSPACE }}
         run: |
           python scripts/cli.py check --service payments_gateway --horizon 30 --fail-threshold 75.0`;
 
@@ -85,7 +85,7 @@ jobs:
             GitHub Action Pre-Merge Risk Gate &amp; PR Bot
           </DialogTitle>
           <DialogDescription className="text-body-sm text-text-secondary mt-1">
-            How Reprieve blocks dangerous waivers directly in GitHub pull requests before code merges to production.
+            How INVARIX blocks dangerous waivers directly in GitHub pull requests before code merges to production.
           </DialogDescription>
         </div>
 
@@ -105,7 +105,7 @@ jobs:
               </span>
             </div>
 
-            {/* Reprieve Bot Comment Body */}
+            {/* INVARIX Bot Comment Body */}
             <div className="p-5 space-y-4">
               <div className="flex items-center justify-between border-b border-border-subtle pb-3">
                 <div className="flex items-center gap-2.5">
@@ -113,7 +113,7 @@ jobs:
                     R
                   </div>
                   <div>
-                    <span className="font-semibold text-text-primary text-body-sm">reprieve-bot</span>
+                    <span className="font-semibold text-text-primary text-body-sm">invarix-bot</span>
                     <span className="rounded bg-sunken px-1.5 py-0.2 text-[10px] text-text-muted ml-2 font-mono">bot</span>
                     <span className="text-caption text-text-muted ml-2">commented 2 minutes ago</span>
                   </div>
@@ -185,7 +185,7 @@ jobs:
                 </div>
 
                 <div className="text-caption text-text-muted italic">
-                  To approve this waiver, link a Compensating Control or assign an active owner in Reprieve.
+                  To approve this waiver, link a Compensating Control or assign an active owner in INVARIX.
                 </div>
               </div>
             </div>
@@ -196,7 +196,7 @@ jobs:
             <div className="flex items-center justify-between">
               <h4 className="font-semibold text-body-sm text-text-primary flex items-center gap-2">
                 <GitCommit className="size-4 text-brand" />
-                Add to your repository: .github/workflows/reprieve-gate.yml
+                Add to your repository: .github/workflows/invarix-gate.yml
               </h4>
               <Button size="sm" variant="outline" onClick={copyYaml} className="gap-1.5">
                 {copied ? <Check className="size-3 text-brand" /> : <Copy className="size-3" />}
@@ -206,17 +206,17 @@ jobs:
 
             <div className="rounded-lg bg-sunken p-4 font-mono text-caption text-text-secondary border border-border-subtle overflow-x-auto">
               <pre className="text-[11px] leading-relaxed">
-{`name: Reprieve Pre-Merge Gate
+{`name: INVARIX Pre-Merge Gate
 on: [pull_request]
 jobs:
-  reprieve-audit:
+  invarix-audit:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Run Reprieve AST Scan & Risk Check
+      - name: Run INVARIX AST Scan & Risk Check
         env:
-          REPRIEVE_API_KEY: \${{ secrets.REPRIEVE_API_KEY }}
-          REPRIEVE_WORKSPACE: \${{ secrets.REPRIEVE_WORKSPACE }}
+          INVARIX_API_KEY: \${{ secrets.INVARIX_API_KEY }}
+          INVARIX_WORKSPACE: \${{ secrets.INVARIX_WORKSPACE }}
         run: |
           python scripts/cli.py scan --dir . --submit
           python scripts/cli.py check --service payments_gateway --fail-threshold 75.0`}
@@ -228,7 +228,7 @@ jobs:
         {/* Footer */}
         <div className="bg-surface-elevated border-t border-border-subtle p-4 flex items-center justify-between">
           <span className="text-caption text-text-muted">
-            CLI &amp; CI/CD Bridge Powered by Reprieve Engine
+            CLI &amp; CI/CD Bridge Powered by INVARIX Engine
           </span>
           <Button onClick={() => onOpenChange(false)}>
             Close

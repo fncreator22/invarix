@@ -1,7 +1,7 @@
 [project]
-name = "reprieve-backend"
+name = "invarix-backend"
 version = "0.1.0"
-description = "Reprieve: Graph-Native Risk Reasoning Engine powered by FalkorDB"
+description = "INVARIX: Graph-Native Risk Reasoning Engine powered by FalkorDB"
 requires-python = ">=3.11"
 dependencies = [
     "fastapi>=0.115.0",

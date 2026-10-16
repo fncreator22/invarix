@@ -4,12 +4,12 @@ import { useState } from "react";
 import { Terminal, Shield, Network, Zap, CheckCircle2, ChevronRight, Play } from "lucide-react";
 import { HeroGraph } from "@/components/marketing/hero-graph";
 import { Button } from "@/components/ui/button";
-import { REPRIEVE_VIDEOS } from "@/lib/videos";
+import { INVARIX_VIDEOS } from "@/lib/videos";
 import { cn } from "@/lib/utils";
 
 export function InteractiveDesktopStage() {
   const [mode, setMode] = useState<"graph" | "telemetry" | "film">("graph");
-  const video = REPRIEVE_VIDEOS.HERO_SHOWCASE;
+  const video = INVARIX_VIDEOS.HERO_SHOWCASE;
 
   return (
     <div className="relative mx-auto w-full max-w-[1240px]">
@@ -31,7 +31,7 @@ export function InteractiveDesktopStage() {
             </div>
             <div className="h-4 w-px bg-white/10 mx-1 hidden sm:block" />
             <span className="text-[12px] font-mono text-zinc-300 font-medium">
-              Reprieve Mission Control · payments-mesh.falkordb
+              INVARIX Mission Control · payments-mesh.falkordb
             </span>
           </div>
 

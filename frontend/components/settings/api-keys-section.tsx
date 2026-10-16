@@ -152,7 +152,7 @@ export function ApiKeysSection() {
             <Key className="mx-auto size-8 text-text-muted mb-2" />
             <h3 className="text-body font-medium">No API keys yet</h3>
             <p className="text-body-sm text-text-secondary mt-1 mb-4">
-              Generate an API key to connect the Reprieve CLI circuit breaker or Cursor / Claude MCP.
+              Generate an API key to connect the INVARIX CLI circuit breaker or Cursor / Claude MCP.
             </p>
             <Button variant="secondary" onClick={() => setCreateOpen(true)} className="gap-2">
               <Plus className="size-4" />
@@ -299,15 +299,15 @@ export function ApiKeysSection() {
           <span>Automation & CLI Environment Variables</span>
         </div>
         <p className="text-body-sm text-text-secondary">
-          Reprieve&apos;s pre-merge risk engine and MCP agent read your API key and target workspace from environment variables:
+          INVARIX&apos;s pre-merge risk engine and MCP agent read your API key and target workspace from environment variables:
         </p>
         <div className="rounded-md bg-bg-muted/80 p-3.5 font-mono text-body-sm space-y-1.5 border border-border-subtle overflow-x-auto">
           <div className="text-text-muted"># Linux / macOS / GitHub Actions CI:</div>
-          <div>export REPRIEVE_API_KEY=&quot;&lt;your-key&gt;&quot;</div>
-          <div>export REPRIEVE_WORKSPACE=&quot;{wsId}&quot;</div>
+          <div>export INVARIX_API_KEY=&quot;&lt;your-key&gt;&quot;</div>
+          <div>export INVARIX_WORKSPACE=&quot;{wsId}&quot;</div>
           <div className="text-text-muted mt-2"># Windows PowerShell:</div>
-          <div>$env:REPRIEVE_API_KEY=&quot;&lt;your-key&gt;&quot;</div>
-          <div>$env:REPRIEVE_WORKSPACE=&quot;{wsId}&quot;</div>
+          <div>$env:INVARIX_API_KEY=&quot;&lt;your-key&gt;&quot;</div>
+          <div>$env:INVARIX_WORKSPACE=&quot;{wsId}&quot;</div>
         </div>
       </section>
 
@@ -421,7 +421,7 @@ export function ApiKeysSection() {
             <div className="rounded-md border border-sev-critical-soft bg-sev-critical-soft/20 p-3 flex gap-2.5 items-start">
               <ShieldAlert className="size-4 text-sev-critical shrink-0 mt-0.5" />
               <p className="text-caption text-text-secondary">
-                Reprieve stores only a cryptographic SHA-256 hash of this key. If this key is lost, you must generate a new one. If leaked, revoke it immediately in the table below.
+                INVARIX stores only a cryptographic SHA-256 hash of this key. If this key is lost, you must generate a new one. If leaked, revoke it immediately in the table below.
               </p>
             </div>
 
@@ -451,11 +451,11 @@ export function ApiKeysSection() {
               </span>
               <div className="rounded-md bg-bg-muted p-3 font-mono text-caption text-text-secondary border border-border-subtle overflow-x-auto space-y-1">
                 <div className="text-[11px] text-text-muted"># Linux / macOS / GitHub Actions CI:</div>
-                <div>export REPRIEVE_API_KEY=&quot;{createdKey?.secret}&quot;</div>
-                <div>export REPRIEVE_WORKSPACE=&quot;{wsId}&quot;</div>
+                <div>export INVARIX_API_KEY=&quot;{createdKey?.secret}&quot;</div>
+                <div>export INVARIX_WORKSPACE=&quot;{wsId}&quot;</div>
                 <div className="text-[11px] text-text-muted pt-1"># Windows PowerShell:</div>
-                <div>$env:REPRIEVE_API_KEY=&quot;{createdKey?.secret}&quot;</div>
-                <div>$env:REPRIEVE_WORKSPACE=&quot;{wsId}&quot;</div>
+                <div>$env:INVARIX_API_KEY=&quot;{createdKey?.secret}&quot;</div>
+                <div>$env:INVARIX_WORKSPACE=&quot;{wsId}&quot;</div>
               </div>
             </div>
           </div>

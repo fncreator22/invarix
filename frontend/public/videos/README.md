@@ -1,6 +1,6 @@
-# Reprieve Video Registry & Asset Catalog
+# INVARIX Video Registry & Asset Catalog
 
-This directory contains production-ready motion graphics films and animated walkthroughs generated for Reprieve.
+This directory contains production-ready motion graphics films and animated walkthroughs generated for INVARIX.
 
 All videos are generated using the **`motionmaxxing`** headless DevTools CDP rendering pipeline with deterministic frame seeking, GSAP spring physics, and ffmpeg H.264/AAC muxing.
 
@@ -8,9 +8,9 @@ All videos are generated using the **`motionmaxxing`** headless DevTools CDP ren
 
 ## 📽️ Active Video Catalog
 
-### 1. `reprieve-hero-showcase.mp4` (Primary Hero Showcase)
+### 1. `invarix-hero-showcase.mp4` (Primary Hero Showcase)
 - **Designated ID:** `HERO_SHOWCASE`
-- **File:** `frontend/public/videos/reprieve-hero-showcase.mp4`
+- **File:** `frontend/public/videos/invarix-hero-showcase.mp4`
 - **Target Section:** Marketing Landing Page (`HeroShowreelSection`)
 - **Format:** MP4 (H.264 High Profile, AAC Stereo)
 - **Resolution:** 1920 × 1080 (1080p Full HD)
@@ -28,9 +28,9 @@ All videos are generated using the **`motionmaxxing`** headless DevTools CDP ren
 5. **Act 5: 16ms Deterministic Traversals (0:29 - 0:35)** — Sunflower Yellow clay card metric grid (16.0ms p95 latency, 5/5 planted scenarios verified, 0 false positives, 3 isolated FalkorDB graphs).
 6. **Act 6: Aurora Brand Climax (0:35 - 0:40)** — 3D Aurora ring mark assembly: *"Exceptions are approved one by one. Risk compounds all at once."*
 
-### 2. `reprieve-graph-intelligence-30s.mp4` (Internal Graph Intelligence)
+### 2. `invarix-graph-intelligence-30s.mp4` (Internal Graph Intelligence)
 - **Designated ID:** `GRAPH_INTELLIGENCE_30S`
-- **File:** `frontend/public/videos/reprieve-graph-intelligence-30s.mp4` (also at `film/reprieve-graph-intelligence-30s.mp4`)
+- **File:** `frontend/public/videos/invarix-graph-intelligence-30s.mp4` (also at `film/invarix-graph-intelligence-30s.mp4`)
 - **Target Section:** Technology / Context Engine Section (Background Loop or Interactive Explainer)
 - **Format:** MP4 (H.264 High Profile, AAC Stereo)
 - **Resolution:** 1920 × 1080 (1080p Full HD)
@@ -57,9 +57,9 @@ All videos are generated using the **`motionmaxxing`** headless DevTools CDP ren
 
 | Video ID | Proposed Filename | Target Section | Planned Duration | Focus Area |
 |---|---|---|---|---|
-| `AVALANCHE_CENTRALITY` | `reprieve-avalanche-demo.mp4` | Graph Explorer / Risk Page | 25s | Exponential blast radius formula $P = p_0^h$ on dependency cascade |
-| `GHOST_OWNER_REMEDIATION` | `reprieve-ghost-owner.mp4` | Alerts & Waivers Page | 20s | Autonomous detection and reassignment of departed staff waivers |
-| `MCP_AGENT_STEWARD` | `reprieve-mcp-steward.mp4` | Architecture & API Docs | 30s | External AI agents calling Reprieve's 14 read-only graph tools via MCP |
+| `AVALANCHE_CENTRALITY` | `invarix-avalanche-demo.mp4` | Graph Explorer / Risk Page | 25s | Exponential blast radius formula $P = p_0^h$ on dependency cascade |
+| `GHOST_OWNER_REMEDIATION` | `invarix-ghost-owner.mp4` | Alerts & Waivers Page | 20s | Autonomous detection and reassignment of departed staff waivers |
+| `MCP_AGENT_STEWARD` | `invarix-mcp-steward.mp4` | Architecture & API Docs | 30s | External AI agents calling INVARIX's 14 read-only graph tools via MCP |
 
 ---
 

@@ -1,6 +1,6 @@
-# Reprieve — Agent Guide
+# INVARIX — Agent Guide
 
-Reprieve exposes a set of read-only graph reasoning tools through two surfaces:
+INVARIX exposes a set of read-only graph reasoning tools through two surfaces:
 1. The **Steward** conversational agent (internal, streaming SSE via `/api/v1/workspaces/{ws_id}/chat`)
 2. The **MCP endpoint** (external, any MCP-compatible agent client via `/api/v1/workspaces/{ws_id}/mcp/tools`)
 

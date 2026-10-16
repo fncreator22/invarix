@@ -1,6 +1,6 @@
 # Agent Reasoning Invariants & MCP Specification
 
-Reprieve exposes its graph intelligence through the **Steward** conversational assistant and external **Model Context Protocol (MCP)** tool endpoints.
+INVARIX exposes its graph intelligence through the **Steward** conversational assistant and external **Model Context Protocol (MCP)** tool endpoints.
 
 ## Core Architectural Invariants
 

@@ -3,7 +3,7 @@ import { LegalPage } from "@/components/marketing/legal-page";
 
 export const metadata: Metadata = {
   title: "Cookie Policy",
-  description: "Explanation of cookies, local storage, and privacy tokens used by the Reprieve platform.",
+  description: "Explanation of cookies, local storage, and privacy tokens used by the INVARIX platform.",
 };
 
 export default function CookiesPage() {
@@ -13,7 +13,7 @@ export default function CookiesPage() {
       updated="11 October 2026"
       intro={
         <>
-          <strong>Zero Ad Tracking Guarantee:</strong> Reprieve does not use third-party advertising cookies,
+          <strong>Zero Ad Tracking Guarantee:</strong> INVARIX does not use third-party advertising cookies,
           behavioral tracking pixels, or cross-site tracking scripts. We only utilize strictly necessary authentication
           cookies and local storage keys essential to delivering the service.
         </>
@@ -41,7 +41,7 @@ export default function CookiesPage() {
           title: "Cookies & Storage Keys We Use",
           body: (
             <>
-              <p>Reprieve only sets strictly necessary first-party and essential service tokens:</p>
+              <p>INVARIX only sets strictly necessary first-party and essential service tokens:</p>
               <ul>
                 <li>
                   <strong className="font-mono text-xs">__session / __client_uat (Clerk):</strong> Strictly necessary
@@ -49,11 +49,11 @@ export default function CookiesPage() {
                   and verify cryptographic JSON Web Tokens (JWT).
                 </li>
                 <li>
-                  <strong className="font-mono text-xs">reprieve_workspace (Local Storage):</strong> Stores your currently
+                  <strong className="font-mono text-xs">invarix_workspace (Local Storage):</strong> Stores your currently
                   selected workspace identifier so you return directly to your active architecture graph without repeated picker prompts.
                 </li>
                 <li>
-                  <strong className="font-mono text-xs">reprieve_theme (Local Storage):</strong> Remembers your display preferences
+                  <strong className="font-mono text-xs">invarix_theme (Local Storage):</strong> Remembers your display preferences
                   (dark mode / light mode).
                 </li>
               </ul>
@@ -74,7 +74,7 @@ export default function CookiesPage() {
                 by the subscriber or user&quot; are legally exempt from the requirement for prior consent banners.
               </p>
               <p>
-                Because Reprieve operates with <strong>zero advertising networks, zero marketing pixels (e.g. Meta Pixel, Google Ads),
+                Because INVARIX operates with <strong>zero advertising networks, zero marketing pixels (e.g. Meta Pixel, Google Ads),
                 and zero third-party cross-site behavioral trackers</strong>, we are not required to disrupt your engineering workflow
                 with intrusive cookie consent popups.
               </p>
@@ -92,7 +92,7 @@ export default function CookiesPage() {
               </p>
               <p>
                 <em>Note:</em> Because the cookies we use are strictly necessary for authentication and multi-tenant security,
-                disabling all cookies in your browser will prevent you from signing in to the Reprieve dashboard.
+                disabling all cookies in your browser will prevent you from signing in to the INVARIX dashboard.
               </p>
             </>
           ),
@@ -104,8 +104,8 @@ export default function CookiesPage() {
             <>
               <p>
                 If you have questions regarding our use of cookies or tracking technologies, please contact our security team at{" "}
-                <a href="mailto:privacy@reprieve.dev" className="text-brand hover:underline font-mono">
-                  privacy@reprieve.dev
+                <a href="mailto:privacy@invarix.dev" className="text-brand hover:underline font-mono">
+                  privacy@invarix.dev
                 </a>.
               </p>
             </>

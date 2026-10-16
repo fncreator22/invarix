@@ -1,7 +1,7 @@
 # BRIEFING — 2026-10-16T00:39:00Z
 
 ## Mission
-Monitor and oversee the execution of Project Reprieve: autonomous agentic engine for tri-planar knowledge graph risk collision detection.
+Monitor and oversee the execution of Project INVARIX: autonomous agentic engine for tri-planar knowledge graph risk collision detection.
 
 ## 🔒 My Identity
 - Archetype: sentinel
@@ -16,7 +16,7 @@ Monitor and oversee the execution of Project Reprieve: autonomous agentic engine
 - Pre-flight audit: None required for General path
 
 ## User Context
-- **Last user request**: Build and launch Reprieve (Tri-Planar FalkorDB Graph, Invariants R1-R8, Avalanche Centrality, Nebius/Nemotron Agent Swarm, Tavily Threat Intel, Next.js 16 UI & CLI gate).
+- **Last user request**: Build and launch INVARIX (Tri-Planar FalkorDB Graph, Invariants R1-R8, Avalanche Centrality, Nebius/Nemotron Agent Swarm, Tavily Threat Intel, Next.js 16 UI & CLI gate).
 - **Pending clarifications**: none
 - **Delivered results**: Complete project delivered and verified; Victory Audit confirmed 100% pass across all requirements and acceptance criteria.
 

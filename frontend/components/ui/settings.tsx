@@ -62,7 +62,7 @@ export function SlackIcon({ className = 'size-5' }: { className?: string }) {
 
 export type DialogKey = 'cli' | 'three-graph' | 'rules' | 'post-mortems' | 'mcp' | 'github' | 'falkordb';
 
-export interface ReprieveFeature {
+export interface InvarixFeature {
    id: string;
    icon: React.ReactNode;
    title: string;
@@ -75,7 +75,7 @@ export interface ReprieveFeature {
    metric?: string;
 }
 
-export interface ReprieveIntegration {
+export interface InvarixIntegration {
    id: string;
    icon: React.ReactNode;
    title: string;
@@ -87,7 +87,7 @@ export interface ReprieveIntegration {
    dialogKey?: DialogKey;
 }
 
-export interface ReprieveGuide {
+export interface InvarixGuide {
    id: string;
    icon: React.ReactNode;
    title: string;
@@ -96,7 +96,7 @@ export interface ReprieveGuide {
    dialogKey: DialogKey;
 }
 
-export const REPRIEVE_FEATURES: ReprieveFeature[] = [
+export const INVARIX_FEATURES: InvarixFeature[] = [
    {
       id: 'avalanche',
       icon: <Network className="text-brand size-5" />,
@@ -171,7 +171,7 @@ export const REPRIEVE_FEATURES: ReprieveFeature[] = [
    },
 ];
 
-export const REPRIEVE_INTEGRATIONS: ReprieveIntegration[] = [
+export const INVARIX_INTEGRATIONS: InvarixIntegration[] = [
    {
       id: 'maileroo',
       icon: <Mail className="size-5 text-brand" />,
@@ -197,7 +197,7 @@ export const REPRIEVE_INTEGRATIONS: ReprieveIntegration[] = [
       icon: <SiGithub className="size-5 text-brand" />,
       title: 'GitHub Actions',
       category: 'Pre-Merge Gate',
-      description: '.github/workflows/reprieve.yml gate blocking PRs violating risk limits.',
+      description: '.github/workflows/invarix.yml gate blocking PRs violating risk limits.',
       status: 'ready',
       actionLabel: 'View YAML',
       dialogKey: 'github',
@@ -217,7 +217,7 @@ export const REPRIEVE_INTEGRATIONS: ReprieveIntegration[] = [
       icon: <Cpu className="size-5 text-brand" />,
       title: 'Model Context Protocol (MCP)',
       category: 'IDE Intelligence',
-      description: 'Connect Cursor, Claude Desktop, and VS Code directly to your Reprieve graph reasoning tools.',
+      description: 'Connect Cursor, Claude Desktop, and VS Code directly to your INVARIX graph reasoning tools.',
       status: 'configured',
       actionLabel: 'View Config',
       dialogKey: 'mcp',
@@ -234,12 +234,12 @@ export const REPRIEVE_INTEGRATIONS: ReprieveIntegration[] = [
    },
 ];
 
-export const REPRIEVE_GUIDES: ReprieveGuide[] = [
+export const INVARIX_GUIDES: InvarixGuide[] = [
    {
       id: 'cli-guide',
       icon: <Terminal className="size-5 text-brand" />,
       title: 'Zero-Login CLI Quickstart',
-      description: 'Run npx reprieve scan --strict locally in under 15ms without credentials or accounts.',
+      description: 'Run npx invarix scan --strict locally in under 15ms without credentials or accounts.',
       tag: 'CLI Tool',
       dialogKey: 'cli',
    },
@@ -343,7 +343,7 @@ export function SettingsWorkspaceHub({
 
    return (
       <div className="w-full text-text-primary transition-colors duration-300">
-         {/* Top Banner with Reprieve Logo */}
+         {/* Top Banner with INVARIX Logo */}
          <div className="rounded-xl border border-border-subtle bg-surface/60 p-6 mb-8">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                <div className="flex items-start gap-3.5">
@@ -611,14 +611,14 @@ export function SettingsWorkspaceHub({
                <div>
                   <h2 className="font-sans text-h3 font-semibold">Explore Features</h2>
                   <p className="text-caption text-text-muted mt-0.5">
-                     Verified graph reasoning and architectural risk prevention engines implemented in Reprieve.
+                     Verified graph reasoning and architectural risk prevention engines implemented in INVARIX.
                   </p>
                </div>
                <span className="font-mono text-[11px] text-text-muted">6 Core Engines</span>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-               {REPRIEVE_FEATURES.map((feature) => (
+               {INVARIX_FEATURES.map((feature) => (
                   <div
                      key={feature.id}
                      className="rounded-lg border border-border-subtle bg-surface p-4 flex flex-col justify-between hover:border-brand/40 transition-colors"
@@ -686,7 +686,7 @@ export function SettingsWorkspaceHub({
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-               {REPRIEVE_INTEGRATIONS.map((integration) => (
+               {INVARIX_INTEGRATIONS.map((integration) => (
                   <div
                      key={integration.id}
                      className="rounded-lg border border-border-subtle bg-surface p-4 flex flex-col justify-between hover:border-brand/40 transition-colors"
@@ -753,7 +753,7 @@ export function SettingsWorkspaceHub({
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-               {REPRIEVE_GUIDES.map((guide) => (
+               {INVARIX_GUIDES.map((guide) => (
                   <div
                      key={guide.id}
                      onClick={() => setActiveDialog(guide.dialogKey)}
@@ -969,7 +969,7 @@ export function SettingsWorkspaceHub({
                      Incident Post-Mortems Archive
                   </DialogTitle>
                   <DialogDescription>
-                     Real-world engineering disasters modeled as Reprieve graph failure paths, with verified links to official post-incident reviews (PIRs).
+                     Real-world engineering disasters modeled as INVARIX graph failure paths, with verified links to official post-incident reviews (PIRs).
                   </DialogDescription>
                </DialogHeader>
                <div className="space-y-3 pt-3">
@@ -994,7 +994,7 @@ export function SettingsWorkspaceHub({
                         </a>
                      </div>
                      <p className="text-caption text-text-secondary">
-                        Content update bypassed canary rollout, triggering kernel panics; Reprieve pre-merge AST scanner forces phased rollout gates on root dependencies.
+                        Content update bypassed canary rollout, triggering kernel panics; INVARIX pre-merge AST scanner forces phased rollout gates on root dependencies.
                      </p>
                   </div>
 
@@ -1019,7 +1019,7 @@ export function SettingsWorkspaceHub({
                         </a>
                      </div>
                      <p className="text-caption text-text-secondary">
-                        Firewall update coincided with DNS upgrade, severing payment gateways; Reprieve detects compound infrastructure change collisions.
+                        Firewall update coincided with DNS upgrade, severing payment gateways; INVARIX detects compound infrastructure change collisions.
                      </p>
                   </div>
 
@@ -1044,7 +1044,7 @@ export function SettingsWorkspaceHub({
                         </a>
                      </div>
                      <p className="text-caption text-text-secondary">
-                        Legacy Citrix portal lacked MFA from an unmonitored merger exception; Reprieve Sentinel flags unowned assets and broken compensating controls.
+                        Legacy Citrix portal lacked MFA from an unmonitored merger exception; INVARIX Sentinel flags unowned assets and broken compensating controls.
                      </p>
                   </div>
 
@@ -1069,7 +1069,7 @@ export function SettingsWorkspaceHub({
                         </a>
                      </div>
                      <p className="text-caption text-text-secondary">
-                        Dead code flag re-enabled dormant test code executing millions of unintended market orders; Reprieve halts retired flags bound to inactive owners.
+                        Dead code flag re-enabled dormant test code executing millions of unintended market orders; INVARIX halts retired flags bound to inactive owners.
                      </p>
                   </div>
 
@@ -1094,7 +1094,7 @@ export function SettingsWorkspaceHub({
                         </a>
                      </div>
                      <p className="text-caption text-text-secondary">
-                        Backup verification temporarily disabled during replication lag; Reprieve flags zero compensating controls during degraded primary operations.
+                        Backup verification temporarily disabled during replication lag; INVARIX flags zero compensating controls during degraded primary operations.
                      </p>
                   </div>
                </div>
@@ -1116,18 +1116,18 @@ export function SettingsWorkspaceHub({
                <div className="space-y-3 pt-3">
                   <div className="relative bg-surface-sunken border border-border-subtle p-3 font-mono text-xs overflow-x-auto">
                      <pre className="text-text-secondary">
-{`name: Reprieve Invariant Gate
+{`name: INVARIX Invariant Gate
 on: [pull_request]
 
 jobs:
-  reprieve-gate:
+  invarix-gate:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - name: Run Zero-Login AST Scanner
-        run: npx reprieve scan --strict
+        run: npx invarix scan --strict
       - name: Verify Blast Radius Limit
-        run: npx reprieve gate --max-avalanche=0.75`}
+        run: npx invarix gate --max-avalanche=0.75`}
                      </pre>
                      <Button
                         variant="secondary"
@@ -1135,7 +1135,7 @@ jobs:
                         className="absolute top-2 right-2 h-7 px-2"
                         onClick={() =>
                            copyToClipboard(
-                              `name: Reprieve Invariant Gate\non: [pull_request]\n\njobs:\n  reprieve-gate:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - name: Run Zero-Login AST Scanner\n        run: npx reprieve scan --strict\n      - name: Verify Blast Radius Limit\n        run: npx reprieve gate --max-avalanche=0.75`,
+                              `name: INVARIX Invariant Gate\non: [pull_request]\n\njobs:\n  invarix-gate:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - name: Run Zero-Login AST Scanner\n        run: npx invarix scan --strict\n      - name: Verify Blast Radius Limit\n        run: npx invarix gate --max-avalanche=0.75`,
                               'yaml'
                            )
                         }
@@ -1156,7 +1156,7 @@ jobs:
                      Model Context Protocol (MCP) Configuration
                   </DialogTitle>
                   <DialogDescription>
-                     Add Reprieve as an MCP server in Cursor, Claude Desktop, or Claude Code.
+                     Add INVARIX as an MCP server in Cursor, Claude Desktop, or Claude Code.
                   </DialogDescription>
                </DialogHeader>
                <div className="space-y-3 pt-3">
@@ -1164,11 +1164,11 @@ jobs:
                      <pre className="text-text-secondary">
 {`{
   "mcpServers": {
-    "reprieve": {
+    "invarix": {
       "command": "npx",
       "args": [
         "-y",
-        "reprieve",
+        "invarix",
         "mcp",
         "--workspace=${slug ?? 'your-workspace-slug'}"
       ]
@@ -1185,9 +1185,9 @@ jobs:
                               JSON.stringify(
                                  {
                                     mcpServers: {
-                                       reprieve: {
+                                       invarix: {
                                           command: 'npx',
-                                          args: ['-y', 'reprieve', 'mcp', `--workspace=${slug ?? 'your-workspace-slug'}`],
+                                          args: ['-y', 'invarix', 'mcp', `--workspace=${slug ?? 'your-workspace-slug'}`],
                                        },
                                     },
                                  },

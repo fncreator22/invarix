@@ -11,7 +11,7 @@
   - `TEST_READY.md`
 
 ## 2026-10-15T23:09:52Z
-[Message] timestamp=2026-10-15T23:09:52Z sender=9b0fddfb-514e-419c-b57c-ebbf64019604 priority=MESSAGE_PRIORITY_HIGH content=You are the E2E Test Writer for Project Reprieve.
+[Message] timestamp=2026-10-15T23:09:52Z sender=9b0fddfb-514e-419c-b57c-ebbf64019604 priority=MESSAGE_PRIORITY_HIGH content=You are the E2E Test Writer for Project INVARIX.
 
 Your working directory is:
 d:\hackthon\Nvidea\.agents\teamwork\test_writer_e2e

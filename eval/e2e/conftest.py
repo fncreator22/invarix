@@ -1,4 +1,4 @@
-"""Shared test configuration, fixtures, and graph isolation for Reprieve E2E tests."""
+"""Shared test configuration, fixtures, and graph isolation for INVARIX E2E tests."""
 
 import os
 import sys

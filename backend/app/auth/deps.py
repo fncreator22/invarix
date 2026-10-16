@@ -88,7 +88,7 @@ async def current_user(
                 if s.dev_auth:
                     if s.env_name not in ("local", "test") or s.env_name == "production":
                         raise ApiError("UNAUTHENTICATED", "dev_auth key rejected in non-local environment.")
-                    claims = Claims("cli_machine", "cli@reprieve.local", True, "Reprieve CLI")
+                    claims = Claims("cli_machine", "cli@invarix.local", True, "INVARIX CLI")
                 else:
                     raise ApiError("UNAUTHENTICATED", "Invalid or unknown API key.")
             else:
@@ -143,7 +143,7 @@ async def current_user(
 
             creator_id = k.get("created_by") or f"usr_{k['id']}"
             u_name = f"API Key ({k.get('name', 'Automation')})"
-            u_email = "api@reprieve.local"
+            u_email = "api@invarix.local"
             if k.get("created_by"):
                 u_rows = await platform.read("p_user_get", user_id=k["created_by"])
                 if u_rows:

@@ -1,7 +1,7 @@
 # BRIEFING — 2026-10-16T00:10:00Z
 
 ## Mission
-Perform comprehensive Forensic Integrity Audit on Project Reprieve (Milestone M-Final).
+Perform comprehensive Forensic Integrity Audit on Project INVARIX (Milestone M-Final).
 
 ## 🔒 My Identity
 - Archetype: forensic_auditor
@@ -22,7 +22,7 @@ Perform comprehensive Forensic Integrity Audit on Project Reprieve (Milestone M-
 - Updated: 2026-10-16T00:04:12Z
 
 ## Audit Scope
-- Work product: Project Reprieve (backend/app/, scripts/cli.py, eval/e2e/, graph queries, guard.py, llm.py, config.py)
+- Work product: Project INVARIX (backend/app/, scripts/cli.py, eval/e2e/, graph queries, guard.py, llm.py, config.py)
 - Profile loaded: General Project
 - Audit type: forensic integrity check
 

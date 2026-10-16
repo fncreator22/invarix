@@ -12,7 +12,7 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
         className="pointer-events-none absolute -top-40 -right-40 size-[520px] rounded-full bg-aurora opacity-[var(--aurora-mesh-opacity)] blur-3xl"
       />
       <Prewarm />
-      <Link href="/" aria-label="Reprieve home" className="relative mb-8 rounded-md">
+      <Link href="/" aria-label="INVARIX home" className="relative mb-8 rounded-md">
         <Logo />
       </Link>
       <main id="main" className="relative flex w-full max-w-[400px] flex-1 flex-col items-center">

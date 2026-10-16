@@ -1,5 +1,5 @@
 /**
- * Reprieve Demo Smoke Tests
+ * INVARIX Demo Smoke Tests
  *
  * Tests the critical demo path end-to-end. Run these before every live demo.
  * Based on the e2e-testing-patterns skill structure.

@@ -13,7 +13,7 @@ export function McpBanner() {
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
-    if (typeof window !== "undefined" && sessionStorage.getItem(`reprieve_dismiss_mcp_${wsId}`) === "1") {
+    if (typeof window !== "undefined" && sessionStorage.getItem(`invarix_dismiss_mcp_${wsId}`) === "1") {
       queueMicrotask(() => {
         setIsDismissed(true);
       });
@@ -39,7 +39,7 @@ export function McpBanner() {
   const handleCopyClaudeConfig = async () => {
     const config = {
       mcpServers: {
-        reprieve: {
+        invarix: {
           url: fullEndpointUrl,
           headers: {
             Authorization: "Bearer <YOUR_CLERK_TOKEN_OR_API_KEY>",
@@ -58,7 +58,7 @@ export function McpBanner() {
   const handleDismiss = () => {
     setIsDismissed(true);
     if (typeof window !== "undefined") {
-      sessionStorage.setItem(`reprieve_dismiss_mcp_${wsId}`, "1");
+      sessionStorage.setItem(`invarix_dismiss_mcp_${wsId}`, "1");
     }
   };
 

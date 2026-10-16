@@ -3,17 +3,17 @@ import { LegalPage } from "@/components/marketing/legal-page";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
-  description: "How Reprieve collects, processes, and protects your architectural graph data and personal information.",
+  description: "How INVARIX collects, processes, and protects your architectural graph data and personal information.",
 };
 
 export default function PrivacyPage() {
   return (
     <LegalPage
       title="Privacy Policy"
-      updated="11 October 2026"
+      updated="16 October 2026"
       intro={
         <>
-          <strong>Commitment to Data Sovereignty:</strong> Reprieve is built on the principle of minimal data extraction.
+          <strong>Commitment to Data Sovereignty:</strong> INVARIX is built on the principle of minimal data extraction.
           We process only the architectural metadata and exception records required to compute graph blast radiuses and
           temporal collisions. We never sell your data, and we enforce a strict <strong>Zero Model Training</strong> guarantee
           across all AI subprocessors.
@@ -26,15 +26,15 @@ export default function PrivacyPage() {
           body: (
             <>
               <p>
-                Reprieve Inc. (&quot;Reprieve&quot;, &quot;we&quot;, &quot;us&quot;, or &quot;our&quot;) is the data controller
+                INVARIX Inc. (&quot;INVARIX&quot;, &quot;we&quot;, &quot;us&quot;, or &quot;our&quot;) is the data controller
                 responsible for your personal data and architectural metadata under the EU General Data Protection Regulation
                 (GDPR), UK GDPR, and California Consumer Privacy Act (CCPA/CPRA).
               </p>
               <p>
                 If you have any questions regarding this Privacy Policy, your data protection rights, or our security practices,
                 contact our Data Protection Team at{" "}
-                <a href="mailto:privacy@reprieve.dev" className="text-brand hover:underline font-mono">
-                  privacy@reprieve.dev
+                <a href="mailto:privacy@invarix.dev" className="text-brand hover:underline font-mono">
+                  privacy@invarix.dev
                 </a>.
               </p>
             </>
@@ -45,7 +45,7 @@ export default function PrivacyPage() {
           title: "What User Data We Collect",
           body: (
             <>
-              <p>We collect and process the following categories of data when you access Reprieve:</p>
+              <p>We collect and process the following categories of data when you access INVARIX:</p>
               <ul>
                 <li>
                   <strong>Identity &amp; Account Data:</strong> Your name, work email address, and authentication identifiers
@@ -103,7 +103,7 @@ export default function PrivacyPage() {
           body: (
             <>
               <p>
-                Reprieve incorporates the Steward agent for natural language graph exploration. We enforce strict architectural boundaries:
+                INVARIX incorporates the Steward agent for natural language graph exploration. We enforce strict architectural boundaries:
               </p>
               <ul>
                 <li>
@@ -111,7 +111,7 @@ export default function PrivacyPage() {
                   purely by deterministic Cypher graph algorithms, never by probabilistic LLMs.
                 </li>
                 <li>
-                  <strong>Zero Foundation Model Training:</strong> Neither Reprieve nor our AI infrastructure partners (e.g., Google Cloud Vertex AI, OpenAI)
+                  <strong>Zero Foundation Model Training:</strong> Neither INVARIX nor our AI infrastructure partners (e.g., Google Cloud Vertex AI, OpenAI)
                   use your workspace data, exceptions, queries, or Steward conversations to train, evaluate, or fine-tune public AI models.
                 </li>
                 <li>
@@ -160,8 +160,8 @@ export default function PrivacyPage() {
                   <strong>Request Deletion (Right to Erasure):</strong> You can delete any workspace immediately via Workspace Settings,
                   which permanently flushes all related tenant graphs (<code className="font-mono text-xs">org_*</code> and <code className="font-mono text-xs">mem_*</code>).
                   To request complete deletion of your user identity across all systems, email{" "}
-                  <a href="mailto:privacy@reprieve.dev" className="text-brand hover:underline font-mono">
-                    privacy@reprieve.dev
+                  <a href="mailto:privacy@invarix.dev" className="text-brand hover:underline font-mono">
+                    privacy@invarix.dev
                   </a>.
                 </li>
                 <li>
@@ -184,7 +184,7 @@ export default function PrivacyPage() {
           body: (
             <>
               <p>
-                We enforce defense-in-depth security measures across the Reprieve stack:
+                We enforce defense-in-depth security measures across the INVARIX stack:
               </p>
               <ul>
                 <li>

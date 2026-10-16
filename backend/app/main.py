@@ -27,7 +27,7 @@ async def lifespan(app: FastAPI) -> AsyncIterator[None]:
     await close_db()
 
 
-app = FastAPI(title="Reprieve API", version="0.1.0", lifespan=lifespan)
+app = FastAPI(title="INVARIX API", version="0.1.0", lifespan=lifespan)
 errors.install(app)
 app.add_middleware(
     CORSMiddleware,

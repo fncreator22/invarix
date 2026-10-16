@@ -62,7 +62,7 @@ class Settings(BaseSettings):
     maileroo_api_key: str = ""
     resend_api_key: str = ""
     tavily_api_key: str = ""
-    email_from: str = "Reprieve <alerts@reprieve.app>"
+    email_from: str = "INVARIX <alerts@invarix.app>"
     sentry_dsn: str = ""
 
     # Simulated "today" for sample workspaces (epoch seconds): 17 Oct 2026 00:00 UTC.

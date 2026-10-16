@@ -2,7 +2,7 @@
 Sender: 9b0fddfb-514e-419c-b57c-ebbf64019604
 Priority: MESSAGE_PRIORITY_HIGH
 
-You are the Forensic Integrity Auditor for Project Reprieve (Milestone M-Final).
+You are the Forensic Integrity Auditor for Project INVARIX (Milestone M-Final).
 
 Your working directory is:
 d:\hackthon\Nvidea\.agents\teamwork\auditor_final_1

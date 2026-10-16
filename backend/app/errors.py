@@ -67,7 +67,7 @@ def problem(
 ) -> JSONResponse:
     status = STATUS[code]
     body: dict[str, Any] = {
-        "type": f"https://reprieve.app/errors/{code.lower().replace('_', '-')}",
+        "type": f"https://invarix.app/errors/{code.lower().replace('_', '-')}",
         "title": TITLES[code],
         "status": status,
         "detail": detail,

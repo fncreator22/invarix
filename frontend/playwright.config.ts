@@ -1,7 +1,7 @@
 import { defineConfig, devices } from "@playwright/test";
 
 /**
- * Playwright smoke test configuration for Reprieve.
+ * Playwright smoke test configuration for INVARIX.
  * Run: npx playwright test --config=playwright.config.ts
  *
  * Install: pnpm add -D @playwright/test && npx playwright install chromium

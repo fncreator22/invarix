@@ -159,8 +159,8 @@ export function BookCallModal({ open, onOpenChange }: BookCallModalProps) {
                 <p>
                   No production credentials required. We collect your contact details solely to coordinate this technical audit.
                   Your information is never sold or shared. To request data deletion or correction, email{" "}
-                  <a href="mailto:privacy@reprieve.dev" className="text-text-primary hover:underline">
-                    privacy@reprieve.dev
+                  <a href="mailto:privacy@invarix.dev" className="text-text-primary hover:underline">
+                    privacy@invarix.dev
                   </a>.
                 </p>
               </div>
@@ -183,7 +183,7 @@ export function BookCallModal({ open, onOpenChange }: BookCallModalProps) {
                   <Link href="/privacy" target="_blank" className="text-brand hover:underline">
                     Privacy Policy
                   </Link>
-                  . I consent to Reprieve contacting me to schedule this 15-minute architecture audit.
+                  . I consent to INVARIX contacting me to schedule this 15-minute architecture audit.
                 </label>
               </div>
 

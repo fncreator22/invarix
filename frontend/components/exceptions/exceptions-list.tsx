@@ -132,7 +132,7 @@ export function ExceptionsList() {
       ) : q.isError ? (
         <p className="text-text-secondary">{errorMessage(q.error)}</p>
       ) : items.length === 0 ? (
-        <EmptyState icon={FileWarning} title="No exceptions match" description="Add one, or paste a ticket or chat thread and let Reprieve draft it." />
+        <EmptyState icon={FileWarning} title="No exceptions match" description="Add one, or paste a ticket or chat thread and let INVARIX draft it." />
       ) : (
         <div className="card-e1 overflow-x-auto">
           <table className="w-full min-w-[720px] text-body-sm">

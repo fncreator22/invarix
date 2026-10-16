@@ -1,8 +1,8 @@
-# 05 — UI/UX Design Brief: Reprieve
+# 05 — UI/UX Design Brief: INVARIX
 
 | Field | Value |
 | --- | --- |
-| **Product** | Reprieve — the exception debt agent |
+| **Product** | INVARIX — the exception debt agent |
 | **Version** | 1.0 (draft for build kickoff) |
 | **Date** | 2 Oct 2026 |
 | **Owner** | Solo founder / developer |
@@ -15,7 +15,7 @@
 
 ## 1. Purpose and design principles
 
-This brief defines **how Reprieve looks, feels, and behaves**: theme, color, type, icons, layout, spacing, components, navigation, overlays, feedback, and motion. It is the single reference for building `globals.css`, the shadcn theme, and every product component.
+This brief defines **how INVARIX looks, feels, and behaves**: theme, color, type, icons, layout, spacing, components, navigation, overlays, feedback, and motion. It is the single reference for building `globals.css`, the shadcn theme, and every product component.
 
 ### 1.1 Design principles (each maps to a product principle in PRD §4)
 
@@ -33,7 +33,7 @@ This brief defines **how Reprieve looks, feels, and behaves**: theme, color, typ
 
 **Clear. Precise. Quietly confident.** Like a good incident commander: calm under pressure, shows its work, never shouts. Visual references: modern developer and security tooling (restrained dark surfaces, crisp type, luminous accents), editorial clarity for marketing. Avoid: neon-cyberpunk "hacker" looks, red-everywhere alarmism, stock photography, cartoon mascots.
 
-**Name meaning.** *Reprieve* is "a temporary stay". The logo mark and motion language echo a **pause that is easy to forget**: a ring that is not quite closed.
+**Name meaning.** *INVARIX* is "a temporary stay". The logo mark and motion language echo a **pause that is easy to forget**: a ring that is not quite closed.
 
 ---
 
@@ -584,7 +584,7 @@ Centered card (400 px) over a calm canvas with a faint aurora glow in one corner
 
 ### 14.4 Logo and favicon
 
-Wordmark "Reprieve" in Bricolage 700. Mark: a ring with a small gap and a single node at the gap end (a "pause"). Mono and aurora versions; favicon is the ring on `--bg-canvas`. OG image: dark, headline, mark, aurora glow (1200x630).
+Wordmark "INVARIX" in Bricolage 700. Mark: a ring with a small gap and a single node at the gap end (a "pause"). Mono and aurora versions; favicon is the ring on `--bg-canvas`. OG image: dark, headline, mark, aurora glow (1200x630).
 
 ---
 

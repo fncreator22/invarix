@@ -12,7 +12,7 @@ interface ShellState {
 }
 
 const ShellContext = createContext<ShellState | null>(null);
-const RAIL_KEY = "reprieve:rail-collapsed";
+const RAIL_KEY = "invarix:rail-collapsed";
 
 export function ShellProvider({ children }: { children: ReactNode }) {
   const [railCollapsed, setRailCollapsed] = useState(false);

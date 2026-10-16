@@ -1,4 +1,4 @@
-# Reprieve / INVARIX — Production Admin Platform & Pricing Architecture Plan
+# INVARIX / INVARIX — Production Admin Platform & Pricing Architecture Plan
 
 > **Status:** Architecture Blueprint & Implementation Specification  
 > **Author:** Principal Systems & Security Architect  
@@ -8,7 +8,7 @@
 
 ## 1. Executive Summary & Problem Statement
 
-Reprieve currently enforces workspace-level security and isolation through a three-graph FalkorDB model (`platform_<prefix>`, `org_<ws_id>`, `mem_<ws_id>`). While workspace admins can manage their own members and run Sentinel risk scans, **the platform lacks a centralized SuperAdmin Control Plane**, a **tiered B2B billing engine**, and an **admin-driven notification broadcast system**.
+INVARIX currently enforces workspace-level security and isolation through a three-graph FalkorDB model (`platform_<prefix>`, `org_<ws_id>`, `mem_<ws_id>`). While workspace admins can manage their own members and run Sentinel risk scans, **the platform lacks a centralized SuperAdmin Control Plane**, a **tiered B2B billing engine**, and an **admin-driven notification broadcast system**.
 
 In a production enterprise SaaS environment, operators require:
 1. **Cross-Tenant Administration**: Managing all users, organizations, and workspaces from a centralized console.
@@ -22,7 +22,7 @@ In a production enterprise SaaS environment, operators require:
 ## 2. Multi-Tenant Architecture & Data Isolation
 
 ### 2.1 The Three-Graph Isolation Invariant
-Reprieve isolates tenants at the database engine level in FalkorDB:
+INVARIX isolates tenants at the database engine level in FalkorDB:
 
 | Graph Identifier | Scope | Data Types Stored | Access Boundary |
 |---|---|---|---|

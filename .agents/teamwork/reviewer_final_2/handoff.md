@@ -13,7 +13,7 @@
 
 **Verdict**: **APPROVE**
 
-The frontend and CLI gate implementations for Project Reprieve meet all functional requirements, interaction contracts, and quality standards outlined in `ORIGINAL_REQUEST.md`, `PROJECT.md`, and `TEST_READY.md`. No regressions, integrity violations, or bypassing facade patterns were found.
+The frontend and CLI gate implementations for Project INVARIX meet all functional requirements, interaction contracts, and quality standards outlined in `ORIGINAL_REQUEST.md`, `PROJECT.md`, and `TEST_READY.md`. No regressions, integrity violations, or bypassing facade patterns were found.
 
 ---
 
@@ -27,7 +27,7 @@ The frontend and CLI gate implementations for Project Reprieve meet all function
    - Command: `python scripts/cli.py scan --pr`
    - Exit code: `1`
    - Verbatim Output Observed:
-     - Header: `REPRIEVE PRE-MERGE GATE · PULL REQUEST ARCHITECTURAL RISK REPORT`
+     - Header: `INVARIX PRE-MERGE GATE · PULL REQUEST ARCHITECTURAL RISK REPORT`
      - Source bypass scan: `Found 28 implicit waivers in source code diff`
      - Target Services Table: `svc_payments_gateway` (Score: 88.5, Band: `CRITICAL`, SPOF: `Rank #1`, Cascade: `84.0%`), `svc_checkout_api` (Score: 76.2, Band: `CRITICAL`, SPOF: `Rank #2`, Cascade: `72.0%`), `svc_ledger_service` (`MODERATE`), `svc_auth_cache` (`LOW`).
      - SPOF Identifications: `Rank #1: svc_payments_gateway`, `Rank #2: svc_checkout_api`.

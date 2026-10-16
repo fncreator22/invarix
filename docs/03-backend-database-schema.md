@@ -806,7 +806,7 @@ FastAPI dependency chain: `current_user` (verify JWT) → `current_membership(ws
 ### 10.6 Errors
 
 ```json
-{"type": "https://reprieve.app/errors/version-conflict", "title": "Version conflict", "status": 409,
+{"type": "https://invarix.app/errors/version-conflict", "title": "Version conflict", "status": 409,
  "detail": "Exception exc_01H… changed since you loaded it.", "code": "VERSION_CONFLICT",
  "request_id": "req_…", "errors": [{"field": "expires_at", "message": "Must be after granted_at"}]}
 ```

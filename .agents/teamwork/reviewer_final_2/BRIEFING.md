@@ -1,7 +1,7 @@
 # BRIEFING — 2026-10-16T00:10:00Z
 
 ## Mission
-Independently review the frontend and CLI gate implementations for Project Reprieve (Milestone M-Final), verify test suites, audit visual/interaction contracts, and stress-test failure modes.
+Independently review the frontend and CLI gate implementations for Project INVARIX (Milestone M-Final), verify test suites, audit visual/interaction contracts, and stress-test failure modes.
 
 ## 🔒 My Identity
 - Archetype: reviewer_critic

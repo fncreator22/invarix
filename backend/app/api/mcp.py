@@ -1,7 +1,7 @@
-"""MCP tool endpoint — exposes Reprieve's graph tools to any MCP-compatible client.
+"""MCP tool endpoint — exposes INVARIX's graph tools to any MCP-compatible client.
 
 This follows the Model Context Protocol (MCP) tool-call convention so external
-agents (Claude, Cursor, Copilot) can call Reprieve's prediction, proof-path, and
+agents (Claude, Cursor, Copilot) can call INVARIX's prediction, proof-path, and
 risk tools directly from their own sessions.
 
 Endpoints:
@@ -30,7 +30,7 @@ class ToolCallBody(BaseModel):
 
 @router.get("/tools", summary="List available MCP tools")
 async def list_mcp_tools(ctx: WorkspaceContext = Depends(viewer)) -> dict[str, Any]:
-    """Return all Reprieve tools in MCP tool-list format.
+    """Return all INVARIX tools in MCP tool-list format.
 
     Compatible with Claude Desktop, Cursor, and any MCP-aware agent that can
     POST to /mcp/tools/{name} with a JSON body.
@@ -47,13 +47,13 @@ async def list_mcp_tools(ctx: WorkspaceContext = Depends(viewer)) -> dict[str, A
     }
 
 
-@router.post("/tools/{tool_name}", summary="Call a Reprieve tool via MCP")
+@router.post("/tools/{tool_name}", summary="Call a INVARIX tool via MCP")
 async def call_mcp_tool(
     tool_name: str,
     body: dict[str, Any],
     ctx: WorkspaceContext = Depends(viewer),
 ) -> dict[str, Any]:
-    """Execute a Reprieve tool and return the result in MCP content format.
+    """Execute a INVARIX tool and return the result in MCP content format.
 
     The body is passed directly to the tool's Pydantic argument model.
     Errors are returned as MCP-compatible error content (isError=True).

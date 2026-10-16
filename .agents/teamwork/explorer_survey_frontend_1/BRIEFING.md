@@ -1,7 +1,7 @@
 # BRIEFING — 2026-10-15T23:07:00Z
 
 ## Mission
-Investigate current frontend, CLI, and integration state of Project Reprieve and synthesize findings into handoff report.
+Investigate current frontend, CLI, and integration state of Project INVARIX and synthesize findings into handoff report.
 
 ## 🔒 My Identity
 - Archetype: explorer
@@ -29,7 +29,7 @@ Investigate current frontend, CLI, and integration state of Project Reprieve and
 - **Key findings**:
   - Frontend: Next.js 16.3.8 & React 19.2.8. `react-force-graph-2d` 2D/WebGL canvas with animated pulsating risk halos, link directional particles, GSAP-driven proof path progression, temporal slider (0/7/30/90d), and node details drawer. Steward chat UI connected via SSE (`POST /api/v1/workspaces/{ws_id}/chat/sessions/{session_id}/messages`).
   - Frontend build: `typecheck` passed (0 errors). `next build` passed (Turbopack, 33 routes static/dynamic). `eslint` failed (84 problems: 12 errors, 72 warnings) due to JSX unescaped entities, direct setState in effect, and CommonJS require in scripts.
-  - CLI: `reprieve scan --pr` is NOT implemented. `scripts/cli.py` has `check` and `scan`, but `scan` does not recognize `--pr` (`error: unrecognized arguments: --pr`), nor does it run PR simulation or output risk bands/SPOF ranks.
+  - CLI: `invarix scan --pr` is NOT implemented. `scripts/cli.py` has `check` and `scan`, but `scan` does not recognize `--pr` (`error: unrecognized arguments: --pr`), nor does it run PR simulation or output risk bands/SPOF ranks.
   - Backend integration: FastAPI and FalkorDB containers are active (`webdev-hackthon-api-1`, `webdev-hackthon-falkordb-1`); `/health` returns `{"status":"ok"}`. Prediction and MCP endpoints are fully implemented and verified by 54 passing pytest tests. Seed file `data/seed/threads/hostile_thread.txt` is missing causing `test_ingest.py` collection failure.
 - **Unexplored areas**: None for survey scope.
 

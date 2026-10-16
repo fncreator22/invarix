@@ -318,7 +318,7 @@ export function GraphExplorer() {
                 <strong>Causal Proof Paths:</strong> Trace the shortest paths between skipped tests, security waivers, and payments services.
               </li>
               <li>
-                <strong>Automated Code Scanning:</strong> Run <code className="font-mono text-caption bg-surface-subtle px-1.5 py-0.5 rounded border border-border-subtle">reprieve scan .</code> in your codebase to attach your services automatically.
+                <strong>Automated Code Scanning:</strong> Run <code className="font-mono text-caption bg-surface-subtle px-1.5 py-0.5 rounded border border-border-subtle">invarix scan .</code> in your codebase to attach your services automatically.
               </li>
             </ul>
           </div>

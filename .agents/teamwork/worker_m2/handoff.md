@@ -15,9 +15,9 @@
 1. In `scripts/cli.py` (prior to changes):
    - Command `python scripts/cli.py scan --pr` returned:
      ```
-     usage: reprieve [-h] [--api-url API_URL] [--api-key API_KEY] [-w WORKSPACE]
+     usage: invarix [-h] [--api-url API_URL] [--api-key API_KEY] [-w WORKSPACE]
                      {check,scan,mcp-config,mcp-bridge} ...
-     reprieve: error: unrecognized arguments: --pr
+     invarix: error: unrecognized arguments: --pr
      ```
    - In `scan_p` (lines 355–363), only `-d/--dir`, `--submit`, and `--auto-approve` arguments existed; `--pr` was missing.
    - Subcommand `check` existed and queried `/api/v1/workspaces/{ws_id}/prediction/simulation?horizon_days={horizon}`, but `cmd_scan` only executed static regex file searching without architectural simulation integration.
@@ -66,10 +66,10 @@
 ### 1.3 Verbatim Terminal Verification Output
 Executing `python scripts/cli.py scan --pr`:
 ```
-▶ Reprieve Autonomous Scanner: Scanning D:\hackthon\Nvidea...
+▶ INVARIX Autonomous Scanner: Scanning D:\hackthon\Nvidea...
 
 ================================================================================
-REPRIEVE PRE-MERGE GATE · PULL REQUEST ARCHITECTURAL RISK REPORT
+INVARIX PRE-MERGE GATE · PULL REQUEST ARCHITECTURAL RISK REPORT
 ================================================================================
 
 Found 28 implicit waivers in source code diff:
@@ -89,7 +89,7 @@ Found 28 implicit waivers in source code diff:
   Sliding Horizon:  +30 days
   Fail Threshold:   Score >= 75.0 or SPOF Critical Risk
 
-  (Notice: Reprieve API unseeded/offline; using architectural simulation fallback)
+  (Notice: INVARIX API unseeded/offline; using architectural simulation fallback)
 
 Target Services Evaluated:
   ------------------------------------------------------------------------------------

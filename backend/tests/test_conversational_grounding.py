@@ -310,7 +310,7 @@ async def test_adversarial_unmodeled_entity_refusal_response(live_ws, monkeypatc
             "done",
             text=(
                 "Refusal: The entity 'Azure SQL Database in Frankfurt' is not present in "
-                "the verified FalkorDB graph state. Reprieve only reasons over verified graph evidence."
+                "the verified FalkorDB graph state. INVARIX only reasons over verified graph evidence."
             ),
             model="stub-evaluator",
             usage={"prompt_tokens": 15, "completion_tokens": 25, "total_tokens": 40},

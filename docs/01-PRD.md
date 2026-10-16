@@ -1,13 +1,13 @@
-# 01 — Product Requirements Document: Reprieve
+# 01 — Product Requirements Document: INVARIX
 
 | Field | Value |
 | --- | --- |
-| **Product** | Reprieve — the exception debt agent (working title; rename freely) |
+| **Product** | INVARIX — the exception debt agent (working title; rename freely) |
 | **Version** | 1.0 (draft for build kickoff) |
 | **Date** | 2 Oct 2026 |
 | **Owner** | Solo founder / developer |
 | **Status** | Ready to build |
-| **Source** | `Reprieve__Exception_Debt_Agent__Full_Project_Blueprint.md` (v1.0), extended from a hackathon spec into a real-product spec |
+| **Source** | `INVARIX__Exception_Debt_Agent__Full_Project_Blueprint.md` (v1.0), extended from a hackathon spec into a real-product spec |
 | **Companion docs** | `02-tech-stack.md`, `03-backend-database-schema.md`, `04-user-flow-and-screens.md`, `05-ui-ux-design-brief.md`, `06-implementation-plan.md` |
 
 ---
@@ -15,10 +15,10 @@
 ## 1. Overview
 
 ### 1.1 One-line pitch
-*Individually reasonable exceptions add up to one unreasonable risk. Reprieve is the agent that sees the sum.*
+*Individually reasonable exceptions add up to one unreasonable risk. INVARIX is the agent that sees the sum.*
 
 ### 1.2 What it is
-Reprieve is a web product that models every temporary exception an organization grants (security waivers, feature-flag overrides, skipped tests, cost-limit extensions, manual data-export permissions, emergency changes) as a **promise in a graph**: it has an owner, an expiry, a compensating control, and the services it touches.
+INVARIX is a web product that models every temporary exception an organization grants (security waivers, feature-flag overrides, skipped tests, cost-limit extensions, manual data-export permissions, emergency changes) as a **promise in a graph**: it has an owner, an expiry, a compensating control, and the services it touches.
 
 An AI agent then does what a flat exception register cannot:
 
@@ -435,7 +435,7 @@ As of an early-October 2026 scan (not exhaustive):
 - Compliance automation (Vanta, Drata) monitors standard controls; exception accumulation is not their headline.
 - "Context graph" thinking captures why decisions were made; the open gap is when a past decision stops being valid.
 
-**Positioning statement:** *Existing tools track exceptions individually; Reprieve focuses on how they compound.* Never claim "no one does this."
+**Positioning statement:** *Existing tools track exceptions individually; INVARIX focuses on how they compound.* Never claim "no one does this."
 
 ---
 

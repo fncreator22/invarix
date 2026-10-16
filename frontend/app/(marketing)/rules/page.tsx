@@ -7,8 +7,8 @@ import { Reveal } from "@/components/marketing/reveal";
 import { CLERK_ENABLED } from "@/lib/auth-config";
 
 export const metadata: Metadata = {
-  title: "Compound Risk Detection Rules · Reprieve",
-  description: "Explore the 8 deterministic Cypher graph traversal rules (R1-R8) powering Reprieve's exception risk detection engine.",
+  title: "Compound Risk Detection Rules · INVARIX",
+  description: "Explore the 8 deterministic Cypher graph traversal rules (R1-R8) powering INVARIX's exception risk detection engine.",
 };
 
 interface RuleDetail {
@@ -185,7 +185,7 @@ export default function RulesPage() {
               The 8 Compound Risk Rules
             </h1>
             <p className="mt-4 text-body-lg text-text-secondary">
-              Reprieve does not ask an LLM to guess security risk. Our Sentinel engine runs deterministic,
+              INVARIX does not ask an LLM to guess security risk. Our Sentinel engine runs deterministic,
               parameterized Cypher queries across your service and ownership graph in sub-20ms.
             </p>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-3">

@@ -24,8 +24,8 @@ const NODES: N[] = [
   { id: "e3", label: "Exception", name: "Flag override", severity: 3, story: "A kill switch forced off during a migration. Renewed three times: temporary is becoming permanent." },
   { id: "e4", label: "Exception", name: "Key rotation", severity: 4, story: "Key rotation deferred. Its owner left in August, so nobody is reviewing it." },
   { id: "team", label: "Team", name: "Payments", story: "The Payments team owns payments-core. Its current lead is who the review should go to." },
-  { id: "per", label: "Person", name: "Owner (left)", story: "Recorded owner of the key-rotation waiver. Left the company; Reprieve reroutes the review to the team lead." },
-  { id: "ctl", label: "Control", name: "Encrypt in transit", story: "The control the TLS waiver switches off. Reprieve weights exceptions by how important the waived control is." },
+  { id: "per", label: "Person", name: "Owner (left)", story: "Recorded owner of the key-rotation waiver. Left the company; INVARIX reroutes the review to the team lead." },
+  { id: "ctl", label: "Control", name: "Encrypt in transit", story: "The control the TLS waiver switches off. INVARIX weights exceptions by how important the waived control is." },
   { id: "cc", label: "CompensatingControl", name: "Manual review", story: "Three exceptions rely on the same person's manual review. If they are out, all three mitigations fail at once." },
 ];
 const LINKS: L[] = [

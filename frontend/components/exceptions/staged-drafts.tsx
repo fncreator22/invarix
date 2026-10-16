@@ -59,7 +59,7 @@ export function StagedDrafts() {
 
   return (
     <PageContainer>
-      <PageHeader title="Capture from text" subtitle="Paste a ticket or chat thread. Reprieve drafts the exception; a reviewer approves it." />
+      <PageHeader title="Capture from text" subtitle="Paste a ticket or chat thread. INVARIX drafts the exception; a reviewer approves it." />
       <section className="card-e1 space-y-3 p-5" aria-label="Paste text">
         <label htmlFor="paste" className="font-medium">
           Ticket or chat thread

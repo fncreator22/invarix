@@ -1,4 +1,4 @@
-/* Reprieve design tokens (docs/05 §3, §12.2). The only place raw colors live, with lib/tokens.ts. */
+/* INVARIX design tokens (docs/05 §3, §12.2). The only place raw colors live, with lib/tokens.ts. */
 @import "tailwindcss";
 @import "tw-animate-css";
 @custom-variant dark (&:where(.dark, .dark *));

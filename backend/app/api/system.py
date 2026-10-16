@@ -29,7 +29,7 @@ def _internal(secret: str | None) -> None:
 
 @router.get("/health")
 async def health() -> dict[str, str]:
-    return {"status": "ok", "service": "reprieve-backend", "engine": "falkordb"}
+    return {"status": "ok", "service": "invarix-backend", "engine": "falkordb"}
 
 
 @router.get("/internal/health/deep")

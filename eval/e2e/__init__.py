@@ -1,4 +1,4 @@
-"""Reprieve End-to-End (E2E) Test Suite.
+"""INVARIX End-to-End (E2E) Test Suite.
 
 Comprehensive, opaque-box, requirement-driven test verification covering:
 - Tier 1: Feature Coverage (R1–R5)

@@ -15,7 +15,7 @@ interface CommandMenuModalProps {
 }
 
 /**
- * Linear-style Command Palette (`Cmd+K`) simulating Reprieve's Steward Agent.
+ * Linear-style Command Palette (`Cmd+K`) simulating INVARIX's Steward Agent.
  * Features instant backdrop blur, keyboard shortcuts, and agent reasoning actions.
  * Adapted from `reference-library/linear-product-landing-dark/analysis/sections/07-command-menu-shortcuts.md`.
  */

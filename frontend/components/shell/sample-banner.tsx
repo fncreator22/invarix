@@ -29,7 +29,7 @@ export function SampleBanner() {
   const [isDismissed, setIsDismissed] = useState(false);
 
   useEffect(() => {
-    if (typeof window !== "undefined" && sessionStorage.getItem(`reprieve_dismiss_sample_${wsId}`) === "1") {
+    if (typeof window !== "undefined" && sessionStorage.getItem(`invarix_dismiss_sample_${wsId}`) === "1") {
       queueMicrotask(() => {
         setIsDismissed(true);
       });
@@ -39,7 +39,7 @@ export function SampleBanner() {
   const handleDismiss = () => {
     setIsDismissed(true);
     if (typeof window !== "undefined") {
-      sessionStorage.setItem(`reprieve_dismiss_sample_${wsId}`, "1");
+      sessionStorage.setItem(`invarix_dismiss_sample_${wsId}`, "1");
     }
   };
 

@@ -1,7 +1,7 @@
 # BRIEFING — 2026-10-15T23:36:00Z
 
 ## Mission
-Design, implement, and validate a comprehensive opaque-box E2E test suite in `eval/e2e/` verifying all user requirements (R1–R5), edge cases, cross-feature flows, and real-world Northwind dataset scenarios for Project Reprieve. Deliver `eval/e2e/`, `TEST_INFRA.md`, and `TEST_READY.md`.
+Design, implement, and validate a comprehensive opaque-box E2E test suite in `eval/e2e/` verifying all user requirements (R1–R5), edge cases, cross-feature flows, and real-world Northwind dataset scenarios for Project INVARIX. Deliver `eval/e2e/`, `TEST_INFRA.md`, and `TEST_READY.md`.
 
 ## 🔒 My Identity
 - Archetype: specialist, qa

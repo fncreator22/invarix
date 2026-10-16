@@ -1,7 +1,7 @@
 # BRIEFING — 2026-10-15T23:25:00Z
 
 ## Mission
-Conduct an exhaustive specification and requirements mining survey for Project Reprieve across all authoritative sources.
+Conduct an exhaustive specification and requirements mining survey for Project INVARIX across all authoritative sources.
 
 ## 🔒 My Identity
 - Archetype: specification-miner

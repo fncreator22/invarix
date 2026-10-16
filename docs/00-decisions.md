@@ -7,7 +7,7 @@
 | 2 Oct 2026 | **No blueprint exists.** The seed specification that `06` T-013 attributes to "blueprint §15" is defined in `07-seed-spec.md`. |
 
 | 2 Oct 2026 | **UI libraries (owner's choice), on top of shadcn/ui:** GSAP (scroll and sequence animation; now free incl. plugins, so 02 §4.1's licensing objection no longer applies), Lenis (smooth scroll, marketing pages only, never inside app scroll containers), React Bits (copy-in components via the shadcn registry), LottieFiles (`@lottiefiles/dotlottie-react` for empty states and illustrations). Each is added when the first component needs it; `prefers-reduced-motion` disables all of them. `motion` stays for small UI transitions. |
-| 2 Oct 2026 | **Repository:** GitHub `fncreator22/Reprieve-full-stack` is the main repository. Local root checkout `/Users/sst/conductor/repos/wemakedevs-hackathon` (`main`) is kept fast-forwarded to the working branch; pushing waits for collaborator access. |
+| 2 Oct 2026 | **Repository:** GitHub `fncreator22/INVARIX-full-stack` is the main repository. Local root checkout `/Users/sst/conductor/repos/wemakedevs-hackathon` (`main`) is kept fast-forwarded to the working branch; pushing waits for collaborator access. |
 
 ## Fixes applied to the documents
 

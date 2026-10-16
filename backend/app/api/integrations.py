@@ -68,7 +68,7 @@ async def update_integrations(
             # Retain secret if sent as mask or blank
             if k == "webhooks" and "secret" in v:
                 if not v["secret"] or "••••" in v["secret"]:
-                    v["secret"] = updated["webhooks"].get("secret", "whsec_reprieve_demo_token")
+                    v["secret"] = updated["webhooks"].get("secret", "whsec_invarix_demo_token")
             # Retain Slack token if sent as mask
             if k == "slack" and "webhook_url" in v:
                 if "••••" in v["webhook_url"]:

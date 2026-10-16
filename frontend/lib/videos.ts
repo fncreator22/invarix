@@ -78,14 +78,14 @@ export const INVARIX_VIDEOS: Record<string, ProductVideo> = {
   },
   GRAPH_INTELLIGENCE_30S: {
     id: "graph-intelligence-30s",
-    name: "Reprieve Graph Intelligence (30s Technical Deep-Dive)",
-    filename: "reprieve-graph-intelligence-30s.mp4",
-    path: "/videos/reprieve-graph-intelligence-30s.mp4",
+    name: "INVARIX Graph Intelligence (30s Technical Deep-Dive)",
+    filename: "invarix-graph-intelligence-30s.mp4",
+    path: "/videos/invarix-graph-intelligence-30s.mp4",
     durationSeconds: 30.0,
     fps: 30,
     resolution: "1920x1080",
     theme: "tactile-light",
-    title: "Reprieve — Internal Graph Intelligence & Autonomous Reasoning",
+    title: "INVARIX — Internal Graph Intelligence & Autonomous Reasoning",
     subtitle: "30-Second High-Velocity Technical Deep-Dive Film",
     targetSection: "Technology / Context Engine Section (Background Loop or Interactive Explainer)",
     acts: [
@@ -102,5 +102,3 @@ export const INVARIX_VIDEOS: Record<string, ProductVideo> = {
     ],
   },
 };
-
-export const REPRIEVE_VIDEOS = INVARIX_VIDEOS;

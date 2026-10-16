@@ -1,4 +1,4 @@
-# TEST_READY — Reprieve E2E Test Suite Ready
+# TEST_READY — INVARIX E2E Test Suite Ready
 
 **Date**: 2026-10-15T23:35:00Z  
 **Author**: E2E Test Writer (`test_writer_e2e`)  
@@ -23,7 +23,7 @@ uv run --directory backend python -m pytest ../eval/e2e/ -v -o asyncio_mode=auto
 Expected output:
 ```
 ================================================================================
-Reprieve Autonomous Cascading Risk Engine — E2E Test Suite
+INVARIX Autonomous Cascading Risk Engine — E2E Test Suite
 Verifying FalkorDB Tri-Planar Graph, Avalanche Centrality, Nebius & Pre-Merge Gate
 ================================================================================
 

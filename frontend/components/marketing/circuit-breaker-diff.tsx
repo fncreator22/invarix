@@ -73,7 +73,7 @@ export function CircuitBreakerDiff() {
           </div>
         </div>
 
-        {/* Right Column: Reprieve Automated CI Check & Shortest Proof Path */}
+        {/* Right Column: INVARIX Automated CI Check & Shortest Proof Path */}
         <div className="lg:col-span-6 p-4 sm:p-5 flex flex-col justify-between bg-[#0e0f12]">
           <div>
             <div className="flex items-center justify-between pb-3 border-b border-white/[0.04]">
@@ -82,7 +82,7 @@ export function CircuitBreakerDiff() {
                   ✕
                 </span>
                 <span className="text-[13px] font-semibold text-zinc-200">
-                  Reprieve Circuit Breaker Bot
+                  INVARIX Circuit Breaker Bot
                 </span>
               </div>
               <span className="text-[11px] font-mono text-zinc-500">14 seconds ago</span>
@@ -118,7 +118,7 @@ export function CircuitBreakerDiff() {
           <div className="mt-5 flex items-center justify-between rounded-lg border border-white/[0.06] bg-[#121316] px-3.5 py-2">
             <span className="text-[12px] text-zinc-400">Action Required:</span>
             <span className="text-[12px] font-mono font-medium text-brand">
-              Add `reprieve-waiver: exc_xyz` or revert
+              Add `invarix-waiver: exc_xyz` or revert
             </span>
           </div>
         </div>

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Reprieve CLI — The Autonomous Pre-Merge Risk Engine for Connected Architectures.
+INVARIX CLI — The Autonomous Pre-Merge Risk Engine for Connected Architectures.
 Provides zero-login terminal commands for CI/CD pipelines, pre-commit hooks, and developer terminals.
 """
 
@@ -23,9 +23,9 @@ YELLOW = "\033[93m"
 CYAN = "\033[96m"
 DIM = "\033[2m"
 
-DEFAULT_API_URL = os.environ.get("REPRIEVE_API_URL", "http://localhost:8000")
-DEFAULT_API_KEY = os.environ.get("REPRIEVE_API_KEY", "rep_live_local")
-DEFAULT_WS_ID = os.environ.get("REPRIEVE_WORKSPACE", "ws_01m4kk3bkc65abxckx2kyes57p")
+DEFAULT_API_URL = os.environ.get("INVARIX_API_URL", "http://localhost:8000")
+DEFAULT_API_KEY = os.environ.get("INVARIX_API_KEY", "rep_live_local")
+DEFAULT_WS_ID = os.environ.get("INVARIX_WORKSPACE", "ws_01m4kk3bkc65abxckx2kyes57p")
 
 
 def _api_call(url: str, method: str = "GET", data: dict | None = None, api_key: str = DEFAULT_API_KEY) -> dict:
@@ -65,7 +65,7 @@ def cmd_check(args: argparse.Namespace) -> int:
     horizon = args.horizon
     target_service = args.service
 
-    print(f"\n{BOLD}{CYAN}▶ Reprieve Circuit Breaker: Checking Architectural Risk...{RESET}")
+    print(f"\n{BOLD}{CYAN}▶ INVARIX Circuit Breaker: Checking Architectural Risk...{RESET}")
     print(f"  {DIM}Target Workspace:{RESET} {ws_id}")
     print(f"  {DIM}Target Service:{RESET}   {target_service or 'ALL (Global Mesh)'}")
     print(f"  {DIM}Sliding Horizon:{RESET}  +{horizon} days\n")
@@ -75,7 +75,7 @@ def cmd_check(args: argparse.Namespace) -> int:
 
     if "error" in result or "code" in result or result.get("status", 200) >= 400:
         err_msg = result.get("detail") or result.get("error") or result.get("code") or "Unknown error"
-        print(f"{RED}❌ Error reaching Reprieve API:{RESET} {err_msg}")
+        print(f"{RED}❌ Error reaching INVARIX API:{RESET} {err_msg}")
         return 2
 
     services = result.get("services") or result.get("avalanche_centrality") or []
@@ -267,7 +267,7 @@ def _get_mock_simulation(target_service: str | None = None) -> tuple[list[dict],
 def cmd_scan(args: argparse.Namespace) -> int:
     """Scans local source files for temporary waivers, #nosec annotations, and skipped tests."""
     target_dir = Path(args.dir)
-    print(f"\n{BOLD}{CYAN}▶ Reprieve Autonomous Scanner: Scanning {target_dir.resolve()}...{RESET}")
+    print(f"\n{BOLD}{CYAN}▶ INVARIX Autonomous Scanner: Scanning {target_dir.resolve()}...{RESET}")
 
     patterns = [
         re.compile(r"#\s*(?:nosec|noqa|skip|hotfix)\b[:\s]*(.*)", re.IGNORECASE),
@@ -298,7 +298,7 @@ def cmd_scan(args: argparse.Namespace) -> int:
 
     if getattr(args, "pr", False):
         print(f"\n{BOLD}{CYAN}================================================================================{RESET}")
-        print(f"{BOLD}{CYAN}REPRIEVE PRE-MERGE GATE · PULL REQUEST ARCHITECTURAL RISK REPORT{RESET}")
+        print(f"{BOLD}{CYAN}INVARIX PRE-MERGE GATE · PULL REQUEST ARCHITECTURAL RISK REPORT{RESET}")
         print(f"{BOLD}{CYAN}================================================================================{RESET}")
 
         if found_waivers:
@@ -335,7 +335,7 @@ def cmd_scan(args: argparse.Namespace) -> int:
             collisions = result.get("temporal_collisions") or result.get("collisions") or []
 
         if not services:
-            print(f"{DIM}  (Notice: Reprieve API unseeded/offline; using architectural simulation fallback){RESET}\n")
+            print(f"{DIM}  (Notice: INVARIX API unseeded/offline; using architectural simulation fallback){RESET}\n")
             services, collisions = _get_mock_simulation(target_service=target_service)
 
         matched_services = [
@@ -477,11 +477,11 @@ def cmd_scan(args: argparse.Namespace) -> int:
     if args.submit:
         api_url = args.api_url.rstrip("/")
         ws_id = args.workspace
-        print(f"\n{BOLD}Submitting waivers to Reprieve Autonomous Ingestion Pipeline...{RESET}")
+        print(f"\n{BOLD}Submitting waivers to INVARIX Autonomous Ingestion Pipeline...{RESET}")
         summary_text = "\n".join([f"Bypass at {p}:{l}: {d}" for p, l, d in found_waivers[:5]])
         ingest_payload = {
             "text": f"Autonomous CLI scan found {len(found_waivers)} temporary code waivers in commit:\n{summary_text}",
-            "source_ref": "reprieve-cli:scan",
+            "source_ref": "invarix-cli:scan",
         }
         resp = _api_call(f"{api_url}/api/v1/workspaces/{ws_id}/exceptions/ingest-text", method="POST", data=ingest_payload, api_key=args.api_key)
         if "error" in resp or "code" in resp or resp.get("status", 200) >= 400:
@@ -535,7 +535,7 @@ def cmd_mcp_bridge(args: argparse.Namespace) -> int:
                 "result": {
                     "protocolVersion": "2024-11-05",
                     "capabilities": {"tools": {}},
-                    "serverInfo": {"name": "reprieve", "version": "0.1.0"},
+                    "serverInfo": {"name": "invarix", "version": "0.1.0"},
                 },
             }
             sys.stdout.write(json.dumps(resp) + "\n")
@@ -604,7 +604,7 @@ def cmd_mcp_config(args: argparse.Namespace) -> int:
     api_key = args.api_key
     config = {
         "mcpServers": {
-            "reprieve": {
+            "invarix": {
                 "command": "python",
                 "args": [
                     str(Path(__file__).resolve()),
@@ -615,9 +615,9 @@ def cmd_mcp_config(args: argparse.Namespace) -> int:
                     api_url,
                 ],
                 "env": {
-                    "REPRIEVE_API_KEY": api_key,
-                    "REPRIEVE_WORKSPACE": ws_id,
-                    "REPRIEVE_API_URL": api_url,
+                    "INVARIX_API_KEY": api_key,
+                    "INVARIX_WORKSPACE": ws_id,
+                    "INVARIX_API_URL": api_url,
                 },
             }
         }
@@ -630,13 +630,13 @@ def cmd_mcp_config(args: argparse.Namespace) -> int:
 
 def main() -> int:
     parent_parser = argparse.ArgumentParser(add_help=False)
-    parent_parser.add_argument("--api-url", default=DEFAULT_API_URL, help="Reprieve API base URL")
-    parent_parser.add_argument("--api-key", default=DEFAULT_API_KEY, help="Reprieve Machine API Key")
+    parent_parser.add_argument("--api-url", default=DEFAULT_API_URL, help="INVARIX API base URL")
+    parent_parser.add_argument("--api-key", default=DEFAULT_API_KEY, help="INVARIX Machine API Key")
     parent_parser.add_argument("-w", "--workspace", default=DEFAULT_WS_ID, help="Workspace ID or slug")
 
     parser = argparse.ArgumentParser(
-        prog="reprieve",
-        description="Reprieve CLI: Continuous Pre-Merge Architectural Risk Gate",
+        prog="invarix",
+        description="INVARIX CLI: Continuous Pre-Merge Architectural Risk Gate",
         parents=[parent_parser],
     )
 

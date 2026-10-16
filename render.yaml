@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: reprieve-backend
+    name: invarix-backend
     runtime: docker
     dockerfilePath: Dockerfile
     plan: free

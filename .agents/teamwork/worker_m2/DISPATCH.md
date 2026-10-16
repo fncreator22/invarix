@@ -1,5 +1,5 @@
 ## 2026-10-15T23:44:20Z
-You are Worker M2 for Project Reprieve.
+You are Worker M2 for Project INVARIX.
 
 Your working directory is:
 d:\hackthon\Nvidea\.agents\teamwork\worker_m2

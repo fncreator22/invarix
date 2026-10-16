@@ -115,7 +115,7 @@ DEFAULT_INTEGRATIONS: dict[str, Any] = {
     "webhooks": {
         "enabled": False,
         "endpoint_url": "",
-        "secret": "whsec_reprieve_demo_token",
+        "secret": "whsec_invarix_demo_token",
     },
 }
 
@@ -154,11 +154,11 @@ async def dispatch_alert_to_plugins(
             title = alert.get("title", "Critical risk alert detected")
             rule_id = alert.get("rule_id", "R4")
             payload = {
-                "text": f"🚨 [Reprieve] Critical Alert: {title}",
+                "text": f"🚨 [INVARIX] Critical Alert: {title}",
                 "blocks": [
                     {
                         "type": "header",
-                        "text": {"type": "plain_text", "text": "🚨 Reprieve Architectural Gate Alert", "emoji": True},
+                        "text": {"type": "plain_text", "text": "🚨 INVARIX Architectural Gate Alert", "emoji": True},
                     },
                     {
                         "type": "section",
@@ -188,7 +188,7 @@ async def dispatch_alert_to_plugins(
                 title = alert.get("title", "Critical risk alert detected")
                 rule_id = alert.get("rule_id", "R4")
                 plain_body = (
-                    f"Reprieve Architectural Gate Alert\n\n"
+                    f"INVARIX Architectural Gate Alert\n\n"
                     f"Workspace: {ws_id}\n"
                     f"Severity: CRITICAL\n"
                     f"Rule: {rule_id}\n"
@@ -197,7 +197,7 @@ async def dispatch_alert_to_plugins(
                 )
                 html_body = (
                     f"<div style='font-family:-apple-system,BlinkMacSystemFont,\"Segoe UI\",sans-serif;background:#090a0f;color:#e1e4ea;padding:32px;border:1px solid #1f2430;max-width:600px;margin:0 auto;'>"
-                    f"<div style='font-family:monospace;font-size:12px;color:#a855f7;font-weight:700;letter-spacing:1px;margin-bottom:8px;'>REPRIEVE ARCHITECTURAL GATE</div>"
+                    f"<div style='font-family:monospace;font-size:12px;color:#a855f7;font-weight:700;letter-spacing:1px;margin-bottom:8px;'>INVARIX ARCHITECTURAL GATE</div>"
                     f"<h2 style='font-size:20px;font-weight:700;margin:0 0 16px 0;color:#ffffff;'>🚨 Critical Risk Alert: {title}</h2>"
                     f"<div style='background:#12141c;border:1px solid #282f3d;padding:16px;margin-bottom:20px;'>"
                     f"<p style='margin:0 0 8px 0;font-size:13px;'><strong>Workspace:</strong> <code style='color:#a855f7;'>{ws_id}</code></p>"
@@ -205,7 +205,7 @@ async def dispatch_alert_to_plugins(
                     f"<p style='margin:0;font-size:13px;'><strong>Status:</strong> Immediate mitigation required.</p>"
                     f"</div>"
                     f"<a href='{s.web_origin}/w/{ws_id}/alerts' style='display:inline-block;background:#7e22ce;color:#ffffff;font-size:13px;font-weight:600;padding:10px 18px;text-decoration:none;'>Inspect Shortest Proof Path &rarr;</a>"
-                    f"<div style='margin-top:24px;border-top:1px solid #1f2430;padding-top:12px;font-size:11px;color:#71788e;'>Delivered via Maileroo REST Engine &middot; Reprieve Autonomous Sentinel</div>"
+                    f"<div style='margin-top:24px;border-top:1px solid #1f2430;padding-top:12px;font-size:11px;color:#71788e;'>Delivered via Maileroo REST Engine &middot; INVARIX Autonomous Sentinel</div>"
                     f"</div>"
                 )
                 async with httpx.AsyncClient(timeout=5.0) as client:
@@ -216,7 +216,7 @@ async def dispatch_alert_to_plugins(
                             json={
                                 "from": s.email_from,
                                 "to": r,
-                                "subject": f"[Reprieve Critical Alert] {title}",
+                                "subject": f"[INVARIX Critical Alert] {title}",
                                 "plain": plain_body,
                                 "html": html_body,
                             },
@@ -243,7 +243,7 @@ async def dispatch_alert_to_plugins(
             results["webhooks"] = {"ok": False, "error": reason}
             log.warning("plugin.webhooks.ssrf_blocked", ws_id=ws_id, reason=reason)
         else:
-            secret = webhooks.get("secret", "whsec_reprieve_demo_token")
+            secret = webhooks.get("secret", "whsec_invarix_demo_token")
             ts = str(int(time.time()))
             body_json = json.dumps({
                 "event": "alert.critical",
@@ -254,9 +254,9 @@ async def dispatch_alert_to_plugins(
             sig = hmac.new(secret.encode(), f"{ts}.{body_json}".encode(), hashlib.sha256).hexdigest()
             headers = {
                 "Content-Type": "application/json",
-                "X-Reprieve-Timestamp": ts,
-                "X-Reprieve-Signature": f"v1={sig}",
-                "User-Agent": "Reprieve-Webhook-Agent/1.0",
+                "X-INVARIX-Timestamp": ts,
+                "X-INVARIX-Signature": f"v1={sig}",
+                "User-Agent": "INVARIX-Webhook-Agent/1.0",
             }
             try:
                 async with httpx.AsyncClient(timeout=4.0) as client:
@@ -280,13 +280,13 @@ async def send_test_ping(plugin_name: str, config: dict[str, Any], ws_id: str) -
         if not safe:
             return {"ok": False, "message": reason}
         payload = {
-            "text": "✅ [Reprieve] Connection Verified!",
+            "text": "✅ [INVARIX] Connection Verified!",
             "blocks": [
                 {
                     "type": "section",
                     "text": {
                         "type": "mrkdwn",
-                        "text": f"*✅ Reprieve Integration Test*\nSuccessfully connected workspace `{ws_id}` to Slack channel `{config.get('channel', '#sre-alerts')}`.\nReal-time Sentinel incidents will broadcast here.",
+                        "text": f"*✅ INVARIX Integration Test*\nSuccessfully connected workspace `{ws_id}` to Slack channel `{config.get('channel', '#sre-alerts')}`.\nReal-time Sentinel incidents will broadcast here.",
                     },
                 }
             ],
@@ -307,10 +307,10 @@ async def send_test_ping(plugin_name: str, config: dict[str, Any], ws_id: str) -
         api_key = s.maileroo_api_key or s.resend_api_key
         if api_key:
             try:
-                plain_body = f"This is a test notification from Reprieve workspace {ws_id}. Real-time Sentinel incidents will deliver to this address."
+                plain_body = f"This is a test notification from INVARIX workspace {ws_id}. Real-time Sentinel incidents will deliver to this address."
                 html_body = (
                     f"<div style='font-family:-apple-system,sans-serif;background:#090a0f;color:#e1e4ea;padding:28px;border:1px solid #1f2430;max-width:560px;'>"
-                    f"<h3 style='color:#a855f7;margin:0 0 12px 0;'>✅ Reprieve &times; Maileroo Connection Verified</h3>"
+                    f"<h3 style='color:#a855f7;margin:0 0 12px 0;'>✅ INVARIX &times; Maileroo Connection Verified</h3>"
                     f"<p style='font-size:14px;color:#cbd5e1;'>Successfully connected workspace <code>{ws_id}</code> to Maileroo transactional delivery service.</p>"
                     f"<p style='font-size:12px;color:#94a3b8;'>Real-time Sentinel architectural risk bulletins will route to this inbox.</p>"
                     f"</div>"
@@ -323,7 +323,7 @@ async def send_test_ping(plugin_name: str, config: dict[str, Any], ws_id: str) -
                             json={
                                 "from": s.email_from,
                                 "to": r,
-                                "subject": "[Reprieve] Test Notification Delivery (Maileroo)",
+                                "subject": "[INVARIX] Test Notification Delivery (Maileroo)",
                                 "plain": plain_body,
                                 "html": html_body,
                             },
@@ -345,19 +345,19 @@ async def send_test_ping(plugin_name: str, config: dict[str, Any], ws_id: str) -
         safe, reason = is_safe_webhook_url(endpoint)
         if not safe:
             return {"ok": False, "message": reason}
-        secret = config.get("secret", "whsec_reprieve_demo_token")
+        secret = config.get("secret", "whsec_invarix_demo_token")
         ts = str(int(time.time()))
         body_json = json.dumps({
             "event": "test.ping",
             "workspace_id": ws_id,
             "timestamp": ts,
-            "message": "Reprieve webhook handshake test",
+            "message": "INVARIX webhook handshake test",
         })
         sig = hmac.new(secret.encode(), f"{ts}.{body_json}".encode(), hashlib.sha256).hexdigest()
         headers = {
             "Content-Type": "application/json",
-            "X-Reprieve-Timestamp": ts,
-            "X-Reprieve-Signature": f"v1={sig}",
+            "X-INVARIX-Timestamp": ts,
+            "X-INVARIX-Signature": f"v1={sig}",
         }
         try:
             async with httpx.AsyncClient(timeout=4.0) as client:

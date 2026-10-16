@@ -35,7 +35,7 @@ Resolve 12 ESLint errors in frontend and ensure `pnpm --dir frontend lint`, `typ
 
 ## Key Decisions Made
 - `eslint.config.mjs`: Added `scripts/**` and `public/**` to `globalIgnores` so helper Node scripts (`render-articles.js`, `test-and-screenshot.js`) don't violate `@typescript-eslint/no-require-imports`.
-- `api-keys-section.tsx`: Replaced unescaped apostrophe in `Reprieve's` with `Reprieve&apos;s`.
+- `api-keys-section.tsx`: Replaced unescaped apostrophe in `INVARIX's` with `INVARIX&apos;s`.
 - `circuit-breaker-diff.tsx`: Correct target for the misnamed `features-section.tsx:50`; replaced raw `""` with `&quot;&quot;`.
 - `sample-banner.tsx` and `graph-explorer.tsx`: Deferred synchronous state setters in `useEffect` using `queueMicrotask` to eliminate `react-hooks/set-state-in-effect`.
 

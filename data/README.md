@@ -1,6 +1,6 @@
 # Dataset Specifications
 
-This directory contains benchmark topologies and evaluation seed bundles for Reprieve.
+This directory contains benchmark topologies and evaluation seed bundles for INVARIX.
 
 ## Seed Topology: Northwind Pay
 A synthetic financial services topology comprising:

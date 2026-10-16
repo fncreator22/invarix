@@ -248,7 +248,7 @@ def test_nebius_provider_instantiation_and_headers():
         assert provider is not None
         assert provider.client.api_key == "neb_secret_key_123"
         assert provider.client.default_headers.get("HTTP-Referer") == "http://localhost:3000"
-        assert provider.client.default_headers.get("X-Title") in ("INVARIX", "Reprieve")
+        assert provider.client.default_headers.get("X-Title") in ("INVARIX", "INVARIX")
 
 
 def test_nebius_unconfigured_returns_none():

@@ -68,9 +68,9 @@ From `scripts/cli.py:344-388`:
   - Result: **Exit Code 1**
   - Verbatim Output:
     ```
-    usage: reprieve [-h] [--api-url API_URL] [--api-key API_KEY] [-w WORKSPACE]
+    usage: invarix [-h] [--api-url API_URL] [--api-key API_KEY] [-w WORKSPACE]
                     {check,scan,mcp-config,mcp-bridge} ...
-    reprieve: error: unrecognized arguments: --pr
+    invarix: error: unrecognized arguments: --pr
     ```
 - Difference between `check` and `scan`:
   - `cmd_check` (`scripts/cli.py:61-134`): Queries `/prediction/simulation?horizon_days={horizon}`, checks `score`, `is_spof`, and `temporal_collisions`, and outputs risk bands and SPOF status.
@@ -109,8 +109,8 @@ From `scripts/cli.py:344-388`:
 2. **CLI Deficiencies**:
    - `ORIGINAL_REQUEST.md` Acceptance Criteria explicitly requires:
      `- [ ] scripts/cli.py executes scan --pr simulation and outputs risk bands and SPOF ranks.`
-   - Executing `python scripts/cli.py scan --pr` directly fails with `reprieve: error: unrecognized arguments: --pr`.
-   - Inspection of `scripts/cli.py` reveals that while `reprieve check` queries `/prediction/simulation` and outputs SPOF ranks and risk bands, `reprieve scan` only performs a regex text scan and lacks `--pr` argument handling and simulation linking.
+   - Executing `python scripts/cli.py scan --pr` directly fails with `invarix: error: unrecognized arguments: --pr`.
+   - Inspection of `scripts/cli.py` reveals that while `invarix check` queries `/prediction/simulation` and outputs SPOF ranks and risk bands, `invarix scan` only performs a regex text scan and lacks `--pr` argument handling and simulation linking.
 
 3. **Backend & Integration Readiness**:
    - The backend service and FalkorDB are operational in Docker containers and responding to HTTP requests at `http://localhost:8000`.
@@ -131,7 +131,7 @@ From `scripts/cli.py:344-388`:
 ## 4. Conclusion
 
 1. **Frontend**: Meets requirements for Next.js 16, React 19, 2D force-directed WebGL canvas with pulsating risk highlights, proof paths, and SSE Steward streaming. Typecheck and Next.js Turbopack production build pass completely (exit code 0). 12 lint issues exist in ESLint that require minor syntax fixes.
-2. **CLI**: **Failed acceptance criteria**. `reprieve scan --pr` is not implemented in `scripts/cli.py` and returns `error: unrecognized arguments: --pr`.
+2. **CLI**: **Failed acceptance criteria**. `invarix scan --pr` is not implemented in `scripts/cli.py` and returns `error: unrecognized arguments: --pr`.
 3. **Integration**: Backend API and FalkorDB are running and healthy. Core prediction simulation endpoints pass 54 unit and property tests. Missing fixture `hostile_thread.txt` breaks ingest test collection.
 
 ---

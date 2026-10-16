@@ -81,7 +81,7 @@ async def test_r1_tri_planar_graph_connectivity_and_schema_isolation(e2e_db: Fal
         # 1. Platform Plane: insert user and workspace
         await plat_repo.g.query(
             "MERGE (u:User {clerk_user_id: $cid}) ON CREATE SET u.id = $uid, u.email = $email",
-            {"cid": "clerk_test_user_01", "uid": "usr_01", "email": "test@reprieve.io"},
+            {"cid": "clerk_test_user_01", "uid": "usr_01", "email": "test@invarix.io"},
         )
         res_u = _rows(await plat_repo.g.query("MATCH (u:User {clerk_user_id: $cid}) RETURN u.id as id", {"cid": "clerk_test_user_01"}))
         assert len(res_u) == 1

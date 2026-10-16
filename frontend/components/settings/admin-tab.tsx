@@ -117,7 +117,7 @@ export function AdminTab() {
     const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(INITIAL_LOGS, null, 2));
     const a = document.createElement("a");
     a.setAttribute("href", dataStr);
-    a.setAttribute("download", `reprieve-audit-${wsId.slice(0, 8)}.json`);
+    a.setAttribute("download", `invarix-audit-${wsId.slice(0, 8)}.json`);
     document.body.appendChild(a);
     a.click();
     a.remove();

@@ -1,6 +1,6 @@
 # Forensic Integrity Audit Report — Milestone M-Final
 
-**Work Product**: Project Reprieve (Autonomous Cascading Risk Engine)  
+**Work Product**: Project INVARIX (Autonomous Cascading Risk Engine)  
 **Integrity Mode**: Development (as declared in `ORIGINAL_REQUEST.md:8`)  
 **Verdict**: **CLEAN**
 
@@ -90,7 +90,7 @@
 
 ## 4. Conclusion
 
-The Reprieve codebase is an authentic, complete, and rigorous implementation adhering to all requirements in `ORIGINAL_REQUEST.md` and `PROJECT.md`. There is no evidence of hardcoded test bypasses, facade implementations, or fabricated outputs.
+The INVARIX codebase is an authentic, complete, and rigorous implementation adhering to all requirements in `ORIGINAL_REQUEST.md` and `PROJECT.md`. There is no evidence of hardcoded test bypasses, facade implementations, or fabricated outputs.
 
 **Final Verdict**: **CLEAN**
 

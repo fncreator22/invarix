@@ -14,7 +14,7 @@
   Command: `uv run python scripts/cli.py scan --pr --dir non_existent_directory_12345`
   Output:
   ```
-  ▶ Reprieve Autonomous Scanner: Scanning D:\hackthon\Nvidea\non_existent_directory_12345...
+  ▶ INVARIX Autonomous Scanner: Scanning D:\hackthon\Nvidea\non_existent_directory_12345...
   ✓ No unmanaged waivers or skipped tests found in source diff.
   ▶ Simulating Pull Request Changes against Architectural Knowledge Graph...
   ...
@@ -63,7 +63,7 @@
     - Code 2: In `scripts/cli.py:314-320`, when the API returns an error or empty services, `cmd_scan` activates `_get_mock_simulation()` fallback:
       ```python
       if not services:
-          print(f"{DIM}  (Notice: Reprieve API unseeded/offline; using architectural simulation fallback){RESET}\n")
+          print(f"{DIM}  (Notice: INVARIX API unseeded/offline; using architectural simulation fallback){RESET}\n")
           services, collisions = _get_mock_simulation(target_service=target_service)
       ```
       This triggers mock simulation with `svc_payments_gateway` (88.5) and blocks with code 1 instead of returning code 2 or code 0 for empty workspaces.
@@ -109,7 +109,7 @@
 
 - **Base URL & Provider Handling**:
   - In `backend/app/agents/llm.py:56-69`:
-    `openai.AsyncOpenAI(base_url=s.compat_base_url, api_key=s.compat_api_key, timeout=s.llm_timeout_s, default_headers={"HTTP-Referer": s.web_origin, "X-Title": "Reprieve"})`
+    `openai.AsyncOpenAI(base_url=s.compat_base_url, api_key=s.compat_api_key, timeout=s.llm_timeout_s, default_headers={"HTTP-Referer": s.web_origin, "X-Title": "INVARIX"})`
   - Empirically verified with trailing slash (`https://api.tokenfactory.nebius.ai/v1/`), custom port (`http://127.0.0.1:8080/v1`), and enterprise subpath (`https://custom-gateway.corp.internal/nebius/v1`).
   - Provider returns `None` safely if `compat_base_url` or `compat_model` is unset.
 

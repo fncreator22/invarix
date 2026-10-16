@@ -1,7 +1,7 @@
 # BRIEFING — 2026-10-16T00:32:00Z
 
 ## Mission
-Conduct independent 3-phase Victory Audit for Project Reprieve claimed completion.
+Conduct independent 3-phase Victory Audit for Project INVARIX claimed completion.
 
 ## 🔒 My Identity
 - Archetype: victory_auditor
@@ -20,7 +20,7 @@ Conduct independent 3-phase Victory Audit for Project Reprieve claimed completio
 - Updated: 2026-10-16T00:32:00Z
 
 ## Audit Scope
-- **Work product**: Project Reprieve (d:\hackthon\Nvidea)
+- **Work product**: Project INVARIX (d:\hackthon\Nvidea)
 - **Profile loaded**: General Project / Victory Audit
 - **Audit type**: victory audit
 

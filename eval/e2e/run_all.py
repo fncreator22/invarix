@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Reprieve End-to-End (E2E) Test Suite Runner.
+"""INVARIX End-to-End (E2E) Test Suite Runner.
 
 Executes all 4 test tiers:
 - Tier 1: Feature Coverage (R1–R5)
@@ -96,7 +96,7 @@ TIER_SPECS = [
 
 def print_banner():
     print(f"\n{BOLD}{CYAN}{'=' * 80}{RESET}")
-    print(f"{BOLD}{CYAN}Reprieve Autonomous Cascading Risk Engine — E2E Test Suite{RESET}")
+    print(f"{BOLD}{CYAN}INVARIX Autonomous Cascading Risk Engine — E2E Test Suite{RESET}")
     print(f"{DIM}Verifying FalkorDB Tri-Planar Graph, Avalanche Centrality, Nebius & Pre-Merge Gate{RESET}")
     print(f"{BOLD}{CYAN}{'=' * 80}{RESET}\n")
 

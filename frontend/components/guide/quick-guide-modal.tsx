@@ -58,7 +58,7 @@ export function QuickGuideModal({ open, onOpenChange }: QuickGuideModalProps) {
             Understanding Exception Debt &amp; Graph Governance
           </DialogTitle>
           <DialogDescription className="text-body-sm text-text-secondary mt-1">
-            Why isolated tickets in Jira fail at systemic risk, and how Reprieve models your architecture in a living knowledge graph.
+            Why isolated tickets in Jira fail at systemic risk, and how INVARIX models your architecture in a living knowledge graph.
           </DialogDescription>
 
           {/* Navigation Tabs */}
@@ -138,11 +138,11 @@ export function QuickGuideModal({ open, onOpenChange }: QuickGuideModalProps) {
                   </ul>
                 </div>
 
-                {/* Reprieve Graph Engine */}
+                {/* INVARIX Graph Engine */}
                 <div className="rounded-xl border border-brand/40 bg-brand-soft/20 p-3.5 space-y-2.5 dark:bg-brand-soft/10">
                   <div className="flex items-center gap-2 text-brand font-semibold text-caption">
                     <Zap className="size-3.5 fill-current" />
-                    REPRIEVE KNOWLEDGE GRAPH
+                    INVARIX KNOWLEDGE GRAPH
                   </div>
                   <h4 className="font-semibold text-body-base text-text-primary">Living Directed Graph</h4>
                   <ul className="space-y-2 text-caption text-text-secondary">
@@ -184,7 +184,7 @@ export function QuickGuideModal({ open, onOpenChange }: QuickGuideModalProps) {
                   <h4 className="font-semibold text-body-base text-text-primary">1. Orphaned Waivers</h4>
                   <p className="text-body-sm text-text-secondary">
                     A staff engineer granted an emergency bypass 9 months ago, then departed for another company. 
-                    The code waiver remains active in production with zero accountability. Reprieve cross-references HR graph nodes to identify orphans immediately.
+                    The code waiver remains active in production with zero accountability. INVARIX cross-references HR graph nodes to identify orphans immediately.
                   </p>
                 </div>
               </div>
@@ -210,7 +210,7 @@ export function QuickGuideModal({ open, onOpenChange }: QuickGuideModalProps) {
                   <h4 className="font-semibold text-body-base text-text-primary">3. Avalanche Reachability</h4>
                   <p className="text-body-sm text-text-secondary">
                     A failure in an obscure internal service propagates downstream to authentication, payments, and checkout. 
-                    Reprieve computes exact shortest proof paths to isolate root causes in seconds.
+                    INVARIX computes exact shortest proof paths to isolate root causes in seconds.
                   </p>
                 </div>
               </div>
@@ -236,7 +236,7 @@ export function QuickGuideModal({ open, onOpenChange }: QuickGuideModalProps) {
                     type="button"
                     onClick={() =>
                       copyToClipboard(
-                        `export REPRIEVE_WORKSPACE="${slug}"\nexport REPRIEVE_API_KEY="<your-api-key>"\npython scripts/cli.py scan --submit`,
+                        `export INVARIX_WORKSPACE="${slug}"\nexport INVARIX_API_KEY="<your-api-key>"\npython scripts/cli.py scan --submit`,
                         "CLI Scan Script"
                       )
                     }
@@ -247,8 +247,8 @@ export function QuickGuideModal({ open, onOpenChange }: QuickGuideModalProps) {
                   </button>
                 </div>
                 <p className="text-text-muted"># 1. Point to your workspace</p>
-                <p className="text-brand">export REPRIEVE_WORKSPACE=&quot;{slug}&quot;</p>
-                <p className="text-brand">export REPRIEVE_API_KEY=&quot;&lt;your-key-from-settings&gt;&quot;</p>
+                <p className="text-brand">export INVARIX_WORKSPACE=&quot;{slug}&quot;</p>
+                <p className="text-brand">export INVARIX_API_KEY=&quot;&lt;your-key-from-settings&gt;&quot;</p>
                 <p className="text-text-muted pt-2"># 2. Automatically scan repository for #nosec, @skip, and TODOs</p>
                 <p className="text-text-primary">python scripts/cli.py scan --dir . --submit</p>
               </div>
@@ -278,23 +278,23 @@ export function QuickGuideModal({ open, onOpenChange }: QuickGuideModalProps) {
                 <div className="flex items-center justify-between text-text-muted border-b border-border-subtle pb-2">
                   <span className="flex items-center gap-2 text-text-primary font-sans font-semibold">
                     <span className="size-2 rounded-full bg-danger" />
-                    GitHub Actions · .github/workflows/reprieve-gate.yml
+                    GitHub Actions · .github/workflows/invarix-gate.yml
                   </span>
                   <button
                     type="button"
                     onClick={() =>
                       copyToClipboard(
-                        `name: Reprieve Pre-Merge Gate
+                        `name: INVARIX Pre-Merge Gate
 on: [pull_request]
 jobs:
-  reprieve-check:
+  invarix-check:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Reprieve Risk Gate
+      - name: INVARIX Risk Gate
         env:
-          REPRIEVE_API_KEY: \${{ secrets.REPRIEVE_API_KEY }}
-          REPRIEVE_WORKSPACE: \${{ secrets.REPRIEVE_WORKSPACE }}
+          INVARIX_API_KEY: \${{ secrets.INVARIX_API_KEY }}
+          INVARIX_WORKSPACE: \${{ secrets.INVARIX_WORKSPACE }}
         run: |
           python scripts/cli.py scan --submit
           python scripts/cli.py check --service payments_gateway --fail-threshold 75.0`,
@@ -308,17 +308,17 @@ jobs:
                   </button>
                 </div>
                 <pre className="text-text-secondary overflow-x-auto whitespace-pre leading-relaxed text-[11px]">
-{`name: Reprieve Pre-Merge Gate
+{`name: INVARIX Pre-Merge Gate
 on: [pull_request]
 jobs:
-  reprieve-check:
+  invarix-check:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Reprieve Risk Gate
+      - name: INVARIX Risk Gate
         env:
-          REPRIEVE_API_KEY: \${{ secrets.REPRIEVE_API_KEY }}
-          REPRIEVE_WORKSPACE: \${{ secrets.REPRIEVE_WORKSPACE }}
+          INVARIX_API_KEY: \${{ secrets.INVARIX_API_KEY }}
+          INVARIX_WORKSPACE: \${{ secrets.INVARIX_WORKSPACE }}
         run: |
           python scripts/cli.py scan --submit
           python scripts/cli.py check --fail-threshold 75.0`}

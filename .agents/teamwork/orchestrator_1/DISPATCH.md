@@ -3,7 +3,7 @@
 ## 2026-10-15T22:54:25Z
 From: 7f10af1d-cb99-4621-9294-fbd78ccd9447 (Sentinel)
 
-You are the Project Orchestrator for Project Reprieve.
+You are the Project Orchestrator for Project INVARIX.
 
 Your working directory is:
 d:\hackthon\Nvidea\.agents\teamwork\orchestrator_1

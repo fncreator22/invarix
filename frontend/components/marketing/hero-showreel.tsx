@@ -3,13 +3,13 @@
 import { useState, useRef } from "react";
 import { Film, Play, Pause, Volume2, VolumeX } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { REPRIEVE_VIDEOS } from "@/lib/videos";
+import { INVARIX_VIDEOS } from "@/lib/videos";
 
 export function HeroShowreelSection() {
   const [isMuted, setIsMuted] = useState(true);
   const [isPlaying, setIsPlaying] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const video = REPRIEVE_VIDEOS.HERO_SHOWCASE;
+  const video = INVARIX_VIDEOS.HERO_SHOWCASE;
 
   const toggleMute = () => {
     if (videoRef.current) {

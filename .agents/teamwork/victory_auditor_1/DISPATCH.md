@@ -14,7 +14,7 @@ Orchestrator completion report and artifacts are located at:
 d:\hackthon\Nvidea\.agents\teamwork\orchestrator_1
 
 Task:
-The Project Orchestrator has claimed project completion for Project Reprieve.
+The Project Orchestrator has claimed project completion for Project INVARIX.
 Conduct your mandatory, independent 3-phase audit:
 1. Phase 1 — Timeline and provenance audit.
 2. Phase 2 — Cheating, hardcoding, and facade detection.

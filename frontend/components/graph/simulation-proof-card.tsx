@@ -25,7 +25,7 @@ export function SimulationProofCard({
   const exportProofPacket = () => {
     const targetId = avalancheItem ? avalancheItem.service_id : collisionItem?.cluster_id ?? "unknown";
     const packet = {
-      standard: "Reprieve-Audit-Proof-Packet-v1.0",
+      standard: "INVARIX-Audit-Proof-Packet-v1.0",
       exported_at: new Date().toISOString(),
       evaluation_model: "Deterministic Cypher Topological Calculus",
       simulation_type: avalancheItem ? "AvalancheCentrality" : "TemporalExpiryCollision",
@@ -56,7 +56,7 @@ export function SimulationProofCard({
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `reprieve-proof-packet-${targetId}-${Date.now()}.json`;
+    a.download = `invarix-proof-packet-${targetId}-${Date.now()}.json`;
     a.click();
     URL.revokeObjectURL(url);
     toast.success("Audit proof packet exported.");

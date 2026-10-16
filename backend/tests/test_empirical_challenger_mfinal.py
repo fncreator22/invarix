@@ -1,6 +1,6 @@
 """Empirical Challenger Final Test Suite (Milestone M-Final).
 
-Adversarial stress-testing of Reprieve mathematical engines:
+Adversarial stress-testing of INVARIX mathematical engines:
 1. Avalanche Centrality AC(u) under adversarial and degenerate topologies:
    - 0-edge disconnected graphs (empty, single isolated, 50 isolated nodes)
    - Dense cyclic dependency graphs (2-cycles, 3-cycles, 10-node cycles, complete directed cliques)

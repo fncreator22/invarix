@@ -353,10 +353,10 @@ export function IntegrationsTab() {
         </div>
 
         <div className="space-y-2">
-          <span className="text-body-sm font-medium text-text-primary">Workflow Configuration: <code className="text-brand font-mono">.github/workflows/reprieve.yml</code></span>
+          <span className="text-body-sm font-medium text-text-primary">Workflow Configuration: <code className="text-brand font-mono">.github/workflows/invarix.yml</code></span>
           <div className="relative rounded-lg border border-border-subtle bg-[#090a0f] p-3.5">
             <pre className="font-mono text-caption text-zinc-300 overflow-x-auto leading-relaxed">
-{`name: Reprieve Pre-Merge Security Gate
+{`name: INVARIX Pre-Merge Security Gate
 on: [pull_request]
 jobs:
   graph-governance:
@@ -364,9 +364,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Scan Code Waivers & Dependencies
-        run: npx reprieve scan --strict --workspace ${wsId}
+        run: npx invarix scan --strict --workspace ${wsId}
         env:
-          REPRIEVE_TOKEN: \${{ secrets.REPRIEVE_API_KEY }}`}
+          INVARIX_TOKEN: \${{ secrets.INVARIX_API_KEY }}`}
             </pre>
             <Button
               variant="ghost"
@@ -374,7 +374,7 @@ jobs:
               className="absolute top-2.5 right-2.5 h-7 px-2 font-mono text-[11px] text-zinc-300 hover:text-white"
               onClick={() =>
                 copyToClipboard(
-                  `name: Reprieve Pre-Merge Security Gate\non: [pull_request]\njobs:\n  graph-governance:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - name: Scan Code Waivers & Dependencies\n        run: npx reprieve scan --strict --workspace ${wsId}\n        env:\n          REPRIEVE_TOKEN: \${{ secrets.REPRIEVE_API_KEY }}`,
+                  `name: INVARIX Pre-Merge Security Gate\non: [pull_request]\njobs:\n  graph-governance:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - name: Scan Code Waivers & Dependencies\n        run: npx invarix scan --strict --workspace ${wsId}\n        env:\n          INVARIX_TOKEN: \${{ secrets.INVARIX_API_KEY }}`,
                   "github-action"
                 )
               }
@@ -421,7 +421,7 @@ jobs:
             <Input
               value={curWebhookUrl}
               onChange={(e) => setWebhookUrl(e.target.value)}
-              placeholder="https://siem.corp.internal/api/v1/reprieve-webhooks"
+              placeholder="https://siem.corp.internal/api/v1/invarix-webhooks"
               className="font-mono text-body-sm rounded-md"
               disabled={!isAdmin}
             />
@@ -445,7 +445,7 @@ jobs:
 
         <div className="flex flex-wrap items-center justify-between gap-3 pt-2">
           <p className="text-caption text-text-muted">
-            Includes signature header <code>X-Reprieve-Signature: v1=&lt;hmac&gt;</code> for payload verification.
+            Includes signature header <code>X-INVARIX-Signature: v1=&lt;hmac&gt;</code> for payload verification.
           </p>
           <div className="flex items-center gap-2">
             <Button
@@ -510,9 +510,9 @@ jobs:
             <pre className="font-mono text-caption text-zinc-300 overflow-x-auto leading-relaxed">
 {`{
   "mcpServers": {
-    "reprieve": {
+    "invarix": {
       "command": "npx",
-      "args": ["-y", "reprieve-mcp@latest", "--workspace", "${wsId}"]
+      "args": ["-y", "invarix-mcp@latest", "--workspace", "${wsId}"]
     }
   }
 }`}
@@ -523,7 +523,7 @@ jobs:
               className="absolute top-2.5 right-2.5 h-7 px-2 font-mono text-[11px] text-zinc-300 hover:text-white"
               onClick={() =>
                 copyToClipboard(
-                  `{\n  "mcpServers": {\n    "reprieve": {\n      "command": "npx",\n      "args": ["-y", "reprieve-mcp@latest", "--workspace", "${wsId}"]\n    }\n  }\n}`,
+                  `{\n  "mcpServers": {\n    "invarix": {\n      "command": "npx",\n      "args": ["-y", "invarix-mcp@latest", "--workspace", "${wsId}"]\n    }\n  }\n}`,
                   "mcp-config"
                 )
               }

@@ -1,4 +1,4 @@
-# Handoff Report: Project Reprieve — Specification & Architecture Mining Survey
+# Handoff Report: Project INVARIX — Specification & Architecture Mining Survey
 
 - **Author**: Specification & Architecture Miner (`spec_miner_survey_1`)
 - **Target Workspace**: `d:\hackthon\Nvidea`
@@ -48,7 +48,7 @@ Direct physical inspection of authoritative specifications and codebase:
    - `R2. Deterministic Prediction & Avalanche Centrality`: Implement mathematical Avalanche Centrality engine $AC(u) = 1 - \prod_{p \in \text{Paths}(u \to \text{Ingress})} (1 - p_0^{\text{len}(p)})$. Simulate failure cascade probabilities and predict sliding-horizon temporal collisions across shared critical paths.
    - `R3. Multi-Agent Reasoning via Nebius Token Factory & NVIDIA Nemotron`: Wire multi-agent swarm (Sentinel, Steward) to Nebius Token Factory endpoints using OpenAI-compatible APIs (`COMPAT_BASE_URL` and `COMPAT_API_KEY`): `nebius/nvidia/Nemotron-3_5-Lightning` (1M context ingestion), `nebius/nvidia/nemotron-3-super-120b-a12b` (multi-hop causal reasoning), Provenance Guardrail (`guard.py`).
    - `R4. External Threat Intelligence via Tavily Search API`: Integrate `tavily_search_threat_intel` tool into agent registry (`backend/app/agents/tools.py`) to query active in-the-wild exploits and EOL advisories ($3,000 Tavily bounty).
-   - `R5. Interactive UI & Pre-Merge CI Gate`: High-fidelity Next.js 16 / React 19 interface with force-directed 2D/WebGL canvas, interactive Steward chat with SSE streaming, and pre-merge CLI gate (`reprieve scan --pr`) blocking risky pull requests.
+   - `R5. Interactive UI & Pre-Merge CI Gate`: High-fidelity Next.js 16 / React 19 interface with force-directed 2D/WebGL canvas, interactive Steward chat with SSE streaming, and pre-merge CLI gate (`invarix scan --pr`) blocking risky pull requests.
 
 2. **Acceptance Criteria (`ORIGINAL_REQUEST.md` lines 34–41)**:
    - Backend starts cleanly on FastAPI with FalkorDB and exposes `/v1` endpoints.
@@ -98,7 +98,7 @@ Direct physical inspection of authoritative specifications and codebase:
        COMPAT_API_KEY=your_nebius_token_factory_key_here
        COMPAT_MODEL=nvidia/nemotron-3-super-120b-a12b
        ```
-     - In `backend/app/agents/llm.py`: Provider `"compat"` instantiates `openai.AsyncOpenAI(base_url=s.compat_base_url, api_key=s.compat_api_key, ...)` and sets headers `HTTP-Referer` and `X-Title: Reprieve`.
+     - In `backend/app/agents/llm.py`: Provider `"compat"` instantiates `openai.AsyncOpenAI(base_url=s.compat_base_url, api_key=s.compat_api_key, ...)` and sets headers `HTTP-Referer` and `X-Title: INVARIX`.
      - In `backend/app/ingest/extractor.py`: Ingests unstructured tickets/code bypasses, falling back to regex extraction if the API is offline.
      - In `backend/app/agents/guard.py`: Functions as provenance guardrail, stripping uncited entity IDs.
 4. **Threat Intelligence Tool**:
@@ -237,11 +237,11 @@ $$\text{Score}(s) = 100 \cdot \left(1 - \exp\left(-\frac{\sum \text{contribution
 
 1. **CLI `scan --pr` vs `check` Gap**:
    - In `ORIGINAL_REQUEST.md` (lines 30, 39) and `PROJECT_BLUEPRINT.md` (line 124), the requirement is stated as:
-     `reprieve scan --pr that blocks risky pull requests in CI/CD` and `scripts/cli.py executes scan --pr simulation and outputs risk bands and SPOF ranks`.
+     `invarix scan --pr that blocks risky pull requests in CI/CD` and `scripts/cli.py executes scan --pr simulation and outputs risk bands and SPOF ranks`.
    - In `scripts/cli.py`:
      - Line 345: Subcommand `check` executes the prediction simulation via `/prediction/simulation`, evaluates risk thresholds, and outputs risk bands and SPOF ranks.
      - Line 355: Subcommand `scan` scans local directories for code waivers (`#nosec`, `@skip`) with flags `--dir`, `--submit`, `--auto-approve`, but has **no `--pr` flag**.
-   - *Recommendation for implementation*: Add `--pr` to `scan_p` in `scripts/cli.py` or have `--pr` invoke the architectural risk simulation circuit breaker so both `reprieve check` and `reprieve scan --pr` succeed identically.
+   - *Recommendation for implementation*: Add `--pr` to `scan_p` in `scripts/cli.py` or have `--pr` invoke the architectural risk simulation circuit breaker so both `invarix check` and `invarix scan --pr` succeed identically.
 
 2. **Tool Registry Naming Alignment in Documentation**:
    - In `AGENTS.md` (lines 16–31) and `README.md` (lines 63–79), the tools table lists:

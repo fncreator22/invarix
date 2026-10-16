@@ -2,7 +2,7 @@
 From: 9b0fddfb-514e-419c-b57c-ebbf64019604
 Priority: MESSAGE_PRIORITY_HIGH
 
-You are the Backend & Graph Architecture Explorer for Project Reprieve.
+You are the Backend & Graph Architecture Explorer for Project INVARIX.
 
 Your working directory is:
 d:\hackthon\Nvidea\.agents\teamwork\explorer_survey_backend_1
@@ -19,7 +19,7 @@ data/ directory
 eval/ directory
 
 OBJECTIVE:
-Investigate the current backend implementation state of Reprieve:
+Investigate the current backend implementation state of INVARIX:
 1. Check FalkorDB connection, tri-planar graph schema (Platform, Domain, Memory), and queries in `backend/app/graph/queries/*.cypher`. Are all 8 invariants implemented? Are shortest proof paths generated deterministically?
 2. Check the Avalanche Centrality and prediction implementation (`backend/app/prediction/` or similar). Is AC(u) implemented according to the mathematical formula? Is temporal collision prediction implemented?
 3. Check agent reasoning and tools (`backend/app/agents/`): Sentinel, Steward (`steward.py`), guardrails (`guard.py` provenance checking), tool registry (`tools.py`). How is Nebius Token Factory wired? Are `COMPAT_BASE_URL`, `COMPAT_API_KEY`, and NVIDIA Nemotron models configured? Is Tavily threat intelligence tool implemented?

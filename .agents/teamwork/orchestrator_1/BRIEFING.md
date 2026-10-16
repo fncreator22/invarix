@@ -1,7 +1,7 @@
 # BRIEFING — 2026-10-16T00:25:00Z
 
 ## Mission
-Orchestrate the end-to-end implementation and verification of Project Reprieve satisfying R1–R5 and all acceptance criteria.
+Orchestrate the end-to-end implementation and verification of Project INVARIX satisfying R1–R5 and all acceptance criteria.
 
 ## 🔒 My Identity
 - Archetype: teamwork_preview_orchestrator

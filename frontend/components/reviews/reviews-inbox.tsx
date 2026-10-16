@@ -63,7 +63,7 @@ export function ReviewsInbox() {
         <EmptyState
           icon={ClipboardCheck}
           title="Link your profile to see your reviews"
-          description="Reviews are assigned to people in the org graph. Tell Reprieve which person you are."
+          description="Reviews are assigned to people in the org graph. Tell INVARIX which person you are."
           action={
             <Button asChild>
               <Link href="/onboarding">Link my profile</Link>

@@ -1,4 +1,4 @@
-"""Tests for Reprieve Pre-Merge CI CLI Gate (scripts/cli.py).
+"""Tests for INVARIX Pre-Merge CI CLI Gate (scripts/cli.py).
 
 Validates:
 1. `scripts/cli.py scan --pr` executes simulation and outputs risk bands and SPOF ranks.
@@ -48,7 +48,7 @@ def test_cli_scan_pr_blocks_critical_cascades() -> None:
     out = proc.stdout
 
     # Verify Header
-    assert "REPRIEVE PRE-MERGE GATE" in out
+    assert "INVARIX PRE-MERGE GATE" in out
     assert "PULL REQUEST ARCHITECTURAL RISK REPORT" in out
 
     # Verify Risk Bands
@@ -81,7 +81,7 @@ def test_cli_scan_pr_approves_safe_threshold() -> None:
     assert proc.returncode == 0, f"Expected returncode 0, got {proc.returncode}. Output:\n{proc.stdout}"
     out = proc.stdout
 
-    assert "REPRIEVE PRE-MERGE GATE" in out
+    assert "INVARIX PRE-MERGE GATE" in out
     assert "svc_auth_cache" in out
     assert "LOW" in out
     assert "PRE-MERGE GATE: APPROVED" in out
@@ -93,9 +93,9 @@ def test_cli_scan_without_pr_runs_standard_scanner() -> None:
     proc = run_cli("scan", "--dir", "backend/app/detection")
     assert proc.returncode == 0
     out = proc.stdout
-    assert "Reprieve Autonomous Scanner" in out
+    assert "INVARIX Autonomous Scanner" in out
     # Should not have PR gate header when --pr is omitted
-    assert "REPRIEVE PRE-MERGE GATE · PULL REQUEST ARCHITECTURAL RISK REPORT" not in out
+    assert "INVARIX PRE-MERGE GATE · PULL REQUEST ARCHITECTURAL RISK REPORT" not in out
 
 
 def test_cli_check_help_and_command() -> None:

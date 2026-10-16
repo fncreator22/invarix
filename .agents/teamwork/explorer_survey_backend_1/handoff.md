@@ -1,8 +1,8 @@
-# Reprieve Backend & Graph Architecture Survey: Comprehensive Handoff Report
+# INVARIX Backend & Graph Architecture Survey: Comprehensive Handoff Report
 
 ## 1. Executive Summary & Core Findings
 
-Reprieve's backend architecture is exceptionally advanced, mathematically rigorous, and grounded in deterministic graph theory. The codebase features:
+INVARIX's backend architecture is exceptionally advanced, mathematically rigorous, and grounded in deterministic graph theory. The codebase features:
 - A fully functional **tri-planar FalkorDB graph** architecture (Platform, Org, Mem) with 129 parameterized Cypher queries.
 - All **8 deterministic invariants (R1–R8)** implemented with deterministic shortest proof path extraction.
 - Complete mathematical implementations of **Avalanche Centrality ($AC(u)$)** and **Temporal Expiry Collision Dynamics**, backed by 54 passing unit and adversarial stress tests.
@@ -71,7 +71,7 @@ However, our investigation identified **4 localized test harness / dependency is
    - `pyproject.toml`: Lacks `[tool.pytest.ini_options]` with `asyncio_mode = "auto"`, causing strict-mode fixture teardown crashes in Python 3.14 unless `-o asyncio_mode=auto` is manually passed.
    - `backend/.env`: Has placeholder values (`LLM_BASE_URL=https://api.openai.com/v1`, `LLM_MODEL=gpt-4o`) instead of `LLM_PRIMARY=compat`, `COMPAT_BASE_URL=https://api.tokenfactory.nebius.ai/v1`, and `COMPAT_MODEL=nvidia/nemotron-3-super-120b-a12b`.
    - `backend/app/config.py` & `backend/app/ingest/extractor.py`: Config only defines a single `compat_model`. There is no dedicated configuration or routing for `nebius/nvidia/Nemotron-3_5-Lightning` (1M-context model for monorepo and manifest ingestion), and `extractor.py` hardcodes `MAX_TEXT = 6000`.
-   - `scripts/cli.py`: Lacks the `--pr` option for `scan` command required by Acceptance Criteria (`reprieve scan --pr`).
+   - `scripts/cli.py`: Lacks the `--pr` option for `scan` command required by Acceptance Criteria (`invarix scan --pr`).
 
 ---
 
@@ -116,7 +116,7 @@ However, our investigation identified **4 localized test harness / dependency is
 
 ### 2.4 Conclusion
 
-Project Reprieve's backend core is in an advanced, near-production state:
+Project INVARIX's backend core is in an advanced, near-production state:
 - **Tri-planar graph schema and all 8 invariants**: Complete, verified, and running on FalkorDB.
 - **Mathematical prediction engines**: 100% passing adversarial and latency tests.
 - **Agent reasoning, tools, and guardrails**: Fully implemented with 15 tools and zero-hallucination provenance filters.
