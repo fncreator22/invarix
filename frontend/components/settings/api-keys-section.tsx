@@ -130,7 +130,7 @@ export function ApiKeysSection() {
           <div>
             <h2 className="font-sans text-h3 font-semibold">API Keys</h2>
             <p className="text-body-sm text-text-secondary mt-1">
-              Secure automation tokens for CLI gates, CI/CD pipelines, and Model Context Protocol (MCP) agents.
+              Secure automation tokens (<code className="text-brand font-mono text-caption">inv_live_...</code>) for CLI gates, CI/CD pipelines, and Model Context Protocol (MCP) agents.
             </p>
           </div>
           {isAdmin && (
@@ -387,7 +387,7 @@ export function ApiKeysSection() {
                 className="rounded border-border"
               />
               <label htmlFor="key-test" className="text-body-sm text-text-secondary cursor-pointer">
-                Generate as test key (<code className="font-mono text-caption">rep_test_</code> prefix)
+                Generate as test key (<code className="font-mono text-caption">inv_test_ / rep_test_</code> prefix)
               </label>
             </div>
 

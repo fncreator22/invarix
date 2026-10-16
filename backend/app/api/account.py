@@ -166,9 +166,18 @@ async def get_workspace(ctx: WorkspaceContext = Depends(any_status)) -> dict[str
 async def patch_workspace(
     body: WorkspacePatch, ctx: WorkspaceContext = Depends(admin)
 ) -> dict[str, Any]:
+    fields: dict[str, Any] = {}
     if body.name is not None:
-        await workspaces.set_fields(ctx.platform, ctx.ws_id, name=body.name)
+        fields["name"] = body.name
         ctx.workspace["name"] = body.name
+    if getattr(body, "clock_mode", None) is not None:
+        fields["clock_mode"] = body.clock_mode
+        ctx.workspace["clock_mode"] = body.clock_mode
+    if getattr(body, "as_of", None) is not None:
+        fields["as_of"] = body.as_of
+        ctx.workspace["as_of"] = body.as_of
+    if fields:
+        await workspaces.set_fields(ctx.platform, ctx.ws_id, **fields)
     return workspace_out(ctx.workspace, ctx.role.value, ctx.person_id)
 
 

@@ -180,7 +180,7 @@ export default function LandingPage() {
       <FeaturesCard />
 
       {/* 05. LIVING COMPOUND RISK & PRODUCT DEMO */}
-      <section aria-labelledby="telemetry-heading" className="mx-auto max-w-[1280px] px-6 py-20 sm:px-10 sm:py-32">
+      <section id="demo" aria-labelledby="telemetry-heading" className="scroll-mt-20 mx-auto max-w-[1280px] px-6 py-20 sm:px-10 sm:py-32">
         <div className="max-w-3xl space-y-4 mb-14 text-left">
           <span className="text-[12px] font-mono uppercase tracking-[0.1em] text-zinc-400 font-semibold">
             LIVING COMPOUND RISK

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Menu } from "lucide-react";
+import { Menu, Sparkles } from "lucide-react";
 import { useEffect, useState } from "react";
 import { UserButton } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
@@ -14,6 +14,7 @@ import { cn } from "@/lib/utils";
 const LINKS = [
   { href: "/#developer-hub", label: "CLI & MCP" },
   { href: "/#case-studies", label: "Post-Mortems" },
+  { href: "/#demo", label: "Live Demo" },
   { href: "/rules", label: "Detection Rules" },
   { href: "/architecture", label: "Architecture" },
   { href: "/#faq", label: "FAQ" },
@@ -23,6 +24,7 @@ const LINKS = [
 export function MarketingNav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [inDemoSection, setInDemoSection] = useState(false);
   const { enabled: authEnabled, isSignedIn, user, signOut } = useAuthBridge();
 
   useEffect(() => {
@@ -31,6 +33,34 @@ export function MarketingNav() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  useEffect(() => {
+    const checkDemo = () => {
+      if (typeof window === "undefined") return;
+      if (window.location.hash === "#demo") {
+        setInDemoSection(true);
+        return;
+      }
+      const el = document.getElementById("demo");
+      if (!el) {
+        setInDemoSection(false);
+        return;
+      }
+      const rect = el.getBoundingClientRect();
+      const inView = rect.top < window.innerHeight * 0.85 && rect.bottom > window.innerHeight * 0.15;
+      setInDemoSection(inView);
+    };
+
+    checkDemo();
+    window.addEventListener("scroll", checkDemo, { passive: true });
+    window.addEventListener("hashchange", checkDemo);
+    return () => {
+      window.removeEventListener("scroll", checkDemo);
+      window.removeEventListener("hashchange", checkDemo);
+    };
+  }, []);
+
+  const isStewardApplicable = isSignedIn || inDemoSection;
 
   return (
     <header
@@ -55,19 +85,22 @@ export function MarketingNav() {
           ))}
         </ul>
         <div className="ml-auto hidden items-center gap-3 sm:flex">
-          <button
-            type="button"
-            onClick={() => {
-              window.dispatchEvent(new CustomEvent("open-command-menu"));
-              window.dispatchEvent(new KeyboardEvent("keydown", { key: "k", metaKey: true, bubbles: true }));
-            }}
-            className="flex items-center gap-2 rounded-none border border-white/[0.08] bg-[#121316] px-3 py-1.5 text-xs text-zinc-400 transition-colors hover:border-white/[0.2] hover:text-zinc-200"
-          >
-            <span>Ask Steward</span>
-            <kbd className="inline-flex h-4 items-center justify-center rounded-none border border-white/[0.1] bg-black/40 px-1 font-mono text-[10px] text-zinc-400">
-              ⌘K
-            </kbd>
-          </button>
+          {isStewardApplicable && (
+            <button
+              type="button"
+              onClick={() => {
+                window.dispatchEvent(new CustomEvent("open-command-menu"));
+                window.dispatchEvent(new KeyboardEvent("keydown", { key: "k", metaKey: true, bubbles: true }));
+              }}
+              className="flex items-center gap-2 rounded-none border border-white/[0.08] bg-[#121316] px-3 py-1.5 text-xs text-zinc-400 transition-colors hover:border-white/[0.2] hover:text-zinc-200 animate-in fade-in duration-200"
+            >
+              <Sparkles className="size-3.5 text-brand" />
+              <span>Ask Steward</span>
+              <kbd className="inline-flex h-4 items-center justify-center rounded-none border border-white/[0.1] bg-black/40 px-1 font-mono text-[10px] text-zinc-400">
+                ⌘K
+              </kbd>
+            </button>
+          )}
           {isSignedIn ? (
             <>
               <Button asChild variant="ghost" size="sm">
@@ -141,6 +174,22 @@ export function MarketingNav() {
               ))}
             </ul>
             <div className="mt-auto flex flex-col gap-2 p-4">
+              {isStewardApplicable && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setOpen(false);
+                    window.dispatchEvent(new CustomEvent("open-command-menu"));
+                  }}
+                  className="flex items-center justify-between rounded-md border border-white/[0.12] bg-[#121316] px-3.5 py-2.5 text-body-sm text-zinc-200 transition-colors hover:border-brand/40 hover:text-white mb-1"
+                >
+                  <span className="flex items-center gap-2 font-medium">
+                    <Sparkles className="size-4 text-brand" />
+                    Ask Steward
+                  </span>
+                  <kbd className="font-mono text-caption text-zinc-400">⌘K</kbd>
+                </button>
+              )}
               {isSignedIn ? (
                 <>
                   <div className="flex items-center justify-between pb-2">

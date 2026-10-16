@@ -119,6 +119,9 @@ class WorkspaceCreate(Base):
 
 class WorkspacePatch(Base):
     name: Annotated[str, Field(min_length=2, max_length=80)] | None = None
+    clock_mode: Literal["live", "simulated"] | None = None
+    as_of: int | None = None
+
 
 
 class WorkspaceOut(Base):

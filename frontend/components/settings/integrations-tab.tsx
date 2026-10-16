@@ -73,8 +73,15 @@ export function IntegrationsTab() {
   const [emailEnabled, setEmailEnabled] = useState<boolean | null>(null);
   const [emailDigest, setEmailDigest] = useState<boolean | null>(null);
 
+  const [githubEnabled, setGithubEnabled] = useState<boolean | null>(null);
+  const [githubRepo, setGithubRepo] = useState<string | null>(null);
+  const [githubBlockOnFail, setGithubBlockOnFail] = useState<boolean | null>(null);
+
   const [webhookUrl, setWebhookUrl] = useState<string | null>(null);
   const [webhookEnabled, setWebhookEnabled] = useState<boolean | null>(null);
+  const [showHmacVerifier, setShowHmacVerifier] = useState(false);
+  const [hmacSamplePayload, setHmacSamplePayload] = useState('{"event":"alert.critical","rule_id":"R4"}');
+  const [hmacResult, setHmacResult] = useState<{ ts: string; signature: string } | null>(null);
 
   const saveMutation = useMutation({
     mutationFn: (body: Partial<IntegrationsData>) =>
@@ -124,8 +131,39 @@ export function IntegrationsTab() {
   const curEmailRecipients = emailRecipients ?? data.email.recipients.join(", ");
   const curEmailDigest = emailDigest ?? data.email.digest_weekly;
 
+  const curGithubEnabled = githubEnabled ?? data.github.enabled;
+  const curGithubRepo = githubRepo ?? data.github.repo;
+  const curGithubBlockOnFail = githubBlockOnFail ?? data.github.block_on_fail;
+
   const curWebhookEnabled = webhookEnabled ?? data.webhooks.enabled;
   const curWebhookUrl = webhookUrl ?? data.webhooks.endpoint_url;
+
+  const computeHmac = async (secret: string, payload: string) => {
+    try {
+      const ts = Math.floor(Date.now() / 1000).toString();
+      const stringToSign = `${ts}.${payload.trim()}`;
+      const enc = new TextEncoder();
+      const key = await window.crypto.subtle.importKey(
+        "raw",
+        enc.encode(secret),
+        { name: "HMAC", hash: "SHA-256" },
+        false,
+        ["sign"]
+      );
+      const signatureBuf = await window.crypto.subtle.sign(
+        "HMAC",
+        key,
+        enc.encode(stringToSign)
+      );
+      const hex = Array.from(new Uint8Array(signatureBuf))
+        .map((b) => b.toString(16).padStart(2, "0"))
+        .join("");
+      setHmacResult({ ts, signature: `v1=${hex}` });
+      toast.success("HMAC header X-INVARIX-Signature calculated!");
+    } catch {
+      toast.error("Failed to calculate HMAC signature.");
+    }
+  };
 
   return (
     <div className="space-y-6">
@@ -333,27 +371,83 @@ export function IntegrationsTab() {
 
       {/* 3. GitHub CI PR Gate Plugin */}
       <section className="card-e1 p-5 rounded-xl border border-border-subtle bg-surface space-y-4">
-        <div className="flex items-center justify-between gap-3 border-b border-border-subtle pb-3">
+        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border-subtle pb-3">
           <div className="flex items-center gap-3">
             <div className="flex size-10 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-white">
               <GithubIcon className="size-5" />
             </div>
             <div>
-              <h3 className="font-sans text-body font-semibold">
+              <h3 className="font-sans text-body font-semibold flex items-center gap-2">
                 GitHub CI Pull Request Guard
+                {curGithubEnabled && (
+                  <span className="rounded-md bg-emerald-500/10 px-2 py-0.5 font-mono text-[11px] font-medium text-emerald-400 border border-emerald-500/20">
+                    Active Gate
+                  </span>
+                )}
               </h3>
               <p className="text-body-sm text-text-secondary">
                 Block PR merges automatically when AST inspection reveals an unmitigated waiver or high-blast dependency path.
               </p>
             </div>
           </div>
-          <span className="rounded-md bg-brand/10 border border-brand/30 px-2 py-0.5 font-mono text-[11px] font-medium text-brand">
-            Pre-Merge CI
-          </span>
+          <Switch
+            checked={curGithubEnabled}
+            disabled={!isAdmin}
+            onCheckedChange={(checked) => setGithubEnabled(checked)}
+            aria-label="Toggle GitHub Actions CI gate"
+          />
+        </div>
+
+        <div className="grid gap-4 sm:grid-cols-2">
+          <label className="block space-y-1.5 text-body-sm">
+            <span className="font-medium text-text-primary">Target GitHub Repository</span>
+            <Input
+              value={curGithubRepo}
+              onChange={(e) => setGithubRepo(e.target.value)}
+              placeholder="e.g. northwind-corp/payments-core"
+              className="font-mono text-body-sm rounded-md"
+              disabled={!isAdmin}
+            />
+          </label>
+          <div className="flex flex-col justify-end">
+            <div className="flex items-center justify-between rounded-lg border border-border-subtle bg-surface-raised p-3">
+              <div className="space-y-0.5">
+                <span className="text-body-sm font-medium text-text-primary">Strict Pre-Merge Gate</span>
+                <p className="text-caption text-text-muted">
+                  Fail workflow exit code (1) if critical debt or ghost owner is found.
+                </p>
+              </div>
+              <Switch
+                checked={curGithubBlockOnFail}
+                disabled={!isAdmin}
+                onCheckedChange={(checked) => setGithubBlockOnFail(checked)}
+                aria-label="Toggle strict block on fail"
+              />
+            </div>
+          </div>
         </div>
 
         <div className="space-y-2">
-          <span className="text-body-sm font-medium text-text-primary">Workflow Configuration: <code className="text-brand font-mono">.github/workflows/invarix.yml</code></span>
+          <div className="flex items-center justify-between">
+            <span className="text-body-sm font-medium text-text-primary">
+              Workflow Configuration: <code className="text-brand font-mono">.github/workflows/invarix.yml</code>
+            </span>
+            <Button
+              size="sm"
+              disabled={!isAdmin || saveMutation.isPending}
+              onClick={() =>
+                saveMutation.mutate({
+                  github: {
+                    enabled: curGithubEnabled,
+                    repo: curGithubRepo,
+                    block_on_fail: curGithubBlockOnFail,
+                  },
+                })
+              }
+            >
+              Save GitHub CI config
+            </Button>
+          </div>
           <div className="relative rounded-lg border border-border-subtle bg-[#090a0f] p-3.5">
             <pre className="font-mono text-caption text-zinc-300 overflow-x-auto leading-relaxed">
 {`name: INVARIX Pre-Merge Security Gate
@@ -364,7 +458,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Scan Code Waivers & Dependencies
-        run: npx invarix scan --strict --workspace ${wsId}
+        run: npx invarix scan ${curGithubBlockOnFail ? "--strict" : "--warn"} --workspace ${wsId}
         env:
           INVARIX_TOKEN: \${{ secrets.INVARIX_API_KEY }}`}
             </pre>
@@ -374,7 +468,7 @@ jobs:
               className="absolute top-2.5 right-2.5 h-7 px-2 font-mono text-[11px] text-zinc-300 hover:text-white"
               onClick={() =>
                 copyToClipboard(
-                  `name: INVARIX Pre-Merge Security Gate\non: [pull_request]\njobs:\n  graph-governance:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - name: Scan Code Waivers & Dependencies\n        run: npx invarix scan --strict --workspace ${wsId}\n        env:\n          INVARIX_TOKEN: \${{ secrets.INVARIX_API_KEY }}`,
+                  `name: INVARIX Pre-Merge Security Gate\non: [pull_request]\njobs:\n  graph-governance:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - name: Scan Code Waivers & Dependencies\n        run: npx invarix scan ${curGithubBlockOnFail ? "--strict" : "--warn"} --workspace ${wsId}\n        env:\n          INVARIX_TOKEN: \${{ secrets.INVARIX_API_KEY }}`,
                   "github-action"
                 )
               }
@@ -445,9 +539,16 @@ jobs:
 
         <div className="flex flex-wrap items-center justify-between gap-3 pt-2">
           <p className="text-caption text-text-muted">
-            Includes signature header <code>X-INVARIX-Signature: v1=&lt;hmac&gt;</code> for payload verification.
+            Includes signature header <code>X-INVARIX-Signature: v1=&lt;hmac&gt;</code> and <code>X-INVARIX-Timestamp</code>.
           </p>
           <div className="flex items-center gap-2">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setShowHmacVerifier(!showHmacVerifier)}
+            >
+              {showHmacVerifier ? "Hide HMAC Inspector" : "Verify HMAC Signature"}
+            </Button>
             <Button
               variant="secondary"
               size="sm"
@@ -479,6 +580,67 @@ jobs:
             </Button>
           </div>
         </div>
+
+        {/* HMAC Signature Verification & Inspector */}
+        {showHmacVerifier && (
+          <div className="mt-4 rounded-lg border border-border-strong bg-[#090a0f] p-4 space-y-4">
+            <div className="flex items-center justify-between border-b border-white/10 pb-2">
+              <h4 className="font-sans text-body-sm font-semibold text-text-primary flex items-center gap-2">
+                <span>HMAC Header Verification (<code className="text-brand">X-INVARIX-Signature</code>)</span>
+              </h4>
+              <span className="font-mono text-[11px] text-zinc-400">Algorithm: HMAC-SHA256</span>
+            </div>
+
+            <p className="text-caption text-text-secondary leading-relaxed">
+              Every webhook sent by INVARIX signs the raw payload with your secret using standard Svix HMAC-SHA256:
+              <br />
+              <code className="text-brand font-mono text-[11px]">Signature = HMAC_SHA256(secret, &quot;$&#123;timestamp&#125;.$&#123;raw_payload&#125;&quot;)</code>
+            </p>
+
+            <div className="space-y-2">
+              <label className="block text-caption font-medium text-text-muted">
+                Test Payload JSON:
+              </label>
+              <textarea
+                rows={2}
+                value={hmacSamplePayload}
+                onChange={(e) => setHmacSamplePayload(e.target.value)}
+                className="w-full rounded border border-border-subtle bg-surface p-2 font-mono text-caption text-text-primary focus:outline-none focus:ring-1 focus:ring-brand"
+              />
+              <Button
+                variant="secondary"
+                size="sm"
+                onClick={() => computeHmac(data.webhooks.secret, hmacSamplePayload)}
+                className="text-xs"
+              >
+                Compute &amp; Verify Signature
+              </Button>
+            </div>
+
+            {hmacResult && (
+              <div className="space-y-2 pt-2 border-t border-white/10 text-caption font-mono">
+                <div className="flex items-center justify-between bg-surface p-2 rounded border border-border-subtle">
+                  <span className="text-zinc-400">X-INVARIX-Timestamp:</span>
+                  <span className="text-zinc-200">{hmacResult.ts}</span>
+                </div>
+                <div className="flex items-center justify-between bg-surface p-2 rounded border border-border-subtle">
+                  <span className="text-zinc-400">X-INVARIX-Signature:</span>
+                  <span className="text-emerald-400 break-all ml-2">{hmacResult.signature}</span>
+                </div>
+              </div>
+            )}
+
+            <div className="pt-2 border-t border-white/10">
+              <span className="text-caption font-medium text-text-muted">Verification code snippet (Python / Fastify):</span>
+              <pre className="mt-1 font-mono text-[11px] text-zinc-400 bg-surface/60 p-2.5 rounded border border-border-subtle overflow-x-auto">
+{`# Python verification:
+import hmac, hashlib
+sig = hmac.new(secret.encode(), f"{timestamp}.{raw_body}".encode(), hashlib.sha256).hexdigest()
+is_valid = hmac.compare_digest(f"v1={sig}", request_signature)`}
+              </pre>
+            </div>
+          </div>
+        )}
       </section>
 
       {/* 5. Model Context Protocol (MCP) IDE Plugin */}

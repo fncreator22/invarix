@@ -174,16 +174,20 @@ export function TopBar({ sentinel }: { sentinel: SentinelState }) {
             <TooltipTrigger asChild>
               <Button
                 variant="ghost"
-                size="icon"
-                aria-label={stewardOpen ? "Close Steward" : "Open Steward"}
+                size="sm"
+                aria-label={stewardOpen ? "Close Steward" : "Ask Steward"}
                 aria-pressed={stewardOpen}
                 onClick={() => setStewardOpen(!stewardOpen)}
-                className={cn("hidden sm:inline-flex", stewardOpen && "bg-brand-soft text-brand")}
+                className={cn(
+                  "hidden sm:inline-flex items-center gap-1.5 h-8 px-2 text-caption font-medium text-text-secondary hover:text-text-primary hover:bg-surface-elevated",
+                  stewardOpen && "bg-brand-soft text-brand font-semibold",
+                )}
               >
-                <Sparkles aria-hidden className="size-5" strokeWidth={1.5} />
+                <Sparkles aria-hidden className="size-4 text-brand" strokeWidth={1.5} />
+                <span className="hidden xl:inline">Ask Steward</span>
               </Button>
             </TooltipTrigger>
-            <TooltipContent>Steward</TooltipContent>
+            <TooltipContent>Ask Steward (AI Agent)</TooltipContent>
           </Tooltip>
           <NotificationsBell />
           <AccountMenu />
