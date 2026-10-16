@@ -98,6 +98,7 @@ def compute_avalanche_centrality(
     target_service_id: str | None = None,
     p0: float = DEFAULT_P0,
     k_avalanche: float = DEFAULT_K_AVALANCHE,
+    cascade_mode: str = "independent",
 ) -> list[AvalancheCentralityItem]:
     """Calculate Avalanche Centrality and SPOF ranking for all target services."""
     targets: dict[str, dict[str, Any]] = {}
@@ -184,7 +185,7 @@ def compute_avalanche_centrality(
 
         for dep_id, dep_info in dependents.items():
             hops_list = dep_info["hops"]
-            p_cascade = combine_path_probabilities(hops_list, p0)
+            p_cascade = combine_path_probabilities(hops_list, p0, mode=cascade_mode)
             tier = dep_info["tier"]
             tier_weight = TIER_WEIGHTS.get(tier, 1.0)
             if dep_info.get("customer_facing"):
@@ -203,7 +204,7 @@ def compute_avalanche_centrality(
 
         for cpid, cp_info in cp_dict.items():
             hops_list = cp_info["hops"]
-            p_cascade = combine_path_probabilities(hops_list, p0)
+            p_cascade = combine_path_probabilities(hops_list, p0, mode=cascade_mode)
             raw_ac += CUSTOMER_PATH_WEIGHT * p_cascade
 
             proof_nodes.add(cpid)
@@ -221,10 +222,7 @@ def compute_avalanche_centrality(
         if not all_coupling_hops:
             cascade_prob = 0.0
         else:
-            prob_no_cascade = 1.0
-            for h in all_coupling_hops:
-                prob_no_cascade *= 1.0 - (p0**h if h > 0 else 1.0)
-            cascade_prob = 1.0 - prob_no_cascade
+            cascade_prob = combine_path_probabilities(all_coupling_hops, p0, mode=cascade_mode)
 
         k = k_avalanche if (k_avalanche and k_avalanche > 0) else DEFAULT_K_AVALANCHE
         score = 100.0 * (1.0 - math.exp(-raw_ac / k))
