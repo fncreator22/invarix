@@ -16,6 +16,14 @@ import {
   Zap,
 } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { Logo, LogoMark } from "@/components/logo";
 import { FOOTER_NAV, PRIMARY_NAV, formatBadge, isActive, type NavItem } from "@/components/shell/nav";
 import { useShell } from "@/components/shell/shell-context";
@@ -108,12 +116,77 @@ function RailLink({ item, collapsed, count }: { item: NavItem; collapsed: boolea
     </div>
   );
   if (!collapsed) return link;
+
+  if (isSettings) {
+    return (
+      <DropdownMenu>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <DropdownMenuTrigger asChild>
+              <button
+                type="button"
+                aria-label="Settings navigation menu"
+                className={cn(
+                  "group relative flex h-10 w-10 mx-auto items-center justify-center rounded-md text-body font-medium transition-colors duration-(--dur-fast)",
+                  active || pathname.includes("/settings")
+                    ? "bg-brand-soft text-text-primary font-semibold ring-1 ring-brand/30"
+                    : "text-text-secondary hover:bg-brand-soft/60 hover:text-text-primary",
+                )}
+              >
+                {(active || pathname.includes("/settings")) && (
+                  <span aria-hidden className="absolute inset-y-2 left-0 w-0.5 rounded-full bg-brand" />
+                )}
+                <Icon aria-hidden className={cn("size-5 shrink-0", active || pathname.includes("/settings") ? "text-brand" : "text-text-secondary")} strokeWidth={1.5} />
+                <span className="sr-only">Settings</span>
+              </button>
+            </DropdownMenuTrigger>
+          </TooltipTrigger>
+          <TooltipContent side="right">
+            Settings (Click to view all 7 sections)
+          </TooltipContent>
+        </Tooltip>
+
+        <DropdownMenuContent side="right" align="start" sideOffset={12} className="w-60 p-1.5 shadow-xl border border-border-subtle bg-surface">
+          <DropdownMenuLabel className="px-2 py-1.5 text-xs font-semibold uppercase tracking-wider text-text-muted flex items-center justify-between">
+            <span>Settings</span>
+            <span className="text-[10px] font-mono font-normal lowercase bg-surface-sunken px-1.5 py-0.5 rounded border border-border-subtle">
+              7 sections
+            </span>
+          </DropdownMenuLabel>
+          <DropdownMenuSeparator className="my-1 border-border-subtle" />
+          {SETTINGS_SUB_ITEMS.map((sub) => {
+            const isSubActive =
+              pathname.includes(`/settings/${sub.key}`) ||
+              (sub.key === "profile" && pathname.endsWith("/settings"));
+            const SubIcon = sub.icon;
+            return (
+              <DropdownMenuItem key={sub.key} asChild className="p-0 focus:bg-transparent">
+                <Link
+                  href={`/w/${slug}/${sub.href}`}
+                  className={cn(
+                    "flex w-full items-center gap-2.5 rounded-md px-2.5 py-2 text-xs font-medium transition-colors cursor-pointer",
+                    isSubActive
+                      ? "bg-brand text-white font-semibold shadow-xs"
+                      : "text-text-secondary hover:bg-surface-sunken hover:text-text-primary focus:bg-surface-sunken focus:text-text-primary"
+                  )}
+                >
+                  <SubIcon className={cn("size-4 shrink-0", isSubActive ? "text-white" : "text-text-muted")} />
+                  <span className="truncate flex-1">{sub.label}</span>
+                  {isSubActive && <span className="size-1.5 rounded-full bg-white" />}
+                </Link>
+              </DropdownMenuItem>
+            );
+          })}
+        </DropdownMenuContent>
+      </DropdownMenu>
+    );
+  }
+
   return (
     <Tooltip>
       <TooltipTrigger asChild>{link}</TooltipTrigger>
       <TooltipContent side="right">
         {item.label}
-        {isSettings && isSettingsExpanded && " (Options expanded)"}
       </TooltipContent>
     </Tooltip>
   );

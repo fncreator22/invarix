@@ -104,5 +104,60 @@ test.describe("Visual Re-verification & Screenshot Inspection", () => {
     const navSteward = page.locator("header nav").getByRole("button", { name: /ask steward/i });
     expect(await navSteward.count()).toBe(0);
   });
+
+  test("08: Collapsed Left Rail - Settings Flyout Popover", async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto("http://localhost:3001/w/northwind-pay/home", { waitUntil: "domcontentloaded" });
+    await page.waitForTimeout(1500);
+
+    // Click collapse button in left rail
+    const collapseBtn = page.getByRole("button", { name: /collapse/i });
+    if ((await collapseBtn.count()) > 0) {
+      await collapseBtn.click();
+      await page.waitForTimeout(600);
+    }
+
+    // In collapsed mode, find visible Settings button and click it to open flyout
+    const settingsBtn = page.locator("nav[aria-label='Primary'] button[aria-label='Settings navigation menu']:visible");
+    await expect(settingsBtn).toBeVisible();
+    await settingsBtn.click();
+    await page.waitForTimeout(600);
+
+    await page.screenshot({ path: path.join(evidenceDir, "10-collapsed-rail-settings-flyout.png") });
+  });
+
+  test("09: Integrations - Open Interactive Configuration Modal", async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto("http://localhost:3001/w/northwind-pay/settings/integrations", { waitUntil: "domcontentloaded" });
+    await page.waitForTimeout(1500);
+
+    // Click Jira Software card
+    const jiraCard = page.getByRole("button", { name: /jira software/i });
+    await expect(jiraCard).toBeVisible();
+    await jiraCard.click();
+    await page.waitForTimeout(800);
+
+    await page.screenshot({ path: path.join(evidenceDir, "11-integrations-modal-jira.png") });
+  });
+
+  test("10: Integrations - Light Mode Verification", async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    // Go to settings profile and switch to light mode
+    await page.goto("http://localhost:3001/w/northwind-pay/settings/profile", { waitUntil: "domcontentloaded" });
+    await page.waitForTimeout(1000);
+
+    const lightThemeBtn = page.getByRole("radio", { name: /light/i });
+    if ((await lightThemeBtn.count()) > 0) {
+      await lightThemeBtn.click();
+      await page.waitForTimeout(600);
+    }
+
+    // Now navigate to integrations in light mode
+    await page.goto("http://localhost:3001/w/northwind-pay/settings/integrations", { waitUntil: "domcontentloaded" });
+    await page.waitForTimeout(1500);
+
+    await page.screenshot({ path: path.join(evidenceDir, "12-integrations-light-mode.png") });
+  });
 });
+
 

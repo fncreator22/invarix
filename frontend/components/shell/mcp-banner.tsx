@@ -70,10 +70,7 @@ export function McpBanner() {
     >
       <div className="flex flex-wrap items-center gap-2.5">
         <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-soft px-2.5 py-0.5 text-xs font-medium text-brand">
-          <span className="relative flex size-2">
-            <span className="absolute inline-flex size-full animate-ping rounded-full bg-brand opacity-75" />
-            <span className="relative inline-flex size-2 rounded-full bg-brand-solid" />
-          </span>
+          <span className="size-2 rounded-full bg-brand-solid shrink-0" />
           <Cpu className="size-3.5" aria-hidden />
           MCP Ready
         </span>
