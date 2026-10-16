@@ -78,13 +78,13 @@ async def current_user(
     s = get_settings()
     if x_api_key is not None:
         key = x_api_key.strip()
-        if not key or not (key.startswith("rep_live_") or key.startswith("rep_test_")) or len(key) < 14:
+        if not key or not (key.startswith("rep_live_") or key.startswith("rep_test_") or key.startswith("inv_live_") or key.startswith("inv_test_")) or len(key) < 14:
             raise ApiError("UNAUTHENTICATED", "Invalid API key format.")
         secret_hash = hashlib.sha256(key.encode("utf-8")).hexdigest()
         platform = platform_repo()
         rows = await platform.read("p_api_key_lookup", secret_hash=secret_hash)
         if not rows:
-            if key == "rep_live_local":
+            if key in ("rep_live_local", "inv_live_local"):
                 if s.dev_auth:
                     if s.env_name not in ("local", "test") or s.env_name == "production":
                         raise ApiError("UNAUTHENTICATED", "dev_auth key rejected in non-local environment.")

@@ -1,15 +1,32 @@
 import type { Metadata } from "next";
-import { redirect } from "next/navigation";
-import { AuthNotConfigured } from "@/components/auth-not-configured";
 import { CLERK_ENABLED } from "@/lib/auth-config";
 import { SignIn } from "@clerk/nextjs";
+import { AuthCard } from "@/components/auth/auth-card";
 
-export const metadata: Metadata = { title: "Sign in" };
+export const metadata: Metadata = { title: "Sign in · INVARIX" };
 
-// Clerk keeps ?redirect_url so deep links return where they started (SCR-A-03).
 export default function SignInPage() {
-  if (!CLERK_ENABLED) {
-    redirect("/w/northwind-pay/home");
+  if (CLERK_ENABLED) {
+    return (
+      <div className="flex w-full flex-col items-center gap-6">
+        <SignIn
+          path="/sign-in"
+          routing="path"
+          signUpUrl="/sign-up"
+          fallbackRedirectUrl="/workspaces"
+        />
+        <div className="text-center">
+          <p className="text-caption text-text-muted">
+            Prefer local zero-trust auth?{" "}
+            <a href="/w/northwind-pay/home" className="text-brand hover:underline font-medium">
+              Launch Live Sandbox (0 Login)
+            </a>
+          </p>
+        </div>
+      </div>
+    );
   }
-  return <SignIn path="/sign-in" routing="path" signUpUrl="/sign-up" fallbackRedirectUrl="/workspaces" />;
+
+  // Standalone Custom Auth Mode (No third-party dependency required)
+  return <AuthCard initialMode="sign-in" redirectUrl="/workspaces" />;
 }

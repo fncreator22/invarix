@@ -40,6 +40,7 @@ export interface Membership {
   role: Role;
   person_id: string | null;
   status: WorkspaceStatus;
+  description?: string;
 }
 export interface UserOut {
   id: string;

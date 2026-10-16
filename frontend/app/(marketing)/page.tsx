@@ -11,6 +11,7 @@ import {
   Cpu,
   Route,
   ArrowRight,
+  Sparkles,
 } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
@@ -137,19 +138,26 @@ export default function LandingPage() {
               </p>
 
               <div className="flex flex-wrap items-center gap-3 pt-2">
-                <Button
-                  type="button"
-                  size="lg"
-                  onClick={() => setBookCallOpen(true)}
-                  className="gap-2 font-semibold px-6 py-6 text-body-base bg-brand-solid hover:bg-brand-solid/90 text-white shadow-xl shadow-brand-solid/25 transition-all hover:scale-[1.02] active:scale-[0.98]"
-                >
-                  <Calendar className="size-4" aria-hidden="true" />
-                  Book Architecture Audit
+                <Button asChild size="lg" className="gap-2 font-semibold px-6 py-6 text-body-base bg-brand-solid hover:bg-brand-solid/90 text-white shadow-xl shadow-brand-solid/25 transition-all hover:scale-[1.02] active:scale-[0.98]">
+                  <Link href="/sign-up">
+                    <Sparkles className="size-4" aria-hidden="true" />
+                    Get Started Free
+                  </Link>
                 </Button>
                 <Button asChild variant="outline" size="lg" className="border-white/15 bg-white/[0.04] text-zinc-200 hover:bg-white/[0.08] hover:text-white px-6 py-6 text-body-base font-semibold">
                   <Link href="/w/northwind-pay/home">
                     Launch Live Sandbox (0 Login)
                   </Link>
+                </Button>
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="lg"
+                  onClick={() => setBookCallOpen(true)}
+                  className="gap-2 font-semibold px-4 py-6 text-body-base text-zinc-400 hover:text-white"
+                >
+                  <Calendar className="size-4" aria-hidden="true" />
+                  Book Architecture Audit
                 </Button>
               </div>
             </div>

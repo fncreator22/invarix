@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Logo } from "@/components/logo";
 import { useAuthBridge } from "@/lib/auth";
+import { CLERK_ENABLED } from "@/lib/auth-config";
 import { cn } from "@/lib/utils";
 
 const LINKS = [
@@ -22,7 +23,7 @@ const LINKS = [
 export function MarketingNav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const { enabled: authEnabled, isSignedIn } = useAuthBridge();
+  const { enabled: authEnabled, isSignedIn, user, signOut } = useAuthBridge();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -67,40 +68,49 @@ export function MarketingNav() {
               ⌘K
             </kbd>
           </button>
-          {authEnabled && isSignedIn ? (
+          {isSignedIn ? (
             <>
-              <Button asChild variant="ghost">
-                <Link href="/workspaces">Dashboard</Link>
-              </Button>
-              <div className="flex items-center pl-1">
-                <UserButton
-                  appearance={{
-                    elements: {
-                      avatarBox: "size-8 rounded-full ring-1 ring-white/20 hover:ring-brand",
-                    },
-                  }}
-                />
-              </div>
-            </>
-          ) : authEnabled ? (
-            <>
-              <Button asChild variant="ghost" size="sm" className="hidden lg:inline-flex text-zinc-300 hover:text-white">
-                <Link href="/w/northwind-pay/home">Live Sandbox (0 Login)</Link>
-              </Button>
               <Button asChild variant="ghost" size="sm">
-                <Link href="/sign-in">Sign in</Link>
+                <Link href="/workspaces">Workspaces</Link>
               </Button>
               <Button asChild size="sm">
-                <Link href="/sign-up">Get started</Link>
+                <Link href="/w/northwind-pay/home">Dashboard</Link>
               </Button>
+              {CLERK_ENABLED ? (
+                <div className="flex items-center pl-1">
+                  <UserButton
+                    appearance={{
+                      elements: {
+                        avatarBox: "size-8 rounded-full ring-1 ring-white/20 hover:ring-brand",
+                      },
+                    }}
+                  />
+                </div>
+              ) : (
+                <div className="flex items-center gap-2 pl-1">
+                  <span className="inline-flex size-8 items-center justify-center rounded-full bg-brand-soft border border-brand/30 text-xs font-bold text-brand">
+                    {user?.name ? user.name.slice(0, 1).toUpperCase() : "U"}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => signOut()}
+                    className="text-caption text-zinc-400 hover:text-white"
+                  >
+                    Sign out
+                  </button>
+                </div>
+              )}
             </>
           ) : (
             <>
-              <Button asChild variant="ghost">
-                <Link href="/w/northwind-pay/home">Enter Demo</Link>
+              <Button asChild variant="ghost" size="sm" className="hidden lg:inline-flex text-zinc-300 hover:text-white border border-white/10 hover:border-white/20 bg-white/[0.02]">
+                <Link href="/w/northwind-pay/home">Live Sandbox (0 Login)</Link>
               </Button>
-              <Button asChild>
-                <Link href="/w/northwind-pay/home">Open Dashboard</Link>
+              <Button asChild variant="ghost" size="sm" className="text-zinc-200 hover:text-white">
+                <Link href="/sign-in">Sign in</Link>
+              </Button>
+              <Button asChild size="sm" className="bg-brand hover:bg-brand/90 text-white font-medium shadow-md shadow-brand/20">
+                <Link href="/sign-up">Get started</Link>
               </Button>
             </>
           )}
@@ -131,21 +141,41 @@ export function MarketingNav() {
               ))}
             </ul>
             <div className="mt-auto flex flex-col gap-2 p-4">
-              {authEnabled && isSignedIn ? (
+              {isSignedIn ? (
                 <>
                   <div className="flex items-center justify-between pb-2">
-                    <span className="text-body-sm text-text-muted">Account</span>
-                    <UserButton />
+                    <span className="text-body-sm text-text-muted">
+                      {user ? user.email : "Signed In"}
+                    </span>
+                    {CLERK_ENABLED ? (
+                      <UserButton />
+                    ) : (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setOpen(false);
+                          signOut();
+                        }}
+                        className="text-caption text-zinc-400 hover:text-white"
+                      >
+                        Sign out
+                      </button>
+                    )}
                   </div>
-                  <Button asChild size="lg">
+                  <Button asChild size="lg" variant="secondary">
                     <Link href="/workspaces" onClick={() => setOpen(false)}>
+                      Workspaces
+                    </Link>
+                  </Button>
+                  <Button asChild size="lg">
+                    <Link href="/w/northwind-pay/home" onClick={() => setOpen(false)}>
                       Open Dashboard
                     </Link>
                   </Button>
                 </>
-              ) : authEnabled ? (
+              ) : (
                 <>
-                  <Button asChild size="lg">
+                  <Button asChild size="lg" className="bg-brand hover:bg-brand/90 text-white font-medium">
                     <Link href="/sign-up" onClick={() => setOpen(false)}>
                       Get started
                     </Link>
@@ -155,17 +185,9 @@ export function MarketingNav() {
                       Sign in
                     </Link>
                   </Button>
-                </>
-              ) : (
-                <>
-                  <Button asChild size="lg">
+                  <Button asChild size="lg" variant="ghost" className="text-zinc-300">
                     <Link href="/w/northwind-pay/home" onClick={() => setOpen(false)}>
-                      Open Dashboard
-                    </Link>
-                  </Button>
-                  <Button asChild size="lg" variant="secondary">
-                    <Link href="/w/northwind-pay/home" onClick={() => setOpen(false)}>
-                      Enter Demo
+                      Live Sandbox (0 Login)
                     </Link>
                   </Button>
                 </>
