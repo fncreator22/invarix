@@ -158,6 +158,14 @@ test.describe("Visual Re-verification & Screenshot Inspection", () => {
 
     await page.screenshot({ path: path.join(evidenceDir, "12-integrations-light-mode.png") });
   });
+
+  test("11: AuthPage - Split-Screen with Floating Paths & Clerk OAuth", async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto("http://localhost:3001/sign-in", { waitUntil: "domcontentloaded" });
+    await page.waitForTimeout(1500);
+
+    await page.screenshot({ path: path.join(evidenceDir, "13-auth-page-split-screen.png") });
+  });
 });
 
 
