@@ -17,6 +17,8 @@ class Settings(BaseSettings):
     falkordb_username: str | None = None
     falkordb_password: str | None = None
     falkordb_tls: bool = False
+    graph_backend: Literal["falkordb", "postgres", "memory"] = "falkordb"
+    database_url: str = ""
 
     clerk_jwks_url: str = ""
     clerk_issuer: str = ""

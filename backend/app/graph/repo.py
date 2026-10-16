@@ -61,10 +61,13 @@ def _rows(result: Any) -> list[Row]:
 class Repo:
     """Executes named queries against one graph."""
 
-    def __init__(self, db: FalkorDB, graph: str):
+    def __init__(self, db: Any, graph: str):
         self.db = db
         self.graph_name = graph
-        self.g = db.select_graph(graph)
+        if hasattr(db, "select_graph"):
+            self.g = db.select_graph(graph)
+        else:
+            self.g = db
 
     async def read(
         self, qid: str, *, label: str | None = None, timeout: int = READ_TIMEOUT_MS, **params: Any
