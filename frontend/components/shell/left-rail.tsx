@@ -67,7 +67,7 @@ export function LeftRail() {
       )}
     >
       <div className={cn("flex h-(--topbar-h) items-center border-b border-border-subtle px-4", railCollapsed && "md:justify-center md:px-0")}>
-        <Link href={`/w/${slug}/home`} aria-label="Reprieve home" className="rounded-md">
+        <Link href={`/w/${slug}/home`} aria-label="INVARIX home" className="rounded-md">
           <LogoMark className={cn("md:hidden", railCollapsed && "md:block")} />
           <Logo className={cn("hidden", !railCollapsed && "md:inline-flex")} />
         </Link>

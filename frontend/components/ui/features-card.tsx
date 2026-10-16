@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { Terminal, Cpu, GitPullRequest, Copy, Check, BarChart3 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-const GITHUB_ACTION_YAML = `name: Reprieve Architecture Gate
+const GITHUB_ACTION_YAML = `name: INVARIX Architecture Gate
 on: [pull_request]
 jobs:
   gate:
@@ -12,9 +12,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: AST Code Waiver Scan
-        run: npx reprieve scan --strict --submit
+        run: npx invarix scan --strict --submit
       - name: Enforce Avalanche Gate
-        run: npx reprieve check --horizon 30 --fail-threshold 75.0`;
+        run: npx invarix check --horizon 30 --fail-threshold 75.0`;
 
 function FalkorDbLogo({ className = "size-5" }: { className?: string }) {
   return (
@@ -114,7 +114,7 @@ export function FeaturesCard() {
           Three Native Interfaces. Zero Friction.
         </h2>
         <p className="text-[1.125rem] text-zinc-300 leading-relaxed">
-          Developers don&apos;t want another dashboard. Reprieve comments directly on pull requests, exposes 14 graph reasoning tools to Cursor and Claude Desktop via MCP, and runs in 12ms inside your CI pipeline with zero login.
+          Developers don&apos;t want another dashboard. INVARIX comments directly on pull requests, exposes 14 graph reasoning tools to Cursor and Claude Desktop via MCP, and runs in 12ms inside your CI pipeline with zero login.
         </p>
       </div>
 
@@ -138,10 +138,10 @@ export function FeaturesCard() {
           </div>
 
           <div className="rounded-none border border-white/[0.08] bg-[#07080a] p-3 font-mono text-[12px] flex items-center justify-between">
-            <span className="text-zinc-300 truncate">npx reprieve scan --strict</span>
+            <span className="text-zinc-300 truncate">npx invarix scan --strict</span>
             <button
               type="button"
-              onClick={() => handleCopy("npx reprieve scan --strict")}
+              onClick={() => handleCopy("npx invarix scan --strict")}
               aria-label="Copy CLI command"
               className="ml-2 p-1.5 rounded-none hover:bg-white/10 text-zinc-400 hover:text-white transition-colors"
             >

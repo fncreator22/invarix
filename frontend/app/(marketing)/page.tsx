@@ -33,12 +33,12 @@ const TRUST_CHIPS = [
 
 const FAQ = [
   {
-    q: "What is Reprieve?",
+    q: "What is INVARIX?",
     a: "An agentic safety platform that tracks temporary exceptions (security waivers, flag overrides, skipped tests, limit extensions) as a graph, detects when they add up to real risk, and routes a review to the person who can decide today.",
   },
   {
     q: "Is it a GRC suite?",
-    a: "No. Reprieve does one job: exception debt. It does not manage policies, audits or vendor risk. It complements the tools where exceptions are approved.",
+    a: "No. INVARIX does one job: exception debt. It does not manage policies, audits or vendor risk. It complements the tools where exceptions are approved.",
   },
   {
     q: "How are risk scores calculated?",
@@ -129,11 +129,11 @@ export default function LandingPage() {
 
               <h1 id="hero-title" className="text-[2.75rem] sm:text-[3.5rem] lg:text-[4rem] font-display font-bold tracking-[-0.04em] text-white leading-[1.05]">
                 Three harmless exceptions. One catastrophic collision.{" "}
-                <span className="text-zinc-400 font-normal block sm:inline">Reprieve intercepts compound risk before merge.</span>
+                <span className="text-zinc-400 font-normal block sm:inline">INVARIX intercepts compound risk before merge.</span>
               </h1>
 
               <p className="text-[1.125rem] text-zinc-300 leading-relaxed max-w-2xl">
-                Sprint boards treat waivers as isolated tickets. Reprieve models temporary bypasses and skipped tests as promises on your microservice graph to stop multi-hop cascading outages.
+                Sprint boards treat waivers as isolated tickets. INVARIX models temporary bypasses and skipped tests as promises on your microservice graph to stop multi-hop cascading outages.
               </p>
 
               <div className="flex flex-wrap items-center gap-3 pt-2">
@@ -182,7 +182,7 @@ export default function LandingPage() {
             Risk compounds across the graph.
           </h2>
           <p className="text-[1.125rem] text-zinc-300 leading-relaxed">
-            Sprint boards treat waivers as isolated tickets. Reprieve projects them onto your microservice topology to catch cascading failures before peak traffic.
+            Sprint boards treat waivers as isolated tickets. INVARIX projects them onto your microservice topology to catch cascading failures before peak traffic.
           </p>
         </div>
 

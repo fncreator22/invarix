@@ -8,7 +8,7 @@ export default function NotFound() {
   return (
     <div className="relative flex min-h-dvh flex-col items-center justify-center px-6 text-center">
       <div aria-hidden className="aurora-mesh pointer-events-none absolute inset-0" />
-      <Link href="/" aria-label="Reprieve home" className="relative mb-10">
+      <Link href="/" aria-label="INVARIX home" className="relative mb-10">
         <Logo />
       </Link>
       <main id="main" className="relative flex max-w-md flex-col items-center">

@@ -5,7 +5,6 @@ export const TABS = {
   ai: "AI",
   "api-keys": "API Keys",
   integrations: "Integrations & Plugins",
-  admin: "Admin & Users",
   billing: "Plans & Pricing",
 } as const;
 export type SettingsTab = keyof typeof TABS;

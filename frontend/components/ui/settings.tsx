@@ -353,7 +353,7 @@ export function SettingsWorkspaceHub({
                   <div>
                      <div className="flex flex-wrap items-center gap-2 mb-1">
                         <span className="font-mono text-[10px] uppercase tracking-wider text-brand font-semibold px-1.5 py-0.5 bg-brand-soft border border-brand/20">
-                           Reprieve Workspace Hub
+                           INVARIX Workspace Hub
                         </span>
                         <span className="font-mono text-[10px] uppercase tracking-wider text-text-muted flex items-center gap-1.5">
                            <span className="size-1.5 rounded-full bg-emerald-500" />
@@ -848,11 +848,11 @@ export function SettingsWorkspaceHub({
                   <div className="space-y-2">
                      <span className="text-caption font-mono uppercase text-text-muted">1. Instant Zero-Login Scan</span>
                      <div className="flex items-center justify-between bg-surface-sunken border border-border-subtle p-3 font-mono text-body-sm">
-                        <code>npx reprieve scan --strict</code>
+                        <code>npx invarix scan --strict</code>
                         <Button
                            variant="ghost"
                            size="sm"
-                           onClick={() => copyToClipboard('npx reprieve scan --strict', 'cmd-scan')}
+                           onClick={() => copyToClipboard('npx invarix scan --strict', 'cmd-scan')}
                         >
                            {copied === 'cmd-scan' ? <Check className="size-4 text-emerald-400" /> : <Copy className="size-4" />}
                         </Button>
@@ -864,11 +864,11 @@ export function SettingsWorkspaceHub({
                   <div className="space-y-2">
                      <span className="text-caption font-mono uppercase text-text-muted">2. Pre-Merge Gate Enforcement</span>
                      <div className="flex items-center justify-between bg-surface-sunken border border-border-subtle p-3 font-mono text-body-sm">
-                        <code>npx reprieve gate --max-avalanche=0.75</code>
+                        <code>npx invarix gate --max-avalanche=0.75</code>
                         <Button
                            variant="ghost"
                            size="sm"
-                           onClick={() => copyToClipboard('npx reprieve gate --max-avalanche=0.75', 'cmd-gate')}
+                           onClick={() => copyToClipboard('npx invarix gate --max-avalanche=0.75', 'cmd-gate')}
                         >
                            {copied === 'cmd-gate' ? <Check className="size-4 text-emerald-400" /> : <Copy className="size-4" />}
                         </Button>

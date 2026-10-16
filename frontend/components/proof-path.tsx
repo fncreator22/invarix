@@ -102,7 +102,7 @@ export function ProofPath({
 
   const exportEvidence = () => {
     const packet = {
-      standard: "Reprieve-Proof-Path-Evidence-v1.0",
+      standard: "INVARIX-Proof-Path-Evidence-v1.0",
       exported_at: new Date().toISOString(),
       summary: path.summary,
       nodes: path.nodes,
@@ -115,7 +115,7 @@ export function ProofPath({
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `reprieve-proof-evidence-${Date.now()}.json`;
+    a.download = `invarix-proof-evidence-${Date.now()}.json`;
     a.click();
     URL.revokeObjectURL(url);
     toast.success("Audit Evidence JSON exported! Ready for review.");

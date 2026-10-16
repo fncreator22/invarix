@@ -21,20 +21,20 @@ export interface ProductVideo {
 }
 
 /**
- * Reprieve Central Video Registry
+ * INVARIX Central Video Registry
  * Catalog of generated product films and showreels for use across the platform.
  */
-export const REPRIEVE_VIDEOS: Record<string, ProductVideo> = {
+export const INVARIX_VIDEOS: Record<string, ProductVideo> = {
   HERO_SHOWCASE: {
     id: "hero-showcase",
-    name: "Reprieve Hero Bento Showcase",
-    filename: "reprieve-hero-showcase.mp4",
-    path: "/videos/reprieve-hero-showcase.mp4",
+    name: "INVARIX Hero Bento Showcase",
+    filename: "invarix-hero-showcase.mp4",
+    path: "/videos/invarix-hero-showcase.mp4",
     durationSeconds: 40.03,
     fps: 30,
     resolution: "1920x1080",
     theme: "editorial-bento",
-    title: "Reprieve — Exceptions Scattered Everywhere",
+    title: "INVARIX — Exceptions Scattered Everywhere",
     subtitle: "40-Second Dynamic Bento Product Film",
     targetSection: "Marketing Landing Page Hero Showreel",
     acts: [
@@ -103,3 +103,4 @@ export const REPRIEVE_VIDEOS: Record<string, ProductVideo> = {
   },
 };
 
+export const REPRIEVE_VIDEOS = INVARIX_VIDEOS;

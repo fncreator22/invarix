@@ -41,7 +41,7 @@ export function MarketingNav() {
       )}
     >
       <nav aria-label="Main" className="mx-auto flex h-16 max-w-[1360px] items-center gap-6 px-4 sm:px-6">
-        <Link href="/" aria-label="Reprieve home" className="rounded-md">
+        <Link href="/" aria-label="INVARIX home" className="rounded-md">
           <Logo />
         </Link>
         <ul className="hidden items-center gap-1 md:flex">

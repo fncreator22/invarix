@@ -128,7 +128,7 @@ export function TopBar({ sentinel }: { sentinel: SentinelState }) {
   return (
     <>
       <header className="@container sticky top-0 z-(--z-topbar) flex h-(--topbar-h) items-center gap-2 border-b border-border-subtle bg-canvas/85 px-3 backdrop-blur sm:px-4">
-        <Link href={`/w/${slug}/home`} aria-label="Reprieve home" className="sm:hidden">
+        <Link href={`/w/${slug}/home`} aria-label="INVARIX home" className="sm:hidden">
           <LogoMark className="size-6" />
         </Link>
         <WorkspaceSwitcher />

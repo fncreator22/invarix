@@ -13,7 +13,7 @@ export function useMe() {
   return useQuery({ queryKey: meQueryKey, queryFn: ({ signal }) => api<MeOut>("/me", { signal }) });
 }
 
-const LAST_WS_KEY = "reprieve:last-ws";
+const LAST_WS_KEY = "invarix:last-ws";
 export function rememberWorkspace(slug: string) {
   try {
     localStorage.setItem(LAST_WS_KEY, slug);

@@ -2,7 +2,9 @@ import { useId } from "react";
 import { cn } from "@/lib/utils";
 
 /**
- * 05 §14.4: a ring with a small gap and a single node at the gap end ("a pause that is easy to forget").
+ * INVARIX Brand Logo Mark:
+ * Geometric Invariant Nexus Shield with dual intersecting causal vectors
+ * and central diamond interception node.
  */
 export function LogoMark({
   variant = "aurora",
@@ -15,41 +17,72 @@ export function LogoMark({
 }) {
   const id = useId();
   const stroke = variant === "aurora" ? `url(#${id})` : "currentColor";
-  // Ring from -40° clockwise to 290°, leaving a ~50° gap at the top right; node at the end.
-  const r = 11;
-  const c = 16;
-  const a0 = (-40 * Math.PI) / 180;
-  const a1 = (275 * Math.PI) / 180;
-  const p = (a: number) => `${(c + r * Math.cos(a)).toFixed(2)} ${(c + r * Math.sin(a)).toFixed(2)}`;
-  const end = { x: c + r * Math.cos(a1), y: c + r * Math.sin(a1) };
+  
   return (
     <svg
       viewBox="0 0 32 32"
-      className={cn("size-7", className)}
+      fill="none"
+      className={cn("size-7 shrink-0", className)}
       role={title ? "img" : undefined}
       aria-hidden={title ? undefined : true}
       aria-label={title}
     >
       {variant === "aurora" && (
         <defs>
-          <linearGradient id={id} x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="var(--aurora-start)" />
-            <stop offset="55%" stopColor="var(--aurora-mid)" />
-            <stop offset="100%" stopColor="var(--aurora-end)" />
+          <linearGradient id={id} x1="4" y1="4" x2="28" y2="28" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stopColor="#6353E8" />
+            <stop offset="50%" stopColor="#8B5CF6" />
+            <stop offset="100%" stopColor="#06B6D4" />
           </linearGradient>
         </defs>
       )}
-      <path d={`M ${p(a0)} A ${r} ${r} 0 1 1 ${p(a1)}`} fill="none" stroke={stroke} strokeWidth="3.2" strokeLinecap="round" />
-      <circle cx={end.x} cy={end.y} r="3.2" fill={variant === "aurora" ? "var(--aurora-end)" : "currentColor"} />
+      
+      {/* Outer Invariant Shield */}
+      <polygon 
+        points="16,3 27,9 27,23 16,29 5,23 5,9" 
+        stroke={stroke} 
+        strokeWidth="1.8" 
+        strokeLinejoin="round"
+        fill={variant === "aurora" ? "#0C0D14" : "none"} 
+      />
+      
+      {/* Invariant Intercepting Vectors */}
+      <path 
+        d="M 9.5 10.5 L 16 15.5 L 22.5 10.5" 
+        stroke={variant === "aurora" ? "#38BDF8" : "currentColor"} 
+        strokeWidth="1.8" 
+        strokeLinecap="round" 
+        strokeLinejoin="round" 
+      />
+      <path 
+        d="M 9.5 21.5 L 16 16.5 L 22.5 21.5" 
+        stroke={stroke} 
+        strokeWidth="1.8" 
+        strokeLinecap="round" 
+        strokeLinejoin="round" 
+      />
+
+      {/* Central Diamond Nexus */}
+      <polygon points="16,14 18,16 16,18 14,16" fill="#FFFFFF" />
+
+      {/* Vertex Anchors */}
+      <circle cx="16" cy="3" r="1.2" fill={variant === "aurora" ? "#06B6D4" : "currentColor"} />
+      <circle cx="27" cy="9" r="1.2" fill={variant === "aurora" ? "#8B5CF6" : "currentColor"} />
+      <circle cx="27" cy="23" r="1.2" fill={variant === "aurora" ? "#6353E8" : "currentColor"} />
+      <circle cx="16" cy="29" r="1.2" fill={variant === "aurora" ? "#06B6D4" : "currentColor"} />
+      <circle cx="5" cy="23" r="1.2" fill={variant === "aurora" ? "#6353E8" : "currentColor"} />
+      <circle cx="5" cy="9" r="1.2" fill={variant === "aurora" ? "#8B5CF6" : "currentColor"} />
     </svg>
   );
 }
 
 export function Logo({ className, markClassName }: { className?: string; markClassName?: string }) {
   return (
-    <span className={cn("inline-flex items-center gap-2", className)}>
+    <span className={cn("inline-flex items-center gap-2.5", className)}>
       <LogoMark className={markClassName} />
-      <span className="font-display text-[1.2rem] font-bold tracking-[-0.02em] text-text-primary">Reprieve</span>
+      <span className="font-display text-[1.25rem] font-extrabold tracking-[0.06em] text-white uppercase">
+        INVARIX
+      </span>
     </span>
   );
 }

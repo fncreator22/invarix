@@ -19,10 +19,10 @@ const jetbrains = JetBrains_Mono({ subsets: ["latin"], weight: ["400", "500"], d
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000"),
-  title: { default: "Reprieve: the exception debt agent", template: "%s · Reprieve" },
+  title: { default: "INVARIX: The Causal Pre-Merge Architecture Safety Engine", template: "%s · INVARIX" },
   description:
-    "Individually reasonable exceptions add up to one unreasonable risk. Reprieve is the agent that sees the sum.",
-  applicationName: "Reprieve",
+    "Individually reasonable exceptions add up to one catastrophic collision. INVARIX intercepts compound cascading risk before merge.",
+  applicationName: "INVARIX",
 };
 
 export const viewport: Viewport = {

@@ -9,7 +9,6 @@ import { toast } from "sonner";
 import { PageContainer, PageHeader } from "@/components/page-header";
 import { ApiKeysSection } from "@/components/settings/api-keys-section";
 import { IntegrationsTab } from "@/components/settings/integrations-tab";
-import { AdminTab } from "@/components/settings/admin-tab";
 import { BillingTab } from "@/components/settings/billing-tab";
 import { TABS, type SettingsTab } from "@/components/settings/tabs";
 import {
@@ -58,7 +57,7 @@ export function SettingsScreen({ tab }: { tab: SettingsTab }) {
             </Link>
           ))}
         </nav>
-        <div className={cn("space-y-6", tab === "workspace" || tab === "api-keys" || tab === "integrations" || tab === "admin" || tab === "billing" ? "max-w-5xl" : "max-w-2xl")}>
+        <div className={cn("space-y-6", tab === "workspace" || tab === "api-keys" || tab === "integrations" || tab === "billing" ? "max-w-5xl" : "max-w-2xl")}>
           {tab === "profile" ? (
             <Profile />
           ) : tab === "workspace" ? (
@@ -67,8 +66,6 @@ export function SettingsScreen({ tab }: { tab: SettingsTab }) {
             <Ai />
           ) : tab === "integrations" ? (
             <IntegrationsTab />
-          ) : tab === "admin" ? (
-            <AdminTab />
           ) : tab === "billing" ? (
             <BillingTab />
           ) : (

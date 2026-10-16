@@ -70,17 +70,17 @@ const VSL_SCRIPT = [
   {
     speaker: "Presenter",
     timestamp: "0:45 - 1:45",
-    text: "Our team built Reprieve to address this structural blind spot. Traditional ticketing platforms treat tech debt as isolated, flat records. Modern cloud architectures are not flat; they are living directed graphs. Reprieve is a graph-reasoning risk engine built specifically for exception debt. Powered by FalkorDB, we model every temporary bypass, skipped test, and security waiver as an active directed edge with live expiration countdowns and cascading reachability.",
+    text: "Our team built INVARIX to address this structural blind spot. Traditional ticketing platforms treat tech debt as isolated, flat records. Modern cloud architectures are not flat; they are living directed graphs. INVARIX is a graph-reasoning risk engine built specifically for exception debt. Powered by FalkorDB, we model every temporary bypass, skipped test, and security waiver as an active directed edge with live expiration countdowns and cascading reachability.",
   },
   {
     speaker: "Presenter",
     timestamp: "1:45 - 3:15",
-    text: "Developers do not need to open another dashboard. In terminal CLI and GitHub Actions, Reprieve parses repositories via AST scanning in under 15 milliseconds. When a pull request introduces an unmanaged bypass, our circuit breaker evaluates mathematical avalanche reachability (P = p0^h) across your entire mesh. If that bypass endangers downstream tier-1 services, the CI check blocks the merge and displays the exact shortest proof path directly in GitHub.",
+    text: "Developers do not need to open another dashboard. In terminal CLI and GitHub Actions, INVARIX parses repositories via AST scanning in under 15 milliseconds. When a pull request introduces an unmanaged bypass, our circuit breaker evaluates mathematical avalanche reachability (P = p0^h) across your entire mesh. If that bypass endangers downstream tier-1 services, the CI check blocks the merge and displays the exact shortest proof path directly in GitHub.",
   },
   {
     speaker: "Presenter",
     timestamp: "3:15 - 4:30",
-    text: "We have deployed this across 25 production microservice architectures. At Northwind Pay, a fintech processing millions in daily transactions, Reprieve detected four simultaneous waiver expirations scheduled to collide during peak trading, preventing an estimated $1.8M outage. At NeoBank UK, our agent uncovered 42 orphaned security waivers whose original authors had left the company, giving their SRE team full audit compliance in 14 seconds.",
+    text: "We have deployed this across 25 production microservice architectures. At Northwind Pay, a fintech processing millions in daily transactions, INVARIX detected four simultaneous waiver expirations scheduled to collide during peak trading, preventing an estimated $1.8M outage. At NeoBank UK, our agent uncovered 42 orphaned security waivers whose original authors had left the company, giving their SRE team full audit compliance in 14 seconds.",
   },
   {
     speaker: "Presenter",
