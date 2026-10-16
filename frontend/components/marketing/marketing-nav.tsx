@@ -142,7 +142,7 @@ export function MarketingNav() {
               <Button asChild variant="ghost" size="sm" className="text-zinc-200 hover:text-white">
                 <Link href="/sign-in">Sign in</Link>
               </Button>
-              <Button asChild size="sm" className="bg-brand-solid hover:bg-brand-solid/90 text-white font-semibold shadow-md shadow-brand-solid/25 transition-all hover:scale-[1.02] active:scale-[0.98]">
+              <Button asChild size="sm" className="bg-[#5848e5] hover:bg-[#4d3ed0] text-white font-semibold shadow-md shadow-[#5848e5]/25 transition-all hover:scale-[1.02] active:scale-[0.98]">
                 <Link href="/sign-up">Get started</Link>
               </Button>
             </>

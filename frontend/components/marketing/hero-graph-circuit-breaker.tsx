@@ -139,7 +139,6 @@ export function HeroGraphCircuitBreaker() {
           >
             <div className="flex items-center justify-between">
               <span className="font-mono text-[12px] font-bold text-zinc-200">payments-core</span>
-              <span className="size-1.5 rounded-full bg-red-400" />
             </div>
             <p className="mt-1 text-[11px] text-zinc-400 leading-snug">Settlement Engine</p>
             {isBlocked && (

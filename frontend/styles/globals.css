@@ -133,7 +133,7 @@
   --text-caption:0.75rem; --text-caption--line-height:1.4;
   --text-overline:0.6875rem; --text-overline--line-height:1.2; --text-overline--letter-spacing:0.08em;
   --text-metric:2.25rem; --text-metric--line-height:1;
-  --breakpoint-sm:640px; --breakpoint-md:1024px; --breakpoint-lg:1440px; --breakpoint-xl:initial; --breakpoint-2xl:initial;
+  --breakpoint-sm:640px; --breakpoint-md:768px; --breakpoint-lg:1024px; --breakpoint-xl:1280px; --breakpoint-2xl:1536px;
   --animate-shimmer:shimmer 1.4s linear infinite;
   --animate-radar:radar 1.6s linear infinite;
   --animate-aurora:aurora-drift 12s var(--ease-in-out) infinite alternate;

@@ -114,56 +114,46 @@ export default function LandingPage() {
   return (
     <>
       {/* 01. HERO STAGE */}
-      <section aria-labelledby="hero-title" className="relative overflow-hidden pt-28 pb-12 sm:pt-32 sm:pb-16 lg:pt-36 lg:pb-20">
+      <section aria-labelledby="hero-title" className="relative overflow-hidden py-16 sm:py-20 lg:py-20">
         {/* Subtle Ambient Radial Backlight */}
         <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 flex items-center justify-center">
-          <div className="absolute -top-[160px] h-[550px] w-[950px] rounded-full bg-[radial-gradient(ellipse_at_center,_rgba(99,83,232,0.18)_0%,_rgba(8,9,11,0)_70%)] blur-[90px]" />
+          <div className="absolute -top-[180px] h-[500px] w-[900px] rounded-full bg-[radial-gradient(ellipse_at_center,_rgba(99,83,232,0.10)_0%,_rgba(8,9,11,0)_70%)] blur-[100px]" />
         </div>
 
         <div className="mx-auto max-w-[1280px] px-6 sm:px-10">
-          <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
+          <div className="grid gap-10 md:grid-cols-12 md:items-center lg:gap-12">
             {/* Left Column: Mission, Value Claim & Actions */}
-            <div className="lg:col-span-7 space-y-6 text-left">
+            <div className="md:col-span-7 space-y-5 text-left">
               <span className="text-[12px] font-mono uppercase tracking-[0.1em] text-zinc-400 font-semibold block">
                 PRE-MERGE ARCHITECTURE SAFETY ENGINE
               </span>
 
-              <h1 id="hero-title" className="text-[2.75rem] sm:text-[3.5rem] lg:text-[4rem] font-display font-bold tracking-[-0.04em] text-white leading-[1.05]">
+              <h1 id="hero-title" className="text-[2.25rem] sm:text-[2.85rem] md:text-[3.15rem] lg:text-[3.5rem] font-display font-bold tracking-tight text-white leading-[1.08]">
                 Three harmless exceptions. One catastrophic collision.{" "}
                 <span className="text-zinc-400 font-normal block sm:inline">INVARIX intercepts compound risk before merge.</span>
               </h1>
 
-              <p className="text-[1.125rem] text-zinc-300 leading-relaxed max-w-2xl">
+              <p className="text-base sm:text-lg text-zinc-300 leading-relaxed max-w-xl">
                 Sprint boards treat waivers as isolated tickets. INVARIX models temporary bypasses and skipped tests as promises on your microservice graph to stop multi-hop cascading outages.
               </p>
 
               <div className="flex flex-wrap items-center gap-3.5 pt-3">
-                <Button asChild size="lg" className="h-12 px-6 text-sm sm:text-base gap-2 font-semibold bg-brand-solid hover:bg-brand-solid/90 text-white shadow-xl shadow-brand-solid/25 transition-all hover:scale-[1.02] active:scale-[0.98]">
+                <Button asChild size="lg" className="h-11 sm:h-12 px-6 text-sm sm:text-base gap-2 font-semibold bg-[#5848e5] hover:bg-[#4d3ed0] text-white shadow-md shadow-[#5848e5]/25 transition-all hover:scale-[1.02] active:scale-[0.98]">
                   <Link href="/sign-up">
                     <Sparkles className="size-4" aria-hidden="true" />
                     Get Started Free
                   </Link>
                 </Button>
-                <Button asChild variant="outline" size="lg" className="h-12 px-6 text-sm sm:text-base border-white/15 bg-white/[0.04] text-zinc-200 hover:bg-white/[0.08] hover:text-white font-semibold transition-all hover:scale-[1.02] active:scale-[0.98]">
+                <Button asChild variant="outline" size="lg" className="h-11 sm:h-12 px-6 text-sm sm:text-base border-white/15 bg-white/[0.04] text-zinc-200 hover:bg-white/[0.08] hover:text-white font-semibold transition-all hover:scale-[1.02] active:scale-[0.98]">
                   <Link href="/w/northwind-pay/home">
                     Launch Live Sandbox (0 Login)
                   </Link>
-                </Button>
-                <Button
-                  type="button"
-                  variant="ghost"
-                  size="lg"
-                  onClick={() => setBookCallOpen(true)}
-                  className="h-12 px-4 text-sm sm:text-base gap-2 font-semibold text-zinc-400 hover:text-white transition-all hover:scale-[1.02] active:scale-[0.98]"
-                >
-                  <Calendar className="size-4" aria-hidden="true" />
-                  Book Architecture Audit
                 </Button>
               </div>
             </div>
 
             {/* Right Column: Hero Graph Circuit Breaker */}
-            <div className="lg:col-span-5 flex justify-center lg:justify-end">
+            <div className="md:col-span-5 flex justify-center md:justify-end">
               <HeroGraphCircuitBreaker />
             </div>
           </div>
