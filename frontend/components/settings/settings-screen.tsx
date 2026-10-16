@@ -6,7 +6,23 @@ import { useRouter } from "next/navigation";
 import { useTheme } from "next-themes";
 import { useState, useEffect, type ReactNode } from "react";
 import { format } from "date-fns";
-import { Calendar, Check, Clock, Download, Globe, Lock, ShieldAlert, ShieldCheck, Sparkles, Trash2, Zap } from "lucide-react";
+import {
+  Building,
+  Calendar,
+  Check,
+  Clock,
+  CreditCard,
+  Download,
+  Globe,
+  Key,
+  Lock,
+  ShieldAlert,
+  ShieldCheck,
+  Sparkles,
+  Trash2,
+  User,
+  Zap,
+} from "lucide-react";
 import { toast } from "sonner";
 import { PageContainer, PageHeader } from "@/components/page-header";
 import { ApiKeysSection } from "@/components/settings/api-keys-section";
@@ -47,29 +63,122 @@ const CLOCK_PRESETS = [
   { label: "15 Jan 2027 (+90 Days)", asOf: 1800000000 },
 ];
 
+const TAB_CONFIG: Record<
+  SettingsTab,
+  { label: string; icon: React.ComponentType<{ className?: string }>; description: string }
+> = {
+  profile: {
+    label: "Profile & General",
+    icon: User,
+    description: "Personal account preferences and theme",
+  },
+  workspace: {
+    label: "Workspace & Clocks",
+    icon: Building,
+    description: "Name, environment, and simulated clock",
+  },
+  "api-keys": {
+    label: "API Keys",
+    icon: Key,
+    description: "CLI tokens and programmatic credentials",
+  },
+  integrations: {
+    label: "Integrations & Webhooks",
+    icon: Zap,
+    description: "GitHub, Slack webhooks, and CI gates",
+  },
+  "ai-governance": {
+    label: "AI Governance",
+    icon: Sparkles,
+    description: "Steward LLM mode and privacy controls",
+  },
+  "data-privacy": {
+    label: "Data Privacy & GDPR",
+    icon: ShieldCheck,
+    description: "Telemetry retention, export, and deletion",
+  },
+  billing: {
+    label: "Plans & Pricing",
+    icon: CreditCard,
+    description: "Subscription tiers, quotas, and invoices",
+  },
+};
+
 /** SCR-P-18: profile, workspace, AI mode, API keys, integrations, data privacy. */
 export function SettingsScreen({ tab }: { tab: SettingsTab }) {
   const { slug } = useWorkspace();
   return (
-    <PageContainer>
-      <PageHeader title="Settings" />
-      <div className="grid gap-6 md:grid-cols-[200px_1fr]">
-        <nav aria-label="Settings sections" className="flex gap-1 md:flex-col">
-          {(Object.keys(TABS) as SettingsTab[]).map((k) => (
+    <PageContainer width="home" className="space-y-6">
+      <PageHeader
+        title="Settings"
+        subtitle="Configure your workspace environment, access keys, AI safety limits, and subscription."
+      />
+
+      {/* Mobile/Tablet Horizontal Tab Navigation */}
+      <div className="lg:hidden -mx-4 px-4 overflow-x-auto pb-2 scrollbar-none border-b border-border-subtle flex gap-2">
+        {(Object.keys(TABS) as SettingsTab[]).map((k) => {
+          const item = TAB_CONFIG[k];
+          const Icon = item.icon;
+          const isActive = k === tab;
+          return (
             <Link
               key={k}
               href={`/w/${slug}/settings/${k}`}
-              aria-current={k === tab ? "page" : undefined}
+              aria-current={isActive ? "page" : undefined}
               className={cn(
-                "rounded-md px-3 py-2 text-body-sm transition-colors",
-                k === tab ? "bg-brand-soft text-brand font-semibold" : "text-text-secondary hover:bg-brand-soft hover:text-text-primary"
+                "flex items-center gap-2 rounded-lg px-3.5 py-2 text-xs font-medium whitespace-nowrap shrink-0 transition-all",
+                isActive
+                  ? "bg-brand text-white font-semibold shadow-xs"
+                  : "bg-surface border border-border-subtle text-text-secondary hover:text-text-primary hover:bg-surface-sunken"
               )}
             >
-              {TABS[k]}
+              <Icon className="size-3.5" />
+              <span>{item.label}</span>
             </Link>
-          ))}
-        </nav>
-        <div className={cn("space-y-6", tab === "workspace" || tab === "api-keys" || tab === "integrations" || tab === "billing" || tab === "data-privacy" ? "max-w-5xl" : "max-w-3xl")}>
+          );
+        })}
+      </div>
+
+      {/* Desktop Grid Layout with Balanced Sidebar */}
+      <div className="grid gap-8 lg:grid-cols-[250px_1fr] items-start">
+        <aside className="hidden lg:block shrink-0">
+          <nav
+            aria-label="Settings sections"
+            className="sticky top-20 flex flex-col gap-1 rounded-xl border border-border-subtle bg-surface/60 p-2.5 backdrop-blur-sm shadow-xs"
+          >
+            <div className="px-3 pt-2 pb-1.5 text-[11px] font-mono uppercase tracking-wider text-text-muted font-semibold">
+              Workspace Settings
+            </div>
+            {(Object.keys(TABS) as SettingsTab[]).map((k) => {
+              const item = TAB_CONFIG[k];
+              const Icon = item.icon;
+              const isActive = k === tab;
+              return (
+                <Link
+                  key={k}
+                  href={`/w/${slug}/settings/${k}`}
+                  aria-current={isActive ? "page" : undefined}
+                  className={cn(
+                    "group flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all",
+                    isActive
+                      ? "bg-brand text-white shadow-sm shadow-brand/25 font-semibold"
+                      : "text-text-secondary hover:bg-surface-sunken hover:text-text-primary"
+                  )}
+                >
+                  <Icon
+                    className={cn(
+                      "size-4 shrink-0 transition-colors",
+                      isActive ? "text-white" : "text-text-muted group-hover:text-text-primary"
+                    )}
+                  />
+                  <span className="truncate">{item.label}</span>
+                </Link>
+              );
+            })}
+          </nav>
+        </aside>
+
+        <main className="min-w-0 flex-1 space-y-8">
           {tab === "profile" ? (
             <Profile />
           ) : tab === "workspace" ? (
@@ -85,7 +194,7 @@ export function SettingsScreen({ tab }: { tab: SettingsTab }) {
           ) : (
             <ApiKeysSection />
           )}
-        </div>
+        </main>
       </div>
     </PageContainer>
   );
@@ -95,11 +204,10 @@ function Profile() {
   const api = useApi();
   const qc = useQueryClient();
   const me = useMe();
-  const { wsId, workspace, role } = useWorkspace();
+  const { role } = useWorkspace();
   const { theme, setTheme } = useTheme();
-  const isAdmin = ROLE_RANK[role] >= ROLE_RANK.admin;
 
-  // 1. User profile name
+  // User profile name
   const [userName, setUserName] = useState<string | null>(null);
   const saveUser = useMutation({
     mutationFn: () => api(`/me`, { method: "PATCH", body: { name: userName } }),
@@ -110,8 +218,57 @@ function Profile() {
     onError: (e) => toast.error(errorMessage(e)),
   });
 
-  // 2. Workspace name & environment
-  const [wsName, setWsName] = useState<string | null>(null);
+  return (
+    <div className="space-y-6">
+      {/* 1. Account Profile */}
+      <Section title="Account Profile">
+        <form className="space-y-4" onSubmit={(e) => (e.preventDefault(), saveUser.mutate())}>
+          <label className="block space-y-1.5 text-body-sm">
+            <span className="font-medium text-text-primary">Display Name</span>
+            <Input
+              value={userName ?? me.data?.user.name ?? ""}
+              onChange={(e) => setUserName(e.target.value)}
+              maxLength={120}
+              placeholder="Your full name"
+            />
+          </label>
+          <div className="flex flex-wrap items-center justify-between gap-2 text-body-sm text-text-muted">
+            <span>Email: <strong className="text-text-primary">{me.data?.user.email}</strong></span>
+            <span className="capitalize text-caption border border-border-subtle px-2 py-0.5 rounded bg-surface-sunken">
+              Role: {role}
+            </span>
+          </div>
+          <Button type="submit" loading={saveUser.isPending} disabled={userName === null}>
+            Save Profile
+          </Button>
+        </form>
+      </Section>
+
+      {/* 2. Appearance */}
+      <Section title="Appearance">
+        <p className="text-caption text-text-muted mb-3">
+          Select your interface color theme preference for INVARIX console and tools.
+        </p>
+        <div role="radiogroup" aria-label="Theme" className="flex gap-2">
+          {["system", "light", "dark"].map((t) => (
+            <Button
+              key={t}
+              role="radio"
+              aria-checked={theme === t}
+              variant={theme === t ? "default" : "secondary"}
+              size="sm"
+              onClick={() => setTheme(t)}
+            >
+              {t[0]!.toUpperCase() + t.slice(1)}
+            </Button>
+          ))}
+        </div>
+      </Section>
+    </div>
+  );
+}
+
+function DeploymentEnvironmentSection({ wsId }: { wsId: string }) {
   const [environment, setEnvironment] = useState<string>("production");
 
   useEffect(() => {
@@ -129,19 +286,57 @@ function Profile() {
     toast.success(`Active deployment environment switched to ${newEnv.toUpperCase()}.`);
   };
 
-  const renameMutation = useMutation({
-    mutationFn: (newName: string) =>
-      api<WorkspaceOut>(wsPath(wsId), { method: "PATCH", body: { name: newName } }),
-    onSuccess: (updated) => {
-      qc.setQueryData(workspaceQueryKey(wsId), updated);
-      void qc.invalidateQueries({ queryKey: workspaceQueryKey(wsId) });
-      void qc.invalidateQueries({ queryKey: meQueryKey });
-      toast.success("Workspace name updated successfully.");
-    },
-    onError: (e) => toast.error(errorMessage(e)),
-  });
+  return (
+    <Section title="Deployment Environment Target">
+      <div className="space-y-3">
+        <div className="flex items-center justify-between">
+          <p className="text-caption text-text-muted">
+            Select the active runtime environment evaluated by INVARIX pre-merge CI gates and AST decorators.
+          </p>
+          <span className="font-mono text-[10px] text-text-muted uppercase border border-border-subtle px-1.5 py-0.5 rounded bg-surface-sunken">
+            Persisted
+          </span>
+        </div>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-1">
+          {[
+            { id: "production", label: "Production", badge: "Live Gates" },
+            { id: "staging", label: "Staging", badge: "Pre-Release" },
+            { id: "development", label: "Development", badge: "Internal" },
+            { id: "sandbox", label: "Sandbox", badge: "Zero-Auth" },
+          ].map((env) => (
+            <button
+              key={env.id}
+              type="button"
+              onClick={() => handleEnvironmentChange(env.id)}
+              className={cn(
+                "flex flex-col items-start p-3.5 rounded-lg border text-left transition-all",
+                environment === env.id
+                  ? "border-brand bg-brand-soft ring-1 ring-brand/40 shadow-xs"
+                  : "border-border-subtle bg-surface hover:border-brand/30 hover:bg-surface-sunken"
+              )}
+            >
+              <span className="text-body-sm font-semibold capitalize text-text-primary">{env.label}</span>
+              <span className="text-[10px] font-mono text-text-muted uppercase mt-0.5">{env.badge}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+    </Section>
+  );
+}
 
-  // 3. Clock settings with live state persistence
+function TemporalClockSection({
+  wsId,
+  workspace,
+  isAdmin,
+}: {
+  wsId: string;
+  workspace?: WorkspaceOut;
+  isAdmin: boolean;
+}) {
+  const api = useApi();
+  const qc = useQueryClient();
+
   const clock = useMutation({
     mutationFn: (asOf: number) =>
       api<ClockOut>(wsPath(wsId, "/clock"), { method: "PUT", body: { as_of: asOf } }),
@@ -168,190 +363,77 @@ function Profile() {
   };
 
   return (
-    <>
-      {/* 1. Account Profile */}
-      <Section title="Account Profile">
-        <form className="space-y-4" onSubmit={(e) => (e.preventDefault(), saveUser.mutate())}>
-          <label className="block space-y-1.5 text-body-sm">
-            <span className="font-medium text-text-primary">Display Name</span>
-            <Input
-              value={userName ?? me.data?.user.name ?? ""}
-              onChange={(e) => setUserName(e.target.value)}
-              maxLength={120}
-              placeholder="Your full name"
-            />
-          </label>
-          <div className="flex flex-wrap items-center justify-between gap-2 text-body-sm text-text-muted">
-            <span>Email: <strong className="text-text-primary">{me.data?.user.email}</strong></span>
-            <span className="capitalize text-caption border border-border-subtle px-2 py-0.5 rounded bg-surface-sunken">
-              Role: {role}
-            </span>
-          </div>
-          <Button type="submit" loading={saveUser.isPending} disabled={userName === null}>
-            Save Profile
-          </Button>
-        </form>
-      </Section>
-
-      {/* 2. Workspace Identity & Environment */}
-      <Section title="Workspace & Environment Settings">
-        <div className="space-y-5">
-          <form
-            className="space-y-4"
-            onSubmit={(e) => {
-              e.preventDefault();
-              if (wsName && wsName.trim()) renameMutation.mutate(wsName.trim());
-            }}
-          >
-            <label className="block space-y-1.5 text-body-sm">
-              <span className="font-medium text-text-primary">Workspace Name</span>
-              <div className="flex gap-2">
-                <Input
-                  value={wsName ?? workspace?.name ?? ""}
-                  onChange={(e) => setWsName(e.target.value)}
-                  maxLength={80}
-                  disabled={!isAdmin}
-                  placeholder="Workspace Name"
-                  className="font-medium"
-                />
-                {isAdmin && (
-                  <Button
-                    type="submit"
-                    loading={renameMutation.isPending}
-                    disabled={wsName === null || wsName.trim() === workspace?.name}
-                  >
-                    Save Name
-                  </Button>
-                )}
-              </div>
-            </label>
-          </form>
-
-          {/* Environment selection with live persistence */}
-          <div className="space-y-2 pt-2 border-t border-border-subtle">
-            <div className="flex items-center justify-between">
-              <span className="text-body-sm font-medium text-text-primary">Active Deployment Environment</span>
-              <span className="font-mono text-[11px] text-text-muted uppercase">Persisted Target</span>
-            </div>
-            <p className="text-caption text-text-muted">
-              Select the deployment target environment evaluated by INVARIX CI gates and AST decorators.
+    <Section title="Temporal Clock & Evaluation Horizon">
+      <div className="space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div>
+            <p className="text-body-sm font-medium text-text-primary">
+              Current Mode: <span className="capitalize font-semibold text-brand">{workspace?.clock_mode ?? "simulated"}</span>
             </p>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1">
-              {[
-                { id: "production", label: "Production", badge: "Live Gates" },
-                { id: "staging", label: "Staging", badge: "Pre-Release" },
-                { id: "development", label: "Development", badge: "Internal" },
-                { id: "sandbox", label: "Sandbox", badge: "Zero-Auth" },
-              ].map((env) => (
-                <button
-                  key={env.id}
-                  type="button"
-                  onClick={() => handleEnvironmentChange(env.id)}
-                  className={cn(
-                    "flex flex-col items-start p-3 rounded-lg border text-left transition-all",
-                    environment === env.id ? "border-brand bg-brand-soft ring-1 ring-brand" : "border-border-subtle bg-surface hover:border-brand/30"
-                  )}
-                >
-                  <span className="text-body-sm font-semibold capitalize text-text-primary">{env.label}</span>
-                  <span className="text-[10px] font-mono text-text-muted uppercase mt-0.5">{env.badge}</span>
-                </button>
-              ))}
-            </div>
+            <p className="text-caption text-text-muted mt-0.5">
+              Simulated clock allows time-traveling forward to evaluate expiring waivers and cascading failure collisions.
+            </p>
           </div>
+          {workspace?.as_of && (
+            <span className="font-mono text-caption text-text-secondary bg-surface-sunken border border-border-subtle px-2.5 py-1 rounded-md flex items-center gap-1.5 self-start sm:self-auto shrink-0">
+              <Calendar className="size-3.5 text-brand" />
+              {format(new Date(workspace.as_of * 1000), "dd MMM yyyy")}
+            </span>
+          )}
         </div>
-      </Section>
 
-      {/* 3. Clock & Simulated Time Settings */}
-      <Section title="Temporal Clock & Evaluation Horizon">
-        <div className="space-y-4">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-body-sm font-medium text-text-primary">
-                Current Mode: <span className="capitalize font-semibold text-brand">{workspace?.clock_mode}</span>
-              </p>
-              <p className="text-caption text-text-muted mt-0.5">
-                Simulated clock allows time-traveling forward to evaluate expiring waivers and cascading failure collisions.
-              </p>
-            </div>
-            {workspace?.as_of && (
-              <span className="font-mono text-caption text-text-secondary bg-surface-sunken border border-border-subtle px-2 py-1 rounded flex items-center gap-1.5">
-                <Calendar className="size-3.5 text-brand" />
-                {format(new Date(workspace.as_of * 1000), "dd MMM yyyy")}
-              </span>
-            )}
-          </div>
-
-          <div className="space-y-3 pt-2 border-t border-border-subtle">
-            <span className="text-body-sm font-medium text-text-primary">Simulated Clock Presets</span>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-              {CLOCK_PRESETS.map((p) => (
-                <button
-                  key={p.asOf}
-                  type="button"
-                  disabled={!isAdmin || clock.isPending}
-                  onClick={() => clock.mutate(p.asOf)}
-                  className={cn(
-                    "flex items-center justify-between p-2.5 rounded-lg border text-left text-xs transition-colors",
-                    workspace?.as_of === p.asOf
-                      ? "border-brand bg-brand-soft text-brand font-semibold"
-                      : "border-border-subtle bg-surface text-text-secondary hover:text-text-primary hover:border-brand/30"
-                  )}
-                >
-                  <span>{p.label}</span>
-                  {workspace?.as_of === p.asOf ? (
-                    <Check className="size-3.5 text-brand" />
-                  ) : (
-                    <Clock className="size-3.5 text-text-muted" />
-                  )}
-                </button>
-              ))}
-            </div>
-
-            <div className="pt-2 flex flex-col sm:flex-row items-end gap-2">
-              <label className="block w-full sm:w-auto flex-1 space-y-1 text-body-sm">
-                <span className="text-caption font-medium text-text-muted">Custom As-Of Date</span>
-                <Input
-                  type="date"
-                  value={dateInput}
-                  onChange={(e) => setDateInput(e.target.value)}
-                  disabled={!isAdmin || clock.isPending}
-                  className="h-9 text-xs font-mono"
-                />
-              </label>
-              <Button
+        <div className="space-y-3 pt-3 border-t border-border-subtle">
+          <span className="text-body-sm font-medium text-text-primary">Simulated Clock Presets</span>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            {CLOCK_PRESETS.map((p) => (
+              <button
+                key={p.asOf}
                 type="button"
-                size="sm"
-                variant="secondary"
                 disabled={!isAdmin || clock.isPending}
-                loading={clock.isPending}
-                onClick={handleApplyCustomDate}
-                className="h-9 text-xs"
+                onClick={() => clock.mutate(p.asOf)}
+                className={cn(
+                  "flex items-center justify-between p-3 rounded-lg border text-left text-xs transition-colors",
+                  workspace?.as_of === p.asOf
+                    ? "border-brand bg-brand-soft text-brand font-semibold ring-1 ring-brand/30"
+                    : "border-border-subtle bg-surface text-text-secondary hover:text-text-primary hover:border-brand/30"
+                )}
               >
-                Apply Custom Date
-              </Button>
-            </div>
+                <span>{p.label}</span>
+                {workspace?.as_of === p.asOf ? (
+                  <Check className="size-3.5 text-brand" />
+                ) : (
+                  <Clock className="size-3.5 text-text-muted" />
+                )}
+              </button>
+            ))}
+          </div>
+
+          <div className="pt-2 flex flex-col sm:flex-row items-end gap-2.5">
+            <label className="block w-full sm:w-auto flex-1 space-y-1 text-body-sm">
+              <span className="text-caption font-medium text-text-muted">Custom As-Of Date</span>
+              <Input
+                type="date"
+                value={dateInput}
+                onChange={(e) => setDateInput(e.target.value)}
+                disabled={!isAdmin || clock.isPending}
+                className="h-9 text-xs font-mono"
+              />
+            </label>
+            <Button
+              type="button"
+              size="sm"
+              variant="secondary"
+              disabled={!isAdmin || clock.isPending}
+              loading={clock.isPending}
+              onClick={handleApplyCustomDate}
+              className="h-9 text-xs shrink-0"
+            >
+              Apply Custom Date
+            </Button>
           </div>
         </div>
-      </Section>
-
-      {/* 4. Appearance */}
-      <Section title="Appearance">
-        <div role="radiogroup" aria-label="Theme" className="flex gap-2">
-          {["system", "light", "dark"].map((t) => (
-            <Button
-              key={t}
-              role="radio"
-              aria-checked={theme === t}
-              variant={theme === t ? "default" : "secondary"}
-              size="sm"
-              onClick={() => setTheme(t)}
-            >
-              {t[0]!.toUpperCase() + t.slice(1)}
-            </Button>
-          ))}
-        </div>
-      </Section>
-    </>
+      </div>
+    </Section>
   );
 }
 
@@ -434,36 +516,40 @@ function Workspace() {
   });
 
   return (
-    <SettingsWorkspaceHub
-      slug={slug}
-      wsId={wsId}
-      workspaceName={workspace?.name}
-      region="United States (US-East-1)"
-      role={role}
-      dataMode={workspace?.data_mode}
-      clockMode={workspace?.clock_mode}
-      isAdmin={admin}
-      onRename={(newName) => renameMutation.mutate(newName)}
-      isRenaming={renameMutation.isPending}
-      onRunSentinel={() => run.mutate()}
-      isRunningSentinel={run.isPending}
-      onResetBlank={() => resetBlank.mutate()}
-      isResettingBlank={resetBlank.isPending}
-      onPurgeData={() => purgeData.mutate()}
-      isPurgingData={purgeData.isPending}
-      onLoadSample={() => loadSample.mutate()}
-      isLoadingSample={loadSample.isPending}
-      deleteDialogNode={
-        role === "owner" ? (
-          <DeleteWorkspaceDialog
-            wsId={wsId}
-            slug={workspace?.slug ?? ""}
-            name={workspace?.name ?? ""}
-            ownerEmail={me.data?.user.email}
-          />
-        ) : undefined
-      }
-    />
+    <div className="space-y-8">
+      <SettingsWorkspaceHub
+        slug={slug}
+        wsId={wsId}
+        workspaceName={workspace?.name}
+        region="United States (US-East-1)"
+        role={role}
+        dataMode={workspace?.data_mode}
+        clockMode={workspace?.clock_mode}
+        isAdmin={admin}
+        onRename={(newName) => renameMutation.mutate(newName)}
+        isRenaming={renameMutation.isPending}
+        onRunSentinel={() => run.mutate()}
+        isRunningSentinel={run.isPending}
+        onResetBlank={() => resetBlank.mutate()}
+        isResettingBlank={resetBlank.isPending}
+        onPurgeData={() => purgeData.mutate()}
+        isPurgingData={purgeData.isPending}
+        onLoadSample={() => loadSample.mutate()}
+        isLoadingSample={loadSample.isPending}
+        deleteDialogNode={
+          role === "owner" ? (
+            <DeleteWorkspaceDialog
+              wsId={wsId}
+              slug={workspace?.slug ?? ""}
+              name={workspace?.name ?? ""}
+              ownerEmail={me.data?.user.email}
+            />
+          ) : undefined
+        }
+      />
+      <DeploymentEnvironmentSection wsId={wsId} />
+      <TemporalClockSection wsId={wsId} workspace={workspace} isAdmin={admin} />
+    </div>
   );
 }
 

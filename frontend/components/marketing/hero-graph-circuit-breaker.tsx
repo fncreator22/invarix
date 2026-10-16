@@ -158,7 +158,6 @@ export function HeroGraphCircuitBreaker() {
           <div className="flex-1 rounded-none border border-white/10 bg-[#12141a] p-3">
             <div className="flex items-center justify-between">
               <span className="font-mono text-[12px] font-medium text-zinc-300">auth-cache</span>
-              <span className="size-1.5 rounded-full bg-emerald-400" />
             </div>
             <p className="mt-1 text-[11px] text-zinc-400 leading-snug">Token Boundary</p>
             <span className="mt-2 inline-block rounded-none border border-white/10 bg-white/[0.04] px-1.5 py-0.5 font-mono text-[10px] text-zinc-400">

@@ -147,7 +147,7 @@ export function AppShell({ slug, children }: { slug: string; children: ReactNode
         )
       ) : res.state === "not-found" ? (
         <main id="main">
-          <NotFoundView homeHref="/onboarding" />
+          <NotFoundView homeHref="/w/northwind-pay/home" />
         </main>
       ) : res.state === "provisioning" ? (
         <main id="main">

@@ -19,7 +19,7 @@ export default function NotFound() {
         <p className="mt-2 text-body text-text-secondary">The link may be wrong, or you may not have access to it.</p>
         <div className="mt-6 flex flex-wrap justify-center gap-2">
           <Button asChild>
-            <Link href="/onboarding">Go to my workspace</Link>
+            <Link href="/w/northwind-pay/home">Go to workspace</Link>
           </Button>
           <Button asChild variant="secondary">
             <Link href="/">Home page</Link>

@@ -62,7 +62,6 @@ const TIERS: PricingTier[] = [
     priceMonthly: 499,
     priceAnnual: 399,
     isPopular: true,
-    badge: "Current Plan",
     description: "Engineering teams enforcing pre-merge circuit breakers in production CI/CD.",
     quotas: {
       workspaces: "3 Workspaces",
@@ -154,7 +153,7 @@ export function BillingTab() {
                   Tiered B2B Pricing & Monetization
                 </span>
                 <span className="font-mono text-[10px] uppercase text-emerald-500 font-semibold px-1.5 py-0.5 bg-emerald-500/10 border border-emerald-500/20">
-                  Team Plan Active
+                  {TIERS.find((t) => t.id === activeTier)?.name} Active
                 </span>
               </div>
               <h2 className="text-h2 font-semibold tracking-tight text-text-primary">
@@ -194,7 +193,7 @@ export function BillingTab() {
       </div>
 
       {/* Tier Matrix Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 items-stretch">
         {TIERS.map((tier) => {
           const price = annualBilling ? tier.priceAnnual : tier.priceMonthly;
           const isCurrent = activeTier === tier.id;
@@ -203,62 +202,85 @@ export function BillingTab() {
             <div
               key={tier.id}
               className={cn(
-                "rounded-xl border bg-surface p-5 flex flex-col justify-between transition-all relative",
-                isCurrent ? "border-brand shadow-glow ring-1 ring-brand/50" : "border-border-subtle hover:border-brand/40"
+                "rounded-xl border bg-surface p-5 sm:p-6 flex flex-col justify-between transition-all duration-200 relative",
+                isCurrent
+                  ? "border-brand shadow-glow ring-1 ring-brand/50 bg-gradient-to-b from-brand-soft/20 to-surface"
+                  : "border-border-subtle hover:border-brand/40 hover:shadow-md"
               )}
             >
-              {tier.badge && (
-                <span className="absolute -top-2.5 right-4 rounded-full bg-brand px-2.5 py-0.5 text-[10px] font-mono uppercase tracking-wider text-text-on-brand shadow-sm font-semibold">
-                  {tier.badge}
+              {(isCurrent || tier.isPopular) && (
+                <span
+                  className={cn(
+                    "absolute -top-2.5 right-4 rounded-full px-2.5 py-0.5 text-[10px] font-mono uppercase tracking-wider font-semibold shadow-xs",
+                    isCurrent
+                      ? "bg-brand text-white shadow-sm shadow-brand/30"
+                      : "bg-emerald-600 text-white"
+                  )}
+                >
+                  {isCurrent ? "Current Plan" : "Most Popular"}
                 </span>
               )}
 
-              <div>
+              <div className="flex-1 flex flex-col">
                 <h3 className="font-semibold text-body-lg text-text-primary">{tier.name}</h3>
-                <p className="text-caption text-text-muted mt-1 min-h-[38px]">{tier.description}</p>
+                <p className="text-caption text-text-muted mt-1 min-h-[42px] leading-relaxed">{tier.description}</p>
 
                 <div className="my-4 pb-4 border-b border-border-subtle">
                   <div className="flex items-baseline gap-1">
-                    <span className="text-display-lg font-bold text-text-primary font-mono">${price}</span>
+                    <span className="text-display-lg font-bold text-text-primary font-mono">
+                      ${price.toLocaleString()}
+                    </span>
                     <span className="text-caption text-text-muted">/ month</span>
                   </div>
-                  {annualBilling && price > 0 && (
-                    <span className="text-[10px] text-emerald-500 font-mono">Billed annually (${price * 12}/yr)</span>
-                  )}
+                  <div className="min-h-[18px] mt-1">
+                    {price === 0 ? (
+                      <span className="text-[11px] text-text-muted font-mono">Free forever</span>
+                    ) : annualBilling ? (
+                      <span className="text-[11px] text-emerald-500 font-mono">
+                        Billed annually (${(price * 12).toLocaleString()}/yr)
+                      </span>
+                    ) : (
+                      <span className="text-[11px] text-text-muted font-mono">Billed monthly</span>
+                    )}
+                  </div>
                 </div>
 
-                {/* Quota Highlights */}
-                <div className="space-y-1.5 mb-4 text-xs font-mono bg-surface-sunken p-2.5 rounded border border-border-subtle">
+                {/* Quota Highlights - All 4 metrics aligned symmetrically */}
+                <div className="space-y-1.5 mb-5 text-xs font-mono bg-surface-sunken p-3 rounded-lg border border-border-subtle">
                   <div className="flex justify-between text-text-secondary">
-                    <span>Tokens:</span>
-                    <strong className="text-text-primary">{tier.quotas.tokensPerDay}</strong>
+                    <span>Workspaces:</span>
+                    <strong className="text-text-primary font-medium">{tier.quotas.workspaces}</strong>
                   </div>
                   <div className="flex justify-between text-text-secondary">
                     <span>Seats:</span>
-                    <strong className="text-text-primary">{tier.quotas.seats}</strong>
+                    <strong className="text-text-primary font-medium">{tier.quotas.seats}</strong>
+                  </div>
+                  <div className="flex justify-between text-text-secondary">
+                    <span>Tokens:</span>
+                    <strong className="text-text-primary font-medium">{tier.quotas.tokensPerDay}</strong>
                   </div>
                   <div className="flex justify-between text-text-secondary">
                     <span>Memory:</span>
-                    <strong className="text-text-primary">{tier.quotas.historyRetention}</strong>
+                    <strong className="text-text-primary font-medium">{tier.quotas.historyRetention}</strong>
                   </div>
                 </div>
 
                 {/* Feature List */}
-                <ul className="space-y-2 text-caption text-text-secondary">
+                <ul className="space-y-2.5 text-caption text-text-secondary mb-6 flex-1">
                   {tier.features.map((f, i) => (
                     <li key={i} className="flex items-start gap-2">
                       <Check className="size-3.5 shrink-0 text-emerald-500 mt-0.5" />
-                      <span>{f}</span>
+                      <span className="leading-snug">{f}</span>
                     </li>
                   ))}
                 </ul>
               </div>
 
-              <div className="pt-5 mt-5 border-t border-border-subtle">
+              <div className="pt-4 border-t border-border-subtle mt-auto">
                 <Button
                   variant={isCurrent ? "secondary" : tier.id === "enterprise" ? "aurora" : "default"}
                   size="sm"
-                  className="w-full text-xs font-semibold"
+                  className={cn("w-full text-xs font-semibold h-9", isCurrent && "border border-brand/30 bg-brand-soft text-brand hover:bg-brand-soft")}
                   onClick={() => handleSelectTier(tier.id)}
                 >
                   {isCurrent ? "Current Plan" : tier.ctaLabel}

@@ -114,7 +114,7 @@ export default function LandingPage() {
   return (
     <>
       {/* 01. HERO STAGE */}
-      <section aria-labelledby="hero-title" className="relative overflow-hidden pt-28 pb-16 sm:pt-36 sm:pb-24">
+      <section aria-labelledby="hero-title" className="relative overflow-hidden pt-28 pb-12 sm:pt-32 sm:pb-16 lg:pt-36 lg:pb-20">
         {/* Subtle Ambient Radial Backlight */}
         <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 flex items-center justify-center">
           <div className="absolute -top-[160px] h-[550px] w-[950px] rounded-full bg-[radial-gradient(ellipse_at_center,_rgba(99,83,232,0.18)_0%,_rgba(8,9,11,0)_70%)] blur-[90px]" />
@@ -137,14 +137,14 @@ export default function LandingPage() {
                 Sprint boards treat waivers as isolated tickets. INVARIX models temporary bypasses and skipped tests as promises on your microservice graph to stop multi-hop cascading outages.
               </p>
 
-              <div className="flex flex-wrap items-center gap-3 pt-2">
-                <Button asChild size="lg" className="gap-2 font-semibold px-6 py-6 text-body-base bg-brand-solid hover:bg-brand-solid/90 text-white shadow-xl shadow-brand-solid/25 transition-all hover:scale-[1.02] active:scale-[0.98]">
+              <div className="flex flex-wrap items-center gap-3.5 pt-3">
+                <Button asChild size="lg" className="h-12 px-6 text-sm sm:text-base gap-2 font-semibold bg-brand-solid hover:bg-brand-solid/90 text-white shadow-xl shadow-brand-solid/25 transition-all hover:scale-[1.02] active:scale-[0.98]">
                   <Link href="/sign-up">
                     <Sparkles className="size-4" aria-hidden="true" />
                     Get Started Free
                   </Link>
                 </Button>
-                <Button asChild variant="outline" size="lg" className="border-white/15 bg-white/[0.04] text-zinc-200 hover:bg-white/[0.08] hover:text-white px-6 py-6 text-body-base font-semibold">
+                <Button asChild variant="outline" size="lg" className="h-12 px-6 text-sm sm:text-base border-white/15 bg-white/[0.04] text-zinc-200 hover:bg-white/[0.08] hover:text-white font-semibold transition-all hover:scale-[1.02] active:scale-[0.98]">
                   <Link href="/w/northwind-pay/home">
                     Launch Live Sandbox (0 Login)
                   </Link>
@@ -154,7 +154,7 @@ export default function LandingPage() {
                   variant="ghost"
                   size="lg"
                   onClick={() => setBookCallOpen(true)}
-                  className="gap-2 font-semibold px-4 py-6 text-body-base text-zinc-400 hover:text-white"
+                  className="h-12 px-4 text-sm sm:text-base gap-2 font-semibold text-zinc-400 hover:text-white transition-all hover:scale-[1.02] active:scale-[0.98]"
                 >
                   <Calendar className="size-4" aria-hidden="true" />
                   Book Architecture Audit
