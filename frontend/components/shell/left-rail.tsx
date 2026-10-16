@@ -2,7 +2,19 @@
 
 import Link from "next/link";
 import { useSelectedLayoutSegment } from "next/navigation";
-import { PanelLeftClose, PanelLeftOpen } from "lucide-react";
+import {
+  Building,
+  ChevronDown,
+  ChevronRight,
+  CreditCard,
+  Key,
+  PanelLeftClose,
+  PanelLeftOpen,
+  ShieldCheck,
+  Sparkles,
+  User,
+  Zap,
+} from "lucide-react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { Logo, LogoMark } from "@/components/logo";
 import { FOOTER_NAV, PRIMARY_NAV, formatBadge, isActive, type NavItem } from "@/components/shell/nav";
@@ -10,44 +22,99 @@ import { useShell } from "@/components/shell/shell-context";
 import { useNavCounts } from "@/components/shell/use-shell-data";
 import { cn } from "@/lib/utils";
 import { useWorkspace } from "@/lib/workspace";
+import { usePathname } from "next/navigation";
+
+const SETTINGS_SUB_ITEMS = [
+  { key: "profile", label: "Profile & General", href: "settings/profile", icon: User },
+  { key: "workspace", label: "Workspace & Clocks", href: "settings/workspace", icon: Building },
+  { key: "api-keys", label: "API Keys", href: "settings/api-keys", icon: Key },
+  { key: "integrations", label: "Integrations & Webhooks", href: "settings/integrations", icon: Zap },
+  { key: "ai-governance", label: "AI Governance", href: "settings/ai-governance", icon: Sparkles },
+  { key: "data-privacy", label: "Data Privacy & GDPR", href: "settings/data-privacy", icon: ShieldCheck },
+  { key: "billing", label: "Plans & Pricing", href: "settings/billing", icon: CreditCard },
+];
 
 function RailLink({ item, collapsed, count }: { item: NavItem; collapsed: boolean; count?: number }) {
   const { slug } = useWorkspace();
   const segment = useSelectedLayoutSegment();
+  const pathname = usePathname();
   const active = isActive(item, segment ?? undefined);
   const Icon = item.icon;
   const badge = formatBadge(count);
+  const isSettings = item.key === "settings";
+  const isSettingsExpanded = isSettings && (active || pathname.includes("/settings"));
+
   const link = (
-    <Link
-      href={`/w/${slug}/${item.href}`}
-      aria-current={active ? "page" : undefined}
-      className={cn(
-        "group relative flex h-10 items-center gap-3 rounded-md px-3 text-body font-medium transition-colors duration-(--dur-fast)",
-        active ? "bg-brand-soft text-text-primary" : "text-text-secondary hover:bg-brand-soft/60 hover:text-text-primary",
-        collapsed && "justify-center px-0",
+    <div className="flex flex-col">
+      <Link
+        href={`/w/${slug}/${item.href}`}
+        aria-current={active ? "page" : undefined}
+        className={cn(
+          "group relative flex h-10 items-center gap-3 rounded-md px-3 text-body font-medium transition-colors duration-(--dur-fast)",
+          active ? "bg-brand-soft text-text-primary font-semibold" : "text-text-secondary hover:bg-brand-soft/60 hover:text-text-primary",
+          collapsed && "justify-center px-0",
+        )}
+      >
+        {active && <span aria-hidden className="absolute inset-y-2 left-0 w-0.5 rounded-full bg-brand" />}
+        <Icon aria-hidden className={cn("size-5 shrink-0", active ? "text-brand" : "text-text-secondary")} strokeWidth={1.5} />
+        <span className={cn("truncate flex-1 text-left", collapsed && "sr-only")}>{item.label}</span>
+        {isSettings && !collapsed && (
+          <ChevronDown
+            className={cn(
+              "size-3.5 text-text-muted transition-transform duration-200",
+              !isSettingsExpanded && "-rotate-90"
+            )}
+          />
+        )}
+        {badge && (
+          <span
+            className={cn(
+              "tabular ml-auto inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-brand-solid px-1.5 text-[11px] font-semibold text-text-on-brand",
+              collapsed && "absolute top-1 right-1 ml-0 h-4 min-w-4 px-1 text-[10px]",
+            )}
+          >
+            {badge}
+            <span className="sr-only"> {item.badge === "alerts" ? "open alerts" : "reviews assigned to you"}</span>
+          </span>
+        )}
+      </Link>
+
+      {/* Sub-navigation tree for Settings when expanded */}
+      {isSettings && !collapsed && isSettingsExpanded && (
+        <div className="ml-3 pl-3.5 border-l-2 border-border-subtle/80 flex flex-col gap-1 py-1.5 my-1 animate-in fade-in-50 duration-150">
+          {SETTINGS_SUB_ITEMS.map((sub) => {
+            const isSubActive =
+              pathname.includes(`/settings/${sub.key}`) ||
+              (sub.key === "profile" && pathname.endsWith("/settings"));
+            const SubIcon = sub.icon;
+            return (
+              <Link
+                key={sub.key}
+                href={`/w/${slug}/${sub.href}`}
+                className={cn(
+                  "flex items-center gap-2.5 rounded-md px-2.5 py-1.5 text-[12px] font-medium transition-all",
+                  isSubActive
+                    ? "bg-brand text-white font-semibold shadow-xs"
+                    : "text-text-secondary hover:bg-surface-sunken hover:text-text-primary"
+                )}
+              >
+                <SubIcon className={cn("size-3.5 shrink-0", isSubActive ? "text-white" : "text-text-muted")} />
+                <span className="truncate">{sub.label}</span>
+              </Link>
+            );
+          })}
+        </div>
       )}
-    >
-      {active && <span aria-hidden className="absolute inset-y-2 left-0 w-0.5 rounded-full bg-brand" />}
-      <Icon aria-hidden className={cn("size-5 shrink-0", active ? "text-brand" : "text-text-secondary")} strokeWidth={1.5} />
-      <span className={cn("truncate", collapsed && "sr-only")}>{item.label}</span>
-      {badge && (
-        <span
-          className={cn(
-            "tabular ml-auto inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-brand-solid px-1.5 text-[11px] font-semibold text-text-on-brand",
-            collapsed && "absolute top-1 right-1 ml-0 h-4 min-w-4 px-1 text-[10px]",
-          )}
-        >
-          {badge}
-          <span className="sr-only"> {item.badge === "alerts" ? "open alerts" : "reviews assigned to you"}</span>
-        </span>
-      )}
-    </Link>
+    </div>
   );
   if (!collapsed) return link;
   return (
     <Tooltip>
       <TooltipTrigger asChild>{link}</TooltipTrigger>
-      <TooltipContent side="right">{item.label}</TooltipContent>
+      <TooltipContent side="right">
+        {item.label}
+        {isSettings && isSettingsExpanded && " (Options expanded)"}
+      </TooltipContent>
     </Tooltip>
   );
 }

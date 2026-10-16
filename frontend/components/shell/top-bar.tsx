@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Check, ChevronsUpDown, HelpCircle, Plus, Search, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -124,6 +124,30 @@ export function TopBar({ sentinel }: { sentinel: SentinelState }) {
   });
 
   const [guideOpen, setGuideOpen] = useState(false);
+  const [topBarPrefs, setTopBarPrefs] = useState({
+    showClock: true,
+    showSentinel: true,
+    showGuide: false,
+    showSteward: true,
+  });
+
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem("invarix_topbar_prefs");
+      if (stored) {
+        setTopBarPrefs((prev) => ({ ...prev, ...JSON.parse(stored) }));
+      }
+    } catch {}
+
+    const handlePrefsChange = (e: Event) => {
+      const customEvent = e as CustomEvent;
+      if (customEvent.detail) {
+        setTopBarPrefs((prev) => ({ ...prev, ...customEvent.detail }));
+      }
+    };
+    window.addEventListener("topbar-prefs-changed", handlePrefsChange);
+    return () => window.removeEventListener("topbar-prefs-changed", handlePrefsChange);
+  }, []);
 
   return (
     <>
@@ -145,50 +169,58 @@ export function TopBar({ sentinel }: { sentinel: SentinelState }) {
             <span className="hidden @3xl:inline">Search</span>
             <kbd className="ml-auto hidden rounded border border-border-subtle bg-sunken px-1.5 font-mono text-[11px] @3xl:inline">⌘K</kbd>
           </button>
-          {workspace && (
+          {workspace && (topBarPrefs.showClock || topBarPrefs.showSentinel) && (
             <div className="hidden items-center gap-2 @4xl:flex">
-              <ClockChip
-                mode={workspace.clock_mode}
-                asOf={workspace.as_of}
-                canEdit={isAdmin}
-                presets={workspace.data_mode === "sample" ? SAMPLE_PRESETS : []}
-                onApply={(asOf) => clock.mutateAsync(asOf)}
-              />
-              <SentinelPill
-                state={sentinel === "idle" && rerun.isPending ? "running" : sentinel}
-                lastRunAt={workspace.last_sentinel_at}
-                onRetry={isAdmin ? () => rerun.mutate() : undefined}
-              />
+              {topBarPrefs.showClock && (
+                <ClockChip
+                  mode={workspace.clock_mode}
+                  asOf={workspace.as_of}
+                  canEdit={isAdmin}
+                  presets={workspace.data_mode === "sample" ? SAMPLE_PRESETS : []}
+                  onApply={(asOf) => clock.mutateAsync(asOf)}
+                />
+              )}
+              {topBarPrefs.showSentinel && (
+                <SentinelPill
+                  state={sentinel === "idle" && rerun.isPending ? "running" : sentinel}
+                  lastRunAt={workspace.last_sentinel_at}
+                  onRetry={isAdmin ? () => rerun.mutate() : undefined}
+                />
+              )}
             </div>
           )}
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => setGuideOpen(true)}
-            className="hidden md:inline-flex items-center gap-1.5 text-caption font-medium text-text-secondary hover:text-text-primary hover:bg-surface-elevated h-8 px-2"
-          >
-            <HelpCircle className="size-4 text-brand" />
-            <span>Quick Guide</span>
-          </Button>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button
-                variant="ghost"
-                size="sm"
-                aria-label={stewardOpen ? "Close Steward" : "Ask Steward"}
-                aria-pressed={stewardOpen}
-                onClick={() => setStewardOpen(!stewardOpen)}
-                className={cn(
-                  "hidden sm:inline-flex items-center gap-1.5 h-8 px-2 text-caption font-medium text-text-secondary hover:text-text-primary hover:bg-surface-elevated",
-                  stewardOpen && "bg-brand-soft text-brand font-semibold",
-                )}
-              >
-                <Sparkles aria-hidden className="size-4 text-brand" strokeWidth={1.5} />
-                <span className="hidden xl:inline">Ask Steward</span>
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>Ask Steward (AI Agent)</TooltipContent>
-          </Tooltip>
+          {topBarPrefs.showGuide && (
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setGuideOpen(true)}
+              className="hidden md:inline-flex items-center gap-1.5 text-caption font-medium text-text-secondary hover:text-text-primary hover:bg-surface-elevated h-8 px-2"
+            >
+              <HelpCircle className="size-4 text-brand" />
+              <span>Quick Guide</span>
+            </Button>
+          )}
+          {topBarPrefs.showSteward && (
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  aria-label={stewardOpen ? "Close Steward" : "Ask Steward"}
+                  aria-pressed={stewardOpen}
+                  onClick={() => setStewardOpen(!stewardOpen)}
+                  className={cn(
+                    "hidden sm:inline-flex items-center gap-1.5 h-8 px-2 text-caption font-medium text-text-secondary hover:text-text-primary hover:bg-surface-elevated",
+                    stewardOpen && "bg-brand-soft text-brand font-semibold",
+                  )}
+                >
+                  <Sparkles aria-hidden className="size-4 text-brand" strokeWidth={1.5} />
+                  <span className="hidden xl:inline">Ask Steward</span>
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>Ask Steward (AI Agent)</TooltipContent>
+            </Tooltip>
+          )}
           <NotificationsBell />
           <AccountMenu />
         </div>

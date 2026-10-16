@@ -42,6 +42,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Switch } from "@/components/ui/switch";
 import { SettingsWorkspaceHub } from "@/components/ui/settings";
 import { useApi, wsPath } from "@/lib/api";
 import { errorMessage } from "@/lib/errors";
@@ -139,46 +140,9 @@ export function SettingsScreen({ tab }: { tab: SettingsTab }) {
         })}
       </div>
 
-      {/* Desktop Grid Layout with Balanced Sidebar */}
-      <div className="grid gap-8 lg:grid-cols-[250px_1fr] items-start">
-        <aside className="hidden lg:block shrink-0">
-          <nav
-            aria-label="Settings sections"
-            className="sticky top-20 flex flex-col gap-1 rounded-xl border border-border-subtle bg-surface/60 p-2.5 backdrop-blur-sm shadow-xs"
-          >
-            <div className="px-3 pt-2 pb-1.5 text-[11px] font-mono uppercase tracking-wider text-text-muted font-semibold">
-              Workspace Settings
-            </div>
-            {(Object.keys(TABS) as SettingsTab[]).map((k) => {
-              const item = TAB_CONFIG[k];
-              const Icon = item.icon;
-              const isActive = k === tab;
-              return (
-                <Link
-                  key={k}
-                  href={`/w/${slug}/settings/${k}`}
-                  aria-current={isActive ? "page" : undefined}
-                  className={cn(
-                    "group flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all",
-                    isActive
-                      ? "bg-brand text-white shadow-sm shadow-brand/25 font-semibold"
-                      : "text-text-secondary hover:bg-surface-sunken hover:text-text-primary"
-                  )}
-                >
-                  <Icon
-                    className={cn(
-                      "size-4 shrink-0 transition-colors",
-                      isActive ? "text-white" : "text-text-muted group-hover:text-text-primary"
-                    )}
-                  />
-                  <span className="truncate">{item.label}</span>
-                </Link>
-              );
-            })}
-          </nav>
-        </aside>
-
-        <main className="min-w-0 flex-1 space-y-8">
+      {/* Full Width Settings Main Canvas */}
+      <div className="w-full max-w-5xl space-y-8">
+        <main className="w-full space-y-8">
           {tab === "profile" ? (
             <Profile />
           ) : tab === "workspace" ? (
@@ -264,7 +228,93 @@ function Profile() {
           ))}
         </div>
       </Section>
+
+      {/* 3. Top Navigation Bar Preferences */}
+      <TopNavigationPreferencesSection />
     </div>
+  );
+}
+
+function TopNavigationPreferencesSection() {
+  const [prefs, setPrefs] = useState({
+    showClock: true,
+    showSentinel: true,
+    showGuide: false,
+    showSteward: true,
+  });
+
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem("invarix_topbar_prefs");
+      if (stored) setPrefs(JSON.parse(stored));
+    } catch {}
+  }, []);
+
+  const updatePref = (key: keyof typeof prefs, val: boolean) => {
+    const next = { ...prefs, [key]: val };
+    setPrefs(next);
+    try {
+      localStorage.setItem("invarix_topbar_prefs", JSON.stringify(next));
+      window.dispatchEvent(new CustomEvent("topbar-prefs-changed", { detail: next }));
+      toast.success("Navigation bar preferences updated.");
+    } catch {}
+  };
+
+  return (
+    <Section title="Top Header &amp; Navigation Preferences">
+      <p className="text-caption text-text-muted mb-4">
+        Customize which status indicators and utility buttons are visible in the top navigation header bar to reduce visual clutter.
+      </p>
+      <div className="grid gap-3 sm:grid-cols-2">
+        <div className="flex items-center justify-between p-3.5 rounded-lg border border-border-subtle bg-surface-raised">
+          <div className="space-y-0.5">
+            <span className="text-body-sm font-semibold text-text-primary block">Simulation Clock Badge</span>
+            <span className="text-caption text-text-muted">Shows active simulated date and time-travel selector</span>
+          </div>
+          <Switch
+            checked={prefs.showClock}
+            onCheckedChange={(v) => updatePref("showClock", v)}
+            aria-label="Toggle clock pill"
+          />
+        </div>
+
+        <div className="flex items-center justify-between p-3.5 rounded-lg border border-border-subtle bg-surface-raised">
+          <div className="space-y-0.5">
+            <span className="text-body-sm font-semibold text-text-primary block">Sentinel Detection Status</span>
+            <span className="text-caption text-text-muted">Real-time status pill of background graph invariants</span>
+          </div>
+          <Switch
+            checked={prefs.showSentinel}
+            onCheckedChange={(v) => updatePref("showSentinel", v)}
+            aria-label="Toggle sentinel pill"
+          />
+        </div>
+
+        <div className="flex items-center justify-between p-3.5 rounded-lg border border-border-subtle bg-surface-raised">
+          <div className="space-y-0.5">
+            <span className="text-body-sm font-semibold text-text-primary block">Quick Guide Button</span>
+            <span className="text-caption text-text-muted">Header walkthrough guide button</span>
+          </div>
+          <Switch
+            checked={prefs.showGuide}
+            onCheckedChange={(v) => updatePref("showGuide", v)}
+            aria-label="Toggle quick guide"
+          />
+        </div>
+
+        <div className="flex items-center justify-between p-3.5 rounded-lg border border-border-subtle bg-surface-raised">
+          <div className="space-y-0.5">
+            <span className="text-body-sm font-semibold text-text-primary block">Ask Steward AI Button</span>
+            <span className="text-caption text-text-muted">Header toggle for conversational reasoning panel</span>
+          </div>
+          <Switch
+            checked={prefs.showSteward}
+            onCheckedChange={(v) => updatePref("showSteward", v)}
+            aria-label="Toggle steward button"
+          />
+        </div>
+      </div>
+    </Section>
   );
 }
 

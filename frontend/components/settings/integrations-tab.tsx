@@ -12,21 +12,16 @@ import { errorMessage } from "@/lib/errors";
 import { cn } from "@/lib/utils";
 import { useWorkspace } from "@/lib/workspace";
 
-function SlackIcon({ className = "size-5" }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-label="Slack">
-      <path d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52zM6.313 15.165a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313zM8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.528 2.528 0 0 1 2.521 2.522v2.52H8.834zM8.834 6.313a2.528 2.528 0 0 1 2.521 2.521 2.528 2.528 0 0 1-2.521 2.521H2.522A2.528 2.528 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.521h6.312zM18.956 8.834a2.528 2.528 0 0 1 2.522-2.521A2.528 2.528 0 0 1 24 8.834a2.528 2.528 0 0 1-2.522 2.521h-2.522V8.834zM17.688 8.834a2.528 2.528 0 0 1-2.523 2.521 2.527 2.527 0 0 1-2.52-2.521V2.522A2.527 2.527 0 0 1 15.165 0a2.528 2.528 0 0 1 2.523 2.522v6.312zM15.165 18.956a2.528 2.528 0 0 1 2.523 2.522A2.528 2.528 0 0 1 15.165 24a2.527 2.527 0 0 1-2.52-2.522v-2.522h2.52zM15.165 17.688a2.527 2.527 0 0 1-2.52-2.523 2.526 2.526 0 0 1 2.52-2.52h6.313A2.527 2.527 0 0 1 24 15.165a2.528 2.528 0 0 1-2.522 2.523h-6.313z" />
-    </svg>
-  );
-}
-
-function GithubIcon({ className = "size-5" }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-label="GitHub">
-      <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
-    </svg>
-  );
-}
+import {
+  GitHubBrandLogo,
+  SlackBrandLogo,
+  JiraBrandLogo,
+  PagerDutyBrandLogo,
+  DatadogBrandLogo,
+  GitLabBrandLogo,
+  ServiceNowBrandLogo,
+  SvixBrandLogo,
+} from "@/components/icons/brand-logos";
 
 interface IntegrationsData {
   slack: {
@@ -167,12 +162,141 @@ export function IntegrationsTab() {
 
   return (
     <div className="space-y-6">
+      {/* Enterprise Ecosystem & Integrations Directory */}
+      <section className="card-e1 p-5 rounded-xl border border-border-subtle bg-surface space-y-4">
+        <div>
+          <span className="text-[11px] font-mono uppercase tracking-wider text-text-muted font-semibold">
+            CONNECTED ECOSYSTEM &amp; PLUGINS
+          </span>
+          <h3 className="font-sans text-body-lg font-bold text-text-primary mt-1">
+            Enterprise Developer &amp; SRE Integrations
+          </h3>
+          <p className="text-body-sm text-text-secondary">
+            INVARIX connects directly into your living software engineering pipeline to block cascading risks at PR merge.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
+          {/* GitHub Actions */}
+          <div className="flex flex-col justify-between p-3.5 rounded-lg border border-border-subtle bg-surface-raised hover:border-brand/40 transition-colors">
+            <div className="flex items-center justify-between">
+              <GitHubBrandLogo className="size-6 text-white" />
+              <span className={cn("text-[10px] font-mono px-1.5 py-0.5 rounded", curGithubEnabled ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20" : "bg-zinc-800 text-zinc-400")}>
+                {curGithubEnabled ? "Active Gate" : "Ready"}
+              </span>
+            </div>
+            <div className="mt-3">
+              <span className="font-semibold text-body-sm text-text-primary block">GitHub Actions</span>
+              <span className="text-[11px] text-text-muted">Pre-merge CI gate</span>
+            </div>
+          </div>
+
+          {/* Slack */}
+          <div className="flex flex-col justify-between p-3.5 rounded-lg border border-border-subtle bg-surface-raised hover:border-brand/40 transition-colors">
+            <div className="flex items-center justify-between">
+              <SlackBrandLogo className="size-6" />
+              <span className={cn("text-[10px] font-mono px-1.5 py-0.5 rounded", curSlackEnabled ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20" : "bg-zinc-800 text-zinc-400")}>
+                {curSlackEnabled ? "Connected" : "Ready"}
+              </span>
+            </div>
+            <div className="mt-3">
+              <span className="font-semibold text-body-sm text-text-primary block">Slack</span>
+              <span className="text-[11px] text-text-muted">Incident channel alerts</span>
+            </div>
+          </div>
+
+          {/* Jira Software */}
+          <div className="flex flex-col justify-between p-3.5 rounded-lg border border-border-subtle bg-surface-raised hover:border-brand/40 transition-colors">
+            <div className="flex items-center justify-between">
+              <JiraBrandLogo className="size-6" />
+              <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-800 text-zinc-400">
+                Connected
+              </span>
+            </div>
+            <div className="mt-3">
+              <span className="font-semibold text-body-sm text-text-primary block">Jira Software</span>
+              <span className="text-[11px] text-text-muted">Waiver issue sync</span>
+            </div>
+          </div>
+
+          {/* PagerDuty */}
+          <div className="flex flex-col justify-between p-3.5 rounded-lg border border-border-subtle bg-surface-raised hover:border-brand/40 transition-colors">
+            <div className="flex items-center justify-between">
+              <PagerDutyBrandLogo className="size-6" />
+              <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-800 text-zinc-400">
+                Connected
+              </span>
+            </div>
+            <div className="mt-3">
+              <span className="font-semibold text-body-sm text-text-primary block">PagerDuty</span>
+              <span className="text-[11px] text-text-muted">Escalation policies</span>
+            </div>
+          </div>
+
+          {/* Datadog */}
+          <div className="flex flex-col justify-between p-3.5 rounded-lg border border-border-subtle bg-surface-raised hover:border-brand/40 transition-colors">
+            <div className="flex items-center justify-between">
+              <DatadogBrandLogo className="size-6" />
+              <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-800 text-zinc-400">
+                Connected
+              </span>
+            </div>
+            <div className="mt-3">
+              <span className="font-semibold text-body-sm text-text-primary block">Datadog</span>
+              <span className="text-[11px] text-text-muted">APM &amp; topology metrics</span>
+            </div>
+          </div>
+
+          {/* GitLab */}
+          <div className="flex flex-col justify-between p-3.5 rounded-lg border border-border-subtle bg-surface-raised hover:border-brand/40 transition-colors">
+            <div className="flex items-center justify-between">
+              <GitLabBrandLogo className="size-6" />
+              <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-800 text-zinc-400">
+                Ready
+              </span>
+            </div>
+            <div className="mt-3">
+              <span className="font-semibold text-body-sm text-text-primary block">GitLab CI</span>
+              <span className="text-[11px] text-text-muted">Merge request scanner</span>
+            </div>
+          </div>
+
+          {/* ServiceNow */}
+          <div className="flex flex-col justify-between p-3.5 rounded-lg border border-border-subtle bg-surface-raised hover:border-brand/40 transition-colors">
+            <div className="flex items-center justify-between">
+              <ServiceNowBrandLogo className="size-6" />
+              <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-800 text-zinc-400">
+                Connected
+              </span>
+            </div>
+            <div className="mt-3">
+              <span className="font-semibold text-body-sm text-text-primary block">ServiceNow</span>
+              <span className="text-[11px] text-text-muted">CAB waiver governance</span>
+            </div>
+          </div>
+
+          {/* Svix Signed Webhooks */}
+          <div className="flex flex-col justify-between p-3.5 rounded-lg border border-border-subtle bg-surface-raised hover:border-brand/40 transition-colors">
+            <div className="flex items-center justify-between">
+              <SvixBrandLogo className="size-6" />
+              <span className={cn("text-[10px] font-mono px-1.5 py-0.5 rounded", curWebhookEnabled ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20" : "bg-zinc-800 text-zinc-400")}>
+                {curWebhookEnabled ? "Active" : "Ready"}
+              </span>
+            </div>
+            <div className="mt-3">
+              <span className="font-semibold text-body-sm text-text-primary block">Svix Webhooks</span>
+              <span className="text-[11px] text-text-muted">HMAC-SHA256 bus</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* 1. Slack / Discord Webhook Plugin */}
       <section className="card-e1 p-5 rounded-xl border border-border-subtle bg-surface space-y-4">
         <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border-subtle pb-3">
           <div className="flex items-center gap-3">
-            <div className="flex size-10 items-center justify-center rounded-lg border border-white/10 bg-[#4A154B]/20 text-[#ECB22E]">
-              <SlackIcon className="size-5" />
+            <div className="flex size-10 items-center justify-center rounded-lg border border-white/10 bg-[#4A154B]/20">
+              <SlackBrandLogo className="size-6" />
             </div>
             <div>
               <h3 className="font-sans text-body font-semibold flex items-center gap-2">
@@ -374,7 +498,7 @@ export function IntegrationsTab() {
         <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border-subtle pb-3">
           <div className="flex items-center gap-3">
             <div className="flex size-10 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-white">
-              <GithubIcon className="size-5" />
+              <GitHubBrandLogo className="size-6 text-white" />
             </div>
             <div>
               <h3 className="font-sans text-body font-semibold flex items-center gap-2">

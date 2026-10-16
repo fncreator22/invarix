@@ -24,7 +24,6 @@ const LINKS = [
 export function MarketingNav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const [inDemoSection, setInDemoSection] = useState(false);
   const { enabled: authEnabled, isSignedIn, user, signOut } = useAuthBridge();
 
   useEffect(() => {
@@ -34,33 +33,7 @@ export function MarketingNav() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  useEffect(() => {
-    const checkDemo = () => {
-      if (typeof window === "undefined") return;
-      if (window.location.hash === "#demo") {
-        setInDemoSection(true);
-        return;
-      }
-      const el = document.getElementById("demo");
-      if (!el) {
-        setInDemoSection(false);
-        return;
-      }
-      const rect = el.getBoundingClientRect();
-      const inView = rect.top < window.innerHeight * 0.85 && rect.bottom > window.innerHeight * 0.15;
-      setInDemoSection(inView);
-    };
-
-    checkDemo();
-    window.addEventListener("scroll", checkDemo, { passive: true });
-    window.addEventListener("hashchange", checkDemo);
-    return () => {
-      window.removeEventListener("scroll", checkDemo);
-      window.removeEventListener("hashchange", checkDemo);
-    };
-  }, []);
-
-  const isStewardApplicable = isSignedIn || inDemoSection;
+  const isStewardApplicable = Boolean(isSignedIn);
 
   return (
     <header

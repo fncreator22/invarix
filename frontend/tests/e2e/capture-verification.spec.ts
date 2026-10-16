@@ -81,4 +81,28 @@ test.describe("Visual Re-verification & Screenshot Inspection", () => {
     await page.waitForTimeout(1500);
     await page.screenshot({ path: path.join(evidenceDir, "07-settings-billing.png") });
   });
+
+  test("06: Settings Integrations - Authentic Brand Logos", async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto("http://localhost:3001/w/northwind-pay/settings/integrations", { waitUntil: "domcontentloaded" });
+    await page.waitForTimeout(2000);
+
+    await page.screenshot({ path: path.join(evidenceDir, "08-settings-integrations-logos.png") });
+  });
+
+  test("07: Landing Page - Ask Steward does not pop up on scroll", async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto("http://localhost:3001", { waitUntil: "domcontentloaded" });
+    await page.waitForTimeout(1000);
+
+    // Scroll down multiple times
+    await page.evaluate(() => window.scrollTo(0, 1500));
+    await page.waitForTimeout(1000);
+    await page.screenshot({ path: path.join(evidenceDir, "09-landing-scrolled-no-steward.png") });
+
+    // Verify Ask Steward is NOT in the marketing nav for anonymous users
+    const navSteward = page.locator("header nav").getByRole("button", { name: /ask steward/i });
+    expect(await navSteward.count()).toBe(0);
+  });
 });
+
