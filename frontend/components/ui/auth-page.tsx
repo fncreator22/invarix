@@ -3,20 +3,31 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from './button';
 import {
-	AppleIcon,
 	AtSignIcon,
 	ChevronLeftIcon,
-	Grid2x2PlusIcon,
+	EyeIcon,
+	EyeOffIcon,
+	LockIcon,
+	UserIcon,
+	Loader2Icon,
+	KeyRoundIcon,
+	CheckCircle2Icon,
 } from 'lucide-react';
 import { Input } from './input';
 import { cn } from '@/lib/utils';
 import { CLERK_ENABLED } from '@/lib/auth-config';
 import { toast } from 'sonner';
+import { LogoMark } from '@/components/logo';
+import {
+	GoogleBrandLogo,
+	AppleBrandLogo,
+	GitHubBrandLogo,
+} from '@/components/icons/brand-logos';
 
-// Optional Clerk hooks (loaded conditionally if Clerk is enabled)
+// Safe Clerk hook imports
 let useSignInHook: any = null;
 let useSignUpHook: any = null;
 try {
@@ -25,20 +36,29 @@ try {
 	useSignUpHook = clerk.useSignUp;
 } catch {}
 
+export type AuthMode = 'sign-in' | 'sign-up' | 'forgot-password';
+
 export function AuthPage({
 	initialMode = 'sign-in',
 }: {
 	initialMode?: 'sign-in' | 'sign-up';
 }) {
 	const router = useRouter();
-	const [mode, setMode] = useState<'sign-in' | 'sign-up'>(initialMode);
+	const [mode, setMode] = useState<AuthMode>(initialMode);
 	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
+	const [confirmPassword, setConfirmPassword] = useState('');
+	const [fullName, setFullName] = useState('');
+	const [resetCode, setResetCode] = useState('');
+	const [showPassword, setShowPassword] = useState(false);
+	const [resetCodeSent, setResetCodeSent] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
 
-	// Safe Clerk hooks (only invoked when ClerkProvider is active)
+	// Safe Clerk hooks (only active when Clerk keys are present)
 	const clerkSignIn = CLERK_ENABLED && useSignInHook ? useSignInHook() : null;
 	const clerkSignUp = CLERK_ENABLED && useSignUpHook ? useSignUpHook() : null;
 
+	// OAuth Handler
 	const handleOAuth = async (strategy: 'oauth_google' | 'oauth_apple' | 'oauth_github') => {
 		if (CLERK_ENABLED && clerkSignIn?.signIn) {
 			try {
@@ -50,7 +70,7 @@ export function AuthPage({
 				});
 			} catch (err: any) {
 				setIsLoading(false);
-				toast.error(err?.errors?.[0]?.message || 'Authentication failed');
+				toast.error(err?.errors?.[0]?.message || 'OAuth authentication failed');
 			}
 		} else {
 			toast.info('Clerk configured! Enter your Clerk keys in .env.local to activate live OAuth.', {
@@ -58,267 +78,548 @@ export function AuthPage({
 			});
 			setTimeout(() => {
 				router.push('/w/northwind-pay/home');
-			}, 1200);
+			}, 900);
 		}
 	};
 
-	const handleEmailAuth = async (e: React.FormEvent) => {
+	// Email/Password Submit Handler
+	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
-		if (!email.trim()) {
-			toast.error('Please enter a valid email address.');
+		setIsLoading(true);
+
+		if (mode === 'forgot-password') {
+			if (!resetCodeSent) {
+				// Send reset code
+				if (CLERK_ENABLED && clerkSignIn?.signIn) {
+					try {
+						await clerkSignIn.signIn.create({
+							strategy: 'reset_password_email_code',
+							identifier: email,
+						});
+						setResetCodeSent(true);
+						setIsLoading(false);
+						toast.success(`Password reset code sent to ${email}`);
+					} catch (err: any) {
+						setIsLoading(false);
+						toast.error(err?.errors?.[0]?.message || 'Failed to send reset code');
+					}
+				} else {
+					setTimeout(() => {
+						setResetCodeSent(true);
+						setIsLoading(false);
+						toast.success(`Simulation: Reset code sent to ${email}`);
+					}, 600);
+				}
+			} else {
+				// Verify code & update password
+				if (CLERK_ENABLED && clerkSignIn?.signIn) {
+					try {
+						const res = await clerkSignIn.signIn.attemptFirstFactor({
+							strategy: 'reset_password_email_code',
+							code: resetCode,
+							password,
+						});
+						if (res.status === 'complete') {
+							await clerkSignIn.setActive({ session: res.createdSessionId });
+							toast.success('Password updated successfully!');
+							router.push('/workspaces');
+						}
+					} catch (err: any) {
+						setIsLoading(false);
+						toast.error(err?.errors?.[0]?.message || 'Invalid reset code');
+					}
+				} else {
+					setTimeout(() => {
+						setIsLoading(false);
+						toast.success('Simulation: Password reset successful! Redirecting to sign in...');
+						setMode('sign-in');
+						setResetCodeSent(false);
+					}, 700);
+				}
+			}
 			return;
 		}
 
+		if (mode === 'sign-up') {
+			if (password !== confirmPassword) {
+				setIsLoading(false);
+				toast.error('Passwords do not match');
+				return;
+			}
+			if (CLERK_ENABLED && clerkSignUp?.signUp) {
+				try {
+					const res = await clerkSignUp.signUp.create({
+						emailAddress: email,
+						password,
+						firstName: fullName,
+					});
+					if (res.status === 'complete') {
+						await clerkSignUp.setActive({ session: res.createdSessionId });
+						router.push('/onboarding');
+					} else {
+						toast.info('Verification required. Please check your email.');
+					}
+				} catch (err: any) {
+					setIsLoading(false);
+					toast.error(err?.errors?.[0]?.message || 'Sign up failed');
+				}
+			} else {
+				toast.success(`Account created for ${email || 'user'}!`, {
+					description: 'Live Clerk auth activates once keys are set in .env.local.',
+				});
+				setTimeout(() => {
+					router.push('/w/northwind-pay/home');
+				}, 800);
+			}
+			return;
+		}
+
+		// Sign-In
 		if (CLERK_ENABLED && clerkSignIn?.signIn) {
 			try {
-				setIsLoading(true);
-				const result = await clerkSignIn.signIn.create({
-					identifier: email.trim(),
+				const res = await clerkSignIn.signIn.create({
+					identifier: email,
+					password: password || undefined,
 				});
-				if (result.status === 'complete') {
+				if (res.status === 'complete') {
+					await clerkSignIn.setActive({ session: res.createdSessionId });
 					router.push('/workspaces');
-				} else {
-					toast.success('Check your email for your verification code!');
 				}
 			} catch (err: any) {
 				setIsLoading(false);
-				toast.error(err?.errors?.[0]?.message || 'Unable to sign in with email');
+				toast.error(err?.errors?.[0]?.message || 'Invalid email or password');
 			}
 		} else {
-			toast.success(`Welcome ${email}! Entering developer workspace...`);
+			toast.success(`Authenticated as ${email || 'guest'}!`, {
+				description: 'Routing to live workspace...',
+			});
 			setTimeout(() => {
-				router.push('/workspaces');
-			}, 800);
+				router.push('/w/northwind-pay/home');
+			}, 700);
 		}
 	};
 
 	return (
-		<main className="relative md:h-screen md:overflow-hidden lg:grid lg:grid-cols-2">
-			{/* Left Column / Visual Brand Sidebar */}
-			<div className="bg-muted/60 relative hidden h-full flex-col border-r border-border-subtle p-10 lg:flex">
-				<div className="from-background absolute inset-0 z-10 bg-gradient-to-t to-transparent opacity-80" />
-				<div className="z-10 flex items-center gap-2">
-					<Grid2x2PlusIcon className="size-6 text-brand" />
-					<p className="text-xl font-bold tracking-tight text-text-primary">INVARIX</p>
+		<main className="relative min-h-screen w-full overflow-hidden bg-[#09090b] text-white flex flex-col lg:flex-row">
+			{/* BRAND & VISUAL ANIMATION PANEL */}
+			<motion.div
+				layout
+				transition={{ type: 'spring', stiffness: 220, damping: 28 }}
+				className={cn(
+					'relative hidden h-screen flex-col justify-between p-10 lg:flex lg:w-1/2 overflow-hidden border-zinc-800/80 bg-[#0c0d12]',
+					mode === 'sign-up' ? 'lg:order-2 border-l' : 'lg:order-1 border-r'
+				)}
+			>
+				{/* Ambient Glows */}
+				<div className="pointer-events-none absolute -top-40 -left-40 size-96 rounded-full bg-brand/15 blur-3xl" />
+				<div className="pointer-events-none absolute -bottom-40 -right-40 size-96 rounded-full bg-cyan-500/10 blur-3xl" />
+
+				{/* Brand Header */}
+				<div className="z-20 flex items-center gap-3">
+					<LogoMark variant="aurora" className="size-8" />
+					<span className="font-display text-xl font-extrabold tracking-[0.08em] text-white uppercase">
+						INVARIX
+					</span>
 				</div>
-				<div className="z-10 mt-auto pb-6">
-					<blockquote className="space-y-2">
-						<p className="text-xl text-text-primary font-medium leading-relaxed">
+
+				{/* Flowing Ribbon Canvas */}
+				<div className="absolute inset-0 pointer-events-none">
+					<FloatingPaths />
+				</div>
+
+				{/* Quote Footer */}
+				<div className="z-20 mt-auto pb-6">
+					<blockquote className="space-y-3 max-w-md">
+						<p className="text-xl text-zinc-100 font-medium leading-relaxed drop-shadow-sm">
 							&ldquo;Individually reasonable exceptions add up to one catastrophic collision.
 							INVARIX intercepts compound cascading risk before merge.&rdquo;
 						</p>
-						<footer className="font-mono text-sm text-text-secondary font-semibold">
+						<footer className="font-mono text-sm text-zinc-400 font-medium">
 							~ Autonomous Architecture Safety Engine
 						</footer>
 					</blockquote>
 				</div>
-				<div className="absolute inset-0">
-					<FloatingPaths position={1} />
-					<FloatingPaths position={-1} />
-				</div>
-			</div>
+			</motion.div>
 
-			{/* Right Column / Authentication Form */}
-			<div className="relative flex min-h-screen flex-col justify-center p-4">
+			{/* AUTHENTICATION FORM PANEL */}
+			<motion.div
+				layout
+				transition={{ type: 'spring', stiffness: 220, damping: 28 }}
+				className={cn(
+					'relative flex min-h-screen flex-col justify-center p-6 sm:p-12 lg:w-1/2 overflow-y-auto bg-[#09090b]',
+					mode === 'sign-up' ? 'lg:order-1' : 'lg:order-2'
+				)}
+			>
+				{/* Background radial glow */}
 				<div
 					aria-hidden
-					className="absolute inset-0 isolate contain-strict -z-10 opacity-60"
+					className="pointer-events-none absolute inset-0 isolate -z-10 opacity-40 overflow-hidden"
 				>
-					<div className="bg-[radial-gradient(68.54%_68.72%_at_55.02%_31.46%,--theme(--color-foreground/.06)_0,hsla(0,0%,55%,.02)_50%,--theme(--color-foreground/.01)_80%)] absolute top-0 right-0 h-320 w-140 -translate-y-87.5 rounded-full" />
-					<div className="bg-[radial-gradient(50%_50%_at_50%_50%,--theme(--color-foreground/.04)_0,--theme(--color-foreground/.01)_80%,transparent_100%)] absolute top-0 right-0 h-320 w-60 [translate:5%_-50%] rounded-full" />
-					<div className="bg-[radial-gradient(50%_50%_at_50%_50%,--theme(--color-foreground/.04)_0,--theme(--color-foreground/.01)_80%,transparent_100%)] absolute top-0 right-0 h-320 w-60 -translate-y-87.5 rounded-full" />
+					<div className="bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-brand/20 via-transparent to-transparent absolute top-0 right-0 h-96 w-96 rounded-full blur-2xl" />
 				</div>
 
-				<Button variant="ghost" className="absolute top-7 left-5" asChild>
+				{/* Home Back Link */}
+				<Button
+					variant="ghost"
+					className="absolute top-6 left-6 text-zinc-400 hover:text-white hover:bg-zinc-800/60"
+					asChild
+				>
 					<Link href="/">
-						<ChevronLeftIcon className="size-4 me-2" />
+						<ChevronLeftIcon className="size-4 me-1.5" />
 						Home
 					</Link>
 				</Button>
 
-				<div className="mx-auto space-y-4 sm:w-sm w-full max-w-sm">
-					<div className="flex items-center gap-2 lg:hidden">
-						<Grid2x2PlusIcon className="size-6 text-brand" />
-						<p className="text-xl font-bold tracking-tight text-text-primary">INVARIX</p>
-					</div>
-					<div className="flex flex-col space-y-1">
-						<h1 className="font-heading text-2xl font-bold tracking-tight text-text-primary">
-							{mode === 'sign-up' ? 'Create an Account' : 'Sign In or Join Now'}
-						</h1>
-						<p className="text-text-muted text-sm">
-							{mode === 'sign-up'
-								? 'Register your team and connect your architecture graph.'
-								: 'Access your enterprise workspace and architecture graphs.'}
-						</p>
+				{/* Form Container */}
+				<div className="mx-auto w-full max-w-sm space-y-6 pt-12 lg:pt-0">
+					{/* Mobile Brand Header */}
+					<div className="flex items-center gap-2.5 lg:hidden mb-2">
+						<LogoMark variant="aurora" className="size-7" />
+						<span className="font-display text-lg font-bold tracking-wider text-white">
+							INVARIX
+						</span>
 					</div>
 
-					{/* OAuth Providers */}
-					<div className="space-y-2 pt-1">
-						<Button
-							type="button"
-							size="lg"
-							variant="outline"
-							className="w-full justify-center text-sm font-medium border border-border-default bg-surface text-text-primary hover:bg-surface-sunken shadow-xs"
-							disabled={isLoading}
-							onClick={() => handleOAuth('oauth_google')}
+					{/* Title & Subtitle with smooth transition */}
+					<AnimatePresence mode="wait">
+						<motion.div
+							key={mode}
+							initial={{ opacity: 0, y: 8 }}
+							animate={{ opacity: 1, y: 0 }}
+							exit={{ opacity: 0, y: -8 }}
+							transition={{ duration: 0.18 }}
+							className="space-y-1.5 text-left"
 						>
-							<GoogleIcon className="size-4 me-2" />
-							Continue with Google
-						</Button>
-						<Button
-							type="button"
-							size="lg"
-							variant="outline"
-							className="w-full justify-center text-sm font-medium border border-border-default bg-surface text-text-primary hover:bg-surface-sunken shadow-xs"
-							disabled={isLoading}
-							onClick={() => handleOAuth('oauth_apple')}
-						>
-							<AppleIcon className="size-4 me-2" />
-							Continue with Apple
-						</Button>
-						<Button
-							type="button"
-							size="lg"
-							variant="outline"
-							className="w-full justify-center text-sm font-medium border border-border-default bg-surface text-text-primary hover:bg-surface-sunken shadow-xs"
-							disabled={isLoading}
-							onClick={() => handleOAuth('oauth_github')}
-						>
-							<GithubIcon className="size-4 me-2" />
-							Continue with GitHub
-						</Button>
-					</div>
+							<h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">
+								{mode === 'sign-up'
+									? 'Create Your Account'
+									: mode === 'forgot-password'
+									? 'Reset Your Password'
+									: 'Sign In or Join Now!'}
+							</h1>
+							<p className="text-sm text-zinc-400">
+								{mode === 'sign-up'
+									? 'Join INVARIX to intercept compound cascading architecture risk.'
+									: mode === 'forgot-password'
+									? 'Enter your email to receive a password reset code.'
+									: 'Access your enterprise workspace and architecture graphs.'}
+							</p>
+						</motion.div>
+					</AnimatePresence>
 
-					<AuthSeparator />
-
-					{/* Email Form */}
-					<form onSubmit={handleEmailAuth} className="space-y-3">
-						<p className="text-text-muted text-start text-xs">
-							Enter your email address to sign in or create an account
-						</p>
-						<div className="relative h-max">
-							<Input
-								placeholder="your.email@example.com"
-								className="peer ps-9 h-10 border border-border-default bg-surface text-text-primary focus:border-brand"
-								type="email"
-								value={email}
-								onChange={(e) => setEmail(e.target.value)}
+					{/* OAuth Buttons (shown in sign-in & sign-up modes) */}
+					{mode !== 'forgot-password' && (
+						<div className="space-y-2.5">
+							<button
+								type="button"
+								onClick={() => handleOAuth('oauth_google')}
 								disabled={isLoading}
-								required
-							/>
-							<div className="text-text-muted pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center ps-3 peer-disabled:opacity-50">
-								<AtSignIcon className="size-4" aria-hidden="true" />
+								className="group relative flex h-11 w-full items-center justify-center gap-3 rounded-lg bg-[#f4f4f5] px-4 text-sm font-semibold text-[#18181b] shadow-xs transition-all hover:bg-white active:scale-[0.98] disabled:opacity-60 cursor-pointer"
+							>
+								<GoogleBrandLogo className="size-5 shrink-0" />
+								<span>Continue with Google</span>
+							</button>
+
+							<button
+								type="button"
+								onClick={() => handleOAuth('oauth_apple')}
+								disabled={isLoading}
+								className="group relative flex h-11 w-full items-center justify-center gap-3 rounded-lg bg-[#f4f4f5] px-4 text-sm font-semibold text-[#18181b] shadow-xs transition-all hover:bg-white active:scale-[0.98] disabled:opacity-60 cursor-pointer"
+							>
+								<AppleBrandLogo className="size-5 shrink-0 text-[#18181b]" />
+								<span>Continue with Apple</span>
+							</button>
+
+							<button
+								type="button"
+								onClick={() => handleOAuth('oauth_github')}
+								disabled={isLoading}
+								className="group relative flex h-11 w-full items-center justify-center gap-3 rounded-lg bg-[#f4f4f5] px-4 text-sm font-semibold text-[#18181b] shadow-xs transition-all hover:bg-white active:scale-[0.98] disabled:opacity-60 cursor-pointer"
+							>
+								<GitHubBrandLogo className="size-5 shrink-0 text-[#18181b]" />
+								<span>Continue with GitHub</span>
+							</button>
+
+							<div className="relative my-4 flex items-center justify-center">
+								<div className="h-px w-full bg-zinc-800" />
+								<span className="bg-[#09090b] px-3 font-mono text-[11px] font-medium tracking-wider text-zinc-500 uppercase">
+									OR
+								</span>
+								<div className="h-px w-full bg-zinc-800" />
+							</div>
+						</div>
+					)}
+
+					{/* Main Form */}
+					<form onSubmit={handleSubmit} className="space-y-4">
+						{/* Full Name (Sign-up only) */}
+						{mode === 'sign-up' && (
+							<div className="space-y-1.5">
+								<label className="text-xs font-medium text-zinc-300">Full Name</label>
+								<div className="relative">
+									<Input
+										placeholder="Sarah Chen"
+										type="text"
+										value={fullName}
+										onChange={(e) => setFullName(e.target.value)}
+										disabled={isLoading}
+										required
+										className="h-11 rounded-lg border-zinc-700/80 bg-zinc-900/90 pl-10 text-sm text-white placeholder:text-zinc-500 focus:border-brand focus:ring-1 focus:ring-brand"
+									/>
+									<UserIcon className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 size-4 text-zinc-400" />
+								</div>
+							</div>
+						)}
+
+						{/* Email Input */}
+						<div className="space-y-1.5">
+							<label className="text-xs font-medium text-zinc-300">
+								{mode === 'forgot-password'
+									? 'Registered Email'
+									: 'Enter your email address'}
+							</label>
+							<div className="relative">
+								<Input
+									placeholder="your.email@example.com"
+									type="email"
+									value={email}
+									onChange={(e) => setEmail(e.target.value)}
+									disabled={isLoading || (mode === 'forgot-password' && resetCodeSent)}
+									required
+									className="h-11 rounded-lg border-zinc-700/80 bg-zinc-900/90 pl-10 text-sm text-white placeholder:text-zinc-500 focus:border-brand focus:ring-1 focus:ring-brand"
+								/>
+								<AtSignIcon className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 size-4 text-zinc-400" />
 							</div>
 						</div>
 
-						<Button type="submit" className="w-full h-10 bg-brand text-white hover:bg-brand/90 font-medium shadow-xs" disabled={isLoading}>
-							<span>
-								{isLoading
-									? 'Connecting…'
-									: mode === 'sign-up'
-									? 'Create Account With Email'
-									: 'Continue With Email'}
-							</span>
+						{/* Password Field (for sign-in, sign-up, or password reset confirmation) */}
+						{(mode === 'sign-in' || mode === 'sign-up' || (mode === 'forgot-password' && resetCodeSent)) && (
+							<div className="space-y-1.5">
+								<div className="flex items-center justify-between">
+									<label className="text-xs font-medium text-zinc-300">
+										{mode === 'forgot-password' ? 'New Password' : 'Password'}
+									</label>
+									{mode === 'sign-in' && (
+										<button
+											type="button"
+											onClick={() => setMode('forgot-password')}
+											className="text-xs font-medium text-violet-400 hover:text-violet-300 hover:underline transition-colors"
+										>
+											Forgot password?
+										</button>
+									)}
+								</div>
+								<div className="relative">
+									<Input
+										placeholder="••••••••••••"
+										type={showPassword ? 'text' : 'password'}
+										value={password}
+										onChange={(e) => setPassword(e.target.value)}
+										disabled={isLoading}
+										required
+										className="h-11 rounded-lg border-zinc-700/80 bg-zinc-900/90 pl-10 pr-10 text-sm text-white placeholder:text-zinc-500 focus:border-brand focus:ring-1 focus:ring-brand"
+									/>
+									<LockIcon className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 size-4 text-zinc-400" />
+									<button
+										type="button"
+										onClick={() => setShowPassword(!showPassword)}
+										className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-white transition-colors"
+										tabIndex={-1}
+									>
+										{showPassword ? (
+											<EyeOffIcon className="size-4" />
+										) : (
+											<EyeIcon className="size-4" />
+										)}
+									</button>
+								</div>
+							</div>
+						)}
+
+						{/* Confirm Password (Sign-up only) */}
+						{mode === 'sign-up' && (
+							<div className="space-y-1.5">
+								<label className="text-xs font-medium text-zinc-300">Confirm Password</label>
+								<div className="relative">
+									<Input
+										placeholder="••••••••••••"
+										type={showPassword ? 'text' : 'password'}
+										value={confirmPassword}
+										onChange={(e) => setConfirmPassword(e.target.value)}
+										disabled={isLoading}
+										required
+										className="h-11 rounded-lg border-zinc-700/80 bg-zinc-900/90 pl-10 text-sm text-white placeholder:text-zinc-500 focus:border-brand focus:ring-1 focus:ring-brand"
+									/>
+									<LockIcon className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 size-4 text-zinc-400" />
+								</div>
+							</div>
+						)}
+
+						{/* Reset Code Input (Forgot Password step 2) */}
+						{mode === 'forgot-password' && resetCodeSent && (
+							<div className="space-y-1.5">
+								<label className="text-xs font-medium text-zinc-300">Verification Code</label>
+								<div className="relative">
+									<Input
+										placeholder="6-digit reset code"
+										type="text"
+										value={resetCode}
+										onChange={(e) => setResetCode(e.target.value)}
+										disabled={isLoading}
+										required
+										className="h-11 rounded-lg border-zinc-700/80 bg-zinc-900/90 pl-10 text-sm text-white placeholder:text-zinc-500 focus:border-brand focus:ring-1 focus:ring-brand"
+									/>
+									<KeyRoundIcon className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 size-4 text-zinc-400" />
+								</div>
+							</div>
+						)}
+
+						{/* Submit Button */}
+						<Button
+							type="submit"
+							disabled={isLoading}
+							className="h-11 w-full rounded-lg bg-[#f4f4f5] text-sm font-semibold text-[#18181b] shadow-xs hover:bg-white active:scale-[0.98] transition-all cursor-pointer"
+						>
+							{isLoading ? (
+								<span className="flex items-center gap-2">
+									<Loader2Icon className="size-4 animate-spin" />
+									Connecting…
+								</span>
+							) : mode === 'sign-up' ? (
+								'Create Account With Email'
+							) : mode === 'forgot-password' ? (
+								resetCodeSent ? 'Reset Password' : 'Send Reset Code'
+							) : (
+								'Continue With Email'
+							)}
 						</Button>
 					</form>
 
-					<div className="pt-1 text-center text-xs text-text-muted">
-						{mode === 'sign-up' ? (
-							<span>
-								Already have an account?{' '}
-								<button
-									type="button"
-									onClick={() => setMode('sign-in')}
-									className="text-brand hover:underline font-semibold"
-								>
-									Sign in
-								</button>
-							</span>
-						) : (
-							<span>
+					{/* Navigation Toggles & Links */}
+					<div className="space-y-3 pt-2 text-center text-xs text-zinc-400">
+						{mode === 'sign-in' ? (
+							<p>
 								Don&apos;t have an account?{' '}
 								<button
 									type="button"
 									onClick={() => setMode('sign-up')}
-									className="text-brand hover:underline font-semibold"
+									className="font-semibold text-violet-400 hover:text-violet-300 hover:underline transition-colors cursor-pointer"
 								>
 									Sign up
 								</button>
-							</span>
+							</p>
+						) : mode === 'sign-up' ? (
+							<p>
+								Already have an account?{' '}
+								<button
+									type="button"
+									onClick={() => setMode('sign-in')}
+									className="font-semibold text-violet-400 hover:text-violet-300 hover:underline transition-colors cursor-pointer"
+								>
+									Sign in
+								</button>
+							</p>
+						) : (
+							<button
+								type="button"
+								onClick={() => {
+									setMode('sign-in');
+									setResetCodeSent(false);
+								}}
+								className="font-semibold text-violet-400 hover:text-violet-300 hover:underline transition-colors cursor-pointer"
+							>
+								← Back to Sign in
+							</button>
 						)}
-					</div>
 
-					<div className="pt-2 text-center">
-						<Link
-							href="/w/northwind-pay/home"
-							className="text-xs text-brand hover:underline font-medium"
-						>
-							Launch Live Sandbox (0 Login) &rarr;
-						</Link>
-					</div>
+						<div>
+							<Link
+								href="/w/northwind-pay/home"
+								className="font-mono text-xs text-violet-400/80 hover:text-violet-300 hover:underline"
+							>
+								Launch Live Sandbox (0 Login) →
+							</Link>
+						</div>
 
-					<p className="text-text-muted text-center mt-6 text-xs leading-relaxed">
-						By clicking continue, you agree to our{' '}
-						<Link
-							href="/terms"
-							className="hover:text-text-primary underline underline-offset-4"
-						>
-							Terms of Service
-						</Link>{' '}
-						and{' '}
-						<Link
-							href="/privacy"
-							className="hover:text-text-primary underline underline-offset-4"
-						>
-							Privacy Policy
-						</Link>
-						.
-					</p>
+						<p className="text-[11px] text-zinc-500 leading-normal">
+							By clicking continue, you agree to our{' '}
+							<Link href="/terms" className="underline underline-offset-2 hover:text-zinc-300">
+								Terms of Service
+							</Link>{' '}
+							and{' '}
+							<Link href="/privacy" className="underline underline-offset-2 hover:text-zinc-300">
+								Privacy Policy
+							</Link>
+							.
+						</p>
+					</div>
 				</div>
-			</div>
+			</motion.div>
 		</main>
 	);
 }
 
-function FloatingPaths({ position }: { position: number }) {
-	const paths = Array.from({ length: 36 }, (_, i) => ({
-		id: i,
-		d: `M-${380 - i * 5 * position} -${189 + i * 6}C-${
-			380 - i * 5 * position
-		} -${189 + i * 6} -${312 - i * 5 * position} ${216 - i * 6} ${
-			152 - i * 5 * position
-		} ${343 - i * 6}C${616 - i * 5 * position} ${470 - i * 6} ${
-			684 - i * 5 * position
-		} ${875 - i * 6} ${684 - i * 5 * position} ${875 - i * 6}`,
-		color: `rgba(15,23,42,${0.1 + i * 0.03})`,
-		width: 0.5 + i * 0.03,
-	}));
+/**
+ * Luminous Sweeping Ribbons Animation Canvas
+ * Matches the glowing curvature and flowing aesthetic of the reference template.
+ */
+function FloatingPaths() {
+	// Generate 40 smooth flowing Bezier ribbon paths matching the reference template arc
+	const paths = React.useMemo(() => {
+		return Array.from({ length: 40 }, (_, i) => {
+			const offset = i * 14;
+			const sag = 50 + i * 8;
+			return {
+				id: i,
+				d: `M -60 ${160 + offset} C ${200 + i * 8} ${240 + offset + sag}, ${460 + i * 10} ${380 + offset + sag}, ${880} ${560 + offset}`,
+				strokeWidth: 0.9 + (i % 4) * 0.45,
+				opacity: 0.25 + (i / 40) * 0.65,
+				duration: 15 + (i % 6) * 3,
+				delay: (i % 5) * 0.8,
+			};
+		});
+	}, []);
 
 	return (
-		<div className="pointer-events-none absolute inset-0 overflow-hidden">
+		<div className="absolute inset-0 overflow-hidden pointer-events-none">
 			<svg
-				className="h-full w-full text-brand/40 dark:text-brand/30"
-				viewBox="0 0 696 316"
+				className="h-full w-full"
+				viewBox="0 0 800 800"
 				fill="none"
+				preserveAspectRatio="xMidYMid slice"
 			>
-				<title>Background Paths</title>
-				{paths.map((path) => (
+				<defs>
+					<linearGradient id="auroraRibbonGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+						<stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.85" />
+						<stop offset="35%" stopColor="#DDD6FE" stopOpacity="0.75" />
+						<stop offset="70%" stopColor="#38BDF8" stopOpacity="0.7" />
+						<stop offset="100%" stopColor="#FFFFFF" stopOpacity="0.4" />
+					</linearGradient>
+				</defs>
+
+				{paths.map((p) => (
 					<motion.path
-						key={path.id}
-						d={path.d}
-						stroke="currentColor"
-						strokeWidth={path.width}
-						strokeOpacity={0.1 + path.id * 0.03}
-						initial={{ pathLength: 0.3, opacity: 0.6 }}
+						key={p.id}
+						d={p.d}
+						stroke="url(#auroraRibbonGradient)"
+						strokeWidth={p.strokeWidth}
+						strokeOpacity={p.opacity}
+						strokeLinecap="round"
+						initial={{
+							pathLength: 0.35,
+							pathOffset: 0,
+							opacity: p.opacity * 0.7,
+						}}
 						animate={{
-							pathLength: 1,
-							opacity: [0.3, 0.6, 0.3],
+							pathLength: [0.35, 0.95, 0.35],
 							pathOffset: [0, 1, 0],
+							opacity: [p.opacity * 0.6, p.opacity, p.opacity * 0.6],
 						}}
 						transition={{
-							duration: 20 + Math.random() * 10,
+							duration: p.duration,
+							delay: p.delay,
 							repeat: Number.POSITIVE_INFINITY,
-							ease: 'linear',
+							ease: 'easeInOut',
 						}}
 					/>
 				))}
@@ -326,41 +627,3 @@ function FloatingPaths({ position }: { position: number }) {
 		</div>
 	);
 }
-
-const GoogleIcon = (props: React.ComponentProps<'svg'>) => (
-	<svg
-		xmlns="http://www.w3.org/2000/svg"
-		viewBox="0 0 24 24"
-		fill="currentColor"
-		{...props}
-	>
-		<g>
-			<path d="M12.479,14.265v-3.279h11.049c0.108,0.571,0.164,1.247,0.164,1.979c0,2.46-0.672,5.502-2.84,7.669   C18.744,22.829,16.051,24,12.483,24C5.869,24,0.308,18.613,0.308,12S5.869,0,12.483,0c3.659,0,6.265,1.436,8.223,3.307L18.392,5.62   c-1.404-1.317-3.307-2.341-5.913-2.341C7.65,3.279,3.873,7.171,3.873,12s3.777,8.721,8.606,8.721c3.132,0,4.916-1.258,6.059-2.401   c0.927-0.927,1.537-2.251,1.777-4.059L12.479,14.265z" />
-		</g>
-	</svg>
-);
-
-const GithubIcon = (props: React.ComponentProps<'svg'>) => (
-	<svg
-		xmlns="http://www.w3.org/2000/svg"
-		viewBox="0 0 24 24"
-		fill="currentColor"
-		{...props}
-	>
-		<path
-			fillRule="evenodd"
-			clipRule="evenodd"
-			d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
-		/>
-	</svg>
-);
-
-const AuthSeparator = () => {
-	return (
-		<div className="flex w-full items-center justify-center my-1">
-			<div className="bg-border-subtle h-px w-full" />
-			<span className="text-text-muted px-2.5 text-xs font-mono uppercase">OR</span>
-			<div className="bg-border-subtle h-px w-full" />
-		</div>
-	);
-};

@@ -159,12 +159,32 @@ test.describe("Visual Re-verification & Screenshot Inspection", () => {
     await page.screenshot({ path: path.join(evidenceDir, "12-integrations-light-mode.png") });
   });
 
-  test("11: AuthPage - Split-Screen with Floating Paths & Clerk OAuth", async ({ page }) => {
+  test("11: AuthPage - Split-Screen with Floating Paths, Clerk OAuth, and Inward Swap", async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 900 });
     await page.goto("http://localhost:3001/sign-in", { waitUntil: "domcontentloaded" });
     await page.waitForTimeout(1500);
 
+    // 1. Sign-in view (Form on right, Animation & Logo on left)
     await page.screenshot({ path: path.join(evidenceDir, "13-auth-page-split-screen.png") });
+
+    // 2. Click "Sign up" to trigger the inward layout swap animation
+    const signUpBtn = page.getByRole("button", { name: "Sign up" });
+    await signUpBtn.click();
+    await page.waitForTimeout(1000); // allow spring layout animation to settle
+
+    // Form is now on the left, Animation on the right!
+    await page.screenshot({ path: path.join(evidenceDir, "14-auth-page-sign-up-swapped.png") });
+
+    // 3. Switch back to sign-in and click "Forgot password?"
+    const signInBtn = page.getByRole("button", { name: "Sign in" });
+    await signInBtn.click();
+    await page.waitForTimeout(600);
+
+    const forgotBtn = page.getByRole("button", { name: "Forgot password?" });
+    await forgotBtn.click();
+    await page.waitForTimeout(600);
+
+    await page.screenshot({ path: path.join(evidenceDir, "15-auth-page-forgot-password.png") });
   });
 });
 
