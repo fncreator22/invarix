@@ -31,18 +31,15 @@ export function WorkspaceSelector() {
   const { user } = useAuthBridge();
   const [, startTransition] = useTransition();
 
-  const [localWorkspaces, setLocalWorkspaces] = useState<any[]>([]);
-
-  useEffect(() => {
+  const [localWorkspaces, setLocalWorkspaces] = useState<any[]>(() => {
+    if (typeof window === "undefined") return [];
     try {
       const stored = localStorage.getItem("invarix_custom_workspaces");
-      if (stored) {
-        setLocalWorkspaces(JSON.parse(stored));
-      }
+      return stored ? JSON.parse(stored) : [];
     } catch {
-      // ignore
+      return [];
     }
-  }, []);
+  });
 
   const apiMemberships = me.data?.memberships ?? [];
   const defaultNorthwind: Membership = {

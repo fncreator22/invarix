@@ -174,7 +174,7 @@ async def dispatch_alert_to_plugins(
                     res = await client.post(url, json=payload)
                     results["slack"] = {"ok": res.status_code < 400, "status": res.status_code}
                     log.info("plugin.slack.dispatched", ws_id=ws_id, status=res.status_code)
-            except Exception as e:
+            except (httpx.HTTPError, OSError) as e:
                 results["slack"] = {"ok": False, "error": str(e)}
                 log.warning("plugin.slack.failed", ws_id=ws_id, error=str(e))
 
@@ -223,7 +223,7 @@ async def dispatch_alert_to_plugins(
                         )
                         log.info("plugin.maileroo.dispatched", recipient=r, status=res.status_code)
                 results["email"] = {"ok": True, "count": len(recipients), "provider": "maileroo"}
-            except Exception as e:
+            except (httpx.HTTPError, OSError) as e:
                 results["email"] = {"ok": False, "error": str(e), "provider": "maileroo"}
                 log.warning("plugin.maileroo.failed", ws_id=ws_id, error=str(e))
         else:
@@ -262,7 +262,7 @@ async def dispatch_alert_to_plugins(
                 async with httpx.AsyncClient(timeout=4.0) as client:
                     res = await client.post(endpoint, content=body_json, headers=headers)
                     results["webhooks"] = {"ok": res.status_code < 400, "status": res.status_code}
-            except Exception as e:
+            except (httpx.HTTPError, OSError) as e:
                 results["webhooks"] = {"ok": False, "error": str(e)}
 
     return results
